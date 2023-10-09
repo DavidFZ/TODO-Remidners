@@ -1,4 +1,4 @@
-package edu.square.UIKit;
+package edu.square.UIUtils;
 
 import java.awt.*;
 
@@ -10,6 +10,8 @@ public class JFrameAttribute {
     private boolean isExit;
     private boolean isVisible;
     private int defaultCloseOperation;
+    /** JFrameAttribute是否构建完成
+     * Whether JFrameAttribute is built **/
     private boolean isAttributeSetDone;
 
 
@@ -22,7 +24,7 @@ public class JFrameAttribute {
     }
 
     /**
-     * 获取默认的JFrame属性
+     * 获取默认的JFrameAttribute对象
      * Get default JFrame attribute
      * 默认窗口大小为屏幕大小的80%
      * Default window size is 80% of the screen size
@@ -42,16 +44,39 @@ public class JFrameAttribute {
         return jFrameAttribute;
     }
 
+    /**
+     * 获取自定义窗口名的默认JFrameAttribute对象
+     * Get the default JFrameAttribute with custom window name
+     * @param frameTitle 窗口标题
+     *                   window name
+     * @return JFrameAttribute 自定义窗口名的默认JFrameAttribute
+     *                         Default JFrameAttribute with custom window name
+     */
     public static JFrameAttribute getAttribute(String frameTitle) {
         JFrameAttribute jFrameAttribute = getDefaultAttribute(frameTitle);
         jFrameAttribute.isAttributeSetDone = true;
         return jFrameAttribute;
     }
 
+
+    /**
+     * 获取窗口名为空的默认JFrameAttribute对象
+     * Get the default JFrameAttribute with empty window name
+     * @return JFrameAttribute 窗口名为空的默认JFrameAttribute
+     *                         Default JFrameAttribute with empty window name
+     */
     public static JFrameAttribute getAnonymousTitleAttribute() {
         return getAttribute("");
     }
 
+    /**
+     * 获取JFrameAttribute建造者
+     * Get JFrameAttribute builder
+     * 默认窗口名为空
+     * Default window name is empty
+     * @return JFrameAttribute 窗口名为空的默认JFrameAttribute
+     *                        Default JFrameAttribute with empty window name
+     */
     public static JFrameAttribute getAttributeBuilder() {
         return getDefaultAttribute("");
     }
@@ -59,13 +84,13 @@ public class JFrameAttribute {
     /**
      * 设置完窗口的所有属性,构建JFrameAttribute
      * After setting all the properties of the window, build JFrameAttribute
+     *
      * @return this
      */
-    public JFrameAttribute build(){
+    public JFrameAttribute build() {
         this.isAttributeSetDone = true;
         return this;
     }
-
 
 
     /**
@@ -136,5 +161,7 @@ public class JFrameAttribute {
         return this;
     }
 
-
+    public boolean isAttributeSetDone() {
+        return isAttributeSetDone;
+    }
 }
