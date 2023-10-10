@@ -1,4 +1,4 @@
-package edu.square;
+package edu.square.views;
 
 import javax.swing.*;
 

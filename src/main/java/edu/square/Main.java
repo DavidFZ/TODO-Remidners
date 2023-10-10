@@ -1,6 +1,6 @@
 package edu.square;
 
-import edu.square.UIUtils.JFrameFactory;
+import edu.square.utils.UIUtils.JFrameFactory;
 
 import javax.swing.*;
 import java.awt.*;

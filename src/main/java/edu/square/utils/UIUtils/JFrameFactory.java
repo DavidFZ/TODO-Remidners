@@ -1,4 +1,4 @@
-package edu.square.UIUtils;
+package edu.square.utils.UIUtils;
 
 import javax.swing.*;
 
