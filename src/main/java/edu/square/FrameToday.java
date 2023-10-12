@@ -18,6 +18,7 @@ public class FrameToday {
     //font定义
 
     //维护一个容器用于记录用户输入的条目
+    //TODO: use some Reminder class to store the data
     ArrayList<String> plans = new ArrayList<>();
     Font font1;
     Font font2;
