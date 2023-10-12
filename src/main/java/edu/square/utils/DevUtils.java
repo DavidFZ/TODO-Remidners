@@ -1,6 +1,7 @@
 package edu.square.utils;
 
 import java.io.File;
+import java.sql.Timestamp;
 
 public class DevUtils {
     /**
@@ -50,5 +51,14 @@ public class DevUtils {
     public static boolean isDirExist(String dir) {
         File file = new File(dir);
         return file.exists();
+    }
+
+    /**
+     * Returns the current timestamp
+     *
+     * @return current timestamp
+     */
+    public static Timestamp getTimeStamp() {
+        return new Timestamp(System.currentTimeMillis());
     }
 }

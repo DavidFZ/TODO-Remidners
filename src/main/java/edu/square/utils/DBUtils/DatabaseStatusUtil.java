@@ -93,9 +93,9 @@ public class DatabaseStatusUtil extends Thread {
         Statement statement = DatabaseStatementUtil.getStatement();
 
 //        statement.execute("INSERT INTO T VALUES(4),(5),(6)");
-        statement.execute("INSERT INTO APP.REMINDER (UUID, CREATE_TIME, LAST_MODIFIED_TIME, CONTENT, DONE_TIME, IS_EMERGENCY, IS_IMPORTANT) VALUES ('124', '2023-10-12 15:27:02.000000000', '2023-10-12 15:27:05.000000000', 'have a try', '2023-10-12 15:27:13.000000000', false, false)");
+        statement.execute("INSERT INTO APP.REMINDER (UUID, CONTENT, CREATE_TIME, LAST_MODIFIED_TIME, REMIND_TIME, DONE_TIME, IS_EMERGENCY, IS_IMPORTANT) VALUES ('1234', 'test!', '2023-10-12 20:08:48.000000000', '2023-10-12 20:08:50.000000000', '2023-10-12 20:08:51.000000000', '2023-10-12 20:08:53.000000000', true, true)");
         statement.close();
 
-        deleteDBDir(false);
+//        deleteDBDir(false);
     }
 }
