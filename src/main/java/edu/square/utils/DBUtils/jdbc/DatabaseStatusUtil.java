@@ -1,4 +1,4 @@
-package edu.square.utils.DBUtils;
+package edu.square.utils.DBUtils.jdbc;
 
 import edu.square.utils.FileUtil;
 
