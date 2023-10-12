@@ -28,7 +28,7 @@ public class FrameToday {
     }
 
     public void init() {
-        frame = JFrameFactory.getDefaultJFrame("Schedule");
+        frame = JFrameFactory.getDefaultJFrame(.8d,"Schedule");
         //定义字体
         font1 = new Font("宋体", Font.BOLD, (int) (0.05 * frame.getWidth()));
         font2 = new Font("宋体", Font.BOLD, (int) (0.03 * frame.getWidth()));
