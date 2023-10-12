@@ -1,8 +1,12 @@
 package edu.square.utils.DBUtils;
 
+import edu.square.utils.FileUtil;
+
 import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.List;
 
 import static edu.square.utils.DevUtils.deleteDir;
 import static edu.square.utils.DevUtils.isDirExist;
@@ -30,7 +34,7 @@ public class DatabaseStatusUtil extends Thread {
      * Stop the database
      */
     public static void stopDB() {
-        if (!isDBDirExist()||DatabaseConnectionUtil.isDBRunning())
+        if (!isDBDirExist() || DatabaseConnectionUtil.isDBRunning())
             return;
         try {
             DatabaseConnectionUtil.closeConnection();
@@ -57,10 +61,22 @@ public class DatabaseStatusUtil extends Thread {
         DatabaseConnectionUtil.createDB();
         Statement statement = DatabaseStatementUtil.getStatement();
 
-        //TODO: use sql file to create tables
-        statement.execute("CREATE TABLE T (I INT)");
-        statement.execute("INSERT INTO T VALUES(1),(2),(3)");
+        try {
+            //TODO: Multi-threading
+            useSQLFileInitDB();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 
+        statement.close();
+    }
+
+    private static void useSQLFileInitDB() throws SQLException, IOException {
+        List<String> sqlList = FileUtil.parseSQLFile("sql/init.sql");
+        Statement statement = DatabaseStatementUtil.getStatement();
+        for (String sqlStatement : sqlList) {
+            statement.execute(sqlStatement);
+        }
         statement.close();
     }
 
@@ -72,14 +88,14 @@ public class DatabaseStatusUtil extends Thread {
 
     public static void main(String[] args) throws SQLException {
         forcedInitDB();
-        stopDB();
+//        stopDB();
 
         Statement statement = DatabaseStatementUtil.getStatement();
 
-        statement.execute("INSERT INTO T VALUES(4),(5),(6)");
-
+//        statement.execute("INSERT INTO T VALUES(4),(5),(6)");
+        statement.execute("INSERT INTO APP.REMINDER (UUID, CREATE_TIME, LAST_MODIFIED_TIME, CONTENT, DONE_TIME, IS_EMERGENCY, IS_IMPORTANT) VALUES ('124', '2023-10-12 15:27:02.000000000', '2023-10-12 15:27:05.000000000', 'have a try', '2023-10-12 15:27:13.000000000', false, false)");
         statement.close();
 
-//        deleteDBDir(false);
+        deleteDBDir(false);
     }
 }
