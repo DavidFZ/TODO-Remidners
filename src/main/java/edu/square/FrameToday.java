@@ -1,5 +1,6 @@
 package edu.square;
 
+import com.sun.tools.javac.comp.Todo;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
 
@@ -139,6 +140,7 @@ public class FrameToday {
     }
 
     public void addItem(String s) {
+//        Todo 添加无刷新
 //        frame.setVisible(false);
         JPanel newJPanel = new JPanel();
         newJPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
