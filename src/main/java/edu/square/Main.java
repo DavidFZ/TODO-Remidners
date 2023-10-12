@@ -8,8 +8,7 @@ import java.awt.*;
 public class Main {
     public static void main(String[] args) {
 
-        JFrame frame = JFrameFactory.getDefaultJFrame("TODO LIST");
-        frame.setVisible(true);
+        JFrame frame = JFrameFactory.getDefaultJFrameWithLayout(0.7, "TODO LIST", new BorderLayout());
 
         JPanel panel = new JPanel(new BorderLayout());
 
@@ -23,9 +22,8 @@ public class Main {
         panel.add(todoPanel, BorderLayout.CENTER);
 
 
-
         frame.add(panel);
 
-
+        frame.setVisible(true);
     }
 }
