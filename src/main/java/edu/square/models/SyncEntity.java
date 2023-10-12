@@ -3,8 +3,8 @@ package edu.square.models;
 import java.util.UUID;
 
 public abstract class SyncEntity {
-    private final UUID uuid;
-    private final Long createdTime;
+    public final UUID uuid;
+    public final Long createdTime;
     private final Long lastModifiedTime;
 
     /**

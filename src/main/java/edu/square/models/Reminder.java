@@ -9,16 +9,9 @@ public class Reminder extends SyncEntity {
     private long doneTime;
 
 
-    private boolean isDone;
-    private boolean isFlagged;
     private boolean isEmergency;
     private boolean isImportant;
 
-
-    /**
-     * for recognizing devices  by ues cloud to sync
-     */
-    private String createBy;
 
     Reminder(String c) {
         super();
