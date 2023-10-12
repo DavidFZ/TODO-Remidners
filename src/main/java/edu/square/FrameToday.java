@@ -1,8 +1,10 @@
 package edu.square;
 
+import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +28,6 @@ public class FrameToday {
     }
 
     public void init() {
-        Toolkit toolkit = Toolkit.getDefaultToolkit();
         frame = JFrameFactory.getDefaultJFrame("Schedule");
         //定义字体
         font1 = new Font("宋体", Font.BOLD, (int) (0.05 * frame.getWidth()));
@@ -72,40 +73,91 @@ public class FrameToday {
             pulsButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    //输入的窗口
+                    Frame printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * frame.getHeight())).setWindowWidth((int) (0.3 * frame.getWidth())).setTitle("Please add item").build());
 
+                    //item + text field
+                    JPanel inputPanel;
+                    JLabel inputLable;
+                    JTextField itemName;
+                    {
+                        inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                        Font font2 = new Font("宋体", Font.BOLD, (int) (0.01 * frame.getWidth()));
+                        inputLable = new JLabel("Item:");
+                        inputPanel.setBounds((int) (0.1 * printFrame.getHeight()), (int) (0.2 * printFrame.getHeight()), (int) (0.8 * printFrame.getWidth()), (int) (0.2 * printFrame.getWidth()));
+                        inputLable.setFont(font2);
+                        inputPanel.add(inputLable);
+                        itemName = new JTextField(10);
+                        inputPanel.add(itemName);
+
+                    }
+
+
+                    //Button
+                    JPanel confirmPanel;
+                    JButton confirmButton;
+
+                    {
+                        confirmPanel = new JPanel(new BorderLayout());
+                        confirmPanel.setBounds(50, 100, 200, 200);
+                        confirmButton = new JButton("confirm");
+                        confirmButton.setSize(100, 100);
+
+                    }
+                    confirmPanel.add(confirmButton, BorderLayout.SOUTH);
+                    printFrame.add(inputPanel);
+                    printFrame.add(confirmPanel);
+                    //The influence of click button
+
+                    confirmButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            String item = itemName.getText();
+                            System.out.println(item);
+                            if (item != null) {
+                                addItem(item);
+                                System.out.println(item);
+                            }
+                            printFrame.dispose();
+
+
+                        }
+                    });
+                    //if components are visible
+                    itemName.setVisible(true);
+                    confirmPanel.setVisible(true);
+                    inputLable.setVisible(true);
+                    inputPanel.setVisible(true);
+                    confirmButton.setVisible(true);
+                    printFrame.setVisible(true);
                 }
             });
-
-
         }
         frame.setVisible(true);
         frame.setResizable(true);
 
     }
 
-
     public void addItem(String s) {
+//        frame.setVisible(false);
         JPanel newJPanel = new JPanel();
         newJPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        newJPanel.setPreferredSize(new Dimension(frame.getWidth(), (int) (0.08 * frame.getHeight())));
-//        newJPanel.setBackground(Color.green);
-        frame.add(newJPanel);
+        newJPanel.setPreferredSize(new Dimension((int) (0.9 * frame.getWidth()), (int) (0.08 * frame.getHeight())));
+        newJPanel.setBackground(Color.green);
+
 
         JPanel newJPanelInner = new JPanel();
         newJPanelInner.setLayout(new FlowLayout(FlowLayout.LEFT));
         newJPanelInner.setPreferredSize(new Dimension((int) (0.85 * frame.getWidth()), (int) (0.07 * frame.getHeight())));
-//        newJPanelInner.setBackground(Color.yellow);
-        newJPanel.add(newJPanelInner);
+        newJPanelInner.setBorder(new LineBorder(Color.PINK));
+        newJPanelInner.setBackground(Color.yellow);
 
 
         JRadioButton radioButton = new JRadioButton();
-        newJPanelInner.add(radioButton);
+
 
         JLabel label = new JLabel(s);
         label.setFont(font2);
-
-        newJPanelInner.add(label);
-
 
         radioButton.addActionListener(new ActionListener() {
             @Override
@@ -119,6 +171,14 @@ public class FrameToday {
             }
         });
 
+
+
+        newJPanelInner.add(radioButton);
+        newJPanelInner.add(label);
+        newJPanel.add(newJPanelInner);
+        frame.add(newJPanel);
+        newJPanel.setVisible(true);
+        newJPanelInner.setVisible(true);
         //将内容存储
         plans.add(s);
     }
