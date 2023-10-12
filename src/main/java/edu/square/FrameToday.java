@@ -1,6 +1,5 @@
 package edu.square;
 
-import com.sun.tools.javac.comp.Todo;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
 
@@ -183,6 +182,9 @@ public class FrameToday {
         newJPanelInner.setVisible(true);
         //将内容存储
         plans.add(s);
+
+        frame.setVisible(true);
+
     }
 
 
