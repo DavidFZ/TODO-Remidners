@@ -1,6 +1,11 @@
 package edu.square.utils.UIUtils;
 
 import javax.swing.*;
+import java.awt.*;
+
+import edu.square.utils.UIUtils.JFrameAttribute;
+
+import static edu.square.utils.UIUtils.JFrameAttribute.getDefaultAttribute;
 
 public class JFrameFactory {
 
@@ -50,16 +55,45 @@ public class JFrameFactory {
      * @return JFrame
      */
     public static JFrame getDefaultJFrame(String title) {
-        return buildJFrame(JFrameAttribute.getAttribute(title));
+        return buildJFrame(JFrameAttribute.getAttribute(title).build());
     }
 
+    /**
+     * 获取按照屏幕百分比设置的JFrame对象
+     * get JFrame object with percentage of screen
+     *
+     * @param percent 屏幕百分比
+     *                percentage of screen
+     * @param title   窗口名
+     * @return JFrame 按照屏幕百分比设置的JFrame对象
+     */
+    public static JFrame getDefaultFrameWithPercentage(double percent, String title) {
+        return buildJFrame(getDefaultAttribute(percent, title).build());
+    }
+
+        /**
+     * 设置JFrame的布局管理器
+     * set JFrame's layout manager
+     *
+     * @param jFrame        JFrame对象
+     * @param layoutManager 布局管理器
+     * @return JFrame 内置Container的JFrame对象
+     * JFrame object with Container
+     */
+    public static JFrame setContainerWithLayout(JFrame jFrame, LayoutManager layoutManager) {
+        jFrame.setContentPane(new Container());
+        jFrame.getContentPane().setLayout(layoutManager);
+        return jFrame;
+    }
 
     public static void main(String[] args) {
         // test cases
         JFrame frame = getDefaultJFrame();
-        frame =getDefaultJFrame("test");
+        frame = getDefaultJFrame("test");
         frame = buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowWidth(200).setWindowHeight(100).build());
         frame = getDefaultJFrame();
+
+        frame = getDefaultFrameWithPercentage(.6, "test");
         frame.setVisible(true);
     }
 }
