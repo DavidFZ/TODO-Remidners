@@ -1,15 +1,27 @@
 package edu.square;
 
-import java.io.IOException;
-import java.util.List;
+import edu.square.models.Reminder;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 
-import static edu.square.utils.FileUtil.parseSQLFile;
+import java.io.IOException;
+
+import static edu.square.utils.DevUtils.getTimeStamp;
 
 public class test {
     public static void main(String[] args) throws IOException {
-        List<String> list=parseSQLFile("sql/init.sql");
-        for (String s:list){
-            System.out.println(s);
-        }
+        Configuration configuration = new Configuration().configure();
+//        System.out.println(configuration);
+
+        SessionFactory sessionFactory = configuration.buildSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        Reminder reminder = new Reminder("session merge test");
+        reminder.setRemindTime(getTimeStamp());
+
+//        session.save(reminder);
+        session.merge(reminder);
+        session.beginTransaction().commit();
     }
 }

@@ -1,21 +1,36 @@
 package edu.square.models;
 
+import lombok.Data;
 
-public class Reminder extends SyncEntity {
+import java.sql.Timestamp;
+
+import static edu.square.utils.DevUtils.getTimeStamp;
+
+@Data
+public class Reminder {
+    private String uuid;
     private String content;
 
 
-    private long remindTime;
-    private long doneTime;
+    private Timestamp createTime;
+    private Timestamp lastModifiedTime;
+    private Timestamp remindTime;
+    private Timestamp doneTime;
 
 
-    private boolean isEmergency;
-    private boolean isImportant;
+    private Boolean isEmergency;
+    private Boolean isImportant;
 
 
-    Reminder(String c) {
+    public Reminder(String c) {
         super();
+        uuid = String.valueOf(java.util.UUID.randomUUID());
         content = c;
+        createTime = lastModifiedTime = getTimeStamp();
+    }
+
+    public Reminder() {
+        uuid = String.valueOf(java.util.UUID.randomUUID());
     }
 
     public static void main(String[] args) {

@@ -1,10 +1,10 @@
-package edu.square.utils.DBUtils;
+package edu.square.utils.DBUtils.jdbc;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-import static edu.square.utils.DBUtils.DatabaseStatusUtil.isDBDirExist;
+import static edu.square.utils.DBUtils.jdbc.DatabaseStatusUtil.isDBDirExist;
 
 public class DatabaseConnectionUtil {
     private static final String DB_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";

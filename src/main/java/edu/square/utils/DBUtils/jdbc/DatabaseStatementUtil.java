@@ -1,4 +1,4 @@
-package edu.square.utils.DBUtils;
+package edu.square.utils.DBUtils.jdbc;
 
 import java.sql.SQLException;
 import java.sql.Statement;
