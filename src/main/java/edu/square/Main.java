@@ -1,10 +1,6 @@
 package edu.square;
 
-import edu.square.utils.UIUtils.JFrameAttribute;
-import edu.square.utils.UIUtils.JFrameFactory;
-
-import javax.swing.*;
-import java.awt.*;
+import edu.square.views.FrameToday;
 
 public class Main {
     public static void main(String[] args) {

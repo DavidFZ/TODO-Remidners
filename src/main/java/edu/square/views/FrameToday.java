@@ -1,4 +1,4 @@
-package edu.square;
+package edu.square.views;
 
 import edu.square.models.Reminder;
 import edu.square.utils.DBUtils.hibernate.HDLUtil;
@@ -18,8 +18,7 @@ public class FrameToday {
     //font定义
 
     //维护一个容器用于记录用户输入的条目
-    //TODO: use some Reminder class to store the data
-    ArrayList<String> plans = new ArrayList<>();
+    ArrayList<Reminder> plans = new ArrayList<>();
     Font font1;
     Font font2;
 
@@ -31,7 +30,7 @@ public class FrameToday {
 
         java.util.List<Reminder> reminderList = HDLUtil.queryAllEntities(SessionFactoryUtil.getSession());
         for (Reminder reminder : reminderList) {
-            addItem(reminder.getContent());
+            addItem(reminder);
         }
 
         mainFrame.setVisible(true);
@@ -45,7 +44,7 @@ public class FrameToday {
         font2 = new Font("宋体", Font.BOLD, (int) (0.03 * mainFrame.getWidth()));
         font3 = new Font("宋体", Font.BOLD, (int) (0.008 * mainFrame.getWidth()));
 
-        //对其方式
+        //对齐方式
         mainFrame.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 15));
 
         //titlePanel
@@ -126,10 +125,8 @@ public class FrameToday {
                             String item = itemName.getText();
                             System.out.println(item);
                             if (item != null) {
-                                addItem(item);
-
                                 //TODO: use some less invasive way to do this
-                                SessionFactoryUtil.insertReminder(item);
+                                addItem(SessionFactoryUtil.insertReminder(item));
 
                                 System.out.println(item);
                             }
@@ -150,7 +147,7 @@ public class FrameToday {
         }
     }
 
-    public void addItem(String s) {
+    public void addItem(Reminder reminder) {
 //        Todo 添加无刷新
 //        frame.setVisible(false);
         JPanel newJPanel = new JPanel();
@@ -169,7 +166,7 @@ public class FrameToday {
         JRadioButton radioButton = new JRadioButton();
 
 
-        JLabel label = new JLabel(s);
+        JLabel label = new JLabel(reminder.getContent());
         label.setFont(font2);
 
         radioButton.addActionListener(new ActionListener() {
@@ -191,8 +188,9 @@ public class FrameToday {
         mainFrame.add(newJPanel);
         newJPanel.setVisible(true);
         newJPanelInner.setVisible(true);
+
         //将内容存储
-        plans.add(s);
+        plans.add(reminder);
 
         mainFrame.setVisible(true);
 
