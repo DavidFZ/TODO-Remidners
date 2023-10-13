@@ -2,18 +2,15 @@ package edu.square;
 
 import edu.square.views.FrameToday;
 
+import java.sql.SQLException;
+
+import static edu.square.utils.DBUtils.jdbc.DatabaseStatusUtil.forcedInitDB;
+import static edu.square.utils.DevUtils.isDirExist;
+
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        if (!isDirExist("derbyDB"))
+            forcedInitDB();
         FrameToday frameToday = new FrameToday();
-//     JFrame frame = new JFrame("Reminder List");
-//            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//            frame.setSize(800, 600);
-//
-//            ReminderListView reminderListView = new ReminderListView(frame);
-//            JScrollPane scrollPane = reminderListView.getScrollPane();
-//            frame.add(scrollPane);
-//
-//            frame.setVisible(true);
-//    }
     }
 }
