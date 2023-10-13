@@ -160,8 +160,6 @@ public class FrameToday {
 //        ReminderPanelModel reminderPanelModel = new ReminderPanelModel(reminder, mainFrame);
 //        mainFrame.add(reminderPanelModel);
 
-//        mainFrame.add(reminderListView.getInnerPanel());
-//        mainFrame.add(reminderListView.);
         reminderListView.addItem(reminder);
         mainFrame.validate();
         mainFrame.repaint();
