@@ -1,19 +1,17 @@
 package edu.square.views;
 
-import edu.square.models.Reminder;
+import edu.square.entity.Reminder;
+import edu.square.model.ReminderPanelModel;
 import edu.square.utils.DBUtils.hibernate.HDLUtil;
 import edu.square.utils.DBUtils.hibernate.SessionFactoryUtil;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
 
 import javax.swing.*;
-import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
-import static edu.square.controller.FrameTodayController.setReminderDoneStatusAndUpdate;
 
 public class FrameToday {
     JFrame mainFrame;
@@ -33,7 +31,6 @@ public class FrameToday {
         java.util.List<Reminder> reminderList = HDLUtil.queryAllEntities(SessionFactoryUtil.getSession());
         for (Reminder reminder : reminderList) {
             addItem(reminder);
-            //TODO:reload done status from db
         }
 
         mainFrame.setVisible(true);
@@ -151,56 +148,8 @@ public class FrameToday {
     }
 
     public void addItem(Reminder reminder) {
-//        Todo 添加无刷新
-//        frame.setVisible(false);
-        JPanel newJPanel = new JPanel();
-        newJPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        newJPanel.setPreferredSize(new Dimension((int) (0.9 * mainFrame.getWidth()), (int) (0.08 * mainFrame.getHeight())));
-        newJPanel.setBackground(Color.green);
-
-
-        JPanel newJPanelInner = new JPanel();
-        newJPanelInner.setLayout(new FlowLayout(FlowLayout.LEFT));
-        newJPanelInner.setPreferredSize(new Dimension((int) (0.85 * mainFrame.getWidth()), (int) (0.07 * mainFrame.getHeight())));
-        newJPanelInner.setBorder(new LineBorder(Color.PINK));
-        newJPanelInner.setBackground(Color.yellow);
-
-
-        JRadioButton radioButton = new JRadioButton();
-
-
-        JLabel label = new JLabel(reminder.getContent());
-        label.setFont(font2);
-
-        radioButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                if (radioButton.isSelected()) {
-                    label.setForeground(Color.GRAY);
-                    //TODO: use global session in this class
-                    setReminderDoneStatusAndUpdate(reminder, true);
-                } else {
-                    label.setForeground(Color.black);
-                    setReminderDoneStatusAndUpdate(reminder, false);
-                }
-
-            }
-        });
-
-
-        newJPanelInner.add(radioButton);
-        newJPanelInner.add(label);
-        newJPanel.add(newJPanelInner);
-        mainFrame.add(newJPanel);
-        newJPanel.setVisible(true);
-        newJPanelInner.setVisible(true);
-
-        //将内容存储
-        plans.add(reminder);
-
+        ReminderPanelModel reminderPanelModel = new ReminderPanelModel(reminder, mainFrame);
+        mainFrame.add(reminderPanelModel);
         mainFrame.setVisible(true);
-
     }
-
-
 }

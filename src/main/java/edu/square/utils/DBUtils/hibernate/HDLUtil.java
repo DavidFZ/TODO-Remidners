@@ -1,6 +1,6 @@
 package edu.square.utils.DBUtils.hibernate;
 
-import edu.square.models.Reminder;
+import edu.square.entity.Reminder;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Root;

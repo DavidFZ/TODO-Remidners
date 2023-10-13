@@ -13,6 +13,6 @@
         <property name="format_sql">true</property>
 
 
-        <mapping resource="edu/square/models/hbm/Reminder.hbm.xml"/>
+        <mapping resource="edu/square/entity/hbm/Reminder.hbm.xml"/>
     </session-factory>
 </hibernate-configuration>

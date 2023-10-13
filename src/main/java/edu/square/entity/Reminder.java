@@ -1,4 +1,4 @@
-package edu.square.models;
+package edu.square.entity;
 
 import lombok.Data;
 

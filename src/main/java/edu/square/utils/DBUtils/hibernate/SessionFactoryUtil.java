@@ -1,6 +1,6 @@
 package edu.square.utils.DBUtils.hibernate;
 
-import edu.square.models.Reminder;
+import edu.square.entity.Reminder;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;

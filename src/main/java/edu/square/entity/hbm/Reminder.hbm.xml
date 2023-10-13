@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
         "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 <hibernate-mapping>
-    <class name="edu.square.models.Reminder" table="Reminder">
+    <class name="edu.square.entity.Reminder" table="Reminder">
 
         <id name="uuid" type="string">
             <column name="uuid" length="36" />
