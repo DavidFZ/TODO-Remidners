@@ -1,11 +1,11 @@
 package edu.square.views;
 
+import edu.square.controller.FrameTodayController;
 import edu.square.entity.Reminder;
 import edu.square.model.ReminderPanelModel;
-import edu.square.utils.DBUtils.hibernate.HDLUtil;
-import edu.square.utils.DBUtils.hibernate.SessionFactoryUtil;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.views.component.ReminderListView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,14 +24,19 @@ public class FrameToday {
 
     Font font3;
 
+    private ReminderListView reminderListView;
+
 
     public FrameToday() {
         init();
 
-        java.util.List<Reminder> reminderList = HDLUtil.queryAllEntities(SessionFactoryUtil.getSession());
+        java.util.List<Reminder> reminderList = FrameTodayController.queryAllEntities();
         for (Reminder reminder : reminderList) {
             addItem(reminder);
         }
+        reminderListView = new ReminderListView(mainFrame);
+//        mainFrame.add(reminderListView.getInnerPanel());
+
 
         mainFrame.setVisible(true);
         mainFrame.setResizable(true);
@@ -126,7 +131,7 @@ public class FrameToday {
                             System.out.println(item);
                             if (item != null) {
                                 //TODO: use some less invasive way to do this
-                                addItem(SessionFactoryUtil.insertReminder(item));
+                                addItem(FrameTodayController.insertReminderEntity(item));
 
                                 System.out.println(item);
                             }
@@ -150,6 +155,7 @@ public class FrameToday {
     public void addItem(Reminder reminder) {
         ReminderPanelModel reminderPanelModel = new ReminderPanelModel(reminder, mainFrame);
         mainFrame.add(reminderPanelModel);
+
         mainFrame.setVisible(true);
     }
 }

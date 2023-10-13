@@ -23,16 +23,7 @@ public class SessionFactoryUtil {
         return sessionFactory.openSession();
     }
 
-    public static Reminder insertReminder(String content) {
-        Session s = getSession();
 
-        Reminder reminder = new Reminder(content);
-        reminder.setRemindTime(getTimeStamp());
-
-        s.merge(reminder);
-        s.beginTransaction().commit();
-        return reminder;
-    }
 
     public static void main(String[] args) {
         Session s = getSession();
