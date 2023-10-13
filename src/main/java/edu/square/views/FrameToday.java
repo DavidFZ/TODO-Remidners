@@ -30,12 +30,16 @@ public class FrameToday {
     public FrameToday() {
         init();
 
-        java.util.List<Reminder> reminderList = FrameTodayController.queryAllEntities();
-        for (Reminder reminder : reminderList) {
-            addItem(reminder);
-        }
+//        java.util.List<Reminder> reminderList = FrameTodayController.queryAllEntities();
+//        for (Reminder reminder : reminderList) {
+//            addItem(reminder);
+//        }
         reminderListView = new ReminderListView(mainFrame);
-//        mainFrame.add(reminderListView.getInnerPanel());
+        JScrollPane jScrollPane = reminderListView.getScrollPane();
+        mainFrame.add(jScrollPane);
+        jScrollPane.validate();
+        jScrollPane.repaint();
+
 
 
         mainFrame.setVisible(true);
@@ -153,8 +157,14 @@ public class FrameToday {
     }
 
     public void addItem(Reminder reminder) {
-        ReminderPanelModel reminderPanelModel = new ReminderPanelModel(reminder, mainFrame);
-        mainFrame.add(reminderPanelModel);
+//        ReminderPanelModel reminderPanelModel = new ReminderPanelModel(reminder, mainFrame);
+//        mainFrame.add(reminderPanelModel);
+
+//        mainFrame.add(reminderListView.getInnerPanel());
+//        mainFrame.add(reminderListView.);
+        reminderListView.addItem(reminder);
+        mainFrame.validate();
+        mainFrame.repaint();
 
         mainFrame.setVisible(true);
     }

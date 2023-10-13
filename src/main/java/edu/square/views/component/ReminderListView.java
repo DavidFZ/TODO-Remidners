@@ -20,8 +20,7 @@ public class ReminderListView {
     private final List<Reminder> reminders;
     @Getter
     private JScrollPane scrollPane;
-    @Getter
-    private JPanel innerPanel;
+
 
 
     public ReminderListView(JFrame parentFrame) {
@@ -30,13 +29,25 @@ public class ReminderListView {
         reminders = FrameTodayController.queryAllEntities();
         reminderViews = new ArrayList<>();
         scrollPane = new JScrollPane();
-        innerPanel = new JPanel();
+
+        int w=(int)(parentFrame.getWidth()*0.95);
+        int h=(int)(parentFrame.getHeight()*0.75);
+        scrollPane.setPreferredSize(new Dimension(w, h));
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+//        scrollPane.setLayout(new ScrollPaneLayout());
+        scrollPane.setLayout(new ScrollPaneLayout());
+
         for (Reminder r : reminders) {
             ReminderView reminderView = new ReminderView(r);
             reminderViews.add(reminderView);
-            innerPanel.add(reminderView.getInnerPanel());
+            JPanel j =reminderView.getInnerPanel();
             scrollPane.add(reminderView.getInnerPanel());
         }
+    }
+
+    public void addItem(Reminder reminder){
+        ReminderView reminderView =new ReminderView(reminder);
+        scrollPane.add(reminderView.getInnerPanel());
     }
 
     public class ReminderView {
@@ -79,6 +90,8 @@ public class ReminderListView {
 
             innerPanel.add(radioButton);
             innerPanel.add(label);
+            innerPanel.setVisible(true);
+
         }
 
         private void setReminderViewDoneStatus(boolean isDone) {
