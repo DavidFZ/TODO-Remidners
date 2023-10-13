@@ -13,6 +13,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import static edu.square.controller.FrameTodayController.setReminderDoneStatusAndUpdate;
+
 public class FrameToday {
     JFrame mainFrame;
     //font定义
@@ -31,6 +33,7 @@ public class FrameToday {
         java.util.List<Reminder> reminderList = HDLUtil.queryAllEntities(SessionFactoryUtil.getSession());
         for (Reminder reminder : reminderList) {
             addItem(reminder);
+            //TODO:reload done status from db
         }
 
         mainFrame.setVisible(true);
@@ -174,8 +177,11 @@ public class FrameToday {
             public void actionPerformed(ActionEvent e) {
                 if (radioButton.isSelected()) {
                     label.setForeground(Color.GRAY);
+                    //TODO: use global session in this class
+                    setReminderDoneStatusAndUpdate(reminder, true);
                 } else {
                     label.setForeground(Color.black);
+                    setReminderDoneStatusAndUpdate(reminder, false);
                 }
 
             }

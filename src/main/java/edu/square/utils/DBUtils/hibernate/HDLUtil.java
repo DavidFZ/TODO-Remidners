@@ -15,9 +15,15 @@ public class HDLUtil {
 
         Root<Reminder> root = criteriaQuery.from(Reminder.class);
         criteriaQuery.select(root);
-        List<Reminder> reminders =session.createQuery(criteriaQuery).getResultList();
+        List<Reminder> reminders = session.createQuery(criteriaQuery).getResultList();
         session.close();
 
         return reminders;
+    }
+
+    public static void updateReminder(Session session, Reminder reminder) {
+        session.merge(reminder);
+        session.beginTransaction().commit();
+        session.close();
     }
 }
