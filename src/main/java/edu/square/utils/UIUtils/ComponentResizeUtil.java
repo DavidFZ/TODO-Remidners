@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
 
-public class FontResizeUtil {
+public class ComponentResizeUtil {
     public static ComponentAdapter getFontResizeUtil(JLabel label, JFrame parentFrame) {
         return new ComponentAdapter() {
             @Override

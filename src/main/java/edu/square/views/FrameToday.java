@@ -2,7 +2,6 @@ package edu.square.views;
 
 import edu.square.controller.FrameTodayController;
 import edu.square.entity.Reminder;
-import edu.square.model.ReminderPanelModel;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.component.ReminderListView;
@@ -11,21 +10,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 public class FrameToday {
-    //外层Frame
-    JFrame mainFrame;
-
-    //维护一个容器用于记录用户输入的条目
-    ArrayList<Reminder> plans = new ArrayList<>();
-
     //font定义
     Font font1;
     Font font2;
-
     Font font3;
-
+    //root Frame
+    private JFrame mainFrame;
     //中间容器
     private ReminderListView reminderListView;
 
@@ -33,17 +25,8 @@ public class FrameToday {
     public FrameToday() {
         init();
 
-//        java.util.List<Reminder> reminderList = FrameTodayController.queryAllEntities();
-//        for (Reminder reminder : reminderList) {
-//            addItem(reminder);
-//        }
-
         reminderListView = new ReminderListView(mainFrame);
-
-        reminderListView.load();
         JScrollPane jScrollPane = reminderListView.getScrollPane();
-
-
         mainFrame.add(jScrollPane);
 
 //        jScrollPane.validate();
@@ -140,12 +123,9 @@ public class FrameToday {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             String item = itemName.getText();
-                            System.out.println(item);
                             if (item != null) {
                                 //TODO: use some less invasive way to do this
                                 addItem(FrameTodayController.insertReminderEntity(item));
-
-                                System.out.println(item);
                             }
                             printFrame.dispose();
 
@@ -168,7 +148,7 @@ public class FrameToday {
 //        ReminderPanelModel reminderPanelModel = new ReminderPanelModel(reminder, mainFrame);
 //        mainFrame.add(reminderPanelModel);
 
-        reminderListView.addItem(reminder);
+        reminderListView.addNewReminderViewIntoReminderListView(reminder);
         mainFrame.validate();
         mainFrame.repaint();
 
