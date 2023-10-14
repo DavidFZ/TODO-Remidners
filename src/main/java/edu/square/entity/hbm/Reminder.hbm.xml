@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="edu.square.entity.Reminder" table="Reminder">
+
+        <id name="uuid" type="string">
+            <column name="uuid" length="36" />
+            <generator class="assigned" />
+        </id>
+
+        <property name="content" type="string" />
+
+        <property name="createTime" type="timestamp">
+            <column name="create_time" />
+        </property>
+
+        <property name="lastModifiedTime" type="timestamp">
+            <column name="last_modified_time" />
+        </property>
+
+        <property name="remindTime" type="timestamp">
+            <column name="remind_time" />
+        </property>
+
+        <property name="doneTime" type="timestamp">
+            <column name="done_time" />
+        </property>
+
+        <property name="isEmergency" type="boolean">
+            <column name="is_emergency" />
+        </property>
+
+        <property name="isImportant" type="boolean">
+            <column name="is_important" />
+        </property>
+    </class>
+</hibernate-mapping>
