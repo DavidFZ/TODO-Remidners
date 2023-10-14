@@ -53,14 +53,13 @@ public class ComponentResizeUtil {
      * @return ComponentAdapter
      */
     public static ComponentAdapter getUniformScalingComponentAdapter(List<Component> componentList, double ratio) {
-        assert componentList != null && !componentList.isEmpty();
+        assert componentList != null;
         return new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
+                if (componentList.isEmpty()) return;
                 for (Component c : componentList) {
-                    Dimension dimension = c.getSize();
-                    c.setSize(getScaleResizedDimension(dimension, ratio));
-//                    c.revalidate();
+                    recursionResize(componentList, ratio);
                 }
             }
         };
@@ -111,6 +110,21 @@ public class ComponentResizeUtil {
     public static Dimension getScaleResizedDimension(Dimension dimension, double scalingRatio) {
         assert scalingRatio > 0;
         return new Dimension((int) (dimension.width * scalingRatio), (int) (dimension.height * scalingRatio));
+    }
+
+    private static void recursionResize(List<Component> componentList, double ratio) {
+        if (componentList.isEmpty()) return;
+        for (Component c : componentList) {
+            Dimension dimension = c.getSize();
+            c.setSize(getScaleResizedDimension(dimension, ratio));
+            JComponent jc = (JComponent) c;
+            List<Component> components = List.of(jc.getComponents());
+            if (components != null && !components.isEmpty())
+                return;
+            for (Component c1 : components)
+                recursionResize(List.of(c1), ratio);
+            c.revalidate();
+        }
     }
 
 

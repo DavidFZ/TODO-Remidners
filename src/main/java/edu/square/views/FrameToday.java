@@ -38,6 +38,7 @@ public class FrameToday {
         formerFrameDimension = mainFrame.getSize();
         mainFrame.addComponentListener(getSelfAspectMaintainer(formerFrameDimension));
         Dimension dimension = mainFrame.getSize();
+        List<Component> componentsList = List.of(mainFrame.getComponents());
         mainFrame.addComponentListener(
                 getUniformScalingComponentAdapter(List.of(mainFrame.getComponents()), calculateWidthScaledRatio(formerFrameDimension.getWidth(), dimension.getWidth())));
 
