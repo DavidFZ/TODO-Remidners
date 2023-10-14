@@ -10,16 +10,20 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
+import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
 
 public class FrameToday {
     //font定义
     Font font1;
     Font font2;
     Font font3;
-    //root Frame
-    private JFrame mainFrame;
-    //中间容器
-    private ReminderListView reminderListView;
+    private JFrame mainFrame; //root view
+    private Dimension formerFrameDimension;  //cache former size
+    private ReminderListView reminderListView;  //sub view
+    private ArrayList<Component> componentsList;
 
 
     public FrameToday() {
@@ -29,8 +33,14 @@ public class FrameToday {
         JScrollPane jScrollPane = reminderListView.getScrollPane();
         mainFrame.add(jScrollPane);
 
-//        jScrollPane.validate();
-//        jScrollPane.repaint();
+
+        //process size and resize event
+        formerFrameDimension = mainFrame.getSize();
+        mainFrame.addComponentListener(getSelfAspectMaintainer(formerFrameDimension));
+        Dimension dimension = mainFrame.getSize();
+        mainFrame.addComponentListener(
+                getUniformScalingComponentAdapter(List.of(mainFrame.getComponents()), calculateWidthScaledRatio(formerFrameDimension.getWidth(), dimension.getWidth())));
+
         mainFrame.setVisible(true);
         mainFrame.setResizable(true);
     }

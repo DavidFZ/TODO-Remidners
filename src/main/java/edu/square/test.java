@@ -5,23 +5,15 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import javax.swing.*;
 import java.io.IOException;
 
 import static edu.square.utils.DevUtils.getTimeStamp;
 
 public class test {
     public static void main(String[] args) throws IOException {
-        Configuration configuration = new Configuration().configure();
-//        System.out.println(configuration);
+        JFrame jFrame = new JFrame();
+        JLabel jLabel = new JLabel("test");
 
-        SessionFactory sessionFactory = configuration.buildSessionFactory();
-        Session session = sessionFactory.openSession();
-
-        Reminder reminder = new Reminder("session merge test");
-        reminder.setRemindTime(getTimeStamp());
-
-//        session.save(reminder);
-        session.merge(reminder);
-        session.beginTransaction().commit();
     }
 }
