@@ -14,16 +14,19 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class FrameToday {
+    //外层Frame
     JFrame mainFrame;
-    //font定义
 
     //维护一个容器用于记录用户输入的条目
     ArrayList<Reminder> plans = new ArrayList<>();
+
+    //font定义
     Font font1;
     Font font2;
 
     Font font3;
 
+    //中间容器
     private ReminderListView reminderListView;
 
 
@@ -34,14 +37,17 @@ public class FrameToday {
 //        for (Reminder reminder : reminderList) {
 //            addItem(reminder);
 //        }
+
         reminderListView = new ReminderListView(mainFrame);
+
+        reminderListView.load();
         JScrollPane jScrollPane = reminderListView.getScrollPane();
+
+
         mainFrame.add(jScrollPane);
-        jScrollPane.validate();
-        jScrollPane.repaint();
 
-
-
+//        jScrollPane.validate();
+//        jScrollPane.repaint();
         mainFrame.setVisible(true);
         mainFrame.setResizable(true);
     }
@@ -69,7 +75,7 @@ public class FrameToday {
             JPanel titlePanel_title = new JPanel();
             titlePanel_title.setLayout(new FlowLayout(FlowLayout.LEFT));
             titlePanel_title.setPreferredSize(new Dimension((int) (0.48 * mainFrame.getWidth()), (int) (0.11 * mainFrame.getHeight())));
-//            titlePanel_title.setBackground(Color.blue);
+            titlePanel_title.setBackground(Color.blue);
             titlePanel.add(titlePanel_title);
 
             JLabel titleLabel = new JLabel("Today");
@@ -80,7 +86,7 @@ public class FrameToday {
             JPanel titlePanel_button = new JPanel();
             titlePanel_button.setLayout(new FlowLayout(FlowLayout.RIGHT));
             titlePanel_button.setPreferredSize(new Dimension((int) (0.48 * mainFrame.getWidth()), (int) (0.11 * mainFrame.getHeight())));
-//            titlePanel_button.setBackground(Color.yellow);
+            titlePanel_button.setBackground(Color.yellow);
             titlePanel.add(titlePanel_button);
 
             JButton pulsButton = new JButton("+");
@@ -89,6 +95,8 @@ public class FrameToday {
             pulsButton.setPreferredSize(new Dimension((int) (0.05 * mainFrame.getWidth()), (int) (0.05 * mainFrame.getWidth())));
             pulsButton.setVisible(true);
             titlePanel_button.add(pulsButton);
+
+
             pulsButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {

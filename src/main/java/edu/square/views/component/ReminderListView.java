@@ -20,33 +20,45 @@ public class ReminderListView {
     private final List<Reminder> reminders;
     @Getter
     private JScrollPane scrollPane;
-
-
+    @Getter
+    JPanel jPanelManage;
 
     public ReminderListView(JFrame parentFrame) {
         this.parentFrame = parentFrame;
 
         reminders = FrameTodayController.queryAllEntities();
         reminderViews = new ArrayList<>();
-        scrollPane = new JScrollPane();
 
-        int w=(int)(parentFrame.getWidth()*0.95);
-        int h=(int)(parentFrame.getHeight()*0.75);
+        jPanelManage = new JPanel();
+        jPanelManage.setPreferredSize(new Dimension((int) (parentFrame.getWidth() * 0.93), (int) (parentFrame.getHeight() * 0.08)));//innerpanel宽度为0.07
+        jPanelManage.setBackground(Color.red);
+        jPanelManage.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        int w = (int) (parentFrame.getWidth() * 0.95);
+        int h = (int) (parentFrame.getHeight() * 0.75);
+        scrollPane = new JScrollPane(jPanelManage);
         scrollPane.setPreferredSize(new Dimension(w, h));
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-//        scrollPane.setLayout(new ScrollPaneLayout());
-        scrollPane.setLayout(new ScrollPaneLayout());
+
 
         for (Reminder r : reminders) {
+
             ReminderView reminderView = new ReminderView(r);
             reminderViews.add(reminderView);
-            JPanel j =reminderView.getInnerPanel();
-            scrollPane.add(reminderView.getInnerPanel());
+            jPanelManage.add(reminderView.getInnerPanel());
         }
     }
 
-    public void addItem(Reminder reminder){
-        ReminderView reminderView =new ReminderView(reminder);
+    public void load() {
+        JButton button = new JButton("111");
+        button.setPreferredSize(new Dimension(200, 200));
+        System.out.println("准备输出");
+        scrollPane.add(button);
+
+    }
+
+    public void addItem(Reminder reminder) {
+        ReminderView reminderView = new ReminderView(reminder);
         scrollPane.add(reminderView.getInnerPanel());
     }
 
@@ -70,7 +82,7 @@ public class ReminderListView {
 
         private void initView() {
             //innerPanel View
-            innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+            innerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
             innerPanel.setPreferredSize(new Dimension((int) (0.85 * parentFrame.getWidth()), (int) (0.07 * parentFrame.getHeight())));
             innerPanel.setBorder(new LineBorder(Color.PINK));
             innerPanel.setBackground(Color.yellow);
