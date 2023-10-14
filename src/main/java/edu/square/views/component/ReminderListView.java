@@ -30,7 +30,7 @@ public class ReminderListView {
         reminderViews = new ArrayList<>();
 
         jPanelManager = new JPanel();
-        jPanelManager.setPreferredSize(new Dimension((int) (parentFrame.getWidth() * 0.93), (int) (parentFrame.getHeight() * 0.08)));//innerpanel宽度为0.07
+        jPanelManager.setPreferredSize(new Dimension((int) (parentFrame.getWidth() * 0.93), (int) (parentFrame.getHeight() * 1.2)));//innerpanel宽度为0.07
         jPanelManager.setBackground(Color.red);
         jPanelManager.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -39,6 +39,7 @@ public class ReminderListView {
         scrollPane = new JScrollPane(jPanelManager);
         scrollPane.setPreferredSize(new Dimension(w, h));
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+        scrollPane.setWheelScrollingEnabled(true);
 
         for (Reminder r : reminders) {
             ReminderView reminderView = new ReminderView(r);
@@ -65,6 +66,8 @@ public class ReminderListView {
             reminder = r;
             innerPanel = new JPanel();
             label = new JLabel(reminder.getContent());
+            //TODO: abstract an interface for font resize from parentFrame
+            label.setFont(new Font("宋体", Font.BOLD, (int) (0.03 * parentFrame.getWidth())));
             radioButton = new JRadioButton();
             //bind view
             initView();
@@ -72,7 +75,7 @@ public class ReminderListView {
 
         private void initView() {
             //innerPanel View
-            innerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+            innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
             innerPanel.setPreferredSize(new Dimension((int) (0.85 * parentFrame.getWidth()), (int) (0.07 * parentFrame.getHeight())));
             innerPanel.setBorder(new LineBorder(Color.PINK));
             innerPanel.setBackground(Color.yellow);
@@ -85,8 +88,8 @@ public class ReminderListView {
             radioButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    setReminderViewDoneStatus(radioButton.isSelected());
-                    updateReminderEntityDoneStatus(reminder, radioButton.isSelected());
+                    setReminderViewDoneStatus(radioButton.isSelected());    //update view
+                    updateReminderEntityDoneStatus(reminder, radioButton.isSelected());     //update database
                 }
             });
 

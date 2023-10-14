@@ -17,4 +17,12 @@ public class ComponentResizeUtil {
             }
         };
     }
+
+    public static Font getFontResizeUtil(JFrame parentFrame, double factor) {
+        int newFontSize = Math.max(10, (int) (parentFrame.getWidth() * factor));
+        // Adjust the factor as needed
+        Font currentFont = parentFrame.getFont();
+        Font newFont = currentFont.deriveFont((float) newFontSize);
+        return newFont;
+    }
 }
