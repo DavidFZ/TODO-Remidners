@@ -1,10 +1,14 @@
 package edu.square.utils;
 
+import java.sql.Timestamp;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-public class DateUtils {
+public class TimeUtils {
 
     /**
      * Generate dates in one year range.
@@ -58,6 +62,12 @@ public class DateUtils {
         return datesInRange;
     }
 
+
+    /**
+     * Get dates in range of this month
+     *
+     * @return List<LocalDate> dates in range of this month
+     */
     public static List<LocalDate> getDateInThisMoth() {
         return getDatesInTheMoth(LocalDate.now());
     }
@@ -73,4 +83,26 @@ public class DateUtils {
         LocalDate endOfMoth = date.withDayOfMonth(date.lengthOfMonth());
         return generateDatesInRange(startOfMoth, endOfMoth);
     }
+
+    public static Date covertLocalDateToStartOfDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+
+
+    /**
+     * Get the Timestamp of start and end of today
+     *
+     * @param isTheStartOfTheDay return the start of the day or the end of the day
+     * @return Timestamp
+     */
+    public static Timestamp getStartTimestampOfToday(boolean isTheStartOfTheDay) {
+        LocalDate today = LocalDate.now();
+        LocalDateTime todayEnd = today.atTime(23, 59, 59, 999999999);
+
+        LocalDateTime localDateTime;
+        if (isTheStartOfTheDay)
+            return Timestamp.valueOf(today.atStartOfDay());
+        return Timestamp.valueOf(todayEnd);
+    }
+
 }
