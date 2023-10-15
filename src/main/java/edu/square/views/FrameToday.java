@@ -1,38 +1,39 @@
 package edu.square.views;
 
+import edu.square.controller.FrameTodayController;
 import edu.square.entity.Reminder;
-import edu.square.model.ReminderPanelModel;
-import edu.square.utils.DBUtils.hibernate.HDLUtil;
-import edu.square.utils.DBUtils.hibernate.SessionFactoryUtil;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.utils.UIUtils.KeyManager;
+import edu.square.views.component.ReminderListView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class FrameToday {
-    JFrame mainFrame;
     //font定义
-
-    //维护一个容器用于记录用户输入的条目
-    ArrayList<Reminder> plans = new ArrayList<>();
     Font font1;
     Font font2;
-
     Font font3;
+    //root Frame
+    private JFrame mainFrame;
+    //中间容器
+    private ReminderListView reminderListView;
 
 
     public FrameToday() {
         init();
 
-        java.util.List<Reminder> reminderList = HDLUtil.queryAllEntities(SessionFactoryUtil.getSession());
-        for (Reminder reminder : reminderList) {
-            addItem(reminder);
-        }
+        reminderListView = new ReminderListView(mainFrame);
+        JScrollPane jScrollPane = reminderListView.getScrollPane();
+        mainFrame.add(jScrollPane);
 
+//        jScrollPane.validate();
+//        jScrollPane.repaint();
         mainFrame.setVisible(true);
         mainFrame.setResizable(true);
     }
@@ -49,18 +50,16 @@ public class FrameToday {
 
         //titlePanel
         {
-
             JPanel titlePanel = new JPanel();
             titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
             titlePanel.setPreferredSize(new Dimension(mainFrame.getWidth(), (int) (0.12 * mainFrame.getHeight())));
 //            titlePanel.setBackground(Color.black);
             mainFrame.add(titlePanel);
-
             //titlePanel_title
             JPanel titlePanel_title = new JPanel();
             titlePanel_title.setLayout(new FlowLayout(FlowLayout.LEFT));
             titlePanel_title.setPreferredSize(new Dimension((int) (0.48 * mainFrame.getWidth()), (int) (0.11 * mainFrame.getHeight())));
-//            titlePanel_title.setBackground(Color.blue);
+            titlePanel_title.setBackground(Color.blue);
             titlePanel.add(titlePanel_title);
 
             JLabel titleLabel = new JLabel("Today");
@@ -71,7 +70,7 @@ public class FrameToday {
             JPanel titlePanel_button = new JPanel();
             titlePanel_button.setLayout(new FlowLayout(FlowLayout.RIGHT));
             titlePanel_button.setPreferredSize(new Dimension((int) (0.48 * mainFrame.getWidth()), (int) (0.11 * mainFrame.getHeight())));
-//            titlePanel_button.setBackground(Color.yellow);
+            titlePanel_button.setBackground(Color.yellow);
             titlePanel.add(titlePanel_button);
 
             JButton pulsButton = new JButton("+");
@@ -80,11 +79,13 @@ public class FrameToday {
             pulsButton.setPreferredSize(new Dimension((int) (0.05 * mainFrame.getWidth()), (int) (0.05 * mainFrame.getWidth())));
             pulsButton.setVisible(true);
             titlePanel_button.add(pulsButton);
+
+
             pulsButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     //输入的窗口
-                    Frame printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * mainFrame.getHeight())).setWindowWidth((int) (0.3 * mainFrame.getWidth())).setTitle("Please add item").build());
+                    JFrame printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * mainFrame.getHeight())).setWindowWidth((int) (0.3 * mainFrame.getWidth())).setTitle("Please add item").build());
 
                     //item + text field
                     JPanel inputPanel;
@@ -114,27 +115,48 @@ public class FrameToday {
                         confirmButton.setSize(100, 100);
 
                     }
+
+                    //while input Enter will be same as click confirm button
+
+
                     confirmPanel.add(confirmButton, BorderLayout.SOUTH);
+                    //two frames will not close together
+                    printFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     printFrame.add(inputPanel);
                     printFrame.add(confirmPanel);
-                    //The influence of click button
 
+                    //The influence of click button
                     confirmButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             String item = itemName.getText();
-                            System.out.println(item);
                             if (item != null) {
                                 //TODO: use some less invasive way to do this
-                                addItem(SessionFactoryUtil.insertReminder(item));
-
-                                System.out.println(item);
+                                addItem(FrameTodayController.insertReminderEntity(item));
                             }
                             printFrame.dispose();
 
 
                         }
                     });
+
+                    //release Enter
+                    itemName.addKeyListener(new KeyAdapter() {
+                        @Override
+                        public void keyTyped(KeyEvent e) {
+                            super.keyTyped(e);
+                            if(e.getKeyChar() == KeyEvent.VK_ENTER){
+                                String item = itemName.getText();
+                                if (item != null) {
+                                    //TODO: use some less invasive way to do this
+                                    addItem(FrameTodayController.insertReminderEntity(item));
+                                }
+                                printFrame.dispose();
+                            }
+                        }
+
+                    });
+
                     //if components are visible
                     itemName.setVisible(true);
                     confirmPanel.setVisible(true);
@@ -148,8 +170,13 @@ public class FrameToday {
     }
 
     public void addItem(Reminder reminder) {
-        ReminderPanelModel reminderPanelModel = new ReminderPanelModel(reminder, mainFrame);
-        mainFrame.add(reminderPanelModel);
+//        ReminderPanelModel reminderPanelModel = new ReminderPanelModel(reminder, mainFrame);
+//        mainFrame.add(reminderPanelModel);
+
+        reminderListView.addNewReminderViewIntoReminderListView(reminder);
+        mainFrame.validate();
+        mainFrame.repaint();
+
         mainFrame.setVisible(true);
     }
 }

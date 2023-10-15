@@ -9,7 +9,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static edu.square.controller.FrameTodayController.setReminderDoneStatusAndUpdate;
+import static edu.square.controller.FrameTodayController.updateReminderEntityDoneStatus;
 
 public class ReminderPanelModel extends JPanel {
     private static Font font1;
@@ -66,10 +66,10 @@ public class ReminderPanelModel extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (radioButton.isSelected()) {
                     label.setForeground(Color.GRAY);
-                    setReminderDoneStatusAndUpdate(reminder, true);
+                    updateReminderEntityDoneStatus(reminder, true);
                 } else {
                     label.setForeground(Color.black);
-                    setReminderDoneStatusAndUpdate(reminder, false);
+                    updateReminderEntityDoneStatus(reminder, false);
                 }
             }
         });
