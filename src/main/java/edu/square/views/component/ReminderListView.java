@@ -23,14 +23,20 @@ public class ReminderListView {
     @Getter
     private JScrollPane scrollPane;
 
+    //以第一次载入的窗口为准
+    private final double frameWidthInit;
+    private final double frameHeightInit;
+
     public ReminderListView(JFrame parentFrame) {
         this.parentFrame = parentFrame;
-
+        frameHeightInit = parentFrame.getHeight();
+        frameWidthInit = parentFrame.getWidth();
         reminders = FrameTodayController.queryAllEntities();
+        int reminderNum = reminders.size();
         reminderViews = new ArrayList<>();
 
         jPanelManager = new JPanel();
-        jPanelManager.setPreferredSize(new Dimension((int) (parentFrame.getWidth() * 0.93), (int) (parentFrame.getHeight() * 1.2)));//innerpanel宽度为0.07
+        jPanelManager.setPreferredSize(new Dimension((int) (parentFrame.getWidth() * 0.93), (int) ((frameHeightInit * 0.076) * reminderNum)));
         jPanelManager.setBackground(Color.red);
         jPanelManager.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -51,6 +57,11 @@ public class ReminderListView {
     public void addNewReminderViewIntoReminderListView(Reminder reminder) {
         ReminderView reminderView = new ReminderView(reminder);
         jPanelManager.add(reminderView.getInnerPanel());
+        jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() +frameHeightInit * 0.078)));
+//        Todo 实现自动滚动到底部
+//        JScrollBar jscrollBar = scrollPane.getVerticalScrollBar();
+//        jscrollBar.setValue(jPanelManager.getHeight()*2);
+
     }
 
     public class ReminderView {
@@ -67,7 +78,7 @@ public class ReminderListView {
             innerPanel = new JPanel();
             label = new JLabel(reminder.getContent());
             //TODO: abstract an interface for font resize from parentFrame
-            label.setFont(new Font("宋体", Font.BOLD, (int) (0.03 * parentFrame.getWidth())));
+            label.setFont(new Font("宋体", Font.BOLD, (int) (0.03 * frameWidthInit)));
             radioButton = new JRadioButton();
             //bind view
             initView();
@@ -76,11 +87,10 @@ public class ReminderListView {
         private void initView() {
             //innerPanel View
             innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-            innerPanel.setPreferredSize(new Dimension((int) (0.85 * parentFrame.getWidth()), (int) (0.07 * parentFrame.getHeight())));
+            innerPanel.setPreferredSize(new Dimension((int) (0.85 * frameWidthInit), (int) (0.07 * frameHeightInit)));
             innerPanel.setBorder(new LineBorder(Color.PINK));
             innerPanel.setBackground(Color.yellow);
 
-            //label.setFont(font2);
 
             //reload done status from db
             setReminderViewDoneStatus(reminder.getDoneTime() != null);
