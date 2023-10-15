@@ -27,10 +27,11 @@ public class ReminderListView {
         this.parentFrame = parentFrame;
 
         reminders = FrameTodayController.queryAllEntities();
+        int reminderNum = reminders.size();
         reminderViews = new ArrayList<>();
 
         jPanelManager = new JPanel();
-        jPanelManager.setPreferredSize(new Dimension((int) (parentFrame.getWidth() * 0.93), (int) (parentFrame.getHeight() * 1.2)));//innerpanel宽度为0.07
+        jPanelManager.setPreferredSize(new Dimension((int) (parentFrame.getWidth() * 0.93), (int) ((parentFrame.getHeight() * 0.0755) * reminderNum)));
         jPanelManager.setBackground(Color.red);
         jPanelManager.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -51,6 +52,11 @@ public class ReminderListView {
     public void addNewReminderViewIntoReminderListView(Reminder reminder) {
         ReminderView reminderView = new ReminderView(reminder);
         jPanelManager.add(reminderView.getInnerPanel());
+        jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + parentFrame.getHeight() * 0.075)));
+//        Todo 实现自动滚动到底部
+//        JScrollBar jscrollBar = scrollPane.getVerticalScrollBar();
+//        jscrollBar.setValue(jPanelManager.getHeight()*2);
+
     }
 
     public class ReminderView {

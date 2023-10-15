@@ -54,4 +54,5 @@ public class FrameTodayController {
         session.beginTransaction().commit();
         session.close();
     }
+
 }
