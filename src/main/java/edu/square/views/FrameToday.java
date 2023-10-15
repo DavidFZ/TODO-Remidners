@@ -145,7 +145,7 @@ public class FrameToday {
                         @Override
                         public void keyTyped(KeyEvent e) {
                             super.keyTyped(e);
-                            if(e.getKeyChar() == KeyEvent.VK_ENTER){
+                            if (e.getKeyChar() == KeyEvent.VK_ENTER) {
                                 String item = itemName.getText();
                                 if (item != null) {
                                     //TODO: use some less invasive way to do this
@@ -174,6 +174,10 @@ public class FrameToday {
 //        mainFrame.add(reminderPanelModel);
 
         reminderListView.addNewReminderViewIntoReminderListView(reminder);
+
+
+
+
         mainFrame.validate();
         mainFrame.repaint();
 
