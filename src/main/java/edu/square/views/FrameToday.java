@@ -1,6 +1,5 @@
 package edu.square.views;
 
-import com.sun.tools.javac.comp.Todo;
 import edu.square.entity.Reminder;
 import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.JFrameAttribute;
