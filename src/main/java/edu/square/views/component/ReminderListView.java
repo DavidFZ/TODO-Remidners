@@ -1,7 +1,7 @@
 package edu.square.views.component;
 
-import edu.square.controller.FrameTodayController;
 import edu.square.entity.Reminder;
+import edu.square.model.ReminderModel;
 import lombok.Getter;
 
 import javax.swing.*;
@@ -12,26 +12,28 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.square.controller.FrameTodayController.updateReminderEntityDoneStatus;
+import static edu.square.model.ReminderModel.updateReminderEntityDoneStatus;
 
 public class ReminderListView {
+    //keep parentFrame var for future implementation resolution scaling
     private final JFrame parentFrame;
     private final List<ReminderView> reminderViews;
     private final List<Reminder> reminders;
+    //以第一次载入的窗口为准
+    private final double frameWidthInit;
+    private final double frameHeightInit;
     @Getter
     JPanel jPanelManager;
     @Getter
     private JScrollPane scrollPane;
 
-    //以第一次载入的窗口为准
-    private final double frameWidthInit;
-    private final double frameHeightInit;
-
     public ReminderListView(JFrame parentFrame) {
         this.parentFrame = parentFrame;
+
         frameHeightInit = parentFrame.getHeight();
         frameWidthInit = parentFrame.getWidth();
-        reminders = FrameTodayController.queryAllEntities();
+
+        reminders = ReminderModel.queryAllEntities();
         int reminderNum = reminders.size();
         reminderViews = new ArrayList<>();
 
@@ -57,7 +59,7 @@ public class ReminderListView {
     public void addNewReminderViewIntoReminderListView(Reminder reminder) {
         ReminderView reminderView = new ReminderView(reminder);
         jPanelManager.add(reminderView.getInnerPanel());
-        jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() +frameHeightInit * 0.078)));
+        jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.078)));
 //        Todo 实现自动滚动到底部
 //        JScrollBar jscrollBar = scrollPane.getVerticalScrollBar();
 //        jscrollBar.setValue(jPanelManager.getHeight()*2);

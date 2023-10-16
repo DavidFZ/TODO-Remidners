@@ -1,4 +1,4 @@
-package edu.square.controller;
+package edu.square.model;
 
 import edu.square.entity.Reminder;
 import jakarta.persistence.TypedQuery;
@@ -14,11 +14,10 @@ import java.util.List;
 
 import static edu.square.utils.DBUtils.hibernate.CriteriaQueryUtil.getCriteriaQuery;
 import static edu.square.utils.DBUtils.hibernate.SessionFactoryUtil.getSession;
+import static edu.square.utils.DevUtils.getTimeStamp;
 import static edu.square.utils.TimeUtils.getStartOrEndTimestampOfDate;
-import static edu.square.utils.TimeUtils.getStartOrEndTimestampOfToday;
 
-
-public class DateQueryController {
+public class ReminderModel {
 
     public static final String CREATE_TIME = "createTime";
     public static final String LAST_MODIFIED_TIME = "lastModifiedTime";
@@ -27,6 +26,20 @@ public class DateQueryController {
     public static final String IS_EMERGENCY = "isEmergency";
     public static final String IS_IMPORTANT = "isImportant";
 
+    public static List<Reminder> queryAllEntities() {
+        Session session = getSession();
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Reminder> criteriaQuery = criteriaBuilder.createQuery(Reminder.class);
+
+        Root<Reminder> root = criteriaQuery.from(Reminder.class);
+        criteriaQuery.select(root);
+        List<Reminder> reminders = session.createQuery(criteriaQuery).getResultList();
+
+        session.close();
+
+        return reminders;
+    }
 
     /**
      * Query the reminder by date
@@ -59,7 +72,7 @@ public class DateQueryController {
      *
      * @return Reminder list at today
      */
-    public static List<Reminder> queryTodayReminder() {
+    public static List<Reminder> queryReminderOfToday() {
         return queryReminderByDate(REMIND_TIME, getStartOrEndTimestampOfDate(LocalDate.now(), true), getStartOrEndTimestampOfDate(LocalDate.now(), false));
     }
 
@@ -106,6 +119,33 @@ public class DateQueryController {
     }
 
     /**
+     * Query the reminder by done status
+     *
+     * @param isDone done status
+     * @return Reminder list which is done or not
+     */
+    public static List<Reminder> queryReminderByDoneStatus(boolean isDone) {
+        Session s = getSession();
+
+        CriteriaBuilder criteriaBuilder = s.getCriteriaBuilder();
+        CriteriaQuery<Reminder> criteriaQuery = getCriteriaQuery(s, Reminder.class);
+        Root<Reminder> root = criteriaQuery.from(Reminder.class);
+
+        Predicate predicate;
+        if (isDone)
+            predicate = criteriaBuilder.isNotNull(root.get(DONE_TIME));
+        else
+            predicate = criteriaBuilder.isNull(root.get(DONE_TIME));
+        criteriaQuery.select(root).where(predicate);
+
+        TypedQuery<Reminder> query = s.createQuery(criteriaQuery);
+        List<Reminder> list = query.getResultList();
+        s.close();
+
+        return list;
+    }
+
+    /**
      * Query the reminder by important and emergency status
      * Query once, instead of query twice and merge the result
      *
@@ -138,7 +178,6 @@ public class DateQueryController {
         return list;
     }
 
-
     /**
      * Query the reminder by date
      *
@@ -150,46 +189,33 @@ public class DateQueryController {
         return queryReminderByDate(attribute, getStartOrEndTimestampOfDate(localDate, true), getStartOrEndTimestampOfDate(localDate, false));
     }
 
-    //TODO: abstract the queryReminderByDate method
 
-    /**
-     * Query the reminder by done status
-     *
-     * @param isDone done status
-     * @return Reminder list which is done or not
-     */
-    public static List<Reminder> queryReminderByDoneStatus(boolean isDone) {
+    public static void updateReminderEntityDoneStatus(Reminder reminder, boolean isDone) {
+
+        reminder.setDoneTime(isDone ? reminder.getRemindTime() : null);
+        reminder.setLastModifiedTime(getTimeStamp());
+        reminder.setRemindTime(isDone ? null : reminder.getRemindTime());
+
+        updateReminder(reminder);
+    }
+
+    public static Reminder insertReminder(String content) {
         Session s = getSession();
 
-        CriteriaBuilder criteriaBuilder = s.getCriteriaBuilder();
-        CriteriaQuery<Reminder> criteriaQuery = getCriteriaQuery(s, Reminder.class);
-        Root<Reminder> root = criteriaQuery.from(Reminder.class);
+        Reminder reminder = new Reminder(content);
+        reminder.setRemindTime(getTimeStamp());
 
-        Predicate predicate;
-        if (isDone)
-            predicate = criteriaBuilder.isNotNull(root.get(DONE_TIME));
-        else
-            predicate = criteriaBuilder.isNull(root.get(DONE_TIME));
-        criteriaQuery.select(root).where(predicate);
-
-        TypedQuery<Reminder> query = s.createQuery(criteriaQuery);
-        List<Reminder> list = query.getResultList();
-        s.close();
-
-        return list;
+        s.merge(reminder);
+        s.beginTransaction().commit();
+        return reminder;
     }
 
+    public static void updateReminder(Reminder reminder) {
+        Session session = getSession();
 
-    public static void main(String[] args) {
-        //testcase
-//        List<Reminder> list = queryReminderByDate(LAST_MODIFIED_TIME, getStartOrEndTimestampOfToday(true), getStartOrEndTimestampOfToday(false));
-//        List<Reminder> list = queryReminderByDoneStatus(false);
-//        List<Reminder> list = queryReminderBoolField(IS_IMPORTANT, true);
-//        List<Reminder> list = queryReminderBoolField(IS_EMERGENCY,true);
-//        List<Reminder> list = queryReminderByDate(REMIND_TIME, getStartOrEndTimestampOfToday(true), getStartOrEndTimestampOfToday(false));
-        List<Reminder> list = queryReminderByImportantAndEmergency(true, false);
-        System.out.println(list.size());
-        System.out.println(list);
+        session.merge(reminder);
+        session.beginTransaction().commit();
+
+        session.close();
     }
-
 }

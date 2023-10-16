@@ -1,10 +1,9 @@
 package edu.square.views;
 
-import edu.square.controller.FrameTodayController;
 import edu.square.entity.Reminder;
+import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
-import edu.square.utils.UIUtils.KeyManager;
 import edu.square.views.component.ReminderListView;
 
 import javax.swing.*;
@@ -132,11 +131,11 @@ public class FrameToday {
                             String item = itemName.getText();
                             if (item.length() > 0 && item.length() <= 40) {
                                 //TODO: use some less invasive way to do this
-                                addItem(FrameTodayController.insertReminderEntity(item));
+                                addItem(ReminderModel.insertReminder(item));
                             }
                             else if (item.length() >= 40) {
                                 String newItem = item.substring(0,39);
-                                addItem(FrameTodayController.insertReminderEntity(newItem));
+                                addItem(ReminderModel.insertReminder(newItem));
                             }
                             printFrame.dispose();
 
@@ -153,7 +152,7 @@ public class FrameToday {
                                 String item = itemName.getText();
                                 if (item != null) {
                                     //TODO: use some less invasive way to do this
-                                    addItem(FrameTodayController.insertReminderEntity(item));
+                                    addItem(ReminderModel.insertReminder(item));
                                 }
                                 printFrame.dispose();
                             }
