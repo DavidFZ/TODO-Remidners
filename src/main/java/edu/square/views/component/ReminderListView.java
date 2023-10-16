@@ -27,6 +27,8 @@ public class ReminderListView {
     @Getter
     private JScrollPane scrollPane;
 
+    int reminderNum;
+
     public ReminderListView(JFrame parentFrame) {
         this.parentFrame = parentFrame;
 
@@ -34,11 +36,11 @@ public class ReminderListView {
         frameWidthInit = parentFrame.getWidth();
 
         reminders = ReminderModel.queryAllEntities();
-        int reminderNum = reminders.size();
+        reminderNum = reminders.size();
         reminderViews = new ArrayList<>();
 
         jPanelManager = new JPanel();
-        jPanelManager.setPreferredSize(new Dimension((int) (parentFrame.getWidth() * 0.93), (int) ((frameHeightInit * 0.076) * reminderNum)));
+        jPanelManager.setPreferredSize(new Dimension((int) (parentFrame.getWidth() * 0.93), (int) ((frameHeightInit * 0.074) * reminderNum)));
         jPanelManager.setBackground(Color.red);
         jPanelManager.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -49,6 +51,9 @@ public class ReminderListView {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setWheelScrollingEnabled(true);
 
+        //实现自动滚动到底部
+
+
         for (Reminder r : reminders) {
             ReminderView reminderView = new ReminderView(r);
             reminderViews.add(reminderView);
@@ -57,12 +62,14 @@ public class ReminderListView {
     }
 
     public void addNewReminderViewIntoReminderListView(Reminder reminder) {
+        reminderNum++;
         ReminderView reminderView = new ReminderView(reminder);
         jPanelManager.add(reminderView.getInnerPanel());
-        jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.078)));
-//        Todo 实现自动滚动到底部
-//        JScrollBar jscrollBar = scrollPane.getVerticalScrollBar();
-//        jscrollBar.setValue(jPanelManager.getHeight()*2);
+        if (reminderNum > 10) {
+            jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.072)));
+        }
+
+    //实现自动滚动到底部
 
     }
 
@@ -89,7 +96,7 @@ public class ReminderListView {
         private void initView() {
             //innerPanel View
             innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-            innerPanel.setPreferredSize(new Dimension((int) (0.85 * frameWidthInit), (int) (0.07 * frameHeightInit)));
+            innerPanel.setPreferredSize(new Dimension((int) (0.85 * frameWidthInit), (int) (0.0675 * frameHeightInit)));
             innerPanel.setBorder(new LineBorder(Color.PINK));
             innerPanel.setBackground(Color.yellow);
 
