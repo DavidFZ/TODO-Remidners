@@ -68,8 +68,8 @@ public class LeftSideView {
         JTextField numberOfFlagged;
         JLabel flaggedItemLabel;
 
-        Font fnTitle = new Font("宋体",Font.BOLD,20);
-        Font fnButton = new Font("宋体",Font.BOLD,15);
+        Font fnTitle = new Font("宋体",Font.BOLD,(int)(0.05*leftMainFrame.getWidth()));
+        Font fnButton = new Font("宋体",Font.BOLD,(int)(0.03*leftMainFrame.getWidth()));
 
 
 

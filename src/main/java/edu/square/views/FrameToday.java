@@ -98,7 +98,7 @@ public class FrameToday {
                         inputPanel.setBounds((int) (0.1 * printFrame.getHeight()), (int) (0.2 * printFrame.getHeight()), (int) (0.8 * printFrame.getWidth()), (int) (0.2 * printFrame.getWidth()));
                         inputLable.setFont(font2);
                         inputPanel.add(inputLable);
-                        itemName = new JTextField(10);
+                        itemName = new JTextField(40);
                         inputPanel.add(itemName);
 
                     }
@@ -130,9 +130,13 @@ public class FrameToday {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             String item = itemName.getText();
-                            if (item != null) {
+                            if (item.length() > 0 && item.length() <= 40) {
                                 //TODO: use some less invasive way to do this
                                 addItem(FrameTodayController.insertReminderEntity(item));
+                            }
+                            else if (item.length() >= 40) {
+                                String newItem = item.substring(0,39);
+                                addItem(FrameTodayController.insertReminderEntity(newItem));
                             }
                             printFrame.dispose();
 
