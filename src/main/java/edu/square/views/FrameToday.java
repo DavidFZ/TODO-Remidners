@@ -1,7 +1,7 @@
 package edu.square.views;
 
-import edu.square.controller.FrameTodayController;
 import edu.square.entity.Reminder;
+import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.component.ReminderListView;
@@ -10,20 +10,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
-import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class FrameToday {
     //font定义
     Font font1;
     Font font2;
     Font font3;
-    private JFrame mainFrame; //root view
-    private Dimension formerFrameDimension;  //cache former size
-    private ReminderListView reminderListView;  //sub view
-    private ArrayList<Component> componentsList;
+    //root Frame
+    private JFrame mainFrame;
+    //中间容器
+    private ReminderListView reminderListView;
 
 
     public FrameToday() {
@@ -33,15 +31,8 @@ public class FrameToday {
         JScrollPane jScrollPane = reminderListView.getScrollPane();
         mainFrame.add(jScrollPane);
 
-
-        //process size and resize event
-        formerFrameDimension = mainFrame.getSize();
-        mainFrame.addComponentListener(getSelfAspectMaintainer(formerFrameDimension));
-        Dimension dimension = mainFrame.getSize();
-        List<Component> componentsList = List.of(mainFrame.getComponents());
-        mainFrame.addComponentListener(
-                getUniformScalingComponentAdapter(List.of(mainFrame.getComponents()), calculateWidthScaledRatio(formerFrameDimension.getWidth(), dimension.getWidth())));
-
+//        jScrollPane.validate();
+//        jScrollPane.repaint();
         mainFrame.setVisible(true);
         mainFrame.setResizable(true);
     }
@@ -58,13 +49,11 @@ public class FrameToday {
 
         //titlePanel
         {
-
             JPanel titlePanel = new JPanel();
             titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
             titlePanel.setPreferredSize(new Dimension(mainFrame.getWidth(), (int) (0.12 * mainFrame.getHeight())));
 //            titlePanel.setBackground(Color.black);
             mainFrame.add(titlePanel);
-
             //titlePanel_title
             JPanel titlePanel_title = new JPanel();
             titlePanel_title.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -95,7 +84,7 @@ public class FrameToday {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     //输入的窗口
-                    Frame printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * mainFrame.getHeight())).setWindowWidth((int) (0.3 * mainFrame.getWidth())).setTitle("Please add item").build());
+                    JFrame printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * mainFrame.getHeight())).setWindowWidth((int) (0.3 * mainFrame.getWidth())).setTitle("Please add item").build());
 
                     //item + text field
                     JPanel inputPanel;
@@ -108,7 +97,7 @@ public class FrameToday {
                         inputPanel.setBounds((int) (0.1 * printFrame.getHeight()), (int) (0.2 * printFrame.getHeight()), (int) (0.8 * printFrame.getWidth()), (int) (0.2 * printFrame.getWidth()));
                         inputLable.setFont(font2);
                         inputPanel.add(inputLable);
-                        itemName = new JTextField(10);
+                        itemName = new JTextField(40);
                         inputPanel.add(itemName);
 
                     }
@@ -125,24 +114,52 @@ public class FrameToday {
                         confirmButton.setSize(100, 100);
 
                     }
+
+                    //while input Enter will be same as click confirm button
+
+
                     confirmPanel.add(confirmButton, BorderLayout.SOUTH);
+                    //two frames will not close together
+                    printFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
                     printFrame.add(inputPanel);
                     printFrame.add(confirmPanel);
-                    //The influence of click button
 
+                    //The influence of click button
                     confirmButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             String item = itemName.getText();
-                            if (item != null) {
+                            if (item.length() > 0 && item.length() <= 40) {
                                 //TODO: use some less invasive way to do this
-                                addItem(FrameTodayController.insertReminderEntity(item));
+                                addItem(ReminderModel.insertReminder(item));
+                            }
+                            else if (item.length() >= 40) {
+                                String newItem = item.substring(0,39);
+                                addItem(ReminderModel.insertReminder(newItem));
                             }
                             printFrame.dispose();
 
 
                         }
                     });
+
+                    //release Enter
+                    itemName.addKeyListener(new KeyAdapter() {
+                        @Override
+                        public void keyTyped(KeyEvent e) {
+                            super.keyTyped(e);
+                            if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+                                String item = itemName.getText();
+                                if (item != null) {
+                                    //TODO: use some less invasive way to do this
+                                    addItem(ReminderModel.insertReminder(item));
+                                }
+                                printFrame.dispose();
+                            }
+                        }
+
+                    });
+
                     //if components are visible
                     itemName.setVisible(true);
                     confirmPanel.setVisible(true);
@@ -160,6 +177,10 @@ public class FrameToday {
 //        mainFrame.add(reminderPanelModel);
 
         reminderListView.addNewReminderViewIntoReminderListView(reminder);
+
+
+
+
         mainFrame.validate();
         mainFrame.repaint();
 
