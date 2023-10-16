@@ -33,7 +33,7 @@ public class KeyManager implements KeyListener{
         return keys[keycode];
     }
 
-    public boolean getkeyvalue(int e){
+    public boolean getKeyValue(int e){
         return keys[e];
     }
 }
