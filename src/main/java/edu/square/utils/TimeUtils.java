@@ -88,6 +88,20 @@ public class TimeUtils {
         return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
 
+    /**
+     * Get the Timestamp of start and end of specific day
+     *
+     * @param isTheStartOfTheDay return the start of the day or the end of the day
+     * @return Timestamp
+     */
+    public static Timestamp getStartOrEndTimestampOfDate(LocalDate day, boolean isTheStartOfTheDay) {
+        LocalDateTime todayEnd = day.atTime(23, 59, 59, 999999999);
+
+        LocalDateTime localDateTime;
+        if (isTheStartOfTheDay)
+            return Timestamp.valueOf(day.atStartOfDay());
+        return Timestamp.valueOf(todayEnd);
+    }
 
     /**
      * Get the Timestamp of start and end of today
@@ -95,14 +109,17 @@ public class TimeUtils {
      * @param isTheStartOfTheDay return the start of the day or the end of the day
      * @return Timestamp
      */
-    public static Timestamp getStartTimestampOfToday(boolean isTheStartOfTheDay) {
-        LocalDate today = LocalDate.now();
-        LocalDateTime todayEnd = today.atTime(23, 59, 59, 999999999);
-
-        LocalDateTime localDateTime;
-        if (isTheStartOfTheDay)
-            return Timestamp.valueOf(today.atStartOfDay());
-        return Timestamp.valueOf(todayEnd);
+    public static Timestamp getStartOrEndTimestampOfToday(boolean isTheStartOfTheDay) {
+        return getStartOrEndTimestampOfDate(LocalDate.now(), isTheStartOfTheDay);
     }
 
+    /**
+     * Get current Timestamp
+     *
+     * @return current Timestamp
+     */
+    public static Timestamp getCurrentTimestamp() {
+        long currentTIme = System.currentTimeMillis();
+        return new Timestamp(currentTIme);
+    }
 }
