@@ -1,5 +1,6 @@
 package edu.square.views;
 
+import com.sun.tools.javac.comp.Todo;
 import edu.square.entity.Reminder;
 import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.JFrameAttribute;
@@ -34,7 +35,7 @@ public class FrameToday {
 //        jScrollPane.validate();
 //        jScrollPane.repaint();
         mainFrame.setVisible(true);
-        mainFrame.setResizable(true);
+        mainFrame.setResizable(false);
     }
 
     public void init() {
@@ -46,6 +47,7 @@ public class FrameToday {
 
         //对齐方式
         mainFrame.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 15));
+
 
         //titlePanel
         {
@@ -129,15 +131,13 @@ public class FrameToday {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             String item = itemName.getText();
-                            if (item.length() > 0 && item.length() <= 40) {
-                                //TODO: use some less invasive way to do this
+                            if (item.length() > 0 && item.length() <= 50) {
+
                                 addItem(ReminderModel.insertReminder(item));
+                                printFrame.dispose();
+                            } else if (item.length() >= 50) {
+                                JOptionPane.showMessageDialog(null, "输入字段过长（输入长度限制50字）", "警告", JOptionPane.WARNING_MESSAGE);
                             }
-                            else if (item.length() >= 40) {
-                                String newItem = item.substring(0,39);
-                                addItem(ReminderModel.insertReminder(newItem));
-                            }
-                            printFrame.dispose();
 
 
                         }
@@ -170,6 +170,7 @@ public class FrameToday {
                 }
             });
         }
+
     }
 
     public void addItem(Reminder reminder) {
@@ -177,8 +178,6 @@ public class FrameToday {
 //        mainFrame.add(reminderPanelModel);
 
         reminderListView.addNewReminderViewIntoReminderListView(reminder);
-
-
 
 
         mainFrame.validate();
