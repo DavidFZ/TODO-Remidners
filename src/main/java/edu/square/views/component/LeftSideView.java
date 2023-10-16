@@ -1,32 +1,32 @@
 package edu.square.views.component;
 
-import edu.square.utils.UIUtils.JFrameAttribute;
-import edu.square.utils.UIUtils.JFrameFactory;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class LeftSideView {
-    public static void main(String[] args) {
+    public static JPanel getLeftSideView(JFrame parentFrame) {
         //build a main frame
-        JFrame leftMainFrame = JFrameFactory.buildJFrame(JFrameAttribute.getDefaultAttribute(0.2,""));
-        leftMainFrame.setSize((int)(leftMainFrame.getWidth()),(int)(4*leftMainFrame.getWidth()));
-        leftMainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JPanel leftGroupView = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        leftGroupView.setPreferredSize(new Dimension(parentFrame.getWidth(), parentFrame.getHeight()));
+
+        leftGroupView.setSize((int) (leftGroupView.getWidth()), (int) (4 * leftGroupView.getWidth()));
+        leftGroupView.setLayout(new FlowLayout(FlowLayout.LEFT));
         //edit panel
         JPanel editPanel;
         JButton editButton;
         {
             editPanel = new JPanel();
-            editPanel.setPreferredSize(new Dimension((int)(0.95*leftMainFrame.getWidth()),50));
+            editPanel.setPreferredSize(new Dimension((int) (0.95 * leftGroupView.getWidth()), 50));
             editPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
             editButton = new JButton("EDIT");
-            editButton.setPreferredSize(new Dimension(60,40));
+            editButton.setPreferredSize(new Dimension(60, 40));
             editButton.setFocusPainted(false);
             //transparent
             editButton.setContentAreaFilled(false);
         }
         editPanel.add(editButton);
-        leftMainFrame.add(editPanel);
+        leftGroupView.add(editPanel);
 
         //search panel
         JPanel searchPanel;
@@ -34,16 +34,16 @@ public class LeftSideView {
         JTextField searchText;
         {
             searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            searchPanel.setPreferredSize(new Dimension((int)(0.98*leftMainFrame.getWidth()),60));
+            searchPanel.setPreferredSize(new Dimension((int) (0.98 * leftGroupView.getWidth()), 60));
             searchTips = new JLabel("search");
-            Font font2 = new Font("宋体", Font.BOLD, (int) (0.04 * leftMainFrame.getWidth()));
+            Font font2 = new Font("宋体", Font.BOLD, (int) (0.04 * leftGroupView.getWidth()));
             searchTips.setFont(font2);
             searchText = new JTextField(20);
             searchPanel.add(searchTips);
             searchPanel.add(searchText);
 
         }
-        leftMainFrame.add(searchPanel);
+        leftGroupView.add(searchPanel);
 
         //the manager of items
         JPanel itemManager;
@@ -68,28 +68,27 @@ public class LeftSideView {
         JTextField numberOfFlagged;
         JLabel flaggedItemLabel;
 
-        Font fnTitle = new Font("宋体",Font.BOLD,(int)(0.05*leftMainFrame.getWidth()));
-        Font fnButton = new Font("宋体",Font.BOLD,(int)(0.03*leftMainFrame.getWidth()));
-
+        Font fnTitle = new Font("宋体", Font.BOLD, (int) (0.05 * leftGroupView.getWidth()));
+        Font fnButton = new Font("宋体", Font.BOLD, (int) (0.03 * leftGroupView.getWidth()));
 
 
         {
             itemManager = new JPanel(new FlowLayout());
-            itemManager.setPreferredSize(new Dimension((int)(1* leftMainFrame.getWidth()),(int)(1.4 * leftMainFrame.getWidth())));
+            itemManager.setPreferredSize(new Dimension((int) (1 * leftGroupView.getWidth()), (int) (1.4 * leftGroupView.getWidth())));
             //itemManager.setBackground(Color.WHITE);
             //four blocks of items
 
             //today
             todayPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
             todayPanel.setBackground(Color.WHITE);
-            todayPanel.setPreferredSize(new Dimension((int)(0.45 * leftMainFrame.getWidth()),(int)(0.45 * leftMainFrame.getWidth())));
+            todayPanel.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.45 * leftGroupView.getWidth())));
             todayItemLabel = new JLabel("Today");
             todayItemLabel.setFont(fnTitle);
 
             numberOfTodayItem = new JTextField(3);
 
             Panel meanlessT = new Panel();
-            meanlessT.setPreferredSize(new Dimension((int)(0.45 * leftMainFrame.getWidth()),(int)(0.2 * leftMainFrame.getWidth())));
+            meanlessT.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.2 * leftGroupView.getWidth())));
 
             searchTodayButton = new JButton("search");
             searchTodayButton.setFont(fnButton);
@@ -103,12 +102,12 @@ public class LeftSideView {
             //completed
             completedPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
             completedPanel.setBackground(Color.WHITE);
-            completedPanel.setPreferredSize(new Dimension((int)(0.45 * leftMainFrame.getWidth()),(int)(0.45 * leftMainFrame.getWidth())));
+            completedPanel.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.45 * leftGroupView.getWidth())));
             completedItemLabel = new JLabel("Completed");
             completedItemLabel.setFont(fnTitle);
 
             Panel meanlessC = new Panel();
-            meanlessC.setPreferredSize(new Dimension((int)(0.45 * leftMainFrame.getWidth()),(int)(0.2 * leftMainFrame.getWidth())));
+            meanlessC.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.2 * leftGroupView.getWidth())));
 
             numberOfCompletedItem = new JTextField(3);
 
@@ -123,12 +122,12 @@ public class LeftSideView {
             //All
             allPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
             allPanel.setBackground(Color.WHITE);
-            allPanel.setPreferredSize(new Dimension((int)(0.45 * leftMainFrame.getWidth()),(int)(0.45 * leftMainFrame.getWidth())));
+            allPanel.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.45 * leftGroupView.getWidth())));
             allItemLabel = new JLabel("All");
             allItemLabel.setFont(fnTitle);
 
             Panel meanlessA = new Panel();
-            meanlessA.setPreferredSize(new Dimension((int)(0.45 * leftMainFrame.getWidth()),(int)(0.2 * leftMainFrame.getWidth())));
+            meanlessA.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.2 * leftGroupView.getWidth())));
 
             numberOfAllItem = new JTextField(3);
 
@@ -143,7 +142,7 @@ public class LeftSideView {
             //flagged
             flaggedPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
             flaggedPanel.setBackground(Color.WHITE);
-            flaggedPanel.setPreferredSize(new Dimension((int)(0.45 * leftMainFrame.getWidth()),(int)(0.45 * leftMainFrame.getWidth())));
+            flaggedPanel.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.45 * leftGroupView.getWidth())));
 
             flaggedItemLabel = new JLabel("Flagged");
             flaggedItemLabel.setFont(fnTitle);
@@ -151,7 +150,7 @@ public class LeftSideView {
             numberOfFlagged = new JTextField(3);
 
             Panel meanlessF = new Panel();
-            meanlessF.setPreferredSize(new Dimension((int)(0.45 * leftMainFrame.getWidth()),(int)(0.2 * leftMainFrame.getWidth())));
+            meanlessF.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.2 * leftGroupView.getWidth())));
 
             searchFlaggedItem = new JButton("search");
             searchFlaggedItem.setFont(fnButton);
@@ -162,23 +161,25 @@ public class LeftSideView {
             flaggedPanel.add(searchFlaggedItem);
 
 
-
         }
         itemManager.add(todayPanel);
         itemManager.add(completedPanel);
         itemManager.add(allPanel);
         itemManager.add(flaggedPanel);
-        leftMainFrame.add(itemManager);
+        leftGroupView.add(itemManager);
 
 
+        leftGroupView.setVisible(true);
 
+        return leftGroupView;
+    }
 
-
-
-
-
-        leftMainFrame.setVisible(true);
-
-
+    public static void main(String[] args) {
+        JFrame jFrame = new JFrame();
+        jFrame.setSize(1000, 800);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setContentPane(getLeftSideView(jFrame));
+        jFrame.setVisible(true);
     }
 }
