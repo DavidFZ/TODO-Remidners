@@ -1,7 +1,15 @@
 package edu.square.views.component;
 
+import edu.square.entity.Reminder;
+import edu.square.utils.UIUtils.JFrameAttribute;
+import edu.square.utils.UIUtils.JFrameFactory;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
+
+import static edu.square.model.ReminderModel.queryReminderByEmergencyStatus;
+import static edu.square.utils.UIUtils.FontUtil.getBoldFont;
 
 public class LeftSideView {
     public static JPanel getLeftSideView(JFrame parentFrame) {
@@ -66,16 +74,17 @@ public class LeftSideView {
         JPanel flaggedPanel;
         JButton searchFlaggedItem;
         JTextField numberOfFlagged;
+        JLabel stringNumberOfFlagged;
         JLabel flaggedItemLabel;
-
+        
         Font fnTitle = new Font("宋体", Font.BOLD, (int) (0.05 * leftGroupView.getWidth()));
         Font fnButton = new Font("宋体", Font.BOLD, (int) (0.03 * leftGroupView.getWidth()));
 
 
         {
             itemManager = new JPanel(new FlowLayout());
-            itemManager.setPreferredSize(new Dimension((int) (1 * leftGroupView.getWidth()), (int) (1.4 * leftGroupView.getWidth())));
             //itemManager.setBackground(Color.WHITE);
+            itemManager.setPreferredSize(new Dimension((int) (1 * leftGroupView.getWidth()), (int) (1.4 * leftGroupView.getWidth())));
             //four blocks of items
 
             //today
@@ -88,8 +97,8 @@ public class LeftSideView {
             numberOfTodayItem = new JTextField(3);
 
             Panel meanlessT = new Panel();
-            meanlessT.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.2 * leftGroupView.getWidth())));
 
+            meanlessT.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.2 * leftGroupView.getWidth())));
             searchTodayButton = new JButton("search");
             searchTodayButton.setFont(fnButton);
 
@@ -161,6 +170,7 @@ public class LeftSideView {
             flaggedPanel.add(searchFlaggedItem);
 
 
+
         }
         itemManager.add(todayPanel);
         itemManager.add(completedPanel);
@@ -169,12 +179,28 @@ public class LeftSideView {
         leftGroupView.add(itemManager);
 
 
+
+
+
+
+
+
         leftGroupView.setVisible(true);
+
 
         return leftGroupView;
     }
 
-    public static void main(String[] args) {
+    //TODO: Encapsulate this class
+    public class ListGroupView {
+        private JPanel panel;
+        private JLabel itemNumberOfGroup;
+        private JLabel flaggedItemLabel;
+        //TODO: find icon resource
+        private JLabel icon;
+    }
+
+        public static void main(String[] args) {
         JFrame jFrame = new JFrame();
         jFrame.setSize(1000, 800);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
