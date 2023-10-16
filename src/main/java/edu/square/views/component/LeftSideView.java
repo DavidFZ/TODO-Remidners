@@ -1,15 +1,7 @@
 package edu.square.views.component;
 
-import edu.square.entity.Reminder;
-import edu.square.utils.UIUtils.JFrameAttribute;
-import edu.square.utils.UIUtils.JFrameFactory;
-
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
-
-import static edu.square.model.ReminderModel.queryReminderByEmergencyStatus;
-import static edu.square.utils.UIUtils.FontUtil.getBoldFont;
 
 public class LeftSideView {
     public static JPanel getLeftSideView(JFrame parentFrame) {
@@ -76,7 +68,7 @@ public class LeftSideView {
         JTextField numberOfFlagged;
         JLabel stringNumberOfFlagged;
         JLabel flaggedItemLabel;
-        
+
         Font fnTitle = new Font("宋体", Font.BOLD, (int) (0.05 * leftGroupView.getWidth()));
         Font fnButton = new Font("宋体", Font.BOLD, (int) (0.03 * leftGroupView.getWidth()));
 
@@ -170,7 +162,6 @@ public class LeftSideView {
             flaggedPanel.add(searchFlaggedItem);
 
 
-
         }
         itemManager.add(todayPanel);
         itemManager.add(completedPanel);
@@ -179,16 +170,19 @@ public class LeftSideView {
         leftGroupView.add(itemManager);
 
 
-
-
-
-
-
-
         leftGroupView.setVisible(true);
 
 
         return leftGroupView;
+    }
+
+    public static void main(String[] args) {
+        JFrame jFrame = new JFrame();
+        jFrame.setSize(1000, 800);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setContentPane(getLeftSideView(jFrame));
+        jFrame.setVisible(true);
     }
 
     //TODO: Encapsulate this class
@@ -198,14 +192,5 @@ public class LeftSideView {
         private JLabel flaggedItemLabel;
         //TODO: find icon resource
         private JLabel icon;
-    }
-
-        public static void main(String[] args) {
-        JFrame jFrame = new JFrame();
-        jFrame.setSize(1000, 800);
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setLocationRelativeTo(null);
-        jFrame.setContentPane(getLeftSideView(jFrame));
-        jFrame.setVisible(true);
     }
 }
