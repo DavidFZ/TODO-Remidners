@@ -13,35 +13,34 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static edu.square.model.ReminderModel.updateReminderEntityDoneStatus;
-import static edu.square.utils.UIUtils.FontUtil.getBoldFont;
 
 public class ReminderListView {
     //keep parentFrame var for future implementation resolution scaling
     private final JFrame parentFrame;
     private final List<ReminderView> reminderViews;
     private final List<Reminder> reminders;
-
-    //get initial parent frame size
-    private final double initialFrameLength;
-    private final double initialFrameHeight;
-
+    //以第一次载入的窗口为准
+    private final double frameWidthInit;
+    private final double frameHeightInit;
     @Getter
     JPanel jPanelManager;
     @Getter
     private JScrollPane scrollPane;
 
+    int reminderNum;
+
     public ReminderListView(JFrame parentFrame) {
         this.parentFrame = parentFrame;
 
-        initialFrameHeight = parentFrame.getHeight();
-        initialFrameLength = parentFrame.getWidth();
+        frameHeightInit = parentFrame.getHeight();
+        frameWidthInit = parentFrame.getWidth();
 
         reminders = ReminderModel.queryAllEntities();
-        int reminderNum = reminders.size();
+        reminderNum = reminders.size();
         reminderViews = new ArrayList<>();
 
         jPanelManager = new JPanel();
-        jPanelManager.setPreferredSize(new Dimension((int) (parentFrame.getWidth() * 0.93), (int) ((initialFrameHeight * 0.076) * reminderNum)));
+        jPanelManager.setPreferredSize(new Dimension((int) (parentFrame.getWidth() * 0.93), (int) ((frameHeightInit * 0.074) * reminderNum)));
         jPanelManager.setBackground(Color.red);
         jPanelManager.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -52,6 +51,9 @@ public class ReminderListView {
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setWheelScrollingEnabled(true);
 
+        //实现自动滚动到底部
+
+
         for (Reminder r : reminders) {
             ReminderView reminderView = new ReminderView(r);
             reminderViews.add(reminderView);
@@ -60,12 +62,14 @@ public class ReminderListView {
     }
 
     public void addNewReminderViewIntoReminderListView(Reminder reminder) {
+        reminderNum++;
         ReminderView reminderView = new ReminderView(reminder);
         jPanelManager.add(reminderView.getInnerPanel());
-        jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + initialFrameHeight * 0.078)));
-//        Todo 实现自动滚动到底部
-//        JScrollBar jscrollBar = scrollPane.getVerticalScrollBar();
-//        jscrollBar.setValue(jPanelManager.getHeight()*2);
+        if (reminderNum > 10) {
+            jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.072)));
+        }
+
+    //实现自动滚动到底部
 
     }
 
@@ -81,17 +85,18 @@ public class ReminderListView {
         protected ReminderView(Reminder r) {
             reminder = r;
             innerPanel = new JPanel();
-
-
             label = new JLabel(reminder.getContent());
             //TODO: abstract an interface for font resize from parentFrame
-            label.setFont(getBoldFont((int) (0.03 * initialFrameLength)));
-
+            label.setFont(new Font("宋体", Font.BOLD, (int) (0.03 * frameWidthInit)));
             radioButton = new JRadioButton();
+            //bind view
+            initView();
+        }
 
+        private void initView() {
             //innerPanel View
             innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-            innerPanel.setPreferredSize(new Dimension((int) (0.85 * initialFrameLength), (int) (0.07 * initialFrameHeight)));
+            innerPanel.setPreferredSize(new Dimension((int) (0.85 * frameWidthInit), (int) (0.0675 * frameHeightInit)));
             innerPanel.setBorder(new LineBorder(Color.PINK));
             innerPanel.setBackground(Color.yellow);
 

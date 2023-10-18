@@ -1,5 +1,6 @@
 package edu.square.views;
 
+import edu.square.controller.FrameTodayController;
 import edu.square.entity.Reminder;
 import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.JFrameAttribute;
@@ -18,6 +19,8 @@ public class FrameToday {
     Font font1;
     Font font2;
     Font font3;
+
+    JButton pulsButton;
     //root Frame
     private JFrame mainFrame;
     //中间容器
@@ -31,8 +34,7 @@ public class FrameToday {
         JScrollPane jScrollPane = reminderListView.getScrollPane();
         mainFrame.add(jScrollPane);
 
-//        jScrollPane.validate();
-//        jScrollPane.repaint();
+
         mainFrame.setVisible(true);
         mainFrame.setResizable(false);
     }
@@ -73,7 +75,7 @@ public class FrameToday {
             titlePanel_button.setBackground(Color.yellow);
             titlePanel.add(titlePanel_button);
 
-            JButton pulsButton = new JButton("+");
+            pulsButton = new JButton("+");
             pulsButton.setFont(font2);
             pulsButton.setBackground(Color.white);
             pulsButton.setPreferredSize(new Dimension((int) (0.05 * mainFrame.getWidth()), (int) (0.05 * mainFrame.getWidth())));
@@ -84,6 +86,7 @@ public class FrameToday {
             pulsButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
+                    pulsButton.setEnabled(false);
                     //输入的窗口
                     JFrame printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * mainFrame.getHeight())).setWindowWidth((int) (0.3 * mainFrame.getWidth())).setTitle("Please add item").build());
 
@@ -133,9 +136,12 @@ public class FrameToday {
                             if (item.length() > 0 && item.length() <= 50) {
 
                                 addItem(ReminderModel.insertReminder(item));
+                                pulsButton.setEnabled(true);
                                 printFrame.dispose();
                             } else if (item.length() >= 50) {
-                                JOptionPane.showMessageDialog(null, "输入字段过长（输入长度限制50字）", "警告", JOptionPane.WARNING_MESSAGE);
+//                                JOptionPane.showMessageDialog(null, "输入字段过长（输入长度限制50字）", "警告", JOptionPane.WARNING_MESSAGE);
+                                String newItem = item.substring(0, 49);
+                                addItem(ReminderModel.insertReminder(newItem));
                             }
 
 
