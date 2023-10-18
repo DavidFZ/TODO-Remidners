@@ -76,7 +76,7 @@ public class LeftSideView {
         {
             itemManager = new JPanel(new FlowLayout());
             //itemManager.setBackground(Color.WHITE);
-            itemManager.setPreferredSize(new Dimension((int) (1 * leftGroupView.getWidth()), (int) (1.4 * leftGroupView.getWidth())));
+            itemManager.setPreferredSize(new Dimension(leftGroupView.getWidth(), (int) (1.4 * leftGroupView.getWidth())));
             //four blocks of items
 
             //today
@@ -163,17 +163,24 @@ public class LeftSideView {
 
 
         }
+
+
         itemManager.add(todayPanel);
         itemManager.add(completedPanel);
         itemManager.add(allPanel);
         itemManager.add(flaggedPanel);
-        leftGroupView.add(itemManager);
 
 
-        leftGroupView.setVisible(true);
-
-
-        return leftGroupView;
+        itemManager.validate();
+        itemManager.repaint();
+        return itemManager;
+//        leftGroupView.add(itemManager);
+//
+//
+//        leftGroupView.setVisible(true);
+//
+//
+//        return leftGroupView;
     }
 
     public static void main(String[] args) {
@@ -181,7 +188,11 @@ public class LeftSideView {
         jFrame.setSize(1000, 800);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
+        JPanel leftSidePanel=getLeftSideView(jFrame);
         jFrame.setContentPane(getLeftSideView(jFrame));
+        jFrame.validate();
+        jFrame.repaint();
+
         jFrame.setVisible(true);
     }
 
@@ -190,7 +201,8 @@ public class LeftSideView {
         private JPanel panel;
         private JLabel itemNumberOfGroup;
         private JLabel flaggedItemLabel;
-        //TODO: find icon resource
+        //TODO: Reserve for icon
+        // find icon resource
         private JLabel icon;
     }
 }
