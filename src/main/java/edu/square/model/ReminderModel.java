@@ -193,7 +193,6 @@ public class ReminderModel {
     public static void updateReminderEntityDoneStatus(Reminder reminder, boolean isDone) {
 
         reminder.setDoneTime(isDone ? reminder.getRemindTime() : null);
-        reminder.setLastModifiedTime(getTimeStamp());
         reminder.setRemindTime(isDone ? null : reminder.getRemindTime());
 
         updateReminder(reminder);
