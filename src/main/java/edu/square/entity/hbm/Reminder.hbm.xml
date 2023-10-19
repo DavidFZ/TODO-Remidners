@@ -15,8 +15,8 @@
             <column name="create_time"/>
         </property>
 
-        <property name="lastModifiedTime" type="timestamp">
-            <column name="last_modified_time"/>
+        <property name="earlyReminderTime" type="timestamp">
+            <column name="early_reminder_time"/>
         </property>
 
         <property name="remindTime" type="timestamp">

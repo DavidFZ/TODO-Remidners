@@ -4,7 +4,7 @@ create table REMINDER
         primary key,
     CONTENT            VARCHAR(512),
     CREATE_TIME        TIMESTAMP not null,
-    LAST_MODIFIED_TIME TIMESTAMP not null,
+    EARLY_REMINDER_TIME TIMESTAMP,
     REMIND_TIME        TIMESTAMP,
     DONE_TIME          TIMESTAMP,
     IS_EMERGENCY       BOOLEAN,
