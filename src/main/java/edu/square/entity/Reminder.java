@@ -2,12 +2,13 @@ package edu.square.entity;
 
 import lombok.Data;
 
+import java.lang.reflect.Field;
 import java.sql.Timestamp;
 
 import static edu.square.utils.DevUtils.getTimeStamp;
 
 @Data
-public class Reminder {
+public class Reminder implements Exportable {
     private String uuid;
     private String content;
 
