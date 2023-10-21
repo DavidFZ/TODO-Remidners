@@ -27,32 +27,32 @@ public class ReminderListView {
     @Getter
     private JScrollPane scrollPane;
 
-    private double scaling = 0.4;
     int reminderNum;
 
     public ReminderListView(JFrame parentFrame) {
         this.parentFrame = parentFrame;
 
         frameHeightInit = parentFrame.getHeight();
-        frameWidthInit =scaling*parentFrame.getWidth();
+        frameWidthInit = parentFrame.getWidth();
 
         reminders = ReminderModel.queryAllEntities();
         reminderNum = reminders.size();
         reminderViews = new ArrayList<>();
 
         jPanelManager = new JPanel();
-        jPanelManager.setPreferredSize(new Dimension((int) (frameWidthInit * 0.93), (int) ((frameHeightInit * 0.074) * reminderNum)));
+        jPanelManager.setPreferredSize(new Dimension((int) (parentFrame.getWidth() * 0.93), (int) ((frameHeightInit * 0.074) * reminderNum)));
         jPanelManager.setBackground(Color.red);
         jPanelManager.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        int w = (int) (frameWidthInit);
-        int h = (int) (0.8*parentFrame.getHeight());
+
+        int w = (int) (parentFrame.getWidth() * 0.95);
+        int h = (int) (parentFrame.getHeight() * 0.75);
         scrollPane = new JScrollPane(jPanelManager);
         scrollPane.setPreferredSize(new Dimension(w, h));
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setWheelScrollingEnabled(true);
 
-        //TODO 实现自动滚动到底部
+        //实现自动滚动到底部
 
 
         for (Reminder r : reminders) {
@@ -88,7 +88,7 @@ public class ReminderListView {
             innerPanel = new JPanel();
             label = new JLabel(reminder.getContent());
             //TODO: abstract an interface for font resize from parentFrame
-            label.setFont(new Font("宋体", Font.BOLD, (int) (0.03 * parentFrame.getWidth())));
+            label.setFont(new Font("宋体", Font.BOLD, (int) (0.03 * frameWidthInit)));
             radioButton = new JRadioButton();
             //bind view
             initView();
