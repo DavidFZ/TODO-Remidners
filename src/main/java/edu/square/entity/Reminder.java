@@ -13,7 +13,7 @@ public class Reminder {
 
 
     private Timestamp createTime;
-    private Timestamp lastModifiedTime;
+    private Timestamp earlyReminderTime;
     private Timestamp remindTime;
     private Timestamp doneTime;
 
@@ -26,7 +26,7 @@ public class Reminder {
         super();
         uuid = String.valueOf(java.util.UUID.randomUUID());
         content = c;
-        createTime = lastModifiedTime = getTimeStamp();
+        createTime = getTimeStamp();
     }
 
     public Reminder() {
