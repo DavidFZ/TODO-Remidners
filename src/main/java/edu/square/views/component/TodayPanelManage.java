@@ -4,6 +4,8 @@ import edu.square.entity.Reminder;
 import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.views.widget.ReminderListView;
+import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +24,7 @@ public class TodayPanelManage {
 
     private JFrame parentFrame;
     //root Frame
+    @Getter
     private JPanel todayPanelManage;
     //中间容器
     private ReminderListView reminderListView;
@@ -44,6 +47,7 @@ public class TodayPanelManage {
         todayPanelManage.setVisible(true);
     }
 
+    //TODO: encapsulate this method as a widget
     public void init() {
         todayPanelManage = new JPanel();
 
@@ -180,6 +184,7 @@ public class TodayPanelManage {
     }
 
     public void addItem(Reminder reminder) {
+        //deprecated
 //        ReminderPanelModel reminderPanelModel = new ReminderPanelModel(reminder, mainFrame);
 //        mainFrame.add(reminderPanelModel);
 
@@ -192,10 +197,6 @@ public class TodayPanelManage {
         todayPanelManage.setVisible(true);
     }
 
-
-    public JPanel getTodayPanelManage() {
-        return todayPanelManage;
-    }
 
     public static void main(String[] args) {
         JFrame jFrame = JFrameFactory.getDefaultJFrame(0.8d, "222");

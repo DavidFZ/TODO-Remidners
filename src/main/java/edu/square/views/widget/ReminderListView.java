@@ -1,4 +1,4 @@
-package edu.square.views.component;
+package edu.square.views.widget;
 
 import edu.square.entity.Reminder;
 import edu.square.model.ReminderModel;

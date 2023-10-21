@@ -4,6 +4,7 @@ import edu.square.entity.Reminder;
 import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.views.widget.ReminderListView;
 
 import javax.swing.*;
 import java.awt.*;
