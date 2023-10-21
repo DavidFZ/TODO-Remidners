@@ -44,6 +44,7 @@ public class ReminderListView {
         jPanelManager.setBackground(Color.red);
         jPanelManager.setLayout(new FlowLayout(FlowLayout.CENTER));
 
+
         int w = (int) (parentFrame.getWidth() * 0.95);
         int h = (int) (parentFrame.getHeight() * 0.75);
         scrollPane = new JScrollPane(jPanelManager);
