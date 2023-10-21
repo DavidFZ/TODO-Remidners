@@ -5,6 +5,8 @@ import edu.square.utils.UIUtils.FontUtil;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroupLabelView {
     private static final Font DEFAULT_FONT = FontUtil.getBoldFont(20);
@@ -48,6 +50,25 @@ public class GroupLabelView {
 
     public JPanel getGroupView() {
         return mainPanel;
+    }
+
+    public static class ViewBuilder {
+        private Dimension parentDimension;
+
+        public ViewBuilder(Dimension parentDimension) {
+            this.parentDimension = parentDimension;
+        }
+
+        public GroupLabelView build(String title) {
+            return new GroupLabelView(parentDimension, title);
+        }
+
+        public List<GroupLabelView> build(List<String> titles) {
+            List<GroupLabelView> list = new ArrayList<>(titles.size());
+            for (String title : titles)
+                list.add(new GroupLabelView(parentDimension, title));
+            return list;
+        }
     }
 
 }

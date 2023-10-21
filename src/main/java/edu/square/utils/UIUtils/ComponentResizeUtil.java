@@ -117,6 +117,11 @@ public class ComponentResizeUtil {
         return new Dimension((int) (dimension.width * scalingRatio), dimension.height);
     }
 
+    public static Dimension resizeDimensionWidthScale(JFrame jFrame, double scalingRatio) {
+        assert scalingRatio > 0;
+        return resizeDimensionWidthScale(jFrame.getSize(), scalingRatio);
+    }
+
     private static void recursionResize(List<Component> componentList, double ratio) {
         if (componentList.isEmpty()) return;
         for (Component c : componentList) {

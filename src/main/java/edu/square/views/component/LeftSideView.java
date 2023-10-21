@@ -5,30 +5,27 @@ import edu.square.views.widget.GroupLabelView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthScale;
 
 public class LeftSideView {
 
+    private static final String[] groupTitles = {"Today", "Completed", "All", "Flagged"};
     JFrame mainFrame;
     JPanel leftGroupView;
-
     int mainFrameWidth;
-
     int mainFrameHeight;
-
     JLabel todayLabel;
-
     JLabel CompletedLabel;
-
     JLabel allLabel;
     JLabel flaggedLabel;
     Font font1;
     Font font2;
     Font font3;
+    private List<GroupLabelView> groupLabelViews;
 
     public LeftSideView(JFrame mainFrame) {
         this.mainFrame = mainFrame;
@@ -95,19 +92,13 @@ public class LeftSideView {
             leftGroupView.add(blockPanel);
         }
 
-        //TODO: use Encapsulated class
-
-        GroupLabelView groupLabelViewAll = new GroupLabelView(resizeDimensionWidthScale(mainFrame.getSize(), 0.2), "All");
-        leftGroupView.add(groupLabelViewAll.getGroupView());
-
-        GroupLabelView groupLabelViewToday = new GroupLabelView(resizeDimensionWidthScale(mainFrame.getSize(), 0.2), "Today");
-        leftGroupView.add(groupLabelViewToday.getGroupView());
-
-        GroupLabelView groupLabelViewCompleted = new GroupLabelView(resizeDimensionWidthScale(mainFrame.getSize(), 0.2), "Completed");
-        leftGroupView.add(groupLabelViewCompleted.getGroupView());
-
-        GroupLabelView groupLabelViewFlagged = new GroupLabelView(resizeDimensionWidthScale(mainFrame.getSize(), 0.2), "Flagged");
-        leftGroupView.add(groupLabelViewFlagged.getGroupView());
+        GroupLabelView.ViewBuilder viewBuilder = new GroupLabelView.ViewBuilder(resizeDimensionWidthScale(mainFrame, 0.2));
+        List<String> titles = new ArrayList<>(Arrays.asList(groupTitles));
+        groupLabelViews = viewBuilder.build(titles);
+        for (GroupLabelView groupLabelView :
+                groupLabelViews) {
+            leftGroupView.add(groupLabelView.getGroupView());
+        }
     }
 
     public JPanel getLeftPanel() {
