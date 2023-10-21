@@ -1,198 +1,279 @@
 package edu.square.views.component;
 
+import edu.square.utils.UIUtils.JFrameFactory;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class LeftSideView {
-    public static JPanel getLeftSideView(JFrame parentFrame) {
-        //build a main frame
-        JPanel leftGroupView = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        leftGroupView.setPreferredSize(new Dimension(parentFrame.getWidth(), parentFrame.getHeight()));
+    JFrame parentFrame;
+    JPanel leftGroupView;
 
-        leftGroupView.setSize((int) (leftGroupView.getWidth()), (int) (4 * leftGroupView.getWidth()));
-        leftGroupView.setLayout(new FlowLayout(FlowLayout.LEFT));
-        //edit panel
-        JPanel editPanel;
-        JButton editButton;
+    int parentFrameWidth;
+
+    int parentFrameHeight;
+
+    JLabel todayLable;
+
+    JLabel CompletedLabel;
+
+    JLabel allLabel;
+    JLabel flaggedLabel;
+    Font font1;
+    Font font2;
+    Font font3;
+
+    public LeftSideView(JFrame parentFrame) {
+        this.parentFrame = parentFrame;
+        font1 = new Font("宋体", Font.BOLD, (int) (0.03 * parentFrame.getWidth()));
+        font2 = new Font("宋体", Font.BOLD, (int) (0.02 * parentFrame.getWidth()));
+        font3 = new Font("宋体", Font.BOLD, (int) (0.01 * parentFrame.getWidth()));
+        parentFrameWidth = (int) (parentFrame.getWidth() * 0.2);
+        parentFrameHeight = parentFrame.getHeight();
+        init();
+    }
+
+    private void init() {
+        //leftGroupView
+        leftGroupView = new JPanel();
+        leftGroupView.setLayout(new FlowLayout(FlowLayout.CENTER));
+        leftGroupView.setPreferredSize(new Dimension(parentFrameWidth, parentFrameHeight));
+        leftGroupView.setBackground(Color.green);
+//        searchTipsPanel
         {
-            editPanel = new JPanel();
-            editPanel.setPreferredSize(new Dimension((int) (0.95 * leftGroupView.getWidth()), 50));
-            editPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-            editButton = new JButton("EDIT");
-            editButton.setPreferredSize(new Dimension(60, 40));
-            editButton.setFocusPainted(false);
-            //transparent
-            editButton.setContentAreaFilled(false);
+            JPanel searchTipsPanel = new JPanel();
+            searchTipsPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+            searchTipsPanel.setPreferredSize(new Dimension(parentFrameWidth, (int) (0.07 * parentFrameHeight)));
+            searchTipsPanel.setBackground(Color.yellow);
+
+            JLabel searchTips = new JLabel("search:");
+            searchTips.setFont(font1);
+            searchTipsPanel.add(searchTips);
+            leftGroupView.add(searchTipsPanel);
+
         }
-        editPanel.add(editButton);
-        leftGroupView.add(editPanel);
-
-        //search panel
-        JPanel searchPanel;
-        JLabel searchTips;
-        JTextField searchText;
+//        searchPanel
         {
-            searchPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-            searchPanel.setPreferredSize(new Dimension((int) (0.98 * leftGroupView.getWidth()), 60));
-            searchTips = new JLabel("search");
-            Font font2 = new Font("宋体", Font.BOLD, (int) (0.04 * leftGroupView.getWidth()));
-            searchTips.setFont(font2);
-            searchText = new JTextField(20);
-            searchPanel.add(searchTips);
+            JPanel searchPanel = new JPanel();
+            searchPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+            searchPanel.setPreferredSize(new Dimension(parentFrameWidth, (int) (0.05 * parentFrameHeight)));
+            searchPanel.setBackground(Color.BLACK);
+            leftGroupView.add(searchPanel);
+
+            JTextField searchText = new JTextField();
+            searchText.setPreferredSize(new Dimension((int) (0.8 * parentFrameWidth), (int) (0.04 * parentFrameHeight)));
+            searchText.setFont(font2);
             searchPanel.add(searchText);
 
+
         }
-        leftGroupView.add(searchPanel);
-
-        //the manager of items
-        JPanel itemManager;
-
-        JPanel todayPanel;
-        JButton searchTodayButton;
-        JTextField numberOfTodayItem;
-        JLabel todayItemLabel;
-
-        JPanel completedPanel;
-        JButton searchCompletedButton;
-        JTextField numberOfCompletedItem;
-        JLabel completedItemLabel;
-
-        JPanel allPanel;
-        JButton searchAllButton;
-        JTextField numberOfAllItem;
-        JLabel allItemLabel;
-
-        JPanel flaggedPanel;
-        JButton searchFlaggedItem;
-        JTextField numberOfFlagged;
-        JLabel stringNumberOfFlagged;
-        JLabel flaggedItemLabel;
-
-        Font fnTitle = new Font("宋体", Font.BOLD, (int) (0.05 * leftGroupView.getWidth()));
-        Font fnButton = new Font("宋体", Font.BOLD, (int) (0.03 * leftGroupView.getWidth()));
-
-
+        //blockPanel
         {
-            itemManager = new JPanel(new FlowLayout());
-            //itemManager.setBackground(Color.WHITE);
-            itemManager.setPreferredSize(new Dimension(leftGroupView.getWidth(), (int) (1.4 * leftGroupView.getWidth())));
-            //four blocks of items
+            JPanel blockPanel = new JPanel();
+            blockPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+            blockPanel.setPreferredSize(new Dimension(parentFrameWidth, (int) (0.2 * parentFrameHeight)));
+//            blockPanel.setBackground(Color.red);
+            leftGroupView.add(blockPanel);
+        }
 
-            //today
-            todayPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-            todayPanel.setBackground(Color.WHITE);
-            todayPanel.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.45 * leftGroupView.getWidth())));
-            todayItemLabel = new JLabel("Today");
-            todayItemLabel.setFont(fnTitle);
+        //todayPanel
+        {
+            JPanel todayPanel = new JPanel();
+            todayPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+            todayPanel.setPreferredSize(new Dimension(parentFrameWidth, (int) (0.1 * parentFrameHeight)));
+            todayPanel.setBackground(Color.red);
+            leftGroupView.add(todayPanel);
 
-            numberOfTodayItem = new JTextField(3);
+            JLabel todayTipsLable = new JLabel("Today");
+            todayTipsLable.setFont(font2);
+            todayTipsLable.setPreferredSize(new Dimension((int) (0.6 * parentFrameWidth), (int) (0.1 * parentFrameHeight)));
+            todayPanel.add(todayTipsLable);
 
-            Panel meanlessT = new Panel();
+            todayLable = new JLabel("0");
+            todayLable.setFont(font2);
+            todayPanel.add(todayLable);
 
-            meanlessT.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.2 * leftGroupView.getWidth())));
-            searchTodayButton = new JButton("search");
-            searchTodayButton.setFont(fnButton);
+            todayPanel.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    //TODO 添加today点击的事件
+                }
 
-            todayPanel.add(todayItemLabel);
-            todayPanel.add(numberOfTodayItem);
-            todayPanel.add(meanlessT);
-            todayPanel.add(searchTodayButton);
+                @Override
+                public void mousePressed(MouseEvent e) {
 
+                }
 
-            //completed
-            completedPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-            completedPanel.setBackground(Color.WHITE);
-            completedPanel.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.45 * leftGroupView.getWidth())));
-            completedItemLabel = new JLabel("Completed");
-            completedItemLabel.setFont(fnTitle);
+                @Override
+                public void mouseReleased(MouseEvent e) {
 
-            Panel meanlessC = new Panel();
-            meanlessC.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.2 * leftGroupView.getWidth())));
+                }
 
-            numberOfCompletedItem = new JTextField(3);
+                @Override
+                public void mouseEntered(MouseEvent e) {
 
-            searchCompletedButton = new JButton("search");
-            searchCompletedButton.setFont(fnButton);
+                }
 
-            completedPanel.add(completedItemLabel);
-            completedPanel.add(numberOfCompletedItem);
-            completedPanel.add(meanlessC);
-            completedPanel.add(searchCompletedButton);
+                @Override
+                public void mouseExited(MouseEvent e) {
 
-            //All
-            allPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-            allPanel.setBackground(Color.WHITE);
-            allPanel.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.45 * leftGroupView.getWidth())));
-            allItemLabel = new JLabel("All");
-            allItemLabel.setFont(fnTitle);
+                }
+            });
+        }
+        //Completed
+        {
+            JPanel CompletedPanel = new JPanel();
+            CompletedPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+            CompletedPanel.setPreferredSize(new Dimension(parentFrameWidth, (int) (0.1 * parentFrameHeight)));
+            CompletedPanel.setBackground(Color.red);
+            leftGroupView.add(CompletedPanel);
 
-            Panel meanlessA = new Panel();
-            meanlessA.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.2 * leftGroupView.getWidth())));
+            JLabel CompletedTipsLable = new JLabel("Completed");
+            CompletedTipsLable.setFont(font2);
+            CompletedTipsLable.setPreferredSize(new Dimension((int) (0.6 * parentFrameWidth), (int) (0.1 * parentFrameHeight)));
+            CompletedPanel.add(CompletedTipsLable);
 
-            numberOfAllItem = new JTextField(3);
+            CompletedLabel = new JLabel("0");
+            CompletedLabel.setFont(font2);
+            CompletedPanel.add(CompletedLabel);
 
-            searchAllButton = new JButton("search");
-            searchAllButton.setFont(fnButton);
+            CompletedPanel.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    //TODO 添加Completed点击的事件
+                }
 
-            allPanel.add(allItemLabel);
-            allPanel.add(numberOfAllItem);
-            allPanel.add(meanlessA);
-            allPanel.add(searchAllButton);
+                @Override
+                public void mousePressed(MouseEvent e) {
 
-            //flagged
-            flaggedPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-            flaggedPanel.setBackground(Color.WHITE);
-            flaggedPanel.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.45 * leftGroupView.getWidth())));
+                }
 
-            flaggedItemLabel = new JLabel("Flagged");
-            flaggedItemLabel.setFont(fnTitle);
+                @Override
+                public void mouseReleased(MouseEvent e) {
 
-            numberOfFlagged = new JTextField(3);
+                }
 
-            Panel meanlessF = new Panel();
-            meanlessF.setPreferredSize(new Dimension((int) (0.45 * leftGroupView.getWidth()), (int) (0.2 * leftGroupView.getWidth())));
+                @Override
+                public void mouseEntered(MouseEvent e) {
 
-            searchFlaggedItem = new JButton("search");
-            searchFlaggedItem.setFont(fnButton);
+                }
 
-            flaggedPanel.add(flaggedItemLabel);
-            flaggedPanel.add(numberOfFlagged);
-            flaggedPanel.add(meanlessF);
-            flaggedPanel.add(searchFlaggedItem);
+                @Override
+                public void mouseExited(MouseEvent e) {
 
-
+                }
+            });
         }
 
 
-        itemManager.add(todayPanel);
-        itemManager.add(completedPanel);
-        itemManager.add(allPanel);
-        itemManager.add(flaggedPanel);
+        //All
+        {
+            JPanel allPanel = new JPanel();
+            allPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+            allPanel.setPreferredSize(new Dimension(parentFrameWidth, (int) (0.1 * parentFrameHeight)));
+            allPanel.setBackground(Color.red);
+            leftGroupView.add(allPanel);
+
+            JLabel allTipsLable = new JLabel("All");
+            allTipsLable.setFont(font2);
+            allTipsLable.setPreferredSize(new Dimension((int) (0.6 * parentFrameWidth), (int) (0.1 * parentFrameHeight)));
+            allPanel.add(allTipsLable);
+
+            allLabel = new JLabel("0");
+            allLabel.setFont(font2);
+            allPanel.add(allLabel);
+
+            allPanel.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    //TODO 添加All点击的事件
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
+        }
+//        Flagged
+        {
+            JPanel flaggedPanel = new JPanel();
+            flaggedPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+            flaggedPanel.setPreferredSize(new Dimension(parentFrameWidth, (int) (0.1 * parentFrameHeight)));
+            flaggedPanel.setBackground(Color.red);
+            leftGroupView.add(flaggedPanel);
+
+            JLabel allTipsLable = new JLabel("flagged");
+            allTipsLable.setFont(font2);
+            allTipsLable.setPreferredSize(new Dimension((int) (0.6 * parentFrameWidth), (int) (0.1 * parentFrameHeight)));
+            flaggedPanel.add(allTipsLable);
+
+            flaggedLabel = new JLabel("0");
+            flaggedLabel.setFont(font2);
+            flaggedPanel.add(flaggedLabel);
+
+            flaggedPanel.addMouseListener(new MouseListener() {
+                @Override
+                public void mouseClicked(MouseEvent e) {
+                    //TODO 添加Flagged点击的事件
+                }
+
+                @Override
+                public void mousePressed(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseReleased(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseEntered(MouseEvent e) {
+
+                }
+
+                @Override
+                public void mouseExited(MouseEvent e) {
+
+                }
+            });
+        }
 
 
-        itemManager.validate();
-        itemManager.repaint();
-        return itemManager;
-//        leftGroupView.add(itemManager);
-//
-//
-//        leftGroupView.setVisible(true);
-//
-//
-//        return leftGroupView;
+    }
+
+
+
+    public JPanel getLeftPanel() {
+        return leftGroupView;
     }
 
     public static void main(String[] args) {
-        JFrame jFrame = new JFrame();
-        jFrame.setSize(1000, 800);
+        JFrame jFrame = JFrameFactory.getDefaultJFrame(.8d, "Schedule");
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setLocationRelativeTo(null);
-        JPanel leftSidePanel=getLeftSideView(jFrame);
-        jFrame.setContentPane(getLeftSideView(jFrame));
-        jFrame.validate();
-        jFrame.repaint();
-
+        jFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
+        LeftSideView leftSideView = new LeftSideView(jFrame);
+        JPanel panel = leftSideView.getLeftPanel();
+        jFrame.add(panel);
         jFrame.setVisible(true);
     }
 
@@ -201,8 +282,13 @@ public class LeftSideView {
         private JPanel panel;
         private JLabel itemNumberOfGroup;
         private JLabel flaggedItemLabel;
-        //TODO: Reserve for icon
-        // find icon resource
+        //TODO: find icon resource
         private JLabel icon;
+
+
+
+
+
+
     }
 }
