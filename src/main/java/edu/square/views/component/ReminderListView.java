@@ -24,10 +24,9 @@ public class ReminderListView {
     private final double frameHeightInit;
     @Getter
     JPanel jPanelManager;
+    int reminderNum;
     @Getter
     private JScrollPane scrollPane;
-
-    int reminderNum;
 
     public ReminderListView(JFrame parentFrame) {
         this.parentFrame = parentFrame;
@@ -70,8 +69,14 @@ public class ReminderListView {
             jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.072)));
         }
 
-    //实现自动滚动到底部
+        //实现自动滚动到底部
 
+    }
+
+    public void clearAllReminderView() {
+        jPanelManager.removeAll();
+        jPanelManager.setPreferredSize(new Dimension((int) (parentFrame.getWidth() * 0.93), (int) ((frameHeightInit * 0.074) * reminderNum)));
+        reminderNum = 0;
     }
 
     public class ReminderView {
