@@ -17,6 +17,7 @@ import static edu.square.model.ReminderModel.updateReminderEntityDoneStatus;
 public class ReminderListWidget {
     //keep parentFrame var for future implementation resolution scaling
     private final JFrame parentFrame;
+    @Getter
     private final List<ReminderView> reminderViews;
     private final List<Reminder> reminders;
     //以第一次载入的窗口为准
