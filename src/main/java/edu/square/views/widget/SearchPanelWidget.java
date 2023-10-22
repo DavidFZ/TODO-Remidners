@@ -8,11 +8,10 @@ import java.awt.*;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
 
+@Getter
 public class SearchPanelWidget {
-    @Getter
-    private JPanel searchPanel;
-    @Getter
-    private JPanel searchTipsPanel;
+    private final JPanel searchPanel;
+    private final JPanel searchTipsPanel;
 
     public SearchPanelWidget(Dimension dimension, Font font2) {
         //        searchTipsPanel

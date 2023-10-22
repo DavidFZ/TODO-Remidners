@@ -17,6 +17,7 @@ import java.awt.event.KeyEvent;
 public class TodayPanelManage {
     private final JFrame parentFrame;
     //中间容器
+    @Getter
     private final ReminderListWidget reminderListWidget;
     private final double scaling = 0.4;
     //font定义

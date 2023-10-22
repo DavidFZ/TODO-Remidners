@@ -1,9 +1,11 @@
 package edu.square.views.component;
 
+import edu.square.controller.View1Controller;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.widget.BlockPanelWidget;
 import edu.square.views.widget.GroupLabelWidget;
 import edu.square.views.widget.SearchPanelWidget;
+import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,18 +19,16 @@ import static edu.square.utils.UIUtils.JPanelUtil.getMainPanel;
 
 public class LeftSideComponent {
 
-    private static final String[] groupTitles = {"Today", "Completed", "All", "Flagged"};
-    private final Dimension parentJComponentDimension;
-    private final Dimension mainPanelDimension;
     Font font1;
     Font font2;
     Font font3;
     private JPanel mainPanel;
+    @Getter
     private List<GroupLabelWidget> groupLabelWidgets;
 
-    public LeftSideComponent(JFrame parentFrame) {
-        parentJComponentDimension = new Dimension(parentFrame.getWidth(), parentFrame.getHeight());
-        mainPanelDimension = resizeDimensionWidthScale(parentJComponentDimension, 0.2);
+    public LeftSideComponent(JFrame parentFrame,String[] groupedTitles) {
+        Dimension parentJComponentDimension = new Dimension(parentFrame.getWidth(), parentFrame.getHeight());
+        Dimension mainPanelDimension = resizeDimensionWidthScale(parentJComponentDimension, 0.2);
 
         font1 = getBoldFont(parentJComponentDimension, FONT_SIZE_1);
         font2 = getBoldFont(parentJComponentDimension, FONT_SIZE_2);
@@ -50,7 +50,7 @@ public class LeftSideComponent {
 
         //GROUP LABEL
         GroupLabelWidget.ViewBuilder viewBuilder = new GroupLabelWidget.ViewBuilder(mainPanelDimension);
-        List<String> titles = new ArrayList<>(Arrays.asList(groupTitles));
+        List<String> titles = new ArrayList<>(Arrays.asList(groupedTitles));
         groupLabelWidgets = viewBuilder.build(titles);
         for (GroupLabelWidget groupLabelWidget :
                 groupLabelWidgets) {
@@ -63,7 +63,7 @@ public class LeftSideComponent {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        LeftSideComponent leftSideComponent = new LeftSideComponent(jFrame);
+        LeftSideComponent leftSideComponent = new LeftSideComponent(jFrame, View1Controller.groupTitles);
         JPanel panel = leftSideComponent.getLeftPanel();
 
         jFrame.add(panel);

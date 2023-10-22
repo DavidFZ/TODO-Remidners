@@ -24,17 +24,16 @@ public class ReminderListWidget {
     private final double frameHeightInit;
     @Getter
     JPanel jPanelManager;
+    int reminderNum;
     @Getter
     private JScrollPane scrollPane;
-
     private double scaling = 0.4;
-    int reminderNum;
 
     public ReminderListWidget(JFrame parentFrame) {
         this.parentFrame = parentFrame;
 
         frameHeightInit = parentFrame.getHeight();
-        frameWidthInit =scaling*parentFrame.getWidth();
+        frameWidthInit = scaling * parentFrame.getWidth();
 
         reminders = ReminderModel.queryAllEntities();
         reminderNum = reminders.size();
@@ -46,7 +45,7 @@ public class ReminderListWidget {
         jPanelManager.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         int w = (int) (frameWidthInit);
-        int h = (int) (0.8*parentFrame.getHeight());
+        int h = (int) (0.8 * parentFrame.getHeight());
         scrollPane = new JScrollPane(jPanelManager);
         scrollPane.setPreferredSize(new Dimension(w, h));
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -70,14 +69,41 @@ public class ReminderListWidget {
             jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.072)));
         }
 
-    //实现自动滚动到底部
+        //TODO:实现自动滚动到底部
+    }
 
+    public void addNewReminderViewsIntoReminderListView(List<Reminder> reminders) {
+        reminderNum += reminders.size();
+
+        for (Reminder reminder : reminders) {
+            ReminderView reminderView = new ReminderView(reminder);
+            jPanelManager.add(reminderView.getInnerPanel());
+        }
+        if (reminderNum > 10) {
+            jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.072)*reminders.size()));
+        }
+        repaint();
+    }
+
+    public void clearReminderListViewWithoutRepaint() {
+        jPanelManager.removeAll();
+        jPanelManager.setPreferredSize(new Dimension((int) (frameWidthInit * 0.93), (int) ((frameHeightInit * 0.074) * reminderNum)));
+        reminderNum = 0;
+    }
+
+    public void clearReminderListView() {
+        clearReminderListViewWithoutRepaint();
+        jPanelManager.repaint();
+    }
+
+    public void repaint() {
+        jPanelManager.repaint();
     }
 
     public class ReminderView {
+        private final JLabel label;
         @Getter
         private Reminder reminder;
-        private JLabel label;
         @Getter
         private JRadioButton radioButton;
         @Getter

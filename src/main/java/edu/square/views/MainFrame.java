@@ -1,5 +1,6 @@
 package edu.square.views;
 
+import edu.square.controller.View1Controller;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.component.LeftSideComponent;
 import edu.square.views.component.TodayPanelManage;
@@ -22,7 +23,7 @@ public class MainFrame {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        LeftSideComponent leftSideComponent = new LeftSideComponent(mainFrame);
+        LeftSideComponent leftSideComponent = new LeftSideComponent(mainFrame, View1Controller.getGroupTitles());
         TodayPanelManage todayPanelManage = new TodayPanelManage(mainFrame);
 
         mainFrame.add(leftSideComponent.getLeftPanel());
