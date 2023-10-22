@@ -5,6 +5,7 @@ import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.widget.ReminderListWidget;
+import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,56 +15,63 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class GroupedListComponent {
+    private final JFrame parentFrame;
+    //中间容器
+    @Getter
+    private final ReminderListWidget reminderListWidget;
+    private final double scaling = 0.4;
     //font定义
     Font font1;
     Font font2;
     Font font3;
-
     JButton addButton;
     //root Frame
-    private JFrame mainFrame;
-    //中间容器
-    private final ReminderListWidget reminderListWidget;
+    @Getter
+    private JPanel todayPanelManage;
 
 
-    public GroupedListComponent() {
+    public GroupedListComponent(JFrame parentFrame) {
+        this.parentFrame = parentFrame;
+        font1 = new Font("宋体", Font.BOLD, (int) (0.05 * parentFrame.getWidth()));
+        font2 = new Font("宋体", Font.BOLD, (int) (0.03 * parentFrame.getWidth()));
+        font3 = new Font("宋体", Font.BOLD, (int) (0.008 * parentFrame.getWidth()));
+
         init();
 
-        reminderListWidget = new ReminderListWidget(mainFrame);
+        reminderListWidget = new ReminderListWidget(parentFrame);
         JScrollPane jScrollPane = reminderListWidget.getScrollPane();
-        mainFrame.add(jScrollPane);
+        todayPanelManage.add(jScrollPane);
 
 
-        mainFrame.setVisible(true);
-        mainFrame.setResizable(false);
+        todayPanelManage.setVisible(true);
     }
 
     public static void main(String[] args) {
-        GroupedListComponent groupedListComponent = new GroupedListComponent();
+        JFrame jFrame = JFrameFactory.getDefaultJFrame(0.8d, "222");
+        GroupedListComponent groupedListComponent1 = new GroupedListComponent(jFrame);
+        jFrame.setVisible(true);
+
     }
 
+    //TODO: encapsulate this method as a widget
     public void init() {
-        mainFrame = JFrameFactory.getDefaultJFrame(.8d, "Schedule");
-        //定义字体
-        font1 = new Font("宋体", Font.BOLD, (int) (0.05 * mainFrame.getWidth()));
-        font2 = new Font("宋体", Font.BOLD, (int) (0.03 * mainFrame.getWidth()));
-        font3 = new Font("宋体", Font.BOLD, (int) (0.008 * mainFrame.getWidth()));
+        todayPanelManage = new JPanel();
 
         //对齐方式
-        mainFrame.setLayout(new FlowLayout(FlowLayout.CENTER, 30, 15));
-
+        todayPanelManage.setLayout(new FlowLayout(FlowLayout.CENTER));
+        todayPanelManage.setPreferredSize(new Dimension((int) (scaling * parentFrame.getWidth()), parentFrame.getHeight()));
 
         //titlePanel
         {
             JPanel titlePanel = new JPanel();
             titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-            titlePanel.setPreferredSize(new Dimension(mainFrame.getWidth(), (int) (0.12 * mainFrame.getHeight())));
+            titlePanel.setPreferredSize(new Dimension((int) (scaling * parentFrame.getWidth()), (int) (0.12 * parentFrame.getHeight())));
 //            titlePanel.setBackground(Color.black);
-            mainFrame.add(titlePanel);
+            todayPanelManage.add(titlePanel);
             //titlePanel_title
             JPanel titlePanel_title = new JPanel();
             titlePanel_title.setLayout(new FlowLayout(FlowLayout.LEFT));
-            titlePanel_title.setPreferredSize(new Dimension((int) (0.48 * mainFrame.getWidth()), (int) (0.11 * mainFrame.getHeight())));
+            titlePanel_title.setPreferredSize(new Dimension((int) (scaling * 0.48 * parentFrame.getWidth()), (int) (0.11 * parentFrame.getHeight())));
             titlePanel_title.setBackground(Color.blue);
             titlePanel.add(titlePanel_title);
 
@@ -74,14 +82,14 @@ public class GroupedListComponent {
             //titlePanel_button
             JPanel titlePanel_button = new JPanel();
             titlePanel_button.setLayout(new FlowLayout(FlowLayout.RIGHT));
-            titlePanel_button.setPreferredSize(new Dimension((int) (0.48 * mainFrame.getWidth()), (int) (0.11 * mainFrame.getHeight())));
+            titlePanel_button.setPreferredSize(new Dimension((int) (scaling * 0.48 * parentFrame.getWidth()), (int) (0.11 * parentFrame.getHeight())));
             titlePanel_button.setBackground(Color.yellow);
             titlePanel.add(titlePanel_button);
 
             addButton = new JButton("+");
             addButton.setFont(font2);
             addButton.setBackground(Color.white);
-            addButton.setPreferredSize(new Dimension((int) (0.05 * mainFrame.getWidth()), (int) (0.05 * mainFrame.getWidth())));
+            addButton.setPreferredSize(new Dimension((int) (0.05 * parentFrame.getWidth()), (int) (0.05 * parentFrame.getWidth())));
             addButton.setVisible(true);
             titlePanel_button.add(addButton);
 
@@ -91,7 +99,8 @@ public class GroupedListComponent {
                 public void actionPerformed(ActionEvent e) {
                     addButton.setEnabled(false);
                     //输入的窗口
-                    JFrame printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * mainFrame.getHeight())).setWindowWidth((int) (0.3 * mainFrame.getWidth())).setTitle("Please add item").build());
+                    JFrame printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * parentFrame.getHeight())).setWindowWidth((int) (0.3 * parentFrame.getWidth())).setTitle("Please add item").build());
+                    printFrame.setAlwaysOnTop(true);
 
                     //item + text field
                     JPanel inputPanel;
@@ -99,7 +108,7 @@ public class GroupedListComponent {
                     JTextField itemName;
                     {
                         inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-                        Font font2 = new Font("宋体", Font.BOLD, (int) (0.01 * mainFrame.getWidth()));
+                        Font font2 = new Font("宋体", Font.BOLD, (int) (0.01 * parentFrame.getWidth()));
                         inputLable = new JLabel("Item:");
                         inputPanel.setBounds((int) (0.1 * printFrame.getHeight()), (int) (0.2 * printFrame.getHeight()), (int) (0.8 * printFrame.getWidth()), (int) (0.2 * printFrame.getWidth()));
                         inputLable.setFont(font2);
@@ -139,7 +148,7 @@ public class GroupedListComponent {
                             if (item.length() > 0 && item.length() <= 50) {
 
                                 addItem(ReminderModel.insertReminder(item));
-                                addButton.setEnabled(true);
+//                                pulsButton.setEnabled(true);
                                 printFrame.dispose();
                             } else if (item.length() >= 50) {
 //                                JOptionPane.showMessageDialog(null, "输入字段过长（输入长度限制50字）", "警告", JOptionPane.WARNING_MESSAGE);
@@ -147,7 +156,7 @@ public class GroupedListComponent {
                                 addItem(ReminderModel.insertReminder(newItem));
                             }
 
-
+                            addButton.setEnabled(true);
                         }
                     });
 
@@ -164,6 +173,7 @@ public class GroupedListComponent {
                                 }
                                 printFrame.dispose();
                             }
+                            addButton.setEnabled(true);
                         }
 
                     });
@@ -175,6 +185,7 @@ public class GroupedListComponent {
                     inputPanel.setVisible(true);
                     confirmButton.setVisible(true);
                     printFrame.setVisible(true);
+
                 }
             });
         }
@@ -182,16 +193,12 @@ public class GroupedListComponent {
     }
 
     public void addItem(Reminder reminder) {
-        //deprecated
-//        ReminderPanelModel reminderPanelModel = new ReminderPanelModel(reminder, mainFrame);
-//        mainFrame.add(reminderPanelModel);
-
         reminderListWidget.addNewReminderViewIntoReminderListView(reminder);
 
+        todayPanelManage.validate();
+        todayPanelManage.repaint();
 
-        mainFrame.validate();
-        mainFrame.repaint();
-
-        mainFrame.setVisible(true);
+        todayPanelManage.setVisible(true);
     }
+
 }

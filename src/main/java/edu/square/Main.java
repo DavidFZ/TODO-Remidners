@@ -1,6 +1,6 @@
 package edu.square;
 
-import edu.square.views.component.GroupedListComponent;
+import edu.square.views.view.View1;
 
 import java.sql.SQLException;
 
@@ -13,11 +13,7 @@ public class Main {
             forcedInitDB();
 
 
-
-
-
-
-        GroupedListComponent groupedListComponent = new GroupedListComponent();
+        View1 view1 = new View1();
 
     }
 }

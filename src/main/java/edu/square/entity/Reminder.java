@@ -11,6 +11,7 @@ import static edu.square.utils.DevUtils.getTimeStamp;
 public class Reminder implements Exportable {
     private String uuid;
     private String content;
+    private String tag;
 
 
     private Timestamp createTime;

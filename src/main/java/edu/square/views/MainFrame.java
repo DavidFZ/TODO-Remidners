@@ -3,7 +3,7 @@ package edu.square.views;
 import edu.square.controller.View1Controller;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.component.LeftSideComponent;
-import edu.square.views.component.TodayPanelManage;
+import edu.square.views.component.GroupedListComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,10 +24,10 @@ public class MainFrame {
         mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         LeftSideComponent leftSideComponent = new LeftSideComponent(mainFrame, View1Controller.getGroupTitles());
-        TodayPanelManage todayPanelManage = new TodayPanelManage(mainFrame);
+        GroupedListComponent groupedListComponent = new GroupedListComponent(mainFrame);
 
         mainFrame.add(leftSideComponent.getLeftPanel());
-        mainFrame.add(todayPanelManage.getTodayPanelManage());
+        mainFrame.add(groupedListComponent.getTodayPanelManage());
 
         mainFrame.setVisible(true);
     }

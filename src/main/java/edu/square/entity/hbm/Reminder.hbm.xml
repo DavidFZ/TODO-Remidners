@@ -11,6 +11,10 @@
 
         <property name="content" type="string"/>
 
+        <property name="tag" type="string">
+            <column name="TAG"/>
+        </property>
+
         <property name="createTime" type="timestamp">
             <column name="create_time"/>
         </property>
