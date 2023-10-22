@@ -117,6 +117,16 @@ public class ComponentResizeUtil {
         return new Dimension((int) (dimension.width * scalingRatio), dimension.height);
     }
 
+    public static Dimension resizeDimensionHeightScale(Dimension dimension, double scalingRatio) {
+        assert scalingRatio > 0;
+        return new Dimension(dimension.width, (int) (dimension.height * scalingRatio));
+    }
+
+    public static Dimension resizeDimensionWidthAndHeight(Dimension dimension, double widthScalingRatio, double heightScalingRatio) {
+        assert widthScalingRatio > 0 && heightScalingRatio > 0;
+        return new Dimension((int) (dimension.width * widthScalingRatio), (int) (dimension.height * heightScalingRatio));
+    }
+
     public static Dimension resizeDimensionWidthScale(JFrame jFrame, double scalingRatio) {
         assert scalingRatio > 0;
         return resizeDimensionWidthScale(jFrame.getSize(), scalingRatio);
