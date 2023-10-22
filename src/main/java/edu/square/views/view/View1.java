@@ -20,7 +20,7 @@ public class View1 {
         View1Controller view1Controller = new View1Controller(leftSideComponent, groupedListComponent);
 
         mainFrame.add(leftSideComponent.getLeftPanel());
-        mainFrame.add(groupedListComponent.getTodayPanelManage());
+        mainFrame.add(groupedListComponent.getMainPanel());
 
         mainFrame.setVisible(true);
     }

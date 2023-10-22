@@ -27,7 +27,9 @@ public class GroupedListComponent {
     JButton addButton;
     //root Frame
     @Getter
-    private JPanel todayPanelManage;
+    private JPanel mainPanel;
+    @Getter
+    private JLabel titleLabel;
 
 
     public GroupedListComponent(JFrame parentFrame) {
@@ -40,10 +42,10 @@ public class GroupedListComponent {
 
         reminderListWidget = new ReminderListWidget(parentFrame);
         JScrollPane jScrollPane = reminderListWidget.getScrollPane();
-        todayPanelManage.add(jScrollPane);
+        mainPanel.add(jScrollPane);
 
 
-        todayPanelManage.setVisible(true);
+        mainPanel.setVisible(true);
     }
 
     public static void main(String[] args) {
@@ -55,11 +57,11 @@ public class GroupedListComponent {
 
     //TODO: encapsulate this method as a widget
     public void init() {
-        todayPanelManage = new JPanel();
+        mainPanel = new JPanel();
 
         //对齐方式
-        todayPanelManage.setLayout(new FlowLayout(FlowLayout.CENTER));
-        todayPanelManage.setPreferredSize(new Dimension((int) (scaling * parentFrame.getWidth()), parentFrame.getHeight()));
+        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        mainPanel.setPreferredSize(new Dimension((int) (scaling * parentFrame.getWidth()), parentFrame.getHeight()));
 
         //titlePanel
         {
@@ -67,7 +69,7 @@ public class GroupedListComponent {
             titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
             titlePanel.setPreferredSize(new Dimension((int) (scaling * parentFrame.getWidth()), (int) (0.12 * parentFrame.getHeight())));
 //            titlePanel.setBackground(Color.black);
-            todayPanelManage.add(titlePanel);
+            mainPanel.add(titlePanel);
             //titlePanel_title
             JPanel titlePanel_title = new JPanel();
             titlePanel_title.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -75,7 +77,7 @@ public class GroupedListComponent {
             titlePanel_title.setBackground(Color.blue);
             titlePanel.add(titlePanel_title);
 
-            JLabel titleLabel = new JLabel("Today");
+            titleLabel = new JLabel("Today");
             titleLabel.setFont(font1);
             titlePanel_title.add(titleLabel);
 
@@ -195,10 +197,10 @@ public class GroupedListComponent {
     public void addItem(Reminder reminder) {
         reminderListWidget.addNewReminderViewIntoReminderListView(reminder);
 
-        todayPanelManage.validate();
-        todayPanelManage.repaint();
+        mainPanel.validate();
+        mainPanel.repaint();
 
-        todayPanelManage.setVisible(true);
+        mainPanel.setVisible(true);
     }
 
 }

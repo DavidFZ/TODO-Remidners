@@ -27,7 +27,7 @@ public class MainFrame {
         GroupedListComponent groupedListComponent = new GroupedListComponent(mainFrame);
 
         mainFrame.add(leftSideComponent.getLeftPanel());
-        mainFrame.add(groupedListComponent.getTodayPanelManage());
+        mainFrame.add(groupedListComponent.getMainPanel());
 
         mainFrame.setVisible(true);
     }

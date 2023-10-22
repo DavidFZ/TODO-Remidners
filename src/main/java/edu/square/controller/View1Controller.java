@@ -34,13 +34,14 @@ public class View1Controller {
         for (int i = 0; i < reminders.size(); i++) {
             GroupLabelWidget widget = (GroupLabelWidget) groupLabelWidgets.get(i);
             List<Reminder> reminderList = reminders.get(i);
+            int finalI = i;
             widget.getGroupView().addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
+                    groupedListComponent.getTitleLabel().setText(groupTitles[finalI]);
 
                     groupedListComponent.getReminderListWidget().clearReminderListView();
-
                     for (Reminder reminder : reminderList) {
                         groupedListComponent.addItem(reminder);
                     }
