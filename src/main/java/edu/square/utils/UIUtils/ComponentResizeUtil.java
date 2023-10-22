@@ -107,16 +107,36 @@ public class ComponentResizeUtil {
      * @param scalingRatio scale ratio
      * @return dimension being resized
      */
-    public static Dimension getScaleResizedDimension(Dimension dimension, double scalingRatio) {
+    public static Dimension resizeDimensionScale(Dimension dimension, double scalingRatio) {
         assert scalingRatio > 0;
         return new Dimension((int) (dimension.width * scalingRatio), (int) (dimension.height * scalingRatio));
+    }
+
+    public static Dimension resizeDimensionWidthScale(Dimension dimension, double scalingRatio) {
+        assert scalingRatio > 0;
+        return new Dimension((int) (dimension.width * scalingRatio), dimension.height);
+    }
+
+    public static Dimension resizeDimensionHeightScale(Dimension dimension, double scalingRatio) {
+        assert scalingRatio > 0;
+        return new Dimension(dimension.width, (int) (dimension.height * scalingRatio));
+    }
+
+    public static Dimension resizeDimensionWidthAndHeight(Dimension dimension, double widthScalingRatio, double heightScalingRatio) {
+        assert widthScalingRatio > 0 && heightScalingRatio > 0;
+        return new Dimension((int) (dimension.width * widthScalingRatio), (int) (dimension.height * heightScalingRatio));
+    }
+
+    public static Dimension resizeDimensionWidthScale(JFrame jFrame, double scalingRatio) {
+        assert scalingRatio > 0;
+        return resizeDimensionWidthScale(jFrame.getSize(), scalingRatio);
     }
 
     private static void recursionResize(List<Component> componentList, double ratio) {
         if (componentList.isEmpty()) return;
         for (Component c : componentList) {
             Dimension dimension = c.getSize();
-            c.setSize(getScaleResizedDimension(dimension, ratio));
+            c.setSize(resizeDimensionScale(dimension, ratio));
             JComponent jc = (JComponent) c;
             List<Component> components = List.of(jc.getComponents());
             if (components != null && !components.isEmpty())

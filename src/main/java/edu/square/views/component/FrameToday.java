@@ -1,11 +1,10 @@
-package edu.square.views;
+package edu.square.views.component;
 
-import edu.square.controller.FrameTodayController;
 import edu.square.entity.Reminder;
 import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
-import edu.square.views.component.ReminderListView;
+import edu.square.views.widget.ReminderListView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -189,5 +188,9 @@ public class FrameToday {
         mainFrame.repaint();
 
         mainFrame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        FrameToday frameToday = new FrameToday();
     }
 }
