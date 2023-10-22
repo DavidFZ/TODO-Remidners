@@ -4,7 +4,7 @@ import edu.square.entity.Reminder;
 import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
-import edu.square.views.widget.ReminderListView;
+import edu.square.views.widget.ReminderListWidget;
 import lombok.Getter;
 
 import javax.swing.*;
@@ -15,10 +15,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class TodayPanelManage {
-    private static final Object syncObject = new Object();
     private final JFrame parentFrame;
     //中间容器
-    private final ReminderListView reminderListView;
+    private final ReminderListWidget reminderListWidget;
     private final double scaling = 0.4;
     //font定义
     Font font1;
@@ -38,8 +37,8 @@ public class TodayPanelManage {
 
         init();
 
-        reminderListView = new ReminderListView(parentFrame);
-        JScrollPane jScrollPane = reminderListView.getScrollPane();
+        reminderListWidget = new ReminderListWidget(parentFrame);
+        JScrollPane jScrollPane = reminderListWidget.getScrollPane();
         todayPanelManage.add(jScrollPane);
 
 
@@ -97,96 +96,95 @@ public class TodayPanelManage {
             addButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    synchronized (syncObject) {
                     addButton.setEnabled(false);
-                        //输入的窗口
-                        JFrame printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * parentFrame.getHeight())).setWindowWidth((int) (0.3 * parentFrame.getWidth())).setTitle("Please add item").build());
-                        printFrame.setAlwaysOnTop(true);
+                    //输入的窗口
+                    JFrame printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * parentFrame.getHeight())).setWindowWidth((int) (0.3 * parentFrame.getWidth())).setTitle("Please add item").build());
+                    printFrame.setAlwaysOnTop(true);
 
-                        //item + text field
-                        JPanel inputPanel;
-                        JLabel inputLable;
-                        JTextField itemName;
-                        {
-                            inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-                            Font font2 = new Font("宋体", Font.BOLD, (int) (0.01 * parentFrame.getWidth()));
-                            inputLable = new JLabel("Item:");
-                            inputPanel.setBounds((int) (0.1 * printFrame.getHeight()), (int) (0.2 * printFrame.getHeight()), (int) (0.8 * printFrame.getWidth()), (int) (0.2 * printFrame.getWidth()));
-                            inputLable.setFont(font2);
-                            inputPanel.add(inputLable);
-                            itemName = new JTextField(40);
-                            inputPanel.add(itemName);
+                    //item + text field
+                    JPanel inputPanel;
+                    JLabel inputLable;
+                    JTextField itemName;
+                    {
+                        inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+                        Font font2 = new Font("宋体", Font.BOLD, (int) (0.01 * parentFrame.getWidth()));
+                        inputLable = new JLabel("Item:");
+                        inputPanel.setBounds((int) (0.1 * printFrame.getHeight()), (int) (0.2 * printFrame.getHeight()), (int) (0.8 * printFrame.getWidth()), (int) (0.2 * printFrame.getWidth()));
+                        inputLable.setFont(font2);
+                        inputPanel.add(inputLable);
+                        itemName = new JTextField(40);
+                        inputPanel.add(itemName);
 
-                        }
-
-
-                        //Button
-                        JPanel confirmPanel;
-                        JButton confirmButton;
-
-                        {
-                            confirmPanel = new JPanel(new BorderLayout());
-                            confirmPanel.setBounds(50, 100, 200, 200);
-                            confirmButton = new JButton("confirm");
-                            confirmButton.setSize(100, 100);
-
-                        }
-
-                        //while input Enter will be same as click confirm button
-
-
-                        confirmPanel.add(confirmButton, BorderLayout.SOUTH);
-                        //two frames will not close together
-                        printFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-                        printFrame.add(inputPanel);
-                        printFrame.add(confirmPanel);
-
-                        //The influence of click button
-                        confirmButton.addActionListener(new ActionListener() {
-                            @Override
-                            public void actionPerformed(ActionEvent e) {
-                                String item = itemName.getText();
-                                if (item.length() > 0 && item.length() <= 50) {
-
-                                    addItem(ReminderModel.insertReminder(item));
-//                                pulsButton.setEnabled(true);
-                                    printFrame.dispose();
-                                } else if (item.length() >= 50) {
-//                                JOptionPane.showMessageDialog(null, "输入字段过长（输入长度限制50字）", "警告", JOptionPane.WARNING_MESSAGE);
-                                    String newItem = item.substring(0, 49);
-                                    addItem(ReminderModel.insertReminder(newItem));
-                                }
-
-                                addButton.setEnabled(true);
-                            }
-                        });
-
-                        //release Enter
-                        itemName.addKeyListener(new KeyAdapter() {
-                            @Override
-                            public void keyTyped(KeyEvent e) {
-                                super.keyTyped(e);
-                                if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-                                    String item = itemName.getText();
-                                    if (item != null) {
-                                        //TODO: use some less invasive way to do this
-                                        addItem(ReminderModel.insertReminder(item));
-                                    }
-                                    printFrame.dispose();
-                                }
-                                addButton.setEnabled(true);
-                            }
-
-                        });
-
-                        //if components are visible
-                        itemName.setVisible(true);
-                        confirmPanel.setVisible(true);
-                        inputLable.setVisible(true);
-                        inputPanel.setVisible(true);
-                        confirmButton.setVisible(true);
-                        printFrame.setVisible(true);
                     }
+
+
+                    //Button
+                    JPanel confirmPanel;
+                    JButton confirmButton;
+
+                    {
+                        confirmPanel = new JPanel(new BorderLayout());
+                        confirmPanel.setBounds(50, 100, 200, 200);
+                        confirmButton = new JButton("confirm");
+                        confirmButton.setSize(100, 100);
+
+                    }
+
+                    //while input Enter will be same as click confirm button
+
+
+                    confirmPanel.add(confirmButton, BorderLayout.SOUTH);
+                    //two frames will not close together
+                    printFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                    printFrame.add(inputPanel);
+                    printFrame.add(confirmPanel);
+
+                    //The influence of click button
+                    confirmButton.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            String item = itemName.getText();
+                            if (item.length() > 0 && item.length() <= 50) {
+
+                                addItem(ReminderModel.insertReminder(item));
+//                                pulsButton.setEnabled(true);
+                                printFrame.dispose();
+                            } else if (item.length() >= 50) {
+//                                JOptionPane.showMessageDialog(null, "输入字段过长（输入长度限制50字）", "警告", JOptionPane.WARNING_MESSAGE);
+                                String newItem = item.substring(0, 49);
+                                addItem(ReminderModel.insertReminder(newItem));
+                            }
+
+                            addButton.setEnabled(true);
+                        }
+                    });
+
+                    //release Enter
+                    itemName.addKeyListener(new KeyAdapter() {
+                        @Override
+                        public void keyTyped(KeyEvent e) {
+                            super.keyTyped(e);
+                            if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+                                String item = itemName.getText();
+                                if (item != null) {
+                                    //TODO: use some less invasive way to do this
+                                    addItem(ReminderModel.insertReminder(item));
+                                }
+                                printFrame.dispose();
+                            }
+                            addButton.setEnabled(true);
+                        }
+
+                    });
+
+                    //if components are visible
+                    itemName.setVisible(true);
+                    confirmPanel.setVisible(true);
+                    inputLable.setVisible(true);
+                    inputPanel.setVisible(true);
+                    confirmButton.setVisible(true);
+                    printFrame.setVisible(true);
+
                 }
             });
         }
@@ -194,12 +192,7 @@ public class TodayPanelManage {
     }
 
     public void addItem(Reminder reminder) {
-        //deprecated
-//        ReminderPanelModel reminderPanelModel = new ReminderPanelModel(reminder, mainFrame);
-//        mainFrame.add(reminderPanelModel);
-
-        reminderListView.addNewReminderViewIntoReminderListView(reminder);
-
+        reminderListWidget.addNewReminderViewIntoReminderListView(reminder);
 
         todayPanelManage.validate();
         todayPanelManage.repaint();
@@ -207,9 +200,4 @@ public class TodayPanelManage {
         todayPanelManage.setVisible(true);
     }
 
-    private static void freeSyncObject() {
-        synchronized (syncObject) {
-            syncObject.notifyAll();
-        }
-    }
 }

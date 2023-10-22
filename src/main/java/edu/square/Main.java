@@ -1,6 +1,6 @@
 package edu.square;
 
-import edu.square.views.component.FrameToday;
+import edu.square.views.component.GroupedListComponent;
 
 import java.sql.SQLException;
 
@@ -17,7 +17,7 @@ public class Main {
 
 
 
-        FrameToday frameToday = new FrameToday();
+        GroupedListComponent groupedListComponent = new GroupedListComponent();
 
     }
 }

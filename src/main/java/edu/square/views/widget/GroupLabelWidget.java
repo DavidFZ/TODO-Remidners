@@ -8,14 +8,14 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupLabelView {
+public class GroupLabelWidget {
     private static final Font DEFAULT_FONT = FontUtil.getBoldFont(20);
     private final JLabel groupTitleLabel;
     private final JLabel countLabel;
     private JPanel mainPanel;
 
 
-    public GroupLabelView(Dimension dimension, String title) {
+    public GroupLabelWidget(Dimension dimension, String title) {
         mainPanel = new JPanel();
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         countLabel = new JLabel("0");
@@ -59,14 +59,14 @@ public class GroupLabelView {
             this.parentDimension = parentDimension;
         }
 
-        public GroupLabelView build(String title) {
-            return new GroupLabelView(parentDimension, title);
+        public GroupLabelWidget build(String title) {
+            return new GroupLabelWidget(parentDimension, title);
         }
 
-        public List<GroupLabelView> build(List<String> titles) {
-            List<GroupLabelView> list = new ArrayList<>(titles.size());
+        public List<GroupLabelWidget> build(List<String> titles) {
+            List<GroupLabelWidget> list = new ArrayList<>(titles.size());
             for (String title : titles)
-                list.add(new GroupLabelView(parentDimension, title));
+                list.add(new GroupLabelWidget(parentDimension, title));
             return list;
         }
     }

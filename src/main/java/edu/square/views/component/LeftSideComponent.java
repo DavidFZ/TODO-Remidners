@@ -1,9 +1,9 @@
 package edu.square.views.component;
 
 import edu.square.utils.UIUtils.JFrameFactory;
-import edu.square.views.widget.BlockPanelView;
-import edu.square.views.widget.GroupLabelView;
-import edu.square.views.widget.SearchPanelView;
+import edu.square.views.widget.BlockPanelWidget;
+import edu.square.views.widget.GroupLabelWidget;
+import edu.square.views.widget.SearchPanelWidget;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +15,7 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthS
 import static edu.square.utils.UIUtils.FontUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getMainPanel;
 
-public class LeftSideView {
+public class LeftSideComponent {
 
     private static final String[] groupTitles = {"Today", "Completed", "All", "Flagged"};
     private final Dimension parentJComponentDimension;
@@ -24,9 +24,9 @@ public class LeftSideView {
     Font font2;
     Font font3;
     private JPanel mainPanel;
-    private List<GroupLabelView> groupLabelViews;
+    private List<GroupLabelWidget> groupLabelWidgets;
 
-    public LeftSideView(JFrame parentFrame) {
+    public LeftSideComponent(JFrame parentFrame) {
         parentJComponentDimension = new Dimension(parentFrame.getWidth(), parentFrame.getHeight());
         mainPanelDimension = resizeDimensionWidthScale(parentJComponentDimension, 0.2);
 
@@ -40,21 +40,21 @@ public class LeftSideView {
         mainPanel.setBackground(Color.green);
 
         //SEARCH PANEL
-        SearchPanelView searchPanelView = new SearchPanelView(mainPanelDimension, font2);
-        mainPanel.add(searchPanelView.getSearchTipsPanel());
-        mainPanel.add(searchPanelView.getSearchPanel());
+        SearchPanelWidget searchPanelWidget = new SearchPanelWidget(mainPanelDimension, font2);
+        mainPanel.add(searchPanelWidget.getSearchTipsPanel());
+        mainPanel.add(searchPanelWidget.getSearchPanel());
 
         //BLOCK PANEL
-        BlockPanelView blockPanelView = new BlockPanelView(parentJComponentDimension);
-        mainPanel.add(blockPanelView.getBlockPanel());
+        BlockPanelWidget blockPanelWidget = new BlockPanelWidget(parentJComponentDimension);
+        mainPanel.add(blockPanelWidget.getBlockPanel());
 
         //GROUP LABEL
-        GroupLabelView.ViewBuilder viewBuilder = new GroupLabelView.ViewBuilder(mainPanelDimension);
+        GroupLabelWidget.ViewBuilder viewBuilder = new GroupLabelWidget.ViewBuilder(mainPanelDimension);
         List<String> titles = new ArrayList<>(Arrays.asList(groupTitles));
-        groupLabelViews = viewBuilder.build(titles);
-        for (GroupLabelView groupLabelView :
-                groupLabelViews) {
-            mainPanel.add(groupLabelView.getGroupView());
+        groupLabelWidgets = viewBuilder.build(titles);
+        for (GroupLabelWidget groupLabelWidget :
+                groupLabelWidgets) {
+            mainPanel.add(groupLabelWidget.getGroupView());
         }
     }
 
@@ -63,8 +63,8 @@ public class LeftSideView {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        LeftSideView leftSideView = new LeftSideView(jFrame);
-        JPanel panel = leftSideView.getLeftPanel();
+        LeftSideComponent leftSideComponent = new LeftSideComponent(jFrame);
+        JPanel panel = leftSideComponent.getLeftPanel();
 
         jFrame.add(panel);
         jFrame.setVisible(true);

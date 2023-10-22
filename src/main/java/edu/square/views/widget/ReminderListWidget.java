@@ -14,7 +14,7 @@ import java.util.List;
 
 import static edu.square.model.ReminderModel.updateReminderEntityDoneStatus;
 
-public class ReminderListView {
+public class ReminderListWidget {
     //keep parentFrame var for future implementation resolution scaling
     private final JFrame parentFrame;
     private final List<ReminderView> reminderViews;
@@ -30,7 +30,7 @@ public class ReminderListView {
     private double scaling = 0.4;
     int reminderNum;
 
-    public ReminderListView(JFrame parentFrame) {
+    public ReminderListWidget(JFrame parentFrame) {
         this.parentFrame = parentFrame;
 
         frameHeightInit = parentFrame.getHeight();

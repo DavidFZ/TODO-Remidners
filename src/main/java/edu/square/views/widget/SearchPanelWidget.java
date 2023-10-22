@@ -8,13 +8,13 @@ import java.awt.*;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
 
-public class SearchPanelView {
+public class SearchPanelWidget {
     @Getter
     private JPanel searchPanel;
     @Getter
     private JPanel searchTipsPanel;
 
-    public SearchPanelView(Dimension dimension, Font font2) {
+    public SearchPanelWidget(Dimension dimension, Font font2) {
         //        searchTipsPanel
         {
             searchTipsPanel = new JPanel();

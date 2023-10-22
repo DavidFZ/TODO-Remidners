@@ -4,7 +4,7 @@ import edu.square.entity.Reminder;
 import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
-import edu.square.views.widget.ReminderListView;
+import edu.square.views.widget.ReminderListWidget;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,29 +13,33 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
-public class FrameToday {
+public class GroupedListComponent {
     //font定义
     Font font1;
     Font font2;
     Font font3;
 
-    JButton pulsButton;
+    JButton addButton;
     //root Frame
     private JFrame mainFrame;
     //中间容器
-    private ReminderListView reminderListView;
+    private final ReminderListWidget reminderListWidget;
 
 
-    public FrameToday() {
+    public GroupedListComponent() {
         init();
 
-        reminderListView = new ReminderListView(mainFrame);
-        JScrollPane jScrollPane = reminderListView.getScrollPane();
+        reminderListWidget = new ReminderListWidget(mainFrame);
+        JScrollPane jScrollPane = reminderListWidget.getScrollPane();
         mainFrame.add(jScrollPane);
 
 
         mainFrame.setVisible(true);
         mainFrame.setResizable(false);
+    }
+
+    public static void main(String[] args) {
+        GroupedListComponent groupedListComponent = new GroupedListComponent();
     }
 
     public void init() {
@@ -74,18 +78,18 @@ public class FrameToday {
             titlePanel_button.setBackground(Color.yellow);
             titlePanel.add(titlePanel_button);
 
-            pulsButton = new JButton("+");
-            pulsButton.setFont(font2);
-            pulsButton.setBackground(Color.white);
-            pulsButton.setPreferredSize(new Dimension((int) (0.05 * mainFrame.getWidth()), (int) (0.05 * mainFrame.getWidth())));
-            pulsButton.setVisible(true);
-            titlePanel_button.add(pulsButton);
+            addButton = new JButton("+");
+            addButton.setFont(font2);
+            addButton.setBackground(Color.white);
+            addButton.setPreferredSize(new Dimension((int) (0.05 * mainFrame.getWidth()), (int) (0.05 * mainFrame.getWidth())));
+            addButton.setVisible(true);
+            titlePanel_button.add(addButton);
 
 
-            pulsButton.addActionListener(new ActionListener() {
+            addButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    pulsButton.setEnabled(false);
+                    addButton.setEnabled(false);
                     //输入的窗口
                     JFrame printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * mainFrame.getHeight())).setWindowWidth((int) (0.3 * mainFrame.getWidth())).setTitle("Please add item").build());
 
@@ -135,7 +139,7 @@ public class FrameToday {
                             if (item.length() > 0 && item.length() <= 50) {
 
                                 addItem(ReminderModel.insertReminder(item));
-                                pulsButton.setEnabled(true);
+                                addButton.setEnabled(true);
                                 printFrame.dispose();
                             } else if (item.length() >= 50) {
 //                                JOptionPane.showMessageDialog(null, "输入字段过长（输入长度限制50字）", "警告", JOptionPane.WARNING_MESSAGE);
@@ -178,19 +182,16 @@ public class FrameToday {
     }
 
     public void addItem(Reminder reminder) {
+        //deprecated
 //        ReminderPanelModel reminderPanelModel = new ReminderPanelModel(reminder, mainFrame);
 //        mainFrame.add(reminderPanelModel);
 
-        reminderListView.addNewReminderViewIntoReminderListView(reminder);
+        reminderListWidget.addNewReminderViewIntoReminderListView(reminder);
 
 
         mainFrame.validate();
         mainFrame.repaint();
 
         mainFrame.setVisible(true);
-    }
-
-    public static void main(String[] args) {
-        FrameToday frameToday = new FrameToday();
     }
 }
