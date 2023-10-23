@@ -3,7 +3,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.time.LocalDate;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class CalandarFrame extends Frame {
     Frame calenderFrame = new JFrame();
@@ -28,8 +30,6 @@ public class CalandarFrame extends Frame {
         titleLabel.setFont(new Font("宋体",Font.BOLD,25));
         titlePanel.add(titleLabel);
 
-        //day of week
-
         //last month and next month
         JPanel lastAndNextPanel =new JPanel();
         JPanel lastPanel = new JPanel();
@@ -52,8 +52,9 @@ public class CalandarFrame extends Frame {
         dayPanel.setPreferredSize(new Dimension((int)(1*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight())));
 //      dayPanel.setBackground(Color.BLUE);
         int dayOfWeek = this.GetThisMonthFirstDay();
-
-        JPanel eachDayPanel = new MonthPanel(10,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),dayOfWeek).monthPanel;
+        LocalDate currentDate = LocalDate.now();
+        int month = currentDate.getMonthValue();
+        JPanel eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),dayOfWeek).monthPanel;
 //      eachDayPanel.setBackground(Color.GREEN);
         dayPanel.add(eachDayPanel);
 
