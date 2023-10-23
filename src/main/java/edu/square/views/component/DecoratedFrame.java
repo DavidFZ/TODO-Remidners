@@ -14,7 +14,7 @@ public class DecoratedFrame extends JFrame {
     public DecoratedFrame() {
         //includes cancel  done
         detailFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
-        detailFrame.setUndecorated(true);
+//        detailFrame.setUndecorated(true);
         detailFrame.setSize(200,620);
         JPanel firstPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         firstPanel.setPreferredSize(new Dimension(190,40));
@@ -112,7 +112,7 @@ public class DecoratedFrame extends JFrame {
         earlyReminderPanel.add(earlyReminderTitlePanel);
         earlyReminderPanel.add(earlyComboBoxPanel);
 
-        //early reminder
+        //repeatPanel
         JPanel repeatPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JPanel repeatTitlePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         JLabel repeatTitle = new JLabel("Repeat");

@@ -1,6 +1,7 @@
 package edu.square;
 
 import edu.square.views.component.FrameToday;
+import edu.square.views.view.View1;
 
 import java.sql.SQLException;
 
@@ -13,11 +14,7 @@ public class Main {
             forcedInitDB();
 
 
-
-
-
-
-        FrameToday frameToday = new FrameToday();
+        View1 view1 = new View1();
 
     }
 }

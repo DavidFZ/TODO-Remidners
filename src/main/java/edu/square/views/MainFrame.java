@@ -1,6 +1,7 @@
 package edu.square.views;
 
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.views.component.DetailInformationView;
 import edu.square.views.component.LeftSideView;
 import edu.square.views.component.TodayPanelManage;
 
@@ -25,8 +26,14 @@ public class MainFrame {
 
 
         TodayPanelManage todayPanelManage = new TodayPanelManage(mainFrame);
+        DetailInformationView detailInformationView = new DetailInformationView(mainFrame);
+
         mainFrame.add(leftSideView.getLeftPanel());
         mainFrame.add(todayPanelManage.getTodayPanelManage());
+
+        mainFrame.add(detailInformationView.getMainPanel());
         mainFrame.setVisible(true);
+
+
     }
 }
