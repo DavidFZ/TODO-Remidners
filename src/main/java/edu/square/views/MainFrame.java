@@ -18,7 +18,6 @@ public class MainFrame {
             forcedInitDB();
 
 
-        //VIEW 1
         JFrame mainFrame = JFrameFactory.getDefaultJFrame(.8d, "Schedule");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
