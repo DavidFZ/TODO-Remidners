@@ -76,10 +76,9 @@ public class CalandarFrame extends Frame {
     }
 
     public int GetThisMonthFirstDay(){
-        Calendar calander = Calendar.getInstance();
-        calander.set(Calendar.DAY_OF_MONTH,1);
-        int dayOfWeek = calander.get(Calendar.DAY_OF_WEEK);
-        return dayOfWeek;
+        Calendar calender = Calendar.getInstance();
+        calender.set(Calendar.DAY_OF_MONTH,1);
+        return calender.get(Calendar.DAY_OF_WEEK);
     }
 
     public static void main(String[] args) {
