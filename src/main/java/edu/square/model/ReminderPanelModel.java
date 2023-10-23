@@ -12,8 +12,8 @@ import java.awt.event.ActionListener;
 import static edu.square.model.ReminderModel.updateReminderEntityDoneStatus;
 
 public class ReminderPanelModel extends JPanel {
-    private static Font font1;
-    private static Font font2;
+    public static Font font1;
+    public static Font font2;
     private static Font font3;
     private final JFrame parentFrame;
 

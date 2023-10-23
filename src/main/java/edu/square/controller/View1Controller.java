@@ -58,6 +58,10 @@ public class View1Controller {
 //            //delete listener
 //            //TODO: still waiting for right component to be implemented
 //        }
+        //listener for add button
+        groupedListComponent.getAddButton().addActionListener(e -> {
+            //TODO:implement add button listener
+        });
     }
 
     public static String[] getGroupTitles() {

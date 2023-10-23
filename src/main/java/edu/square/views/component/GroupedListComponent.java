@@ -2,6 +2,7 @@ package edu.square.views.component;
 
 import edu.square.entity.Reminder;
 import edu.square.model.ReminderModel;
+import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.widget.ReminderListWidget;
@@ -24,33 +25,36 @@ public class GroupedListComponent {
     Font font1;
     Font font2;
     Font font3;
+    @Getter
     JButton addButton;
     //root Frame
     @Getter
     private JPanel mainPanel;
     @Getter
     private JLabel titleLabel;
+    @Getter
+    private JFrame printFrame;
 
 
     public GroupedListComponent(JFrame parentFrame) {
         this.parentFrame = parentFrame;
-        font1 = new Font("宋体", Font.BOLD, (int) (0.05 * parentFrame.getWidth()));
-        font2 = new Font("宋体", Font.BOLD, (int) (0.03 * parentFrame.getWidth()));
-        font3 = new Font("宋体", Font.BOLD, (int) (0.008 * parentFrame.getWidth()));
+        font1 = FontUtil.getBoldFont(parentFrame.getSize(), 0.05);
+        font2 = FontUtil.getBoldFont(parentFrame.getSize(), 0.03);
+        font3 = FontUtil.getBoldFont(parentFrame.getSize(), 0.008);
 
         init();
 
         reminderListWidget = new ReminderListWidget(parentFrame);
-        JScrollPane jScrollPane = reminderListWidget.getScrollPane();
-        mainPanel.add(jScrollPane);
+        mainPanel.add(reminderListWidget.getScrollPane());
 
 
         mainPanel.setVisible(true);
     }
 
     public static void main(String[] args) {
-        JFrame jFrame = JFrameFactory.getDefaultJFrame(0.8d, "222");
-        GroupedListComponent groupedListComponent1 = new GroupedListComponent(jFrame);
+        JFrame jFrame = JFrameFactory.getDefaultJFrame(0.8d, "GroupedListComponentTest");
+        GroupedListComponent groupedListComponent = new GroupedListComponent(jFrame);
+        jFrame.add(groupedListComponent.getMainPanel());
         jFrame.setVisible(true);
 
     }
@@ -101,20 +105,20 @@ public class GroupedListComponent {
                 public void actionPerformed(ActionEvent e) {
                     addButton.setEnabled(false);
                     //输入的窗口
-                    JFrame printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * parentFrame.getHeight())).setWindowWidth((int) (0.3 * parentFrame.getWidth())).setTitle("Please add item").build());
+                    printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * parentFrame.getHeight())).setWindowWidth((int) (0.3 * parentFrame.getWidth())).setTitle("Please add item").build());
                     printFrame.setAlwaysOnTop(true);
 
                     //item + text field
                     JPanel inputPanel;
-                    JLabel inputLable;
+                    JLabel inputLabel;
                     JTextField itemName;
                     {
                         inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
                         Font font2 = new Font("宋体", Font.BOLD, (int) (0.01 * parentFrame.getWidth()));
-                        inputLable = new JLabel("Item:");
+                        inputLabel = new JLabel("Item:");
                         inputPanel.setBounds((int) (0.1 * printFrame.getHeight()), (int) (0.2 * printFrame.getHeight()), (int) (0.8 * printFrame.getWidth()), (int) (0.2 * printFrame.getWidth()));
-                        inputLable.setFont(font2);
-                        inputPanel.add(inputLable);
+                        inputLabel.setFont(font2);
+                        inputPanel.add(inputLabel);
                         itemName = new JTextField(40);
                         inputPanel.add(itemName);
 
@@ -183,7 +187,7 @@ public class GroupedListComponent {
                     //if components are visible
                     itemName.setVisible(true);
                     confirmPanel.setVisible(true);
-                    inputLable.setVisible(true);
+                    inputLabel.setVisible(true);
                     inputPanel.setVisible(true);
                     confirmButton.setVisible(true);
                     printFrame.setVisible(true);
