@@ -15,10 +15,10 @@ public class BlockPanelView {
         mainPanel.setBackground(backgroundColor);
     }
 
-    public BlockPanelView(Dimension parentJComponentDimension) {
+    public BlockPanelView(Dimension parentJComponentDimension,double scalingRatio) {
         mainPanel = new JPanel();
         mainPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        mainPanel.setPreferredSize(resizeDimensionHeightScale(parentJComponentDimension, 0.2));
+        mainPanel.setPreferredSize(resizeDimensionHeightScale(parentJComponentDimension, scalingRatio));
     }
 
     public JPanel getBlockPanel() {

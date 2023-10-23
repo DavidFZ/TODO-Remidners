@@ -13,7 +13,7 @@ public class TextFieldPanelView {
 
     JTextField textField;
 
-    public TextFieldPanelView(Dimension dimension, Font font2, Font font3, String title) {
+    public TextFieldPanelView(Dimension dimension, Font font2, Font font3, String title,double scalingRatio) {
         panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));
         panel.setPreferredSize(resizeDimensionHeightScale(dimension, 0.07));
