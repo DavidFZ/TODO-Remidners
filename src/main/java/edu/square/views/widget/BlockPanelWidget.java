@@ -21,6 +21,12 @@ public class BlockPanelWidget {
         mainPanel.setPreferredSize(resizeDimensionHeightScale(parentJComponentDimension, 0.2));
     }
 
+    public BlockPanelWidget(Dimension parentJComponentDimension, double scalingRation) {
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        mainPanel.setPreferredSize(resizeDimensionHeightScale(parentJComponentDimension, scalingRation));
+    }
+
     public JPanel getBlockPanel() {
         return mainPanel;
     }

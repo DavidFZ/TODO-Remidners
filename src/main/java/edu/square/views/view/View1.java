@@ -2,6 +2,7 @@ package edu.square.views.view;
 
 import edu.square.controller.View1Controller;
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.views.component.DetailInformationView;
 import edu.square.views.component.LeftSideComponent;
 import edu.square.views.component.GroupedListComponent;
 
@@ -16,11 +17,13 @@ public class View1 {
 
         LeftSideComponent leftSideComponent = new LeftSideComponent(mainFrame, View1Controller.getGroupTitles());
         GroupedListComponent groupedListComponent = new GroupedListComponent(mainFrame);
+        DetailInformationView detailInformationView = new DetailInformationView(mainFrame);
 
         View1Controller view1Controller = new View1Controller(leftSideComponent, groupedListComponent);
 
         mainFrame.add(leftSideComponent.getLeftPanel());
         mainFrame.add(groupedListComponent.getMainPanel());
+        mainFrame.add(detailInformationView.getMainPanel());
 
         mainFrame.setVisible(true);
     }

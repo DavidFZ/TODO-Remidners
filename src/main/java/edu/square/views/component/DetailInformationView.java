@@ -29,7 +29,7 @@ public class DetailInformationView {
 
     public DetailInformationView(JFrame parentFrame) {
         parentJComponentDimension = new Dimension(parentFrame.getWidth(), parentFrame.getHeight());
-        componentPanelDimension = resizeDimensionWidthScale(parentJComponentDimension, 0.35);
+        componentPanelDimension = resizeDimensionWidthScale(parentJComponentDimension, 0.38);
 
         font1 = getBoldFont(parentJComponentDimension, FONT_SIZE_1);
         font2 = getBoldFont(parentJComponentDimension, FONT_SIZE_2);
@@ -118,7 +118,7 @@ public class DetailInformationView {
         }
         //BlockPanel
         {
-            BlockPanelWidget blockPanelView = new BlockPanelWidget(componentPanelDimension);
+            BlockPanelWidget blockPanelView = new BlockPanelWidget(componentPanelDimension,0.1);
             mainPanel.add(blockPanelView.getBlockPanel());
         }
         //TextPanel
