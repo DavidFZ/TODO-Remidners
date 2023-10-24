@@ -1,7 +1,7 @@
 package edu.square.views.component;
 
 import edu.square.utils.UIUtils.JPanelUtil;
-import edu.square.views.widget.BlockPanelView;
+import edu.square.views.widget.BlockPanelWidget;
 import edu.square.views.widget.ComboBoxPanelView;
 import edu.square.views.widget.TextFieldPanelView;
 
@@ -118,7 +118,7 @@ public class DetailInformationView {
         }
         //BlockPanel
         {
-            BlockPanelView blockPanelView = new BlockPanelView(componentPanelDimension, 0.1);
+            BlockPanelWidget blockPanelView = new BlockPanelWidget(componentPanelDimension);
             mainPanel.add(blockPanelView.getBlockPanel());
         }
         //TextPanel

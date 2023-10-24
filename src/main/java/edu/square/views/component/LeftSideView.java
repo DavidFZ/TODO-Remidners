@@ -1,9 +1,9 @@
 package edu.square.views.component;
 
 import edu.square.utils.UIUtils.JFrameFactory;
-import edu.square.views.widget.BlockPanelView;
-import edu.square.views.widget.GroupLabelView;
-import edu.square.views.widget.SearchPanelView;
+import edu.square.views.widget.BlockPanelWidget;
+import edu.square.views.widget.GroupLabelWidget;
+import edu.square.views.widget.SearchPanelWidget;
 
 import javax.swing.*;
 import java.awt.*;
@@ -24,7 +24,7 @@ public class LeftSideView {
     Font font2;
     Font font3;
     private JPanel mainPanel;
-    private List<GroupLabelView> groupLabelViews;
+    private List<GroupLabelWidget> groupLabelViews;
 
     public LeftSideView(JFrame parentFrame) {
         parentJComponentDimension = new Dimension(parentFrame.getWidth(), parentFrame.getHeight());
@@ -40,19 +40,19 @@ public class LeftSideView {
         mainPanel.setBackground(Color.green);
 
         //SEARCH PANEL
-        SearchPanelView searchPanelView = new SearchPanelView(mainPanelDimension, font2);
+        SearchPanelWidget searchPanelView = new SearchPanelWidget(mainPanelDimension, font2);
         mainPanel.add(searchPanelView.getSearchTipsPanel());
         mainPanel.add(searchPanelView.getSearchPanel());
 
         //BLOCK PANEL
-        BlockPanelView blockPanelView = new BlockPanelView(parentJComponentDimension,0.2);
+        BlockPanelWidget blockPanelView = new BlockPanelWidget(parentJComponentDimension);
         mainPanel.add(blockPanelView.getBlockPanel());
 
         //GROUP LABEL
-        GroupLabelView.ViewBuilder viewBuilder = new GroupLabelView.ViewBuilder(mainPanelDimension);
+        GroupLabelWidget.ViewBuilder viewBuilder = new GroupLabelWidget.ViewBuilder(mainPanelDimension);
         List<String> titles = new ArrayList<>(Arrays.asList(groupTitles));
         groupLabelViews = viewBuilder.build(titles);
-        for (GroupLabelView groupLabelView :
+        for (GroupLabelWidget groupLabelView :
                 groupLabelViews) {
             mainPanel.add(groupLabelView.getGroupView());
         }
