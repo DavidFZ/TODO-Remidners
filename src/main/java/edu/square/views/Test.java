@@ -3,26 +3,31 @@ package edu.square.views;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Test extends JFrame {
     public Test() {
-        setTitle("Java 第二个 GUI 程序");    //设置显示窗口标题
-        setBounds(100,100,400,341);    //设置窗口显示位置及尺寸
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setVisible(true);    //设置窗口是否可见
-        getContentPane().setLayout(null);//设置空布局，组件想怎么放怎么放
+       JFrame f = new JFrame();
+       f.setSize(1000,1000);
+       JPanel p = new JPanel();
+       p.setPreferredSize(new Dimension(600,600));
+       p.setBackground(Color.BLUE);
+       JPanel p2 = new JPanel();
+       p2.setBackground(Color.GREEN);
+       p2.setPreferredSize(new Dimension(200,200));
+       JButton jb = new JButton();
+       jb.setPreferredSize(new Dimension(100,100));
+       jb.addMouseListener(new MouseAdapter() {
+           @Override
+           public void mouseClicked(MouseEvent e) {
+               p.removeAll();
+           }
+       });
+       p.add(jb);
+       f.add(p);
 
-        JPanel panel = new JPanel();//第一个JPanel
-        panel.setBorder(new LineBorder(Color.CYAN));
-        panel.setBounds(10, 10, 364, 98);
-        panel.add(new Label("first"));//将标签放入面板中
-        getContentPane().add(panel);//将panel放入jframe界面
-
-        JPanel panel_1 = new JPanel();//第二个JPanel
-
-        panel_1.setBounds(10, 141, 364, 128);
-        panel_1.add(new Label("second"));//这是第二个面板
-        getContentPane().add(panel_1);//将panel放入jframe界面
+       f.setVisible(true);
     }
     public static void main(String[] args) {
         new Test();

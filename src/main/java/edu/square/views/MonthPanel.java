@@ -2,15 +2,21 @@ package edu.square.views;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
 //对于某一个月的panel
 public class MonthPanel {
     JPanel monthPanel = new JPanel();
+    int width,height;
     MonthPanel(int i,int width,int heigh,int day){
+        this.width = width;
+        this.height = heigh;
         monthPanel.setPreferredSize(new Dimension((int)width,(int)heigh));
         monthPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
         JPanel monthNamePanel = new JPanel();
         monthNamePanel.setPreferredSize(new Dimension((int)(width),(int)(0.1*heigh)));
-
         if(i == 1){
             JLabel monthNameLabel = new JLabel("January");
             monthNameLabel.setFont(new Font("宋体",Font.BOLD,(int)(0.05*width)));
@@ -165,6 +171,13 @@ public class MonthPanel {
         monthPanel.add(monthDayPanel);
 
     }
+
+    public JPanel nextMonth(int i,int j){
+        JPanel m = new MonthPanel(i + 1,width,height,j + 2).monthPanel;
+        return m;
+    }
+
+
 
     public static void main(String[] args) {
         JFrame f = new JFrame();
