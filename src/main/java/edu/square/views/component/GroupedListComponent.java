@@ -7,13 +7,11 @@ import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.widget.ReminderListWidget;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
 public class GroupedListComponent {
     private final JFrame parentFrame;
@@ -34,6 +32,8 @@ public class GroupedListComponent {
     private JLabel titleLabel;
     @Getter
     private JFrame printFrame;
+    @Setter
+    private ActionListener actionListener;
 
 
     public GroupedListComponent(JFrame parentFrame) {
@@ -166,23 +166,30 @@ public class GroupedListComponent {
                         }
                     });
 
-                    //release Enter
-                    itemName.addKeyListener(new KeyAdapter() {
-                        @Override
-                        public void keyTyped(KeyEvent e) {
-                            super.keyTyped(e);
-                            if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-                                String item = itemName.getText();
-                                if (item != null) {
-                                    //TODO: use some less invasive way to do this
-                                    addItem(ReminderModel.insertReminder(item));
-                                }
-                                printFrame.dispose();
-                            }
-                            addButton.setEnabled(true);
-                        }
+                    //insert listener
+                    //TODO: use some less invasive way to do this
+                    if (actionListener != null) {
+                        confirmButton.addActionListener(actionListener);
+                    }
 
-                    });
+                    //release Enter
+                    //TODO: recover this function by implement a new listener
+//                    itemName.addKeyListener(new KeyAdapter() {
+//                        @Override
+//                        public void keyTyped(KeyEvent e) {
+//                            super.keyTyped(e);
+//                            if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+//                                String item = itemName.getText();
+//                                if (item != null) {
+//                                    //TODO: use some less invasive way to do this
+//                                    addItem(ReminderModel.insertReminder(item));
+//                                }
+//                                printFrame.dispose();
+//                            }
+//                            addButton.setEnabled(true);
+//                        }
+//
+//                    });
 
                     //if components are visible
                     itemName.setVisible(true);

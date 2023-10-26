@@ -58,9 +58,9 @@ public class View1Controller {
 //            //delete listener
 //            //TODO: still waiting for right component to be implemented
 //        }
-        //listener for add button
-        groupedListComponent.getAddButton().addActionListener(e -> {
-            //TODO:implement add button listener
+        //listener for add frame confirm button
+        groupedListComponent.setActionListener(e -> {
+            upDateView();
         });
     }
 
@@ -80,13 +80,14 @@ public class View1Controller {
     }
 
     private void upDateView() {
+        System.out.println("update view");
         reminders = getGroupedReminders();
         for (int i = 0; i < reminders.size(); i++) {
             List<Reminder> reminderList = reminders.get(i);
             //update left side group view count label
             GroupLabelWidget groupLabelWidget = (GroupLabelWidget) leftSideComponent.getGroupLabelWidgets().get(i);
             groupLabelWidget.setGroupViewCount(reminderList.size());
-
+            groupLabelWidget.repaint();
         }
     }
 
