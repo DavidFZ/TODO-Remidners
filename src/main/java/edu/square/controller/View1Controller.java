@@ -1,8 +1,8 @@
 package edu.square.controller;
 
 import edu.square.entity.Reminder;
-import edu.square.views.component.LeftSideComponent;
 import edu.square.views.component.GroupedListComponent;
+import edu.square.views.component.LeftSideComponent;
 import edu.square.views.widget.GroupLabelWidget;
 import edu.square.views.widget.ReminderListWidget;
 
@@ -16,8 +16,8 @@ import static edu.square.model.ReminderModel.*;
 public class View1Controller {
     public static String[] groupTitles = {"All", "Today", "Completed", "Flagged"};
     private final List<GroupLabelWidget> groupLabelWidgets;
-    private LeftSideComponent leftSideComponent;
-    private GroupedListComponent groupedListComponent;
+    private final LeftSideComponent leftSideComponent;
+    private final GroupedListComponent groupedListComponent;
     private List<List<Reminder>> reminders;
     private int currentGroupIndex = 0;
 
@@ -27,11 +27,11 @@ public class View1Controller {
         this.groupedListComponent = groupedListComponent;
 
         //Add listeners to group labels, so that when clicked, the reminder list & title panel will be updated
-        groupLabelWidgets = (List) leftSideComponent.getGroupLabelWidgets();
+        groupLabelWidgets = leftSideComponent.getGroupLabelWidgets();
         reminders = getGroupedReminders();
 
         for (int i = 0; i < reminders.size(); i++) {
-            GroupLabelWidget widget = (GroupLabelWidget) groupLabelWidgets.get(i);
+            GroupLabelWidget widget = groupLabelWidgets.get(i);
             List<Reminder> reminderList = reminders.get(i);
             int finalI = i;
             widget.getGroupView().addMouseListener(new MouseAdapter() {
@@ -58,9 +58,18 @@ public class View1Controller {
 //            //delete listener
 //            //TODO: still waiting for right component to be implemented
 //        }
-        //listener for add frame confirm button
-        groupedListComponent.setActionListener(e -> {
-            upDateView();
+
+
+        //add listener for add frame confirm button
+        groupedListComponent.addReminderInsertConfirmListener(e -> {
+            updateCountLabel();
+        });
+
+        //add listener for
+        ReminderListWidget reminderListWidget = groupedListComponent.getReminderListWidget();
+        reminderListWidget.addClickListeners(e -> {
+            System.out.println("add reminder insert confirm listener\n\n\n\n\n\n");
+            updateCountLabel();
         });
     }
 
@@ -79,13 +88,12 @@ public class View1Controller {
         return reminders;
     }
 
-    private void upDateView() {
-        System.out.println("update view");
+    private void updateCountLabel() {
         reminders = getGroupedReminders();
         for (int i = 0; i < reminders.size(); i++) {
             List<Reminder> reminderList = reminders.get(i);
             //update left side group view count label
-            GroupLabelWidget groupLabelWidget = (GroupLabelWidget) leftSideComponent.getGroupLabelWidgets().get(i);
+            GroupLabelWidget groupLabelWidget = leftSideComponent.getGroupLabelWidgets().get(i);
             groupLabelWidget.setGroupViewCount(reminderList.size());
             groupLabelWidget.repaint();
         }

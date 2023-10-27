@@ -3,6 +3,7 @@ package edu.square.views.widget;
 import edu.square.entity.Reminder;
 import edu.square.model.ReminderModel;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -23,12 +24,14 @@ public class ReminderListWidget {
     //以第一次载入的窗口为准
     private final double frameWidthInit;
     private final double frameHeightInit;
+    private final double scaling = 0.4;
     @Getter
     JPanel jPanelManager;
     int reminderNum;
     @Getter
     private JScrollPane scrollPane;
-    private double scaling = 0.4;
+    @Setter
+    private ActionListener completeActionListener;
 
     public ReminderListWidget(JFrame parentFrame) {
         this.parentFrame = parentFrame;
@@ -66,6 +69,9 @@ public class ReminderListWidget {
         reminderNum++;
         ReminderView reminderView = new ReminderView(reminder);
         jPanelManager.add(reminderView.getInnerPanel());
+        // add complete button listener
+        if (completeActionListener != null)
+            reminderView.getRadioButton().addActionListener(completeActionListener);
         if (reminderNum > 10) {
             jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.072)));
         }
@@ -79,9 +85,12 @@ public class ReminderListWidget {
         for (Reminder reminder : reminders) {
             ReminderView reminderView = new ReminderView(reminder);
             jPanelManager.add(reminderView.getInnerPanel());
+            // add complete button listener
+            if (completeActionListener != null)
+                reminderView.getRadioButton().addActionListener(completeActionListener);
         }
         if (reminderNum > 10) {
-            jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.072)*reminders.size()));
+            jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.072) * reminders.size()));
         }
         repaint();
     }
@@ -90,6 +99,8 @@ public class ReminderListWidget {
         jPanelManager.removeAll();
         jPanelManager.setPreferredSize(new Dimension((int) (frameWidthInit * 0.93), (int) ((frameHeightInit * 0.074) * reminderNum)));
         reminderNum = 0;
+        reminders.clear();
+        reminderViews.clear();
     }
 
     public void clearReminderListView() {
@@ -99,6 +110,13 @@ public class ReminderListWidget {
 
     public void repaint() {
         jPanelManager.repaint();
+    }
+
+    public void addClickListeners(ActionListener actionListener) {
+        assert actionListener != null;
+        for (ReminderView reminderView : reminderViews) {
+            reminderView.radioButton.addActionListener(actionListener);
+        }
     }
 
     public class ReminderView {
@@ -155,6 +173,10 @@ public class ReminderListWidget {
                 radioButton.setSelected(false);
                 label.setForeground(Color.BLACK);
             }
+        }
+
+        private void addClickListener(ActionListener actionListener) {
+            radioButton.addActionListener(actionListener);
         }
     }
 

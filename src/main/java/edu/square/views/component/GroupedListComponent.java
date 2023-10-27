@@ -7,11 +7,11 @@ import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.widget.ReminderListWidget;
 import lombok.Getter;
-import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class GroupedListComponent {
     private final JFrame parentFrame;
@@ -32,8 +32,7 @@ public class GroupedListComponent {
     private JLabel titleLabel;
     @Getter
     private JFrame printFrame;
-    @Setter
-    private ActionListener actionListener;
+    private JButton confirmButton;
 
 
     public GroupedListComponent(JFrame parentFrame) {
@@ -62,6 +61,10 @@ public class GroupedListComponent {
     //TODO: encapsulate this method as a widget
     public void init() {
         mainPanel = new JPanel();
+        confirmButton = new JButton("confirm");
+        // Instantiate a button in advance
+        // Void null pointer exception when add reminder insert confirm listener
+
 
         //对齐方式
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -81,7 +84,7 @@ public class GroupedListComponent {
             titlePanel_title.setBackground(Color.blue);
             titlePanel.add(titlePanel_title);
 
-            titleLabel = new JLabel("Today");
+            titleLabel = new JLabel("All");
             titleLabel.setFont(font1);
             titlePanel_title.add(titleLabel);
 
@@ -127,14 +130,10 @@ public class GroupedListComponent {
 
                     //Button
                     JPanel confirmPanel;
-                    JButton confirmButton;
-
                     {
                         confirmPanel = new JPanel(new BorderLayout());
                         confirmPanel.setBounds(50, 100, 200, 200);
-                        confirmButton = new JButton("confirm");
                         confirmButton.setSize(100, 100);
-
                     }
 
                     //while input Enter will be same as click confirm button
@@ -165,12 +164,6 @@ public class GroupedListComponent {
                             addButton.setEnabled(true);
                         }
                     });
-
-                    //insert listener
-                    //TODO: use some less invasive way to do this
-                    if (actionListener != null) {
-                        confirmButton.addActionListener(actionListener);
-                    }
 
                     //release Enter
                     //TODO: recover this function by implement a new listener
@@ -214,4 +207,17 @@ public class GroupedListComponent {
         mainPanel.setVisible(true);
     }
 
+    public void addItem(List reminders) {
+        reminderListWidget.addNewReminderViewsIntoReminderListView((java.util.List<Reminder>) reminders);
+
+        mainPanel.validate();
+        mainPanel.repaint();
+
+        mainPanel.setVisible(true);
+    }
+
+    public void addReminderInsertConfirmListener(ActionListener reminderInsertConfirmListener) {
+        assert confirmButton != null;
+        confirmButton.addActionListener(reminderInsertConfirmListener);
+    }
 }

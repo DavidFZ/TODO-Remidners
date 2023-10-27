@@ -53,6 +53,7 @@ public class GroupLabelWidget {
     }
 
     public void repaint() {
+        mainPanel.validate();
         mainPanel.repaint();
     }
 

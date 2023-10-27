@@ -2,6 +2,7 @@ package edu.square.model;
 
 import edu.square.entity.Reminder;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -23,7 +24,9 @@ public class ReminderPanelModel extends JPanel {
 
     @Getter
     private JRadioButton radioButton;
-    private JPanel innerPanel;
+    private final JPanel innerPanel;
+    @Setter
+    private ActionListener actionListener;
 
     public ReminderPanelModel(Reminder reminder, final JFrame parentFrame) {
         this.reminder = reminder;
@@ -73,6 +76,9 @@ public class ReminderPanelModel extends JPanel {
                 }
             }
         });
+
+        if (actionListener != null)
+            radioButton.addActionListener(actionListener);
 
         innerPanel.add(radioButton);
         innerPanel.add(label);
