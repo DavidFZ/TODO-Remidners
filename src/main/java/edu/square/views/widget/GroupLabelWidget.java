@@ -52,6 +52,11 @@ public class GroupLabelWidget {
         return mainPanel;
     }
 
+    public void repaint() {
+        mainPanel.validate();
+        mainPanel.repaint();
+    }
+
     public static class ViewBuilder {
         private Dimension parentDimension;
 

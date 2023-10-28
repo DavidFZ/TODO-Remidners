@@ -1,5 +1,6 @@
 package edu.square.views.component;
 
+import edu.square.controller.View1Controller;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.widget.BlockPanelWidget;
 import edu.square.views.widget.GroupLabelWidget;
@@ -17,7 +18,7 @@ import static edu.square.utils.UIUtils.JPanelUtil.getMainPanel;
 
 public class LeftSideView {
 
-    private static final String[] groupTitles = {"Today", "Completed", "All", "Flagged"};
+    private static final String[] groupTitles = View1Controller.getGroupTitles();
     private final Dimension parentJComponentDimension;
     private final Dimension mainPanelDimension;
     Font font1;

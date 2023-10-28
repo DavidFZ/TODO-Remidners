@@ -2,6 +2,7 @@ package edu.square.views.component;
 
 import edu.square.entity.Reminder;
 import edu.square.model.ReminderModel;
+import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.widget.ReminderListWidget;
@@ -11,8 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class GroupedListComponent {
     private final JFrame parentFrame;
@@ -24,33 +23,37 @@ public class GroupedListComponent {
     Font font1;
     Font font2;
     Font font3;
+    @Getter
     JButton addButton;
     //root Frame
     @Getter
     private JPanel mainPanel;
     @Getter
     private JLabel titleLabel;
+    @Getter
+    private JFrame printFrame;
+    private JButton confirmButton;
 
 
     public GroupedListComponent(JFrame parentFrame) {
         this.parentFrame = parentFrame;
-        font1 = new Font("宋体", Font.BOLD, (int) (0.05 * parentFrame.getWidth()));
-        font2 = new Font("宋体", Font.BOLD, (int) (0.03 * parentFrame.getWidth()));
-        font3 = new Font("宋体", Font.BOLD, (int) (0.008 * parentFrame.getWidth()));
+        font1 = FontUtil.getBoldFont(parentFrame.getSize(), 0.05);
+        font2 = FontUtil.getBoldFont(parentFrame.getSize(), 0.03);
+        font3 = FontUtil.getBoldFont(parentFrame.getSize(), 0.008);
 
         init();
 
         reminderListWidget = new ReminderListWidget(parentFrame);
-        JScrollPane jScrollPane = reminderListWidget.getScrollPane();
-        mainPanel.add(jScrollPane);
+        mainPanel.add(reminderListWidget.getScrollPane());
 
 
         mainPanel.setVisible(true);
     }
 
     public static void main(String[] args) {
-        JFrame jFrame = JFrameFactory.getDefaultJFrame(0.8d, "222");
-        GroupedListComponent groupedListComponent1 = new GroupedListComponent(jFrame);
+        JFrame jFrame = JFrameFactory.getDefaultJFrame(0.8d, "GroupedListComponentTest");
+        GroupedListComponent groupedListComponent = new GroupedListComponent(jFrame);
+        jFrame.add(groupedListComponent.getMainPanel());
         jFrame.setVisible(true);
 
     }
@@ -58,6 +61,10 @@ public class GroupedListComponent {
     //TODO: encapsulate this method as a widget
     public void init() {
         mainPanel = new JPanel();
+        confirmButton = new JButton("confirm");
+        // Instantiate a button in advance
+        // Void null pointer exception when add reminder insert confirm listener
+
 
         //对齐方式
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -77,7 +84,7 @@ public class GroupedListComponent {
             titlePanel_title.setBackground(Color.blue);
             titlePanel.add(titlePanel_title);
 
-            titleLabel = new JLabel("Today");
+            titleLabel = new JLabel("All");
             titleLabel.setFont(font1);
             titlePanel_title.add(titleLabel);
 
@@ -101,20 +108,20 @@ public class GroupedListComponent {
                 public void actionPerformed(ActionEvent e) {
                     addButton.setEnabled(false);
                     //输入的窗口
-                    JFrame printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * parentFrame.getHeight())).setWindowWidth((int) (0.3 * parentFrame.getWidth())).setTitle("Please add item").build());
+                    printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * parentFrame.getHeight())).setWindowWidth((int) (0.3 * parentFrame.getWidth())).setTitle("Please add item").build());
                     printFrame.setAlwaysOnTop(true);
 
                     //item + text field
                     JPanel inputPanel;
-                    JLabel inputLable;
+                    JLabel inputLabel;
                     JTextField itemName;
                     {
                         inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
                         Font font2 = new Font("宋体", Font.BOLD, (int) (0.01 * parentFrame.getWidth()));
-                        inputLable = new JLabel("Item:");
+                        inputLabel = new JLabel("Item:");
                         inputPanel.setBounds((int) (0.1 * printFrame.getHeight()), (int) (0.2 * printFrame.getHeight()), (int) (0.8 * printFrame.getWidth()), (int) (0.2 * printFrame.getWidth()));
-                        inputLable.setFont(font2);
-                        inputPanel.add(inputLable);
+                        inputLabel.setFont(font2);
+                        inputPanel.add(inputLabel);
                         itemName = new JTextField(40);
                         inputPanel.add(itemName);
 
@@ -123,14 +130,10 @@ public class GroupedListComponent {
 
                     //Button
                     JPanel confirmPanel;
-                    JButton confirmButton;
-
                     {
                         confirmPanel = new JPanel(new BorderLayout());
                         confirmPanel.setBounds(50, 100, 200, 200);
-                        confirmButton = new JButton("confirm");
                         confirmButton.setSize(100, 100);
-
                     }
 
                     //while input Enter will be same as click confirm button
@@ -163,27 +166,28 @@ public class GroupedListComponent {
                     });
 
                     //release Enter
-                    itemName.addKeyListener(new KeyAdapter() {
-                        @Override
-                        public void keyTyped(KeyEvent e) {
-                            super.keyTyped(e);
-                            if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-                                String item = itemName.getText();
-                                if (item != null) {
-                                    //TODO: use some less invasive way to do this
-                                    addItem(ReminderModel.insertReminder(item));
-                                }
-                                printFrame.dispose();
-                            }
-                            addButton.setEnabled(true);
-                        }
-
-                    });
+                    //TODO: recover this function by implement a new listener
+//                    itemName.addKeyListener(new KeyAdapter() {
+//                        @Override
+//                        public void keyTyped(KeyEvent e) {
+//                            super.keyTyped(e);
+//                            if (e.getKeyChar() == KeyEvent.VK_ENTER) {
+//                                String item = itemName.getText();
+//                                if (item != null) {
+//                                    //TODO: use some less invasive way to do this
+//                                    addItem(ReminderModel.insertReminder(item));
+//                                }
+//                                printFrame.dispose();
+//                            }
+//                            addButton.setEnabled(true);
+//                        }
+//
+//                    });
 
                     //if components are visible
                     itemName.setVisible(true);
                     confirmPanel.setVisible(true);
-                    inputLable.setVisible(true);
+                    inputLabel.setVisible(true);
                     inputPanel.setVisible(true);
                     confirmButton.setVisible(true);
                     printFrame.setVisible(true);
@@ -203,4 +207,17 @@ public class GroupedListComponent {
         mainPanel.setVisible(true);
     }
 
+    public void addItem(List reminders) {
+        reminderListWidget.addNewReminderViewsIntoReminderListView((java.util.List<Reminder>) reminders);
+
+        mainPanel.validate();
+        mainPanel.repaint();
+
+        mainPanel.setVisible(true);
+    }
+
+    public void addReminderInsertConfirmListener(ActionListener reminderInsertConfirmListener) {
+        assert confirmButton != null;
+        confirmButton.addActionListener(reminderInsertConfirmListener);
+    }
 }
