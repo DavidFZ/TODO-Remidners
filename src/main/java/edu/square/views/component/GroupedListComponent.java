@@ -12,6 +12,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class GroupedListComponent {
     private final JFrame parentFrame;
@@ -67,13 +69,13 @@ public class GroupedListComponent {
 
 
         //对齐方式
-        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         mainPanel.setPreferredSize(new Dimension((int) (scaling * parentFrame.getWidth()), parentFrame.getHeight()));
 
         //titlePanel
         {
             JPanel titlePanel = new JPanel();
-            titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+            titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
             titlePanel.setPreferredSize(new Dimension((int) (scaling * parentFrame.getWidth()), (int) (0.12 * parentFrame.getHeight())));
 //            titlePanel.setBackground(Color.black);
             mainPanel.add(titlePanel);
@@ -106,7 +108,7 @@ public class GroupedListComponent {
             addButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    addButton.setEnabled(false);
+
                     //输入的窗口
                     printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * parentFrame.getHeight())).setWindowWidth((int) (0.3 * parentFrame.getWidth())).setTitle("Please add item").build());
                     printFrame.setAlwaysOnTop(true);
@@ -126,22 +128,35 @@ public class GroupedListComponent {
                         inputPanel.add(itemName);
 
                     }
-
-
                     //Button
+
                     JPanel confirmPanel;
                     {
                         confirmPanel = new JPanel(new BorderLayout());
                         confirmPanel.setBounds(50, 100, 200, 200);
                         confirmButton.setSize(100, 100);
                     }
-
                     //while input Enter will be same as click confirm button
 
 
                     confirmPanel.add(confirmButton, BorderLayout.SOUTH);
                     //two frames will not close together
                     printFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+
+                    //对窗口的打开和关闭操作添加触发事件
+                    printFrame.addWindowListener(new WindowAdapter() {
+                        @Override
+                        public void windowOpened(WindowEvent e) {
+                            addButton.setEnabled(false);
+                        }
+
+                        @Override
+                        public void windowClosed(WindowEvent e) {
+                            super.windowClosed(e);
+                            addButton.setEnabled(true);
+
+                        }
+                    });
                     printFrame.add(inputPanel);
                     printFrame.add(confirmPanel);
 
@@ -161,7 +176,7 @@ public class GroupedListComponent {
                                 addItem(ReminderModel.insertReminder(newItem));
                             }
 
-                            addButton.setEnabled(true);
+//                            addButton.setEnabled(true);
                         }
                     });
 

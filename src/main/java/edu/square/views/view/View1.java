@@ -3,8 +3,8 @@ package edu.square.views.view;
 import edu.square.controller.View1Controller;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.component.DetailInformationView;
-import edu.square.views.component.LeftSideComponent;
 import edu.square.views.component.GroupedListComponent;
+import edu.square.views.component.LeftSideComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +13,7 @@ public class View1 {
     public View1() {
         JFrame mainFrame = JFrameFactory.getDefaultJFrame(.8d, "Schedule");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
+        mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 
         LeftSideComponent leftSideComponent = new LeftSideComponent(mainFrame, View1Controller.getGroupTitles());
         GroupedListComponent groupedListComponent = new GroupedListComponent(mainFrame);
