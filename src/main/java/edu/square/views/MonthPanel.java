@@ -141,6 +141,9 @@ public class MonthPanel {
         monthDayPanel.setPreferredSize(new Dimension((int)width,(int)(heigh)));
         monthDayPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 //        monthDayPanel.setBackground(Color.BLUE);
+        if(day == 7){
+            day = 0;
+        }
         for(int k = 0; k < day; k++){
             JPanel blankPanel = new JPanel();
             blankPanel.setPreferredSize(new Dimension((int)(width/7.5),(int)(0.8*width/7.5)));

@@ -72,8 +72,20 @@ public class CalendarFrame extends Frame {
             public void mouseClicked(MouseEvent e) {
                 month--;
                 eachDayPanel.setVisible(false);
+                Calendar calendar = Calendar.getInstance();
+                int day;
                 if(month >= 1){
-                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),dayOfWeek).monthPanel;
+                    calendar.set(calendar.get(Calendar.YEAR),month-1,1);
+                    day = calendar.get(Calendar.DAY_OF_WEEK);
+                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),day-1).monthPanel;
+                    eachDayPanel.setVisible(true);
+                    dayPanel.add(eachDayPanel);
+                }
+                else{
+                    month = 12;
+                    calendar.set(calendar.get(Calendar.YEAR),month-1,1);
+                    day = calendar.get(Calendar.DAY_OF_WEEK);
+                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),day-1).monthPanel;
                     eachDayPanel.setVisible(true);
                     dayPanel.add(eachDayPanel);
                 }
@@ -84,8 +96,20 @@ public class CalendarFrame extends Frame {
             public void mouseClicked(MouseEvent e) {
                 month++;
                 eachDayPanel.setVisible(false);
+                Calendar calendar = Calendar.getInstance();
+                int day;
                 if(month <= 12){
-                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),dayOfWeek).monthPanel;
+                    calendar.set(calendar.get(Calendar.YEAR),month-1,1);
+                    day = calendar.get(Calendar.DAY_OF_WEEK);
+                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),day-1).monthPanel;
+                    eachDayPanel.setVisible(true);
+                    dayPanel.add(eachDayPanel);
+                }
+                else {
+                    month = 1;
+                    calendar.set(calendar.get(Calendar.YEAR),month-1,1);
+                    day = calendar.get(Calendar.DAY_OF_WEEK);
+                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),day-1).monthPanel;
                     eachDayPanel.setVisible(true);
                     dayPanel.add(eachDayPanel);
                 }
