@@ -67,13 +67,13 @@ public class GroupedListComponent {
 
 
         //对齐方式
-        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
         mainPanel.setPreferredSize(new Dimension((int) (scaling * parentFrame.getWidth()), parentFrame.getHeight()));
 
         //titlePanel
         {
             JPanel titlePanel = new JPanel();
-            titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+            titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
             titlePanel.setPreferredSize(new Dimension((int) (scaling * parentFrame.getWidth()), (int) (0.12 * parentFrame.getHeight())));
 //            titlePanel.setBackground(Color.black);
             mainPanel.add(titlePanel);

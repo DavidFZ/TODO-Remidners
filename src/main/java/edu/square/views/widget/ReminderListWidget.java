@@ -44,9 +44,9 @@ public class ReminderListWidget {
         reminderViews = new ArrayList<>();
 
         jPanelManager = new JPanel();
-        jPanelManager.setPreferredSize(new Dimension((int) (frameWidthInit * 0.93), (int) ((frameHeightInit * 0.074) * reminderNum)));
+        jPanelManager.setPreferredSize(new Dimension((int) (frameWidthInit*0.95), (int) ((frameHeightInit * 0.06) * reminderNum)));
         jPanelManager.setBackground(Color.red);
-        jPanelManager.setLayout(new FlowLayout(FlowLayout.CENTER));
+        jPanelManager.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
 
         int w = (int) (frameWidthInit);
         int h = (int) (0.8 * parentFrame.getHeight());
@@ -57,7 +57,7 @@ public class ReminderListWidget {
 
         //TODO 实现自动滚动到底部
 
-
+        //循环遍历添加数据库内容
         for (Reminder r : reminders) {
             ReminderView reminderView = new ReminderView(r);
             reminderViews.add(reminderView);
@@ -72,8 +72,8 @@ public class ReminderListWidget {
         // add complete button listener
         if (completeActionListener != null)
             reminderView.getRadioButton().addActionListener(completeActionListener);
-        if (reminderNum > 10) {
-            jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.072)));
+        if (reminderNum > 13) {
+            jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.06)));
         }
 
         //TODO:实现自动滚动到底部
@@ -89,15 +89,15 @@ public class ReminderListWidget {
             if (completeActionListener != null)
                 reminderView.getRadioButton().addActionListener(completeActionListener);
         }
-        if (reminderNum > 10) {
-            jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.072) * reminders.size()));
-        }
+//        if (reminderNum > 13) {
+//            jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.06) * reminders.size()));
+//        }
         repaint();
     }
 
     public void clearReminderListViewWithoutRepaint() {
         jPanelManager.removeAll();
-        jPanelManager.setPreferredSize(new Dimension((int) (frameWidthInit * 0.93), (int) ((frameHeightInit * 0.074) * reminderNum)));
+        jPanelManager.setPreferredSize(new Dimension((int) (frameWidthInit * 0.93), (int) ((frameHeightInit * 0.06) * reminderNum)));
         reminderNum = 0;
         reminders.clear();
         reminderViews.clear();
@@ -141,8 +141,8 @@ public class ReminderListWidget {
 
         private void initView() {
             //innerPanel View
-            innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-            innerPanel.setPreferredSize(new Dimension((int) (0.85 * frameWidthInit), (int) (0.0675 * frameHeightInit)));
+            innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+            innerPanel.setPreferredSize(new Dimension((int) (0.85 * frameWidthInit), (int) (0.06 * frameHeightInit)));//13个
             innerPanel.setBorder(new LineBorder(Color.PINK));
             innerPanel.setBackground(Color.yellow);
 
