@@ -1,7 +1,6 @@
 package edu.square.controller;
 
 import edu.square.entity.Reminder;
-import edu.square.utils.TimeUtils;
 import edu.square.views.component.GroupedListComponent;
 import edu.square.views.component.LeftSideComponent;
 import edu.square.views.widget.GroupLabelWidget;
@@ -45,6 +44,7 @@ public class View1Controller {
                     //update reminder list
                     currentGroupIndex = finalI;
                     updateReminderListViews(finalI);
+                    batchAddReminderDoneStatusListener();
                 }
             });
             widget.setGroupViewCount(reminders.get(i).size());
@@ -67,7 +67,7 @@ public class View1Controller {
             updateCountLabel();
         });
 
-        updateReminderDoneStatus();
+        batchAddReminderDoneStatusListener();
     }
 
     public static String[] getGroupTitles() {
@@ -88,7 +88,7 @@ public class View1Controller {
     public ActionListener getCompletedStatusListener(ReminderListWidget.ReminderView reminderView) {
         return e -> {
             //TODO: fix this bull shit
-            Reminder reminder =reminderView.getReminder();
+            Reminder reminder = reminderView.getReminder();
             updateReminderEntityDoneStatus(reminder, reminderView.getRadioButton().isSelected());
             updateCountLabel();
         };
@@ -111,10 +111,9 @@ public class View1Controller {
         for (Reminder reminder : reminders.get(index)) {
             groupedListComponent.addItem(reminder);
         }
-        updateReminderDoneStatus();
     }
 
-    private void updateReminderDoneStatus() {
+    private void batchAddReminderDoneStatusListener() {
         List<ReminderListWidget.ReminderView> reminderViews = groupedListComponent.getReminderListWidget().getReminderViews();
         for (ReminderListWidget.ReminderView reminderView : reminderViews) {
             reminderView.getRadioButton().addActionListener(getCompletedStatusListener(reminderView));

@@ -67,7 +67,10 @@ public class ReminderListWidget {
 
     public void addNewReminderViewIntoReminderListView(Reminder reminder) {
         reminderNum++;
+        reminders.add(reminder);
         ReminderView reminderView = new ReminderView(reminder);
+        reminderViews.add(reminderView);
+
         jPanelManager.add(reminderView.getInnerPanel());
         // add complete button listener
         if (completeActionListener != null)
