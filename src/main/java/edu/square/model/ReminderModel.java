@@ -1,6 +1,7 @@
 package edu.square.model;
 
 import edu.square.entity.Reminder;
+import edu.square.utils.TimeUtils;
 import jakarta.persistence.TypedQuery;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -192,7 +193,7 @@ public class ReminderModel {
 
     public static void updateReminderEntityDoneStatus(Reminder reminder, boolean isDone) {
 
-        reminder.setDoneTime(isDone ? reminder.getRemindTime() : null);
+        reminder.setDoneTime(isDone ? TimeUtils.getCurrentTimestamp() : null);
         reminder.setRemindTime(isDone ? null : reminder.getRemindTime());
 
         updateReminder(reminder);

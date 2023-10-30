@@ -67,7 +67,10 @@ public class ReminderListWidget {
 
     public void addNewReminderViewIntoReminderListView(Reminder reminder) {
         reminderNum++;
+        reminders.add(reminder);
         ReminderView reminderView = new ReminderView(reminder);
+        reminderViews.add(reminderView);
+
         jPanelManager.add(reminderView.getInnerPanel());
         // add complete button listener
         if (completeActionListener != null)
@@ -112,13 +115,6 @@ public class ReminderListWidget {
         jPanelManager.repaint();
     }
 
-    public void addClickListeners(ActionListener actionListener) {
-        assert actionListener != null;
-        for (ReminderView reminderView : reminderViews) {
-            reminderView.radioButton.addActionListener(actionListener);
-        }
-    }
-
     public class ReminderView {
         private final JLabel label;
         @Getter
@@ -154,7 +150,7 @@ public class ReminderListWidget {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setReminderViewDoneStatus(radioButton.isSelected());    //update view
-                    updateReminderEntityDoneStatus(reminder, radioButton.isSelected());     //update database
+//                    updateReminderEntityDoneStatus(reminder, radioButton.isSelected());     //update database
                 }
             });
 
