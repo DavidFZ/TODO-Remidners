@@ -3,15 +3,14 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.time.LocalDate;
 import java.util.Calendar;
-import java.util.Locale;
 
-public class CalandarFrame extends Frame {
+public class CalendarFrame extends Frame {
     Frame calenderFrame = new JFrame();
+    static JPanel eachDayPanel = new JPanel();
+    static int month;
     //日历除了日期以外的部分
-    CalandarFrame() {
+    CalendarFrame() {
         //can change size
         calenderFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
         calenderFrame.setUndecorated(true);
@@ -31,6 +30,8 @@ public class CalandarFrame extends Frame {
         titleLabel.setFont(new Font("宋体",Font.BOLD,25));
         titlePanel.add(titleLabel);
 
+        //day of week
+
         //last month and next month
         JPanel lastAndNextPanel =new JPanel();
         JPanel lastPanel = new JPanel();
@@ -48,17 +49,16 @@ public class CalandarFrame extends Frame {
         lastAndNextPanel.add(lastPanel);
         lastAndNextPanel.add(nextPanel);
         //panel of days
+
         JPanel dayPanel = new JPanel();
-        dayPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        dayPanel.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
         dayPanel.setPreferredSize(new Dimension((int)(1*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight())));
 //      dayPanel.setBackground(Color.BLUE);
-        int dayOfWeek = this.GetThisMonthFirstDay();
-        LocalDate currentDate = LocalDate.now();
-        int month = currentDate.getMonthValue();
-        JPanel eachDayPanel = this.getThisMonthPanel(month,dayOfWeek);
+        int dayOfWeek = this.GetThisMonthFirstDay()-1;
+        month = this.GetMonth();
+        eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),dayOfWeek).monthPanel;
+//      eachDayPanel.setBackground(Color.GREEN);
         dayPanel.add(eachDayPanel);
-        int firstDayOfLastMonthNumber = this.GetEveryMonthFirstDay(month - 1);
-        int firstDayOfNextMonthNumber = this.GetEveryMonthFirstDay(month + 1);
 
         backLabel.addMouseListener(new MouseAdapter() {
             @Override
@@ -67,43 +67,32 @@ public class CalandarFrame extends Frame {
             }
         });
 
-        lastLabel.addMouseListener(new MouseListener() {
+        lastLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(firstDayOfLastMonthNumber >= 0){
-                    dayPanel.removeAll();
-                    dayPanel.revalidate();
-                    System.out.println("click");
-                    JPanel lastMonthPanel = new MonthPanel(month-1,(int) (0.98 * calenderFrame.getWidth()), (int) (0.8 * calenderFrame.getHeight()), firstDayOfLastMonthNumber).monthPanel;
-                    dayPanel.add(lastMonthPanel);
-
+                month--;
+                eachDayPanel.setVisible(false);
+                if(month >= 1){
+                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),dayOfWeek).monthPanel;
+                    eachDayPanel.setVisible(true);
+                    dayPanel.add(eachDayPanel);
                 }
             }
-            @Override
-            public void mousePressed(MouseEvent e) {
-            }
-            @Override
-            public void mouseReleased(MouseEvent e) {
-            }
-            @Override
-            public void mouseEntered(MouseEvent e) {
-            }
-            @Override
-            public void mouseExited(MouseEvent e) {
-            }
         });
-
         nextLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                if(firstDayOfNextMonthNumber >= 0){
-                    eachDayPanel.setVisible(false);
-                    JPanel lastMonthPanel = new MonthPanel(month+1,(int) (0.98 * calenderFrame.getWidth()), (int) (0.8 * calenderFrame.getHeight()), firstDayOfNextMonthNumber).monthPanel;
-                    dayPanel.add(lastMonthPanel);
-
+                month++;
+                eachDayPanel.setVisible(false);
+                if(month <= 12){
+                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),dayOfWeek).monthPanel;
+                    eachDayPanel.setVisible(true);
+                    dayPanel.add(eachDayPanel);
                 }
+
             }
         });
+
 
 
 
@@ -111,58 +100,24 @@ public class CalandarFrame extends Frame {
         calenderFrame.add(backPanel);
         calenderFrame.add(lastAndNextPanel);
         calenderFrame.add(dayPanel);
-        calenderFrame.setVisible(true);
 
-    }
-
-    public JPanel getThisMonthPanel(int i, int day){
-        JPanel monthPanel = new JPanel();
-        monthPanel = new MonthPanel(i, (int) (0.98 * calenderFrame.getWidth()), (int) (0.8 * calenderFrame.getHeight()), day).monthPanel;
-        return monthPanel;
     }
 
     public int GetThisMonthFirstDay(){
-        Calendar calender = Calendar.getInstance();
-        calender.set(Calendar.DAY_OF_MONTH,1);
-        return calender.get(Calendar.DAY_OF_WEEK) - 1;
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.DAY_OF_MONTH,1);
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        return dayOfWeek;
     }
 
-    public int GetEveryMonthFirstDay(int i){
-        int result = 0;
-        if(i == 1 || i == 10){
-            return result;
-        }
-        else if(i == 2 || i == 3 || i==11){
-            result = 3;
-            return result;
-        }
-        else if(i == 4 || i == 7){
-            result = 6;
-            return result;
-        }
-        else if(i == 5){
-            result = 1;
-            return result;
-        }
-        else if(i == 6){
-            result = 4;
-            return result;
-        }
-        else if(i == 8){
-            result = 2;
-            return result;
-        }
-        else if(i == 12 || i == 9){
-            result = 5;
-            return result;
-        }
-        else{
-            return -1;
-        }
+    public int GetMonth(){
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.MONTH) + 1;
     }
+
 
     public static void main(String[] args) {
-        Frame frame = new CalandarFrame().calenderFrame;
+        Frame frame = new CalendarFrame().calenderFrame;
 
         frame.setVisible(true);
         System.out.println();
@@ -170,3 +125,4 @@ public class CalandarFrame extends Frame {
 
 
 }
+
