@@ -22,6 +22,9 @@ public class Reminder implements Exportable {
 
     private Boolean isEmergency;
     private Boolean isImportant;
+    private Boolean isDeleted;
+
+    private String note;
 
 
     public Reminder(String c) {
