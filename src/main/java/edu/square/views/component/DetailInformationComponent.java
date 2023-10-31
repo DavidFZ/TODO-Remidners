@@ -18,19 +18,19 @@ public class DetailInformationComponent {
     public final Dimension parentJComponentDimension;
 
     private final Dimension componentPanelDimension;
+    private final JPanel mainPanel;
     Font font1;
     Font font2;
     Font font3;
     String[] options = {"None", "5 minutes before", "15 minutes before", "30 minutes before", "1 hour before", "2 hours before", "1 day before", "2 days before", "1 week before", "2 weeks before"};
-    private JPanel mainPanel;
-
-
     @Getter
     private JButton deleteButton;
     @Getter
     private JButton resetButton;
     @Getter
     private JButton doneButton;
+    @Getter
+    private JButton backButton;
 
     @Getter
     private TextFieldPanelWidget nameTextFieldPanelWidget;
@@ -138,7 +138,12 @@ public class DetailInformationComponent {
 
 
         JPanel deletePanel = getFlowJpanel(FlowLayout.LEFT, new Dimension((int) (0.48 * componentPanelDimension.width), (int) (0.08 * componentPanelDimension.height)), Color.orange);
+        backButton = buttonBuilder("Back");
+        backButton.addActionListener(e -> {
+            mainPanel.setVisible(false);
+        });
         deleteButton = buttonBuilder("Delete");
+        deletePanel.add(backButton);
         deletePanel.add(deleteButton);
 
         reminderStatusControllerPanel.add(deletePanel);

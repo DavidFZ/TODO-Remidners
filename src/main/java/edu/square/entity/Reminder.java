@@ -2,7 +2,6 @@ package edu.square.entity;
 
 import lombok.Data;
 
-import java.lang.reflect.Field;
 import java.sql.Timestamp;
 
 import static edu.square.utils.DevUtils.getTimeStamp;
@@ -32,10 +31,12 @@ public class Reminder implements Exportable {
         uuid = String.valueOf(java.util.UUID.randomUUID());
         content = c;
         createTime = getTimeStamp();
+        isDeleted = false;
     }
 
     public Reminder() {
         uuid = String.valueOf(java.util.UUID.randomUUID());
+        isDeleted = false;
     }
 
     public static void main(String[] args) {

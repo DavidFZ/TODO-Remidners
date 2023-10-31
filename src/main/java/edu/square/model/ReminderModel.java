@@ -26,6 +26,7 @@ public class ReminderModel {
     public static final String DONE_TIME = "doneTime";
     public static final String IS_EMERGENCY = "isEmergency";
     public static final String IS_IMPORTANT = "isImportant";
+    public static final String IS_DELETED = "isDeleted";
 
     public static List<Reminder> queryAllEntities() {
         Session session = getSession();
@@ -213,6 +214,16 @@ public class ReminderModel {
     public static void updateReminder(Reminder reminder) {
         Session session = getSession();
 
+        session.merge(reminder);
+        session.beginTransaction().commit();
+
+        session.close();
+    }
+
+    public static void deleteReminder(Reminder reminder) {
+        Session session = getSession();
+
+        reminder.setIsDeleted(true);
         session.merge(reminder);
         session.beginTransaction().commit();
 
