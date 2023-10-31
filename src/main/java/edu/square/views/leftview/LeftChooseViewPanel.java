@@ -52,6 +52,7 @@ public class LeftChooseViewPanel extends JPanel {
             public void mouseClicked(MouseEvent e) {
                 view3Panel.setBackground(Color.RED);
                 view2Panel.setBackground(Color.WHITE);
+
                 view4Panel.setBackground(Color.WHITE);
                 view1Panel.setBackground(Color.WHITE);
                 System.out.println("Click");
