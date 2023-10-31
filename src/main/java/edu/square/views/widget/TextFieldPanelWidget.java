@@ -5,15 +5,13 @@ import java.awt.*;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 
-public class TextFieldPanelView {
-
-    private JPanel panel;
-
-    private String title;
+public class TextFieldPanelWidget {
 
     JTextField textField;
+    private JPanel panel;
+    private String title;
 
-    public TextFieldPanelView(Dimension dimension, Font font2, Font font3, String title,double scalingRatio) {
+    public TextFieldPanelWidget(Dimension dimension, Font font2, Font font3, String title, double scalingRatio) {
         panel = new JPanel();
         panel.setLayout(new FlowLayout(FlowLayout.LEFT));
         panel.setPreferredSize(resizeDimensionHeightScale(dimension, 0.07));
@@ -38,5 +36,10 @@ public class TextFieldPanelView {
 
     public JTextField getTextField() {
         return textField;
+    }
+
+    public void setTextField(String text) {
+        textField.setText(text);
+        textField.repaint();
     }
 }
