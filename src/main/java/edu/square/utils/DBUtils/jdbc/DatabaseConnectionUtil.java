@@ -8,7 +8,7 @@ import static edu.square.utils.DBUtils.jdbc.DatabaseStatusUtil.isDBDirExist;
 
 public class DatabaseConnectionUtil {
     private static final String DB_DRIVER = "org.apache.derby.jdbc.EmbeddedDriver";
-    private static final String DB_URL_PREFIX = "jdbc:derby:";
+    private static final String DB_DRIVER_TYPE = "jdbc:derby:";
     private static final String DB_URL_DEFAULT_PATH = "derbyDB";
     private static final String DB_CREATE = ";create=true";
 
@@ -36,11 +36,11 @@ public class DatabaseConnectionUtil {
     }
 
     private static String createDefaultDBURL() {
-        return DB_URL_PREFIX + DB_URL_DEFAULT_PATH + DB_CREATE;
+        return DB_DRIVER_TYPE + DB_URL_DEFAULT_PATH + DB_CREATE;
     }
 
     private static String getDefaultDBURL() {
-        return DB_URL_PREFIX + DB_URL_DEFAULT_PATH;
+        return DB_DRIVER_TYPE + DB_URL_DEFAULT_PATH;
     }
 
     /**
