@@ -34,6 +34,7 @@ public class GroupedListComponent {
     private JLabel titleLabel;
     @Getter
     private JFrame printFrame;
+    @Getter
     private JButton confirmButton;
 
 

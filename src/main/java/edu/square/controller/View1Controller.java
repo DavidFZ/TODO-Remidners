@@ -1,6 +1,7 @@
 package edu.square.controller;
 
 import edu.square.entity.Reminder;
+import edu.square.model.component.DetailInformationModel;
 import edu.square.views.component.DetailInformationComponent;
 import edu.square.views.component.GroupedListComponent;
 import edu.square.views.component.LeftSideComponent;
@@ -21,7 +22,8 @@ public class View1Controller {
     private final List<GroupLabelWidget> groupLabelWidgets;
     private final LeftSideComponent leftSideComponent;
     private final GroupedListComponent groupedListComponent;
-    private final DetailInformationComponent detailInformationComponent;
+    //Model
+    private final DetailInformationModel detailInformationModel;
     private List<List<Reminder>> reminders;
     private int currentGroupIndex = 0;
 
@@ -29,9 +31,8 @@ public class View1Controller {
     public View1Controller(LeftSideComponent leftSideComponent, GroupedListComponent groupedListComponent, DetailInformationComponent detailInformationComponent) {
         this.leftSideComponent = leftSideComponent;
         this.groupedListComponent = groupedListComponent;
-        this.detailInformationComponent = detailInformationComponent;
 
-        detailInformationComponent.getMainPanel().setVisible(false);
+        detailInformationModel = new DetailInformationModel(detailInformationComponent, null);
 
         //Add listeners to group labels, so that when clicked, the reminder list & title panel will be updated
         groupLabelWidgets = leftSideComponent.getGroupLabelWidgets();
@@ -57,14 +58,24 @@ public class View1Controller {
             widget.setGroupViewCount(reminders.get(i).size());
         }
 
-        batchAddReminderDetailListener();
 
         //add listener for add frame confirm button
-        groupedListComponent.addReminderInsertConfirmListener(e -> {
+//        groupedListComponent.addReminderInsertConfirmListener(e -> {
+//            updateCountLabel();
+//        });
+        groupedListComponent.getConfirmButton().addActionListener(e->{
             updateCountLabel();
+
         });
 
+        batchAddReminderDetailListener();
         batchAddReminderDoneStatusListener();
+
+        detailInformationModel.addListenerOnDeleteButton(e -> {
+            clearViewOfSingleReminder(detailInformationModel.getReminderView());
+            reminders = getGroupedReminders();
+            updateCountLabel();
+        });
     }
 
     public static String[] getGroupTitles() {
@@ -97,9 +108,7 @@ public class View1Controller {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                System.out.println("\n\n\n\nCLICKED\n\n\n\n");
-                Reminder reminder = reminderView.getReminder();
-                updateDetailPanel(reminder);
+                detailInformationModel.setVisibleOfComponent(reminderView);
             }
         };
     }
@@ -117,17 +126,11 @@ public class View1Controller {
 
     private void updateReminderListViews(int index) {
         groupedListComponent.getReminderListWidget().clearReminderListView();
+        //update reminder list
+        reminders = getGroupedReminders();
         for (Reminder reminder : reminders.get(index)) {
             groupedListComponent.addItem(reminder);
         }
-    }
-
-    private void updateDetailPanel(Reminder reminder) {
-        detailInformationComponent.getMainPanel().setVisible(true);
-
-        JTextField textField = detailInformationComponent.getNameTextFieldPanelWidget().getTextField();
-        textField.setText(reminder.getContent());
-
     }
 
     private void batchAddReminderDoneStatusListener() {
@@ -142,6 +145,18 @@ public class View1Controller {
         for (ReminderListWidget.ReminderView reminderView : reminderViews) {
             reminderView.getInnerPanel().addMouseListener(getClickAdapter(reminderView));
         }
+    }
+
+    private void clearViewOfSingleReminder(ReminderListWidget.ReminderView reminderView) {
+        groupedListComponent.getMainPanel().remove(reminderView.getInnerPanel());
+    }
+
+    private void addListenerOnNewReminderView(ReminderListWidget.ReminderView reminderView) {
+        JPanel mainPanel = reminderView.getInnerPanel();
+        mainPanel.addMouseMotionListener(getClickAdapter(reminderView));
+
+        JRadioButton jRadioButton = reminderView.getRadioButton();
+        jRadioButton.addActionListener(getCompletedStatusListener(reminderView));
     }
 
 

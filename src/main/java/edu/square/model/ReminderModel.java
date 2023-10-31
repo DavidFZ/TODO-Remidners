@@ -28,6 +28,10 @@ public class ReminderModel {
     public static final String IS_IMPORTANT = "isImportant";
     public static final String IS_DELETED = "isDeleted";
 
+    /**
+     * Select ALL Entities, which IS_DELETED are false;
+     * @return List of Reminder
+     */
     public static List<Reminder> queryAllEntities() {
         Session session = getSession();
 
@@ -35,12 +39,30 @@ public class ReminderModel {
         CriteriaQuery<Reminder> criteriaQuery = criteriaBuilder.createQuery(Reminder.class);
 
         Root<Reminder> root = criteriaQuery.from(Reminder.class);
-        criteriaQuery.select(root);
+        Predicate predicate = criteriaBuilder.isFalse(root.get(IS_DELETED));
+        criteriaQuery.select(root).where(predicate);
         List<Reminder> reminders = session.createQuery(criteriaQuery).getResultList();
 
         session.close();
 
         return reminders;
+    }
+
+    public static List<Reminder> queryAllEntities(boolean isDeleted) {
+        Session session = getSession();
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Reminder> criteriaQuery = criteriaBuilder.createQuery(Reminder.class);
+
+        Root<Reminder> root = criteriaQuery.from(Reminder.class);
+        Predicate predicate = !isDeleted ? criteriaBuilder.isFalse(root.get(IS_DELETED)) : criteriaBuilder.isTrue(root.get(IS_DELETED));
+        criteriaQuery.select(root).where(predicate);
+
+        TypedQuery<Reminder> query = session.createQuery(criteriaQuery);
+        List<Reminder> list = query.getResultList();
+        session.close();
+
+        return list;
     }
 
     /**

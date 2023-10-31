@@ -1,6 +1,8 @@
 package edu.square.views.component;
 
 import edu.square.utils.UIUtils.JPanelUtil;
+import edu.square.views.widget.BlockPanelWidget;
+import edu.square.views.widget.ComboBoxPanelView;
 import edu.square.views.widget.TextFieldPanelWidget;
 import lombok.Getter;
 
@@ -13,10 +15,7 @@ import static edu.square.utils.UIUtils.FontUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
 public class DetailInformationComponent {
-
-
     public final Dimension parentJComponentDimension;
-
     private final Dimension componentPanelDimension;
     private final JPanel mainPanel;
     Font font1;
@@ -54,11 +53,8 @@ public class DetailInformationComponent {
 
 
         //TextPanel
-
         JPanel textPanelDetail = getFlowJpanel(FlowLayout.CENTER, resizeDimensionHeightScale(componentPanelDimension, 0.1));
-        JLabel detailLabel = new JLabel("Detail");
-        detailLabel.setFont(font2);
-        textPanelDetail.add(detailLabel);
+        textPanelDetail.add(labelBuilder("Detail", font2));
         mainPanel.add(textPanelDetail);
 
         //nameTextFieldPanelWidget
@@ -69,27 +65,19 @@ public class DetailInformationComponent {
         noteTextFieldPanelWidget = new TextFieldPanelWidget(componentPanelDimension, font2, font3, "Note:", 0.07);
         mainPanel.add(noteTextFieldPanelWidget.getPanel());
 
+        //BlockPanel
+        BlockPanelWidget blockPanelView = new BlockPanelWidget(componentPanelDimension, 0.1);
+        mainPanel.add(blockPanelView.getBlockPanel());
 
-//        //BlockPanel
-//        {
-//            BlockPanelWidget blockPanelView = new BlockPanelWidget(componentPanelDimension, 0.1);
-//            mainPanel.add(blockPanelView.getBlockPanel());
-//        }
-//        //TextPanel
-//        {
-//            JPanel textPanelEarlyReminder = new JPanel();
-//            textPanelEarlyReminder.setPreferredSize(resizeDimensionHeightScale(componentPanelDimension, 0.06));
-//            textPanelEarlyReminder.setLayout(new FlowLayout(FlowLayout.LEFT));
-//            JLabel detailLabel = new JLabel("Early Reminder:");
-//            detailLabel.setFont(font2);
-//            textPanelEarlyReminder.add(detailLabel);
-//            mainPanel.add(textPanelEarlyReminder);
-//        }
-//        //earlyReminderComboBoxPanel
-//        {
-//            ComboBoxPanelView earlyReminderComboBoxPanel = new ComboBoxPanelView(componentPanelDimension, 0.07, font3, options, Color.cyan);
-//            mainPanel.add(earlyReminderComboBoxPanel.getjPanel());
-//        }
+        //TextPanel
+        JPanel textPanelEarlyReminder = getFlowJpanel(FlowLayout.LEFT, resizeDimensionHeightScale(componentPanelDimension, 0.06));
+        textPanelEarlyReminder.add(labelBuilder("Early Reminder:", font2));
+        mainPanel.add(textPanelEarlyReminder);
+
+        //earlyReminderComboBoxPanel
+        ComboBoxPanelView earlyReminderComboBoxPanel = new ComboBoxPanelView(componentPanelDimension, 0.07, font3, options, Color.cyan);
+        mainPanel.add(earlyReminderComboBoxPanel.getjPanel());
+
 //        //TextPanel
 //        {
 //            JPanel textPanelRepeat = new JPanel();
@@ -130,6 +118,13 @@ public class DetailInformationComponent {
         return button;
     }
 
+    private JLabel labelBuilder(String labelName, Font font) {
+        JLabel label = new JLabel(labelName);
+        label.setFont(font);
+
+        return label;
+    }
+
     private JPanel reminderStatusControllerPanel() {
         JPanel reminderStatusControllerPanel = new JPanel();
         reminderStatusControllerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -139,9 +134,6 @@ public class DetailInformationComponent {
 
         JPanel deletePanel = getFlowJpanel(FlowLayout.LEFT, new Dimension((int) (0.48 * componentPanelDimension.width), (int) (0.08 * componentPanelDimension.height)), Color.orange);
         backButton = buttonBuilder("Back");
-        backButton.addActionListener(e -> {
-            mainPanel.setVisible(false);
-        });
         deleteButton = buttonBuilder("Delete");
         deletePanel.add(backButton);
         deletePanel.add(deleteButton);

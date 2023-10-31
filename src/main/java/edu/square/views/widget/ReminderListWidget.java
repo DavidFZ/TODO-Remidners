@@ -118,6 +118,7 @@ public class ReminderListWidget {
     public class ReminderView {
         private final JLabel label;
         @Getter
+        @Setter
         private Reminder reminder;
         @Getter
         private JRadioButton radioButton;
