@@ -17,7 +17,7 @@ public class View1 {
 
         LeftSideComponent leftSideComponent = new LeftSideComponent(mainFrame, View1Controller.getGroupTitles());
         GroupedListComponent groupedListComponent = new GroupedListComponent(mainFrame);
-        DetailInformationComponent detailInformationComponent = new DetailInformationComponent(mainFrame);
+        DetailInformationComponent detailInformationComponent = new DetailInformationComponent(mainFrame.getSize());
 
         View1Controller view1Controller = new View1Controller(leftSideComponent, groupedListComponent,detailInformationComponent);
 
