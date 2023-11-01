@@ -76,7 +76,7 @@ public class DetailInformationComponent {
 
         //earlyReminderComboBoxPanel
         ComboBoxPanelView earlyReminderComboBoxPanel = new ComboBoxPanelView(componentPanelDimension, 0.07, font3, options, Color.cyan);
-        mainPanel.add(earlyReminderComboBoxPanel.getjPanel());
+        mainPanel.add(earlyReminderComboBoxPanel.getMainPanel());
 
 //        //TextPanel
 //        {

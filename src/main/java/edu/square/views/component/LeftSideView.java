@@ -46,7 +46,7 @@ public class LeftSideView {
         mainPanel.add(searchPanelView.getSearchPanel());
 
         //BLOCK PANEL
-        BlockPanelWidget blockPanelView = new BlockPanelWidget(parentJComponentDimension);
+        BlockPanelWidget blockPanelView = new BlockPanelWidget(parentJComponentDimension,0.2);
         mainPanel.add(blockPanelView.getMainPanel());
 
         //GROUP LABEL
