@@ -1,4 +1,4 @@
 package edu.square.model.component;
 
-public class LeftSideModel {
+public class LeftSideModel extends MComponentModel{
 }

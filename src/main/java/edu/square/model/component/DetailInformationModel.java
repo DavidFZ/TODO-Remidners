@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 
 import static edu.square.model.ReminderModel.updateReminder;
 
-public class DetailInformationModel {
+public class DetailInformationModel extends MComponentModel {
     private final DetailInformationComponent detailInformationComponent;
     @Getter
     private ReminderListWidget.ReminderView reminderView;

@@ -47,7 +47,7 @@ public class LeftSideView {
 
         //BLOCK PANEL
         BlockPanelWidget blockPanelView = new BlockPanelWidget(parentJComponentDimension);
-        mainPanel.add(blockPanelView.getBlockPanel());
+        mainPanel.add(blockPanelView.getMainPanel());
 
         //GROUP LABEL
         GroupLabelWidget.ViewBuilder viewBuilder = new GroupLabelWidget.ViewBuilder(mainPanelDimension);

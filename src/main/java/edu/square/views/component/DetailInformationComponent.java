@@ -67,7 +67,7 @@ public class DetailInformationComponent {
 
         //BlockPanel
         BlockPanelWidget blockPanelView = new BlockPanelWidget(componentPanelDimension, 0.1);
-        mainPanel.add(blockPanelView.getBlockPanel());
+        mainPanel.add(blockPanelView.getMainPanel());
 
         //TextPanel
         JPanel textPanelEarlyReminder = getFlowJpanel(FlowLayout.LEFT, resizeDimensionHeightScale(componentPanelDimension, 0.06));
