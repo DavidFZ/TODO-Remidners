@@ -13,9 +13,14 @@ public abstract class MComponent {
     @Getter
     protected JPanel mainPanel;
 
-    public MComponent(Dimension parentDimension,Dimension componentPanelDimension) {
+    public MComponent(Dimension parentDimension, Dimension componentPanelDimension) {
         this.parentDimension = parentDimension;
         selfDimension = componentPanelDimension;
+    }
+
+    public MComponent(Dimension parentDimension) {
+        this.parentDimension = parentDimension;
+        selfDimension = null;
     }
 
     protected abstract void setColors();

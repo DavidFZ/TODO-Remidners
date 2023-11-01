@@ -23,7 +23,7 @@ public class MainFrame {
         mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         LeftSideComponent leftSideComponent = new LeftSideComponent(mainFrame, View1Controller.getGroupTitles());
-        GroupedListComponent groupedListComponent = new GroupedListComponent(mainFrame);
+        GroupedListComponent groupedListComponent = new GroupedListComponent(mainFrame.getSize());
 
         mainFrame.add(leftSideComponent.getLeftPanel());
         mainFrame.add(groupedListComponent.getMainPanel());

@@ -15,9 +15,9 @@ import java.util.List;
 
 import static edu.square.model.ReminderModel.updateReminderEntityDoneStatus;
 
-public class ReminderListWidget {
+public class ReminderListWidget extends MWidget{
     //keep parentFrame var for future implementation resolution scaling
-    private final JFrame parentFrame;
+    private final Dimension parentDimension;
     @Getter
     private final List<ReminderView> reminderViews;
     private final List<Reminder> reminders;
@@ -33,11 +33,11 @@ public class ReminderListWidget {
     @Setter
     private ActionListener completeActionListener;
 
-    public ReminderListWidget(JFrame parentFrame) {
-        this.parentFrame = parentFrame;
+    public ReminderListWidget(Dimension parentDimension) {
+        this.parentDimension = parentDimension;
 
-        frameHeightInit = parentFrame.getHeight();
-        frameWidthInit = scaling * parentFrame.getWidth();
+        frameHeightInit = parentDimension.getHeight();
+        frameWidthInit = scaling * parentDimension.getWidth();
 
         reminders = ReminderModel.queryAllEntities();
         reminderNum = reminders.size();
@@ -49,7 +49,7 @@ public class ReminderListWidget {
         jPanelManager.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
 
         int w = (int) (frameWidthInit);
-        int h = (int) (0.8 * parentFrame.getHeight());
+        int h = (int) (0.8 * parentDimension.getHeight());
         scrollPane = new JScrollPane(jPanelManager);
         scrollPane.setPreferredSize(new Dimension(w, h));
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -130,7 +130,7 @@ public class ReminderListWidget {
             innerPanel = new JPanel();
             label = new JLabel(reminder.getContent());
             //TODO: abstract an interface for font resize from parentFrame
-            label.setFont(new Font("宋体", Font.BOLD, (int) (0.03 * parentFrame.getWidth())));
+            label.setFont(new Font("宋体", Font.BOLD, (int) (0.03 * parentDimension.getWidth())));
             radioButton = new JRadioButton();
             //bind view
             initView();

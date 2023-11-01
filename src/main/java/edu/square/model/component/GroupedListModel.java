@@ -3,11 +3,10 @@ package edu.square.model.component;
 import edu.square.views.component.GroupedListComponent;
 import edu.square.views.widget.ReminderListWidget;
 
-public class GroupedListModel {
-    private final GroupedListComponent groupedListComponent;
+public class GroupedListModel extends MComponentModel{
 
     public GroupedListModel(GroupedListComponent groupedListComponent) {
-        this.groupedListComponent = groupedListComponent;
+        super(groupedListComponent);
 
     }
 

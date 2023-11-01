@@ -15,9 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
-public class GroupedListComponent {
-    private final JFrame parentFrame;
-    //中间容器
+public class GroupedListComponent extends MComponent {
     @Getter
     private final ReminderListWidget reminderListWidget;
     private final double scaling = 0.4;
@@ -38,15 +36,17 @@ public class GroupedListComponent {
     private JButton confirmButton;
 
 
-    public GroupedListComponent(JFrame parentFrame) {
-        this.parentFrame = parentFrame;
-        font1 = FontUtil.getBoldFont(parentFrame.getSize(), 0.05);
-        font2 = FontUtil.getBoldFont(parentFrame.getSize(), 0.03);
-        font3 = FontUtil.getBoldFont(parentFrame.getSize(), 0.008);
+    public GroupedListComponent(Dimension parentFrameDimension) {
+        super(parentFrameDimension);
+
+
+        font1 = FontUtil.getBoldFont(parentFrameDimension, 0.05);
+        font2 = FontUtil.getBoldFont(parentFrameDimension, 0.03);
+        font3 = FontUtil.getBoldFont(parentFrameDimension, 0.008);
 
         init();
 
-        reminderListWidget = new ReminderListWidget(parentFrame);
+        reminderListWidget = new ReminderListWidget(parentFrameDimension);
         mainPanel.add(reminderListWidget.getScrollPane());
 
 
@@ -55,7 +55,7 @@ public class GroupedListComponent {
 
     public static void main(String[] args) {
         JFrame jFrame = JFrameFactory.getDefaultJFrame(0.8d, "GroupedListComponentTest");
-        GroupedListComponent groupedListComponent = new GroupedListComponent(jFrame);
+        GroupedListComponent groupedListComponent = new GroupedListComponent(jFrame.getSize());
         jFrame.add(groupedListComponent.getMainPanel());
         jFrame.setVisible(true);
 
@@ -71,19 +71,19 @@ public class GroupedListComponent {
 
         //对齐方式
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        mainPanel.setPreferredSize(new Dimension((int) (scaling * parentFrame.getWidth()), parentFrame.getHeight()));
+        mainPanel.setPreferredSize(new Dimension((int) (scaling * parentDimension.getWidth()), (int) parentDimension.getHeight()));
 
         //titlePanel
         {
             JPanel titlePanel = new JPanel();
             titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-            titlePanel.setPreferredSize(new Dimension((int) (scaling * parentFrame.getWidth()), (int) (0.12 * parentFrame.getHeight())));
+            titlePanel.setPreferredSize(new Dimension((int) (scaling * parentDimension.getWidth()), (int) (0.12 * parentDimension.getHeight())));
 //            titlePanel.setBackground(Color.black);
             mainPanel.add(titlePanel);
             //titlePanel_title
             JPanel titlePanel_title = new JPanel();
             titlePanel_title.setLayout(new FlowLayout(FlowLayout.LEFT));
-            titlePanel_title.setPreferredSize(new Dimension((int) (scaling * 0.48 * parentFrame.getWidth()), (int) (0.11 * parentFrame.getHeight())));
+            titlePanel_title.setPreferredSize(new Dimension((int) (scaling * 0.48 * parentDimension.getWidth()), (int) (0.11 * parentDimension.getHeight())));
             titlePanel_title.setBackground(Color.blue);
             titlePanel.add(titlePanel_title);
 
@@ -94,14 +94,14 @@ public class GroupedListComponent {
             //titlePanel_button
             JPanel titlePanel_button = new JPanel();
             titlePanel_button.setLayout(new FlowLayout(FlowLayout.RIGHT));
-            titlePanel_button.setPreferredSize(new Dimension((int) (scaling * 0.48 * parentFrame.getWidth()), (int) (0.11 * parentFrame.getHeight())));
+            titlePanel_button.setPreferredSize(new Dimension((int) (scaling * 0.48 * parentDimension.getWidth()), (int) (0.11 * parentDimension.getHeight())));
             titlePanel_button.setBackground(Color.yellow);
             titlePanel.add(titlePanel_button);
 
             addButton = new JButton("+");
             addButton.setFont(font2);
             addButton.setBackground(Color.white);
-            addButton.setPreferredSize(new Dimension((int) (0.05 * parentFrame.getWidth()), (int) (0.05 * parentFrame.getWidth())));
+            addButton.setPreferredSize(new Dimension((int) (0.05 * parentDimension.getWidth()), (int) (0.05 * parentDimension.getWidth())));
             addButton.setVisible(true);
             titlePanel_button.add(addButton);
 
@@ -111,7 +111,7 @@ public class GroupedListComponent {
                 public void actionPerformed(ActionEvent e) {
 
                     //输入的窗口
-                    printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * parentFrame.getHeight())).setWindowWidth((int) (0.3 * parentFrame.getWidth())).setTitle("Please add item").build());
+                    printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * parentDimension.getHeight())).setWindowWidth((int) (0.3 * parentDimension.getWidth())).setTitle("Please add item").build());
                     printFrame.setAlwaysOnTop(true);
 
                     //item + text field
@@ -120,7 +120,7 @@ public class GroupedListComponent {
                     JTextField itemName;
                     {
                         inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-                        Font font2 = new Font("宋体", Font.BOLD, (int) (0.01 * parentFrame.getWidth()));
+                        Font font2 = new Font("宋体", Font.BOLD, (int) (0.01 * parentDimension.getWidth()));
                         inputLabel = new JLabel("Item:");
                         inputPanel.setBounds((int) (0.1 * printFrame.getHeight()), (int) (0.2 * printFrame.getHeight()), (int) (0.8 * printFrame.getWidth()), (int) (0.2 * printFrame.getWidth()));
                         inputLabel.setFont(font2);
@@ -235,5 +235,10 @@ public class GroupedListComponent {
     public void addReminderInsertConfirmListener(ActionListener reminderInsertConfirmListener) {
         assert confirmButton != null;
         confirmButton.addActionListener(reminderInsertConfirmListener);
+    }
+
+    @Override
+    protected void setColors() {
+
     }
 }

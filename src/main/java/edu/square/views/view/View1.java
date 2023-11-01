@@ -16,7 +16,7 @@ public class View1 {
         mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
         LeftSideComponent leftSideComponent = new LeftSideComponent(mainFrame, View1Controller.getGroupTitles());
-        GroupedListComponent groupedListComponent = new GroupedListComponent(mainFrame);
+        GroupedListComponent groupedListComponent = new GroupedListComponent(mainFrame.getSize());
         DetailInformationComponent detailInformationComponent = new DetailInformationComponent(mainFrame.getSize());
 
         View1Controller view1Controller = new View1Controller(leftSideComponent, groupedListComponent,detailInformationComponent);
