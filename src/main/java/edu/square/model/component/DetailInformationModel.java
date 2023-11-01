@@ -16,7 +16,8 @@ public class DetailInformationModel extends MComponentModel {
     @Getter
     private ReminderListWidget.ReminderView reminderView;
 
-    public DetailInformationModel(DetailInformationComponent detailInformationComponent, ReminderListWidget.ReminderView reminderView) {
+    public DetailInformationModel(DetailInformationComponent detailInformationComponent) {
+        super(detailInformationComponent);
         this.detailInformationComponent = detailInformationComponent;
 
         //invisible the component
@@ -36,8 +37,6 @@ public class DetailInformationModel extends MComponentModel {
             deleteDBOfReminder();
             setInvisibleOfComponent();
         });
-
-        this.reminderView =reminderView;
     }
 
     public void updateViewOfReminderDetailInfo(ReminderListWidget.ReminderView reminderView) {

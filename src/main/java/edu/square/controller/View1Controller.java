@@ -32,7 +32,7 @@ public class View1Controller {
         this.leftSideComponent = leftSideComponent;
         this.groupedListComponent = groupedListComponent;
 
-        detailInformationModel = new DetailInformationModel(detailInformationComponent, null);
+        detailInformationModel = new DetailInformationModel(detailInformationComponent);
 
         //Add listeners to group labels, so that when clicked, the reminder list & title panel will be updated
         groupLabelWidgets = leftSideComponent.getGroupLabelWidgets();

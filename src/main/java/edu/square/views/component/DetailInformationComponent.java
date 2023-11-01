@@ -2,7 +2,6 @@ package edu.square.views.component;
 
 import edu.square.utils.UIUtils.JPanelUtil;
 import edu.square.views.widget.BlockPanelWidget;
-import edu.square.views.widget.ComboBoxPanelView;
 import edu.square.views.widget.TextFieldPanelWidget;
 import lombok.Getter;
 
@@ -14,14 +13,12 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthS
 import static edu.square.utils.UIUtils.FontUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
-public class DetailInformationComponent {
-    public final Dimension parentJComponentDimension;
-    private final Dimension componentPanelDimension;
-    private final JPanel mainPanel;
+public class DetailInformationComponent extends MComponent {
     Font font1;
     Font font2;
     Font font3;
     String[] options = {"None", "5 minutes before", "15 minutes before", "30 minutes before", "1 hour before", "2 hours before", "1 day before", "2 days before", "1 week before", "2 weeks before"};
+    private final JPanel reminderStatusControllerPanel;
     @Getter
     private JButton deleteButton;
     @Getter
@@ -36,82 +33,49 @@ public class DetailInformationComponent {
     @Getter
     private TextFieldPanelWidget noteTextFieldPanelWidget;
 
-    public DetailInformationComponent(JFrame parentFrame) {
-        parentJComponentDimension = new Dimension(parentFrame.getWidth(), parentFrame.getHeight());
-        componentPanelDimension = resizeDimensionWidthScale(parentJComponentDimension, 0.38);
+    public DetailInformationComponent(Dimension parentFrameDimension) {
+        super(parentFrameDimension, resizeDimensionWidthScale(parentFrameDimension, 0.38));
 
-        font1 = getBoldFont(parentJComponentDimension, FONT_SIZE_1);
-        font2 = getBoldFont(parentJComponentDimension, FONT_SIZE_2);
-        font3 = getBoldFont(parentJComponentDimension, FONT_SIZE_3);
+        font1 = getBoldFont(parentDimension, FONT_SIZE_1);
+        font2 = getBoldFont(parentDimension, FONT_SIZE_2);
+        font3 = getBoldFont(parentDimension, FONT_SIZE_3);
 
         //set MainPanel
-        mainPanel = JPanelUtil.getMainPanel(componentPanelDimension);
-        mainPanel.setBackground(Color.yellow);
+        mainPanel = JPanelUtil.getMainPanel(selfDimension);
 
         //reminderStatusControllerPanel
-        mainPanel.add(reminderStatusControllerPanel());
+        reminderStatusControllerPanel = reminderStatusControllerPanel();
+        mainPanel.add(reminderStatusControllerPanel);
 
 
         //TextPanel
-        JPanel textPanelDetail = getFlowJpanel(FlowLayout.CENTER, resizeDimensionHeightScale(componentPanelDimension, 0.1));
+        JPanel textPanelDetail = getFlowJpanel(FlowLayout.CENTER, resizeDimensionHeightScale(selfDimension, 0.1));
         textPanelDetail.add(labelBuilder("Detail", font2));
         mainPanel.add(textPanelDetail);
 
         //nameTextFieldPanelWidget
-        nameTextFieldPanelWidget = new TextFieldPanelWidget(componentPanelDimension, font2, font3, "Content:", 0.07);
+        nameTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, font2, font3, "Content:", 0.07);
         mainPanel.add(nameTextFieldPanelWidget.getPanel());
 
         //nameTextFieldPanelWidget
-        noteTextFieldPanelWidget = new TextFieldPanelWidget(componentPanelDimension, font2, font3, "Note:", 0.07);
+        noteTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, font2, font3, "Note:", 0.07);
         mainPanel.add(noteTextFieldPanelWidget.getPanel());
 
         //BlockPanel
-        BlockPanelWidget blockPanelView = new BlockPanelWidget(componentPanelDimension, 0.1);
+        BlockPanelWidget blockPanelView = new BlockPanelWidget(selfDimension, 0.1);
         mainPanel.add(blockPanelView.getMainPanel());
 
-        //TextPanel
-        JPanel textPanelEarlyReminder = getFlowJpanel(FlowLayout.LEFT, resizeDimensionHeightScale(componentPanelDimension, 0.06));
-        textPanelEarlyReminder.add(labelBuilder("Early Reminder:", font2));
-        mainPanel.add(textPanelEarlyReminder);
-
-        //earlyReminderComboBoxPanel
-        ComboBoxPanelView earlyReminderComboBoxPanel = new ComboBoxPanelView(componentPanelDimension, 0.07, font3, options, Color.cyan);
-        mainPanel.add(earlyReminderComboBoxPanel.getMainPanel());
-
 //        //TextPanel
-//        {
-//            JPanel textPanelRepeat = new JPanel();
-//            textPanelRepeat.setPreferredSize(resizeDimensionHeightScale(componentPanelDimension, 0.06));
-//            textPanelRepeat.setLayout(new FlowLayout(FlowLayout.LEFT));
-//            JLabel detailLabel = new JLabel("Repeat:");
-//            detailLabel.setFont(font2);
-//            textPanelRepeat.add(detailLabel);
-//            mainPanel.add(textPanelRepeat);
-//        }
-//        //repeatPanel
-//        {
-//            ComboBoxPanelView repeatComboBoxPanel = new ComboBoxPanelView(componentPanelDimension, 0.07, font3, options, Color.cyan);
-//            mainPanel.add(repeatComboBoxPanel.getjPanel());
-//        }
+//        JPanel textPanelEarlyReminder = getFlowJpanel(FlowLayout.LEFT, resizeDimensionHeightScale(componentPanelDimension, 0.06));
+//        textPanelEarlyReminder.add(labelBuilder("Early Reminder:", font2));
+//        mainPanel.add(textPanelEarlyReminder);
 
-    }
-
-    //清空输入内容
-    public void clear() {
-
-    }
-
-    public void pushInformation() {
-        //TODO do something to deliver information to DB
-    }
-
-    public JPanel getMainPanel() {
-        return mainPanel;
+        setColors();
     }
 
     private JButton buttonBuilder(String buttonName) {
         JButton button = new JButton(buttonName);
-        button.setPreferredSize(new Dimension((int) (0.2 * componentPanelDimension.width), (int) (0.04 * componentPanelDimension.height)));
+        button.setPreferredSize(new Dimension((int) (0.2 * selfDimension.width), (int) (0.04 * selfDimension.height)));
         button.setFont(font3);
         button.setBackground(Color.white);
 
@@ -126,13 +90,9 @@ public class DetailInformationComponent {
     }
 
     private JPanel reminderStatusControllerPanel() {
-        JPanel reminderStatusControllerPanel = new JPanel();
-        reminderStatusControllerPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        reminderStatusControllerPanel.setPreferredSize(resizeDimensionHeightScale(componentPanelDimension, 0.1));
-        reminderStatusControllerPanel.setBackground(Color.green);
+        JPanel reminderStatusControllerPanel = getFlowJpanel(FlowLayout.CENTER, resizeDimensionHeightScale(selfDimension, 0.1));
 
-
-        JPanel deletePanel = getFlowJpanel(FlowLayout.LEFT, new Dimension((int) (0.48 * componentPanelDimension.width), (int) (0.08 * componentPanelDimension.height)), Color.orange);
+        JPanel deletePanel = getFlowJpanel(FlowLayout.LEFT, new Dimension((int) (0.48 * selfDimension.width), (int) (0.08 * selfDimension.height)), Color.orange);
         backButton = buttonBuilder("Back");
         deleteButton = buttonBuilder("Delete");
         deletePanel.add(backButton);
@@ -141,7 +101,7 @@ public class DetailInformationComponent {
         reminderStatusControllerPanel.add(deletePanel);
 
 
-        JPanel donePanel = getFlowJpanel(FlowLayout.RIGHT, new Dimension((int) (0.48 * componentPanelDimension.width), (int) (0.08 * componentPanelDimension.height)), Color.orange);
+        JPanel donePanel = getFlowJpanel(FlowLayout.RIGHT, new Dimension((int) (0.48 * selfDimension.width), (int) (0.08 * selfDimension.height)), Color.orange);
         resetButton = buttonBuilder("Rest");
         doneButton = buttonBuilder("Done");
         donePanel.add(resetButton);
@@ -152,4 +112,9 @@ public class DetailInformationComponent {
         return reminderStatusControllerPanel;
     }
 
+    @Override
+    protected void setColors() {
+        mainPanel.setBackground(Color.yellow);
+        reminderStatusControllerPanel.setBackground(Color.green);
+    }
 }

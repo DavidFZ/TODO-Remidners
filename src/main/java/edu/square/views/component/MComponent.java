@@ -1,16 +1,22 @@
 package edu.square.views.component;
 
+import lombok.Getter;
+
 import javax.swing.*;
+import java.awt.*;
 
-public class MComponent {
-    private JPanel mainPanel;
-    private JFrame parentFame;
+public abstract class MComponent {
+    @Getter
+    protected final Dimension parentDimension;
+    @Getter
+    protected final Dimension selfDimension;
+    @Getter
+    protected JPanel mainPanel;
 
-    public JPanel getMainPanel(){
-        return mainPanel;
+    public MComponent(Dimension parentDimension,Dimension componentPanelDimension) {
+        this.parentDimension = parentDimension;
+        selfDimension = componentPanelDimension;
     }
 
-    public MComponent(JFrame parentFame){
-        this.parentFame =parentFame;
-    }
+    protected abstract void setColors();
 }
