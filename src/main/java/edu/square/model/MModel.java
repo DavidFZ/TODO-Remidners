@@ -11,4 +11,5 @@ public class MModel {
     public MModel(MComponentModel... mComponentModels){
         mComponentModels = (MComponentModel[]) Arrays.stream(mComponentModels).toArray();
     }
+
 }
