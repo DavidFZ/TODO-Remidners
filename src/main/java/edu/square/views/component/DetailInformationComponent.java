@@ -14,11 +14,11 @@ import static edu.square.utils.UIUtils.FontUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
 public class DetailInformationComponent extends MComponent {
+    private final JPanel reminderStatusControllerPanel;
     Font font1;
     Font font2;
     Font font3;
     String[] options = {"None", "5 minutes before", "15 minutes before", "30 minutes before", "1 hour before", "2 hours before", "1 day before", "2 days before", "1 week before", "2 weeks before"};
-    private final JPanel reminderStatusControllerPanel;
     @Getter
     private JButton deleteButton;
     @Getter
@@ -36,12 +36,6 @@ public class DetailInformationComponent extends MComponent {
     public DetailInformationComponent(Dimension parentFrameDimension) {
         super(parentFrameDimension, resizeDimensionWidthScale(parentFrameDimension, 0.38));
 
-        font1 = getBoldFont(parentDimension, FONT_SIZE_1);
-        font2 = getBoldFont(parentDimension, FONT_SIZE_2);
-        font3 = getBoldFont(parentDimension, FONT_SIZE_3);
-
-        //set MainPanel
-        mainPanel = JPanelUtil.getCenterFlowMainPanel(selfDimension);
 
         //reminderStatusControllerPanel
         reminderStatusControllerPanel = reminderStatusControllerPanel();
@@ -71,6 +65,23 @@ public class DetailInformationComponent extends MComponent {
 //        mainPanel.add(textPanelEarlyReminder);
 
         setColors();
+    }
+
+    @Override
+    protected void initializeMainPanel() {
+        mainPanel = JPanelUtil.getCenterFlowMainPanel(selfDimension);
+    }
+
+    @Override
+    protected void initializeFonts() {
+        font1 = getBoldFont(parentDimension, FONT_SIZE_1);
+        font2 = getBoldFont(parentDimension, FONT_SIZE_2);
+        font3 = getBoldFont(parentDimension, FONT_SIZE_3);
+    }
+
+    @Override
+    protected void initializeJComponents() {
+
     }
 
     private JButton buttonBuilder(String buttonName) {

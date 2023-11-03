@@ -77,6 +77,21 @@ public class LeftSideComponent extends MComponent {
     }
 
     @Override
+    protected void initializeMainPanel() {
+
+    }
+
+    @Override
+    protected void initializeFonts() {
+
+    }
+
+    @Override
+    protected void initializeJComponents() {
+
+    }
+
+    @Override
     protected void setColors() {
 
     }

@@ -16,12 +16,19 @@ public abstract class MComponent {
     public MComponent(Dimension parentDimension, Dimension componentPanelDimension) {
         this.parentDimension = parentDimension;
         selfDimension = componentPanelDimension;
+
+        initializeMainPanel();
+        initializeFonts();
     }
 
     public MComponent(Dimension parentDimension) {
         this.parentDimension = parentDimension;
         selfDimension = null;
     }
+
+    protected abstract void initializeMainPanel();
+    protected abstract void initializeFonts();
+    protected abstract void initializeJComponents();
 
     protected abstract void setColors();
 }

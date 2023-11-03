@@ -53,6 +53,21 @@ public class GroupedListComponent extends MComponent {
         mainPanel.setVisible(true);
     }
 
+    @Override
+    protected void initializeMainPanel() {
+
+    }
+
+    @Override
+    protected void initializeFonts() {
+
+    }
+
+    @Override
+    protected void initializeJComponents() {
+
+    }
+
     public static void main(String[] args) {
         JFrame jFrame = JFrameFactory.getDefaultJFrame(0.8d, "GroupedListComponentTest");
         GroupedListComponent groupedListComponent = new GroupedListComponent(jFrame.getSize());
