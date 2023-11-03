@@ -1,13 +1,14 @@
-package edu.square.views.view4;
+package edu.square.views.component;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Line2D;
 
-public class TomatoTimer extends JFrame {
+public class TomatoTimer extends JPanel {
+    Dimension dimension;
+    private JPanel tomatoTimerJPanel;
     private int initialHours = 0;
     private int initialMinutes = 25;
     private int initialSeconds = 0;
@@ -23,11 +24,12 @@ public class TomatoTimer extends JFrame {
     private JButton stopButton;
     private JButton resetButton;
 
-    public TomatoTimer() {
-        setTitle("Tomato Timer");
-        setSize(400, 400);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+    public TomatoTimer(Dimension dimension) {
+        this.dimension=dimension;
+        tomatoTimerJPanel = new JPanel();
+//        tomatoTimerJPanel.setSize(400, 400);
+
+        tomatoTimerJPanel.setLayout(new BorderLayout());
 
         JPanel timerPanel = new JPanel(new BorderLayout());
         timerLabel = new JLabel(getTime(), SwingConstants.CENTER);
@@ -54,7 +56,7 @@ public class TomatoTimer extends JFrame {
                 g2d.setFont(numbersFont);
                 g2d.setColor(Color.BLACK);
                 for (int i = 1; i <= 12; i++) {
-                    double angle = Math.toRadians(i * 30 - 60);
+                    double angle = Math.toRadians(i * 30 - 90);
                     int x = (int) (centerX + (radius - 25) * Math.cos(angle));
                     int y = (int) (centerY + (radius - 25) * Math.sin(angle));
                     g2d.drawString(Integer.toString(i), x - 5, y + 5);
@@ -68,7 +70,7 @@ public class TomatoTimer extends JFrame {
         };
 
         timerPanel.add(clockPanel, BorderLayout.CENTER);
-        add(timerPanel, BorderLayout.CENTER);
+        tomatoTimerJPanel.add(timerPanel, BorderLayout.CENTER);
 
         JPanel controlPanel = new JPanel(new FlowLayout());
 
@@ -128,7 +130,7 @@ public class TomatoTimer extends JFrame {
         controlPanel.add(startButton);
         controlPanel.add(stopButton);
         controlPanel.add(resetButton);
-        add(controlPanel, BorderLayout.SOUTH);
+        tomatoTimerJPanel.add(controlPanel, BorderLayout.SOUTH);
 
         timer = new Timer(1000, new ActionListener() {
             @Override
@@ -151,6 +153,17 @@ public class TomatoTimer extends JFrame {
                 clockPanel.repaint();
             }
         });
+
+//        tomatoTimerJPanel
+
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                TomatoTimer timer = new TomatoTimer();
+//                timer.setVisible(true);
+//            }
+//        });
+
     }
 
     private String getTime() {
@@ -166,13 +179,21 @@ public class TomatoTimer extends JFrame {
         g2d.drawLine(centerX, centerY, x, y);
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                TomatoTimer timer = new TomatoTimer();
-                timer.setVisible(true);
-            }
-        });
+//    public static void main(String[] args) {
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                TomatoTimer timer = new TomatoTimer();
+//                timer.setVisible(true);
+//            }
+//        });
+//    }
+
+    public JPanel getTomatoTimerJPanel() {
+        JPanel jPanel = new JPanel();
+        jPanel.setPreferredSize(dimension);
+        jPanel.setLayout(new BorderLayout());
+        jPanel.add(tomatoTimerJPanel);
+        return jPanel;
     }
 }
