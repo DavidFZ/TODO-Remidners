@@ -17,7 +17,7 @@ import java.util.List;
 
 import static edu.square.model.ReminderModel.*;
 
-public class View1Controller {
+public class View1Controller extends MController {
     public static String[] groupTitles = {"All", "Today", "Completed", "Flagged"};
     private final List<GroupLabelWidget> groupLabelWidgets;
     private final LeftSideComponent leftSideComponent;
@@ -29,6 +29,8 @@ public class View1Controller {
 
 
     public View1Controller(LeftSideComponent leftSideComponent, GroupedListComponent groupedListComponent, DetailInformationComponent detailInformationComponent) {
+        super(leftSideComponent, groupedListComponent, detailInformationComponent);
+
         this.leftSideComponent = leftSideComponent;
         this.groupedListComponent = groupedListComponent;
 

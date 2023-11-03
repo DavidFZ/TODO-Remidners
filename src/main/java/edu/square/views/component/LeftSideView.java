@@ -14,7 +14,7 @@ import java.util.List;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthScale;
 import static edu.square.utils.UIUtils.FontUtil.*;
-import static edu.square.utils.UIUtils.JPanelUtil.getMainPanel;
+import static edu.square.utils.UIUtils.JPanelUtil.getCenterFlowMainPanel;
 
 public class LeftSideView {
 
@@ -37,7 +37,7 @@ public class LeftSideView {
 
 
         //ROOT COMPONENT OF LEFT GROUP VIEW
-        mainPanel = getMainPanel(mainPanelDimension);
+        mainPanel = getCenterFlowMainPanel(mainPanelDimension);
         mainPanel.setBackground(Color.green);
 
         //SEARCH PANEL

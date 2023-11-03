@@ -2,8 +2,12 @@ package edu.square.controller;
 
 import edu.square.views.component.MComponent;
 
-public class MController {
-    public MController(MComponent ... components){
+import java.util.List;
 
+public class MController {
+    protected List<MComponent> mComponents;
+
+    public MController(MComponent... components) {
+        mComponents = List.of(components);
     }
 }

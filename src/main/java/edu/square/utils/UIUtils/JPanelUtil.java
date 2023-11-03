@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class JPanelUtil {
-    public static JPanel getMainPanel(Dimension mainPanelDimension) {
+    public static JPanel getCenterFlowMainPanel(Dimension mainPanelDimension) {
         JPanel mainPanel = new JPanel();
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         mainPanel.setPreferredSize(mainPanelDimension);

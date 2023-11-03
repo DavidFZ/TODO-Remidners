@@ -15,9 +15,9 @@ import java.util.List;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthScale;
 import static edu.square.utils.UIUtils.FontUtil.*;
-import static edu.square.utils.UIUtils.JPanelUtil.getMainPanel;
+import static edu.square.utils.UIUtils.JPanelUtil.getCenterFlowMainPanel;
 
-public class LeftSideComponent {
+public class LeftSideComponent extends MComponent {
 
     Font font1;
     Font font2;
@@ -27,6 +27,8 @@ public class LeftSideComponent {
     private List<GroupLabelWidget> groupLabelWidgets;
 
     public LeftSideComponent(JFrame parentFrame,String[] groupedTitles) {
+        super(parentFrame.getSize());
+
         Dimension parentJComponentDimension = new Dimension(parentFrame.getWidth(), parentFrame.getHeight());
         Dimension mainPanelDimension = resizeDimensionWidthScale(parentJComponentDimension, 0.2);
 
@@ -36,7 +38,7 @@ public class LeftSideComponent {
 
 
         //ROOT COMPONENT OF LEFT GROUP VIEW
-        mainPanel = getMainPanel(mainPanelDimension);
+        mainPanel = getCenterFlowMainPanel(mainPanelDimension);
         mainPanel.setBackground(Color.green);
 
         //SEARCH PANEL
@@ -74,4 +76,8 @@ public class LeftSideComponent {
         return mainPanel;
     }
 
+    @Override
+    protected void setColors() {
+
+    }
 }

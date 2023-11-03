@@ -41,7 +41,7 @@ public class DetailInformationComponent extends MComponent {
         font3 = getBoldFont(parentDimension, FONT_SIZE_3);
 
         //set MainPanel
-        mainPanel = JPanelUtil.getMainPanel(selfDimension);
+        mainPanel = JPanelUtil.getCenterFlowMainPanel(selfDimension);
 
         //reminderStatusControllerPanel
         reminderStatusControllerPanel = reminderStatusControllerPanel();
