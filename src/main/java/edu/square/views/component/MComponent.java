@@ -27,7 +27,9 @@ public abstract class MComponent {
     }
 
     protected abstract void initializeMainPanel();
+
     protected abstract void initializeFonts();
+
     protected abstract void initializeJComponents();
 
     protected abstract void setColors();

@@ -14,7 +14,6 @@ import static edu.square.utils.UIUtils.FontUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
 public class DetailInformationComponent extends MComponent {
-    private final JPanel reminderStatusControllerPanel;
     Font font1;
     Font font2;
     Font font3;
@@ -38,7 +37,8 @@ public class DetailInformationComponent extends MComponent {
 
 
         //reminderStatusControllerPanel
-        reminderStatusControllerPanel = reminderStatusControllerPanel();
+        JPanel reminderStatusControllerPanel = reminderStatusControllerPanel();
+        reminderStatusControllerPanel.setBackground(Color.red);
         mainPanel.add(reminderStatusControllerPanel);
 
 
@@ -126,6 +126,5 @@ public class DetailInformationComponent extends MComponent {
     @Override
     protected void setColors() {
         mainPanel.setBackground(Color.yellow);
-        reminderStatusControllerPanel.setBackground(Color.green);
     }
 }

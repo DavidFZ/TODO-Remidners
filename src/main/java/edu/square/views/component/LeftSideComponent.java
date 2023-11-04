@@ -22,7 +22,6 @@ public class LeftSideComponent extends MComponent {
     Font font1;
     Font font2;
     Font font3;
-    private JPanel mainPanel;
     @Getter
     private List<GroupLabelWidget> groupLabelWidgets;
 
