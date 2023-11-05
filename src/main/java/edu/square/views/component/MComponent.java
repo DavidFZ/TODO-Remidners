@@ -1,5 +1,6 @@
 package edu.square.views.component;
 
+import edu.square.views.MyView;
 import lombok.Getter;
 
 import javax.swing.*;
@@ -24,6 +25,18 @@ public abstract class MComponent {
     public MComponent(Dimension parentDimension) {
         this.parentDimension = parentDimension;
         selfDimension = null;
+    }
+
+    public MComponent(MyView myView, Dimension componentPanelDimension) {
+        this.parentDimension = myView.getMainPanelDimension();
+        selfDimension = componentPanelDimension;
+
+        initializeMainPanel();
+        initializeFonts();
+        initializeJComponents();
+        setColors();
+
+        myView.addMComponent(this);
     }
 
     protected abstract void initializeMainPanel();

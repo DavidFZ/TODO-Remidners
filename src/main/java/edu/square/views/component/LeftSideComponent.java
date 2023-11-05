@@ -2,6 +2,7 @@ package edu.square.views.component;
 
 import edu.square.controller.View1Controller;
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.views.MyView;
 import edu.square.views.widget.BlockPanelWidget;
 import edu.square.views.widget.GroupLabelWidget;
 import edu.square.views.widget.SearchPanelWidget;
@@ -25,7 +26,44 @@ public class LeftSideComponent extends MComponent {
     @Getter
     private List<GroupLabelWidget> groupLabelWidgets;
 
-    public LeftSideComponent(JFrame parentFrame,String[] groupedTitles) {
+    public LeftSideComponent(Dimension parentFrameDimension, MyView myView, String[] groupedTitles) {
+        super(parentFrameDimension);
+
+        //TODO: clean this up
+        Dimension parentJComponentDimension = new Dimension((int) parentFrameDimension.getWidth(), (int) parentFrameDimension.getHeight());
+        Dimension mainPanelDimension = resizeDimensionWidthScale(parentJComponentDimension, 0.2);
+
+        font1 = getBoldFont(parentJComponentDimension, FONT_SIZE_1);
+        font2 = getBoldFont(parentJComponentDimension, FONT_SIZE_2);
+        font3 = getBoldFont(parentJComponentDimension, FONT_SIZE_3);
+
+
+        //ROOT COMPONENT OF LEFT GROUP VIEW
+        mainPanel = getCenterFlowMainPanel(mainPanelDimension);
+        mainPanel.setBackground(Color.green);
+
+        //SEARCH PANEL
+        SearchPanelWidget searchPanelWidget = new SearchPanelWidget(mainPanelDimension, font2);
+        mainPanel.add(searchPanelWidget.getSearchTipsPanel());
+        mainPanel.add(searchPanelWidget.getSearchPanel());
+
+        //BLOCK PANEL
+        BlockPanelWidget blockPanelWidget = new BlockPanelWidget(parentJComponentDimension, 0.2);
+        mainPanel.add(blockPanelWidget.getMainPanel());
+
+        //GROUP LABEL
+        GroupLabelWidget.ViewBuilder viewBuilder = new GroupLabelWidget.ViewBuilder(mainPanelDimension);
+        List<String> titles = new ArrayList<>(Arrays.asList(groupedTitles));
+        groupLabelWidgets = viewBuilder.build(titles);
+        for (GroupLabelWidget groupLabelWidget :
+                groupLabelWidgets) {
+            mainPanel.add(groupLabelWidget.getGroupView());
+        }
+
+        myView.addMComponent(this);
+    }
+
+    public LeftSideComponent(JFrame parentFrame, String[] groupedTitles) {
         super(parentFrame.getSize());
 
         Dimension parentJComponentDimension = new Dimension(parentFrame.getWidth(), parentFrame.getHeight());
@@ -46,7 +84,7 @@ public class LeftSideComponent extends MComponent {
         mainPanel.add(searchPanelWidget.getSearchPanel());
 
         //BLOCK PANEL
-        BlockPanelWidget blockPanelWidget = new BlockPanelWidget(parentJComponentDimension,0.2);
+        BlockPanelWidget blockPanelWidget = new BlockPanelWidget(parentJComponentDimension, 0.2);
         mainPanel.add(blockPanelWidget.getMainPanel());
 
         //GROUP LABEL

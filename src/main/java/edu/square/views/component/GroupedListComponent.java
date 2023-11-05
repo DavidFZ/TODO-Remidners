@@ -5,6 +5,7 @@ import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.views.MyView;
 import edu.square.views.widget.ReminderListWidget;
 import lombok.Getter;
 
@@ -17,7 +18,7 @@ import java.awt.event.WindowEvent;
 
 public class GroupedListComponent extends MComponent {
     @Getter
-    private final ReminderListWidget reminderListWidget;
+    private ReminderListWidget reminderListWidget;
     private final double scaling = 0.4;
     //font定义
     Font font1;
@@ -51,6 +52,11 @@ public class GroupedListComponent extends MComponent {
 
 
         mainPanel.setVisible(true);
+    }
+
+    public GroupedListComponent(Dimension parentFrameDimension, MyView myView) {
+        this(parentFrameDimension);
+        myView.addMComponent(this);
     }
 
     @Override
