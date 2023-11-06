@@ -1,6 +1,8 @@
 package edu.square.views.widget;
 
 import edu.square.utils.UIUtils.FontUtil;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,6 +12,12 @@ public class GroupedTitleWidgetView extends MWidget {
     Font font1;
     Font font2;
     Font font3;
+    @Getter
+    @Setter
+    private JLabel titleLabel;
+    @Getter
+    @Setter
+    private JButton addButton;
 
     public GroupedTitleWidgetView(Dimension rootFrameDimension, Dimension selfDimension) {
         super(rootFrameDimension, selfDimension);
@@ -38,7 +46,8 @@ public class GroupedTitleWidgetView extends MWidget {
 
     @Override
     protected void initializeMainPanel() {
-
+        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        mainPanel.setPreferredSize(new Dimension((int) (scaling * rootFrameDimension.getWidth()), (int) (0.12 * rootFrameDimension.getHeight())));
     }
 
     @Override
@@ -48,21 +57,17 @@ public class GroupedTitleWidgetView extends MWidget {
         font3 = FontUtil.getBoldFont(rootFrameDimension, 0.008);
     }
 
+    //TODO: 重构这坨答辩
     @Override
     protected void initializeJComponents() {
-        JPanel titlePanel = new JPanel();
-        titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        titlePanel.setPreferredSize(new Dimension((int) (scaling * rootFrameDimension.getWidth()), (int) (0.12 * rootFrameDimension.getHeight())));
-        mainPanel.add(titlePanel);
-
         //titlePanel_title
         JPanel titlePanel_title = new JPanel();
         titlePanel_title.setLayout(new FlowLayout(FlowLayout.LEFT));
         titlePanel_title.setPreferredSize(new Dimension((int) (scaling * 0.48 * rootFrameDimension.getWidth()), (int) (0.11 * rootFrameDimension.getHeight())));
         titlePanel_title.setBackground(Color.blue);
-        titlePanel.add(titlePanel_title);
+        mainPanel.add(titlePanel_title);
 
-        JLabel titleLabel = new JLabel("All");
+        titleLabel = new JLabel("All");
         titleLabel.setFont(font1);
         titlePanel_title.add(titleLabel);
 
@@ -71,14 +76,16 @@ public class GroupedTitleWidgetView extends MWidget {
         titlePanel_button.setLayout(new FlowLayout(FlowLayout.RIGHT));
         titlePanel_button.setPreferredSize(new Dimension((int) (scaling * 0.48 * rootFrameDimension.getWidth()), (int) (0.11 * rootFrameDimension.getHeight())));
         titlePanel_button.setBackground(Color.yellow);
-        titlePanel.add(titlePanel_button);
+        mainPanel.add(titlePanel_button);
 
 
-        JButton addButton = new JButton("+");
+        addButton = new JButton("+");
         addButton.setFont(font2);
         addButton.setBackground(Color.white);
         addButton.setPreferredSize(new Dimension((int) (0.05 * rootFrameDimension.getWidth()), (int) (0.05 * rootFrameDimension.getWidth())));
         addButton.setVisible(true);
         titlePanel_button.add(addButton);
     }
+
+
 }
