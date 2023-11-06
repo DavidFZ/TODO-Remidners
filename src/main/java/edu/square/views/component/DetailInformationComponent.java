@@ -68,6 +68,11 @@ public class DetailInformationComponent extends MComponent {
         setColors();
     }
 
+    @Override
+    protected void calculateSelfDimension() {
+
+    }
+
     public DetailInformationComponent(Dimension parentFrameDimension, MyView myView) {
         this(parentFrameDimension);
         myView.addMComponent(this);

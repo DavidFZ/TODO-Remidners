@@ -18,7 +18,11 @@ public class ListView extends MyView {
     public ListView(JFrame parentFrame, Dimension selfDimension) {
         super(parentFrame, selfDimension);
 
-        leftSideComponent = new LeftSideComponent(rootFrameDimension, this, groupTitles);
+        leftSideComponent = new LeftSideComponent(rootFrameDimension, this);
+
+        LeftSideComponent leftSideComponent = (LeftSideComponent) this.leftSideComponent;
+        leftSideComponent.setGroupLabelWidgetsTitle(groupTitles);
+
         groupedListComponent = new GroupedListComponent(rootFrameDimension,this);
         detailInformationComponent = new DetailInformationComponent(rootFrameDimension,this);
     }

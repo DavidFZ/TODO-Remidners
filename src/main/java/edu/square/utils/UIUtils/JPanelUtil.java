@@ -29,10 +29,15 @@ public class JPanelUtil {
         return jPanel;
     }
 
-    public static JPanel getFlowJpanel(FlowLayout flowLayout, Dimension dimension, Color color) {
+    public static JPanel getFlowJpanel(FlowLayout flowLayout, Dimension dimension) {
         JPanel jPanel = new JPanel();
         jPanel.setLayout(flowLayout);
         jPanel.setPreferredSize(dimension);
+        return jPanel;
+    }
+
+    public static JPanel getFlowJpanel(FlowLayout flowLayout, Dimension dimension, Color color) {
+        JPanel jPanel = getFlowJpanel(flowLayout, dimension);
         jPanel.setBackground(color);
         return jPanel;
     }

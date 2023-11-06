@@ -10,7 +10,7 @@ public abstract class MComponent {
     @Getter
     protected final Dimension parentDimension;
     @Getter
-    protected final Dimension selfDimension;
+    protected Dimension selfDimension;
     @Getter
     protected JPanel mainPanel;
 
@@ -24,20 +24,29 @@ public abstract class MComponent {
 
     public MComponent(Dimension parentDimension) {
         this.parentDimension = parentDimension;
-        selfDimension = null;
+        calculateSelfDimension();
+
+        initialize();
+
     }
 
-    public MComponent(MyView myView, Dimension componentPanelDimension) {
+    public MComponent(MyView myView, Dimension selfDimension) {
         this.parentDimension = myView.getMainPanelDimension();
-        selfDimension = componentPanelDimension;
+        this.selfDimension = selfDimension;
 
+        initialize();
+
+        myView.addMComponent(this);
+    }
+
+    private void initialize() {
         initializeMainPanel();
         initializeFonts();
         initializeJComponents();
         setColors();
-
-        myView.addMComponent(this);
     }
+
+    protected abstract void calculateSelfDimension();
 
     protected abstract void initializeMainPanel();
 

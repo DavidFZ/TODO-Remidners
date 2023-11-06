@@ -16,9 +16,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
+import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthScale;
+import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
+
 public class GroupedListComponent extends MComponent {
-    @Getter
-    private ReminderListWidget reminderListWidget;
     private final double scaling = 0.4;
     //font定义
     Font font1;
@@ -26,6 +27,8 @@ public class GroupedListComponent extends MComponent {
     Font font3;
     @Getter
     JButton addButton;
+    @Getter
+    private ReminderListWidget reminderListWidget;
     //root Frame
     @Getter
     private JPanel mainPanel;
@@ -54,24 +57,8 @@ public class GroupedListComponent extends MComponent {
         mainPanel.setVisible(true);
     }
 
-    public GroupedListComponent(Dimension parentFrameDimension, MyView myView) {
-        this(parentFrameDimension);
-        myView.addMComponent(this);
-    }
-
-    @Override
-    protected void initializeMainPanel() {
-
-    }
-
-    @Override
-    protected void initializeFonts() {
-
-    }
-
-    @Override
-    protected void initializeJComponents() {
-
+    public GroupedListComponent(Dimension rootFrameDimension, MyView myView) {
+        super(myView,rootFrameDimension);
     }
 
     public static void main(String[] args) {
@@ -80,6 +67,57 @@ public class GroupedListComponent extends MComponent {
         jFrame.add(groupedListComponent.getMainPanel());
         jFrame.setVisible(true);
 
+    }
+
+    @Override
+    protected void calculateSelfDimension() {
+        selfDimension = resizeDimensionWidthScale(parentDimension, scaling);
+    }
+
+    @Override
+    protected void initializeMainPanel() {
+        FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, 0, 0);
+        mainPanel = getFlowJpanel(flowLayout, selfDimension);
+    }
+
+    @Override
+    protected void initializeFonts() {
+        font1 = FontUtil.getBoldFont(parentDimension, 0.05);
+        font2 = FontUtil.getBoldFont(parentDimension, 0.03);
+        font3 = FontUtil.getBoldFont(parentDimension, 0.008);
+    }
+
+    @Override
+    protected void initializeJComponents() {
+        JPanel titlePanel = new JPanel();
+        titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        titlePanel.setPreferredSize(new Dimension((int) (scaling * parentDimension.getWidth()), (int) (0.12 * parentDimension.getHeight())));
+//            titlePanel.setBackground(Color.black);
+        mainPanel.add(titlePanel);
+        //titlePanel_title
+        JPanel titlePanel_title = new JPanel();
+        titlePanel_title.setLayout(new FlowLayout(FlowLayout.LEFT));
+        titlePanel_title.setPreferredSize(new Dimension((int) (scaling * 0.48 * parentDimension.getWidth()), (int) (0.11 * parentDimension.getHeight())));
+        titlePanel_title.setBackground(Color.blue);
+        titlePanel.add(titlePanel_title);
+
+        titleLabel = new JLabel("All");
+        titleLabel.setFont(font1);
+        titlePanel_title.add(titleLabel);
+
+        //titlePanel_button
+        JPanel titlePanel_button = new JPanel();
+        titlePanel_button.setLayout(new FlowLayout(FlowLayout.RIGHT));
+        titlePanel_button.setPreferredSize(new Dimension((int) (scaling * 0.48 * parentDimension.getWidth()), (int) (0.11 * parentDimension.getHeight())));
+        titlePanel_button.setBackground(Color.yellow);
+        titlePanel.add(titlePanel_button);
+
+        addButton = new JButton("+");
+        addButton.setFont(font2);
+        addButton.setBackground(Color.white);
+        addButton.setPreferredSize(new Dimension((int) (0.05 * parentDimension.getWidth()), (int) (0.05 * parentDimension.getWidth())));
+        addButton.setVisible(true);
+        titlePanel_button.add(addButton);
     }
 
     //TODO: encapsulate this method as a widget
