@@ -15,7 +15,8 @@ public class SearchPanelWidget extends MWidget {
 
     //TODO: 清理这坨答辩
     public SearchPanelWidget(Dimension dimension, Font font2) {
-        super();
+        //TODO: figure out what is this? self dimension or parent dimension
+        super(dimension,dimension);
         //        searchTipsPanel
         {
             searchTipsPanel = new JPanel();
@@ -46,5 +47,20 @@ public class SearchPanelWidget extends MWidget {
     @Override
     protected void setMainPanelFlowLayout(FlowLayout flowLayout) {
         mainPanel.setLayout(flowLayout);
+    }
+
+    @Override
+    protected void initializeMainPanel() {
+
+    }
+
+    @Override
+    protected void initializeFonts() {
+
+    }
+
+    @Override
+    protected void initializeJComponents() {
+
     }
 }

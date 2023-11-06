@@ -33,7 +33,9 @@ public class ReminderListWidget extends MWidget{
     @Setter
     private ActionListener completeActionListener;
 
-    public ReminderListWidget(Dimension parentDimension) {
+    public ReminderListWidget(Dimension parentDimension,Dimension selfDimension) {
+        //TODO: 搞清楚这个到底是parentDimension还是selfDimension
+        super(parentDimension,selfDimension);
         this.parentDimension = parentDimension;
 
         frameHeightInit = parentDimension.getHeight();
@@ -117,6 +119,21 @@ public class ReminderListWidget extends MWidget{
 
     @Override
     protected void setMainPanelFlowLayout(FlowLayout flowLayout) {
+
+    }
+
+    @Override
+    protected void initializeMainPanel() {
+
+    }
+
+    @Override
+    protected void initializeFonts() {
+
+    }
+
+    @Override
+    protected void initializeJComponents() {
 
     }
 

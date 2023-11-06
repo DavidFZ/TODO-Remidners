@@ -22,8 +22,9 @@ public class ListView extends MyView {
 
         LeftSideComponentView leftSideComponentView = (LeftSideComponentView) this.leftSideComponent;
         leftSideComponentView.setGroupLabelWidgetsTitle(groupTitles);
-
+        //groupedListComponent
         groupedListComponent = new GroupedListComponent(rootFrameDimension,this);
+        //detailInformationComponent
         detailInformationComponent = new DetailInformationComponent(rootFrameDimension,this);
     }
 

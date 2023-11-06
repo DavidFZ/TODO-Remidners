@@ -7,13 +7,28 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeight
 
 public class BlockPanelWidget extends MWidget{
     public BlockPanelWidget(Dimension parentJComponentDimension, double scalingRation) {
-        super();
+        super(parentJComponentDimension,resizeDimensionHeightScale(parentJComponentDimension, scalingRation));
         mainPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         mainPanel.setPreferredSize(resizeDimensionHeightScale(parentJComponentDimension, scalingRation));
     }
 
     @Override
     protected void setMainPanelFlowLayout(FlowLayout flowLayout) {
+
+    }
+
+    @Override
+    protected void initializeMainPanel() {
+
+    }
+
+    @Override
+    protected void initializeFonts() {
+
+    }
+
+    @Override
+    protected void initializeJComponents() {
 
     }
 }

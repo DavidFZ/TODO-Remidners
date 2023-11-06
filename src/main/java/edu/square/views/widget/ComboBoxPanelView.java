@@ -11,12 +11,13 @@ public class ComboBoxPanelView extends MWidget {
 
     String[] options;
 
-    public ComboBoxPanelView(Dimension dimension, double scalingRatio, Font font, String[] options, Color background) {
-        super();
+    public ComboBoxPanelView(Dimension rootFrameDimension,Dimension dimension, double scalingRatio, Font font, String[] options, Color background) {
+        super(rootFrameDimension,resizeDimensionHeightScale(dimension,scalingRatio));
+        selfDimension = resizeDimensionHeightScale(dimension, scalingRatio);
         this.options = options;
 
         mainPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        mainPanel.setPreferredSize(resizeDimensionHeightScale(dimension, scalingRatio));
+        mainPanel.setPreferredSize(selfDimension);
         mainPanel.setBackground(background);
 
         jComboBox = new JComboBox<String>();
@@ -31,6 +32,21 @@ public class ComboBoxPanelView extends MWidget {
 
     @Override
     protected void setMainPanelFlowLayout(FlowLayout flowLayout) {
+
+    }
+
+    @Override
+    protected void initializeMainPanel() {
+
+    }
+
+    @Override
+    protected void initializeFonts() {
+
+    }
+
+    @Override
+    protected void initializeJComponents() {
 
     }
 }

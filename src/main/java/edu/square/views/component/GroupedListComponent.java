@@ -6,6 +6,7 @@ import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.view.MyView;
+import edu.square.views.widget.GroupedTitleWidgetView;
 import edu.square.views.widget.ReminderListWidget;
 import lombok.Getter;
 
@@ -39,23 +40,6 @@ public class GroupedListComponent extends MComponent {
     @Getter
     private JButton confirmButton;
 
-
-    public GroupedListComponent(Dimension parentFrameDimension) {
-        super(parentFrameDimension);
-
-
-        font1 = FontUtil.getBoldFont(parentFrameDimension, 0.05);
-        font2 = FontUtil.getBoldFont(parentFrameDimension, 0.03);
-        font3 = FontUtil.getBoldFont(parentFrameDimension, 0.008);
-
-        init();
-
-        reminderListWidget = new ReminderListWidget(parentFrameDimension);
-        mainPanel.add(reminderListWidget.getScrollPane());
-
-
-        mainPanel.setVisible(true);
-    }
 
     public GroupedListComponent(Dimension rootFrameDimension, MyView myView) {
         super(myView,rootFrameDimension);
@@ -94,38 +78,12 @@ public class GroupedListComponent extends MComponent {
 
     @Override
     protected void initializeJComponents() {
-        JPanel titlePanel = new JPanel();
-        titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        titlePanel.setPreferredSize(new Dimension((int) (scaling * parentDimension.getWidth()), (int) (0.12 * parentDimension.getHeight())));
-//            titlePanel.setBackground(Color.black);
-        mainPanel.add(titlePanel);
-        //titlePanel_title
-        JPanel titlePanel_title = new JPanel();
-        titlePanel_title.setLayout(new FlowLayout(FlowLayout.LEFT));
-        titlePanel_title.setPreferredSize(new Dimension((int) (scaling * 0.48 * parentDimension.getWidth()), (int) (0.11 * parentDimension.getHeight())));
-        titlePanel_title.setBackground(Color.blue);
-        titlePanel.add(titlePanel_title);
-
-        titleLabel = new JLabel("All");
-        titleLabel.setFont(font1);
-        titlePanel_title.add(titleLabel);
-
-        //titlePanel_button
-        JPanel titlePanel_button = new JPanel();
-        titlePanel_button.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        titlePanel_button.setPreferredSize(new Dimension((int) (scaling * 0.48 * parentDimension.getWidth()), (int) (0.11 * parentDimension.getHeight())));
-        titlePanel_button.setBackground(Color.yellow);
-        titlePanel.add(titlePanel_button);
-
-        addButton = new JButton("+");
-        addButton.setFont(font2);
-        addButton.setBackground(Color.white);
-        addButton.setPreferredSize(new Dimension((int) (0.05 * parentDimension.getWidth()), (int) (0.05 * parentDimension.getWidth())));
-        addButton.setVisible(true);
-        titlePanel_button.add(addButton);
+        //GROUP TITLE
+        GroupedTitleWidgetView groupedTitleWidgetView = new GroupedTitleWidgetView(parentDimension, selfDimension);
+        mainPanel.add(groupedTitleWidgetView.getMainPanel());
 
         //GROUP LABEL
-        reminderListWidget = new ReminderListWidget(parentDimension);
+        reminderListWidget = new ReminderListWidget(parentDimension,selfDimension);
         mainPanel.add(reminderListWidget.getScrollPane());
     }
 
