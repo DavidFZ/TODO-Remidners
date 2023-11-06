@@ -2,6 +2,7 @@ package edu.square.views.widget;
 
 import edu.square.entity.Reminder;
 import edu.square.model.ReminderModel;
+import edu.square.utils.UIUtils.FontUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -13,9 +14,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.square.model.ReminderModel.updateReminderEntityDoneStatus;
+import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
 
-public class ReminderListWidget extends MWidget{
+public class ReminderListWidgetView extends MWidget {
     //keep parentFrame var for future implementation resolution scaling
     private final Dimension parentDimension;
     @Getter
@@ -25,18 +26,19 @@ public class ReminderListWidget extends MWidget{
     private final double frameWidthInit;
     private final double frameHeightInit;
     private final double scaling = 0.4;
-    @Getter
-    JPanel jPanelManager;
     int reminderNum;
     @Getter
     private JScrollPane scrollPane;
     @Setter
     private ActionListener completeActionListener;
+    Font font;
 
-    public ReminderListWidget(Dimension parentDimension,Dimension selfDimension) {
-        //TODO: 搞清楚这个到底是parentDimension还是selfDimension
-        super(parentDimension,selfDimension);
+    public ReminderListWidgetView(Dimension parentDimension, Dimension selfDimension) {
+        super(parentDimension, selfDimension);
+
         this.parentDimension = parentDimension;
+        //TODO:给我去掉这个牛皮藓
+        this.selfDimension = new Dimension(resizeDimensionWidthAndHeight(selfDimension, 0.93, 0.06));
 
         frameHeightInit = parentDimension.getHeight();
         frameWidthInit = scaling * parentDimension.getWidth();
@@ -45,25 +47,19 @@ public class ReminderListWidget extends MWidget{
         reminderNum = reminders.size();
         reminderViews = new ArrayList<>();
 
-        jPanelManager = new JPanel();
-        jPanelManager.setPreferredSize(new Dimension((int) (frameWidthInit*0.95), (int) ((frameHeightInit * 0.06) * reminderNum)));
-        jPanelManager.setBackground(Color.red);
-        jPanelManager.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
 
         int w = (int) (frameWidthInit);
         int h = (int) (0.8 * parentDimension.getHeight());
-        scrollPane = new JScrollPane(jPanelManager);
+        scrollPane = new JScrollPane(mainPanel);
         scrollPane.setPreferredSize(new Dimension(w, h));
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setWheelScrollingEnabled(true);
-
-        //TODO 实现自动滚动到底部
 
         //循环遍历添加数据库内容
         for (Reminder r : reminders) {
             ReminderView reminderView = new ReminderView(r);
             reminderViews.add(reminderView);
-            jPanelManager.add(reminderView.getInnerPanel());
+            mainPanel.add(reminderView.getInnerPanel());
         }
     }
 
@@ -73,12 +69,12 @@ public class ReminderListWidget extends MWidget{
         ReminderView reminderView = new ReminderView(reminder);
         reminderViews.add(reminderView);
 
-        jPanelManager.add(reminderView.getInnerPanel());
+        mainPanel.add(reminderView.getInnerPanel());
         // add complete button listener
         if (completeActionListener != null)
             reminderView.getRadioButton().addActionListener(completeActionListener);
         if (reminderNum > 13) {
-            jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.06)));
+            mainPanel.setPreferredSize(new Dimension(mainPanel.getWidth(), (int) (mainPanel.getHeight() + frameHeightInit * 0.06)));
         }
 
         //TODO:实现自动滚动到底部
@@ -89,7 +85,7 @@ public class ReminderListWidget extends MWidget{
 
         for (Reminder reminder : reminders) {
             ReminderView reminderView = new ReminderView(reminder);
-            jPanelManager.add(reminderView.getInnerPanel());
+            mainPanel.add(reminderView.getInnerPanel());
             // add complete button listener
             if (completeActionListener != null)
                 reminderView.getRadioButton().addActionListener(completeActionListener);
@@ -101,8 +97,8 @@ public class ReminderListWidget extends MWidget{
     }
 
     public void clearReminderListViewWithoutRepaint() {
-        jPanelManager.removeAll();
-        jPanelManager.setPreferredSize(new Dimension((int) (frameWidthInit * 0.93), (int) ((frameHeightInit * 0.06) * reminderNum)));
+        mainPanel.removeAll();
+        mainPanel.setPreferredSize(selfDimension);
         reminderNum = 0;
         reminders.clear();
         reminderViews.clear();
@@ -110,26 +106,27 @@ public class ReminderListWidget extends MWidget{
 
     public void clearReminderListView() {
         clearReminderListViewWithoutRepaint();
-        jPanelManager.repaint();
+        mainPanel.repaint();
     }
 
     public void repaint() {
-        jPanelManager.repaint();
+        mainPanel.repaint();
     }
 
     @Override
     protected void setMainPanelFlowLayout(FlowLayout flowLayout) {
-
+        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
     }
 
     @Override
     protected void initializeMainPanel() {
-
+        mainPanel.setPreferredSize(new Dimension((int) (frameWidthInit * 0.95), (int) ((frameHeightInit * 0.06) * reminderNum)));
+        mainPanel.setBackground(Color.red);
     }
 
     @Override
     protected void initializeFonts() {
-
+        font = FontUtil.getBoldFont(parentDimension, 0.03);
     }
 
     @Override
@@ -152,7 +149,7 @@ public class ReminderListWidget extends MWidget{
             innerPanel = new JPanel();
             label = new JLabel(reminder.getContent());
             //TODO: abstract an interface for font resize from parentFrame
-            label.setFont(new Font("宋体", Font.BOLD, (int) (0.03 * parentDimension.getWidth())));
+            label.setFont(font);
             radioButton = new JRadioButton();
             //bind view
             initView();
@@ -160,7 +157,7 @@ public class ReminderListWidget extends MWidget{
 
         private void initView() {
             //innerPanel View
-            innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+            innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
             innerPanel.setPreferredSize(new Dimension((int) (0.85 * frameWidthInit), (int) (0.06 * frameHeightInit)));//13个
             innerPanel.setBorder(new LineBorder(Color.PINK));
             innerPanel.setBackground(Color.yellow);
@@ -173,7 +170,6 @@ public class ReminderListWidget extends MWidget{
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     setReminderViewDoneStatus(radioButton.isSelected());    //update view
-//                    updateReminderEntityDoneStatus(reminder, radioButton.isSelected());     //update database
                 }
             });
 
@@ -192,10 +188,6 @@ public class ReminderListWidget extends MWidget{
                 radioButton.setSelected(false);
                 label.setForeground(Color.BLACK);
             }
-        }
-
-        private void addClickListener(ActionListener actionListener) {
-            radioButton.addActionListener(actionListener);
         }
     }
 

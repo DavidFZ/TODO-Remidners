@@ -1,12 +1,10 @@
 package edu.square.model.component;
 
 import edu.square.entity.Reminder;
-import edu.square.model.ReminderModel;
 import edu.square.views.component.DetailInformationComponent;
-import edu.square.views.widget.ReminderListWidget;
+import edu.square.views.widget.ReminderListWidgetView;
 import lombok.Getter;
 
-import javax.swing.*;
 import java.awt.event.ActionListener;
 
 import static edu.square.model.ReminderModel.updateReminder;
@@ -14,7 +12,7 @@ import static edu.square.model.ReminderModel.updateReminder;
 public class DetailInformationModel extends MComponentModel {
     private final DetailInformationComponent detailInformationComponent;
     @Getter
-    private ReminderListWidget.ReminderView reminderView;
+    private ReminderListWidgetView.ReminderView reminderView;
 
     public DetailInformationModel(DetailInformationComponent detailInformationComponent) {
         super(detailInformationComponent);
@@ -39,7 +37,7 @@ public class DetailInformationModel extends MComponentModel {
         });
     }
 
-    public void updateViewOfReminderDetailInfo(ReminderListWidget.ReminderView reminderView) {
+    public void updateViewOfReminderDetailInfo(ReminderListWidgetView.ReminderView reminderView) {
         this.reminderView = reminderView;
         Reminder reminder = reminderView.getReminder();
         detailInformationComponent.getNameTextFieldPanelWidget().getTextField().setText(reminder.getContent());
@@ -63,7 +61,7 @@ public class DetailInformationModel extends MComponentModel {
         updateReminder(reminder);
     }
 
-    public void setVisibleOfComponent(ReminderListWidget.ReminderView reminderView) {
+    public void setVisibleOfComponent(ReminderListWidgetView.ReminderView reminderView) {
         assert reminderView != null;
         updateViewOfReminderDetailInfo(reminderView);
         detailInformationComponent.getMainPanel().setVisible(true);

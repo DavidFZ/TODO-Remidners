@@ -1,21 +1,14 @@
 package edu.square.views.component;
 
-import edu.square.entity.Reminder;
-import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.FontUtil;
-import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.view.MyView;
 import edu.square.views.widget.GroupedTitleWidgetView;
-import edu.square.views.widget.ReminderListWidget;
+import edu.square.views.widget.ReminderListWidgetView;
 import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthScale;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
@@ -29,7 +22,7 @@ public class GroupedListComponent extends MComponent {
     @Getter
     JButton addButton;
     @Getter
-    private ReminderListWidget reminderListWidget;
+    private ReminderListWidgetView reminderListWidgetView;
     //root Frame
     @Getter
     private JPanel mainPanel;
@@ -83,8 +76,8 @@ public class GroupedListComponent extends MComponent {
         mainPanel.add(groupedTitleWidgetView.getMainPanel());
 
         //GROUP LABEL
-        reminderListWidget = new ReminderListWidget(parentDimension,selfDimension);
-        mainPanel.add(reminderListWidget.getScrollPane());
+        reminderListWidgetView = new ReminderListWidgetView(parentDimension,selfDimension);
+        mainPanel.add(reminderListWidgetView.getScrollPane());
     }
 
     //TODO: encapsulate this method as a widget
@@ -131,136 +124,8 @@ public class GroupedListComponent extends MComponent {
             addButton.setVisible(true);
             titlePanel_button.add(addButton);
 
-
-            addButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-
-                    //输入的窗口
-                    printFrame = JFrameFactory.buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowHeight((int) (0.3 * parentDimension.getHeight())).setWindowWidth((int) (0.3 * parentDimension.getWidth())).setTitle("Please add item").build());
-                    printFrame.setAlwaysOnTop(true);
-
-                    //item + text field
-                    JPanel inputPanel;
-                    JLabel inputLabel;
-                    JTextField itemName;
-                    {
-                        inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-                        Font font2 = new Font("宋体", Font.BOLD, (int) (0.01 * parentDimension.getWidth()));
-                        inputLabel = new JLabel("Item:");
-                        inputPanel.setBounds((int) (0.1 * printFrame.getHeight()), (int) (0.2 * printFrame.getHeight()), (int) (0.8 * printFrame.getWidth()), (int) (0.2 * printFrame.getWidth()));
-                        inputLabel.setFont(font2);
-                        inputPanel.add(inputLabel);
-                        itemName = new JTextField(40);
-                        inputPanel.add(itemName);
-
-                    }
-                    //Button
-
-                    JPanel confirmPanel;
-                    {
-                        confirmPanel = new JPanel(new BorderLayout());
-                        confirmPanel.setBounds(50, 100, 200, 200);
-                        confirmButton.setSize(100, 100);
-                    }
-                    //while input Enter will be same as click confirm button
-
-
-                    confirmPanel.add(confirmButton, BorderLayout.SOUTH);
-                    //two frames will not close together
-                    printFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-
-                    //对窗口的打开和关闭操作添加触发事件
-                    printFrame.addWindowListener(new WindowAdapter() {
-                        @Override
-                        public void windowOpened(WindowEvent e) {
-                            addButton.setEnabled(false);
-                        }
-
-                        @Override
-                        public void windowClosed(WindowEvent e) {
-                            super.windowClosed(e);
-                            addButton.setEnabled(true);
-
-                        }
-                    });
-                    printFrame.add(inputPanel);
-                    printFrame.add(confirmPanel);
-
-                    //The influence of click button
-                    confirmButton.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            String item = itemName.getText();
-                            if (item.length() > 0 && item.length() <= 50) {
-
-                                addItem(ReminderModel.insertReminder(item));
-//                                pulsButton.setEnabled(true);
-                                printFrame.dispose();
-                            } else if (item.length() >= 50) {
-//                                JOptionPane.showMessageDialog(null, "输入字段过长（输入长度限制50字）", "警告", JOptionPane.WARNING_MESSAGE);
-                                String newItem = item.substring(0, 49);
-                                addItem(ReminderModel.insertReminder(newItem));
-                            }
-
-//                            addButton.setEnabled(true);
-                        }
-                    });
-
-                    //release Enter
-                    //TODO: recover this function by implement a new listener
-//                    itemName.addKeyListener(new KeyAdapter() {
-//                        @Override
-//                        public void keyTyped(KeyEvent e) {
-//                            super.keyTyped(e);
-//                            if (e.getKeyChar() == KeyEvent.VK_ENTER) {
-//                                String item = itemName.getText();
-//                                if (item != null) {
-//                                    //TODO: use some less invasive way to do this
-//                                    addItem(ReminderModel.insertReminder(item));
-//                                }
-//                                printFrame.dispose();
-//                            }
-//                            addButton.setEnabled(true);
-//                        }
-//
-//                    });
-
-                    //if components are visible
-                    itemName.setVisible(true);
-                    confirmPanel.setVisible(true);
-                    inputLabel.setVisible(true);
-                    inputPanel.setVisible(true);
-                    confirmButton.setVisible(true);
-                    printFrame.setVisible(true);
-
-                }
-            });
         }
 
-    }
-
-    public void addItem(Reminder reminder) {
-        reminderListWidget.addNewReminderViewIntoReminderListView(reminder);
-
-        mainPanel.validate();
-        mainPanel.repaint();
-
-        mainPanel.setVisible(true);
-    }
-
-    public void addItem(List reminders) {
-        reminderListWidget.addNewReminderViewsIntoReminderListView((java.util.List<Reminder>) reminders);
-
-        mainPanel.validate();
-        mainPanel.repaint();
-
-        mainPanel.setVisible(true);
-    }
-
-    public void addReminderInsertConfirmListener(ActionListener reminderInsertConfirmListener) {
-        assert confirmButton != null;
-        confirmButton.addActionListener(reminderInsertConfirmListener);
     }
 
     @Override

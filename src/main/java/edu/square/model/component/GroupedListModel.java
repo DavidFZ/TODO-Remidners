@@ -1,7 +1,7 @@
 package edu.square.model.component;
 
 import edu.square.views.component.GroupedListComponent;
-import edu.square.views.widget.ReminderListWidget;
+import edu.square.views.widget.ReminderListWidgetView;
 
 public class GroupedListModel extends MComponentModel{
 
@@ -10,6 +10,6 @@ public class GroupedListModel extends MComponentModel{
 
     }
 
-    public void clearSingleReminderView(ReminderListWidget.ReminderView reminderView) {
+    public void clearSingleReminderView(ReminderListWidgetView.ReminderView reminderView) {
     }
 }
