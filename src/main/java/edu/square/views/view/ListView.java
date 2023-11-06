@@ -1,4 +1,4 @@
-package edu.square.views;
+package edu.square.views.view;
 
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.component.DetailInformationComponent;

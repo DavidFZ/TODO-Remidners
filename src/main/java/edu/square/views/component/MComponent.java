@@ -1,17 +1,15 @@
 package edu.square.views.component;
 
-import edu.square.views.MyView;
+import edu.square.views.view.MyView;
 import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
 
+@Getter
 public abstract class MComponent {
-    @Getter
     protected final Dimension parentDimension;
-    @Getter
     protected Dimension selfDimension;
-    @Getter
     protected JPanel mainPanel;
 
     public MComponent(Dimension parentDimension, Dimension componentPanelDimension) {

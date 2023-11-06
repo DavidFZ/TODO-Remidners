@@ -5,7 +5,7 @@ import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JFrameAttribute;
 import edu.square.utils.UIUtils.JFrameFactory;
-import edu.square.views.MyView;
+import edu.square.views.view.MyView;
 import edu.square.views.widget.ReminderListWidget;
 import lombok.Getter;
 

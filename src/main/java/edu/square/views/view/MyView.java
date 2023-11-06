@@ -1,4 +1,4 @@
-package edu.square.views;
+package edu.square.views.view;
 
 import edu.square.views.component.MComponent;
 import lombok.Getter;
@@ -6,7 +6,7 @@ import lombok.Getter;
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class MyView {
+public class MyView {
     protected Dimension rootFrameDimension;
     @Getter
     protected JPanel mainPanel;

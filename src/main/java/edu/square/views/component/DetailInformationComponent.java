@@ -1,7 +1,7 @@
 package edu.square.views.component;
 
 import edu.square.utils.UIUtils.JPanelUtil;
-import edu.square.views.MyView;
+import edu.square.views.view.MyView;
 import edu.square.views.widget.BlockPanelWidget;
 import edu.square.views.widget.TextFieldPanelWidget;
 import lombok.Getter;
