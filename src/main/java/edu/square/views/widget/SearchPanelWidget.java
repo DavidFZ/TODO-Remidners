@@ -9,11 +9,13 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeight
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
 
 @Getter
-public class SearchPanelWidget {
+public class SearchPanelWidget extends MWidget {
     private final JPanel searchPanel;
     private final JPanel searchTipsPanel;
 
+    //TODO: 清理这坨答辩
     public SearchPanelWidget(Dimension dimension, Font font2) {
+        super();
         //        searchTipsPanel
         {
             searchTipsPanel = new JPanel();
@@ -39,5 +41,10 @@ public class SearchPanelWidget {
             searchText.setFont(font2);
             searchPanel.add(searchText);
         }
+    }
+
+    @Override
+    protected void setMainPanelFlowLayout(FlowLayout flowLayout) {
+        mainPanel.setLayout(flowLayout);
     }
 }

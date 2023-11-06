@@ -12,4 +12,8 @@ public class BlockPanelWidget extends MWidget{
         mainPanel.setPreferredSize(resizeDimensionHeightScale(parentJComponentDimension, scalingRation));
     }
 
+    @Override
+    protected void setMainPanelFlowLayout(FlowLayout flowLayout) {
+
+    }
 }

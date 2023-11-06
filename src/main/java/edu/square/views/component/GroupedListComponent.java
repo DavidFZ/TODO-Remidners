@@ -63,8 +63,13 @@ public class GroupedListComponent extends MComponent {
 
     public static void main(String[] args) {
         JFrame jFrame = JFrameFactory.getDefaultJFrame(0.8d, "GroupedListComponentTest");
-        GroupedListComponent groupedListComponent = new GroupedListComponent(jFrame.getSize());
-        jFrame.add(groupedListComponent.getMainPanel());
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        MyView myView = new MyView(jFrame,jFrame.getSize());
+        GroupedListComponent groupedListComponent = new GroupedListComponent(jFrame.getSize(),myView);
+
+//        jFrame.add(groupedListComponent.getMainPanel());
         jFrame.setVisible(true);
 
     }
@@ -118,6 +123,10 @@ public class GroupedListComponent extends MComponent {
         addButton.setPreferredSize(new Dimension((int) (0.05 * parentDimension.getWidth()), (int) (0.05 * parentDimension.getWidth())));
         addButton.setVisible(true);
         titlePanel_button.add(addButton);
+
+        //GROUP LABEL
+        reminderListWidget = new ReminderListWidget(parentDimension);
+        mainPanel.add(reminderListWidget.getScrollPane());
     }
 
     //TODO: encapsulate this method as a widget

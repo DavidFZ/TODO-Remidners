@@ -4,7 +4,7 @@ import edu.square.entity.Reminder;
 import edu.square.model.component.DetailInformationModel;
 import edu.square.views.component.DetailInformationComponent;
 import edu.square.views.component.GroupedListComponent;
-import edu.square.views.component.LeftSideComponent;
+import edu.square.views.component.LeftSideComponentView;
 import edu.square.views.widget.GroupLabelWidget;
 import edu.square.views.widget.ReminderListWidget;
 
@@ -20,7 +20,7 @@ import static edu.square.model.ReminderModel.*;
 public class View1Controller extends MController {
     public static String[] groupTitles = {"All", "Today", "Completed", "Flagged"};
     private final List<GroupLabelWidget> groupLabelWidgets;
-    private final LeftSideComponent leftSideComponent;
+    private final LeftSideComponentView leftSideComponentView;
     private final GroupedListComponent groupedListComponent;
     //Model
     private final DetailInformationModel detailInformationModel;
@@ -28,16 +28,16 @@ public class View1Controller extends MController {
     private int currentGroupIndex = 0;
 
 
-    public View1Controller(LeftSideComponent leftSideComponent, GroupedListComponent groupedListComponent, DetailInformationComponent detailInformationComponent) {
-        super(leftSideComponent, groupedListComponent, detailInformationComponent);
+    public View1Controller(LeftSideComponentView leftSideComponentView, GroupedListComponent groupedListComponent, DetailInformationComponent detailInformationComponent) {
+        super(leftSideComponentView, groupedListComponent, detailInformationComponent);
 
-        this.leftSideComponent = leftSideComponent;
+        this.leftSideComponentView = leftSideComponentView;
         this.groupedListComponent = groupedListComponent;
 
         detailInformationModel = new DetailInformationModel(detailInformationComponent);
 
         //Add listeners to group labels, so that when clicked, the reminder list & title panel will be updated
-        groupLabelWidgets = leftSideComponent.getGroupLabelWidgets();
+        groupLabelWidgets = leftSideComponentView.getGroupLabelWidgets();
         reminders = getGroupedReminders();
 
         for (int i = 0; i < reminders.size(); i++) {
@@ -120,7 +120,7 @@ public class View1Controller extends MController {
         for (int i = 0; i < reminders.size(); i++) {
             List<Reminder> reminderList = reminders.get(i);
             //update left side group view count label
-            GroupLabelWidget groupLabelWidget = leftSideComponent.getGroupLabelWidgets().get(i);
+            GroupLabelWidget groupLabelWidget = leftSideComponentView.getGroupLabelWidgets().get(i);
             groupLabelWidget.setGroupViewCount(reminderList.size());
             groupLabelWidget.repaint();
         }

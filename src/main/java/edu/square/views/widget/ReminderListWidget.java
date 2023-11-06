@@ -115,6 +115,11 @@ public class ReminderListWidget extends MWidget{
         jPanelManager.repaint();
     }
 
+    @Override
+    protected void setMainPanelFlowLayout(FlowLayout flowLayout) {
+
+    }
+
     public class ReminderView {
         private final JLabel label;
         @Getter

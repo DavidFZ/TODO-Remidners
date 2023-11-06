@@ -1,6 +1,5 @@
 package edu.square.views.component;
 
-import edu.square.controller.View1Controller;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.view.MyView;
 import edu.square.views.widget.BlockPanelWidget;
@@ -18,7 +17,7 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthS
 import static edu.square.utils.UIUtils.FontUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getCenterFlowMainPanel;
 
-public class LeftSideComponent extends MComponent {
+public class LeftSideComponentView extends MComponent {
     private static final String[] testGroupTitles = {"All", "Today", "Completed", "Flagged"};
     Font font1;
     Font font2;
@@ -27,7 +26,7 @@ public class LeftSideComponent extends MComponent {
     @Getter
     private List<GroupLabelWidget> groupLabelWidgets;
 
-    public LeftSideComponent(Dimension rootFrameDimension, MyView myView) {
+    public LeftSideComponentView(Dimension rootFrameDimension, MyView myView) {
         super(myView,rootFrameDimension);
     }
 
@@ -38,8 +37,8 @@ public class LeftSideComponent extends MComponent {
         jFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         MyView myView = new MyView(jFrame,jFrame.getSize());
-        LeftSideComponent leftSideComponent = new LeftSideComponent(jFrame.getSize(),myView);
-        leftSideComponent.setGroupLabelWidgetsTitle(testGroupTitles);
+        LeftSideComponentView leftSideComponentView = new LeftSideComponentView(jFrame.getSize(),myView);
+        leftSideComponentView.setGroupLabelWidgetsTitle(testGroupTitles);
 
         jFrame.setVisible(true);
     }

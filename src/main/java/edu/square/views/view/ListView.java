@@ -3,7 +3,7 @@ package edu.square.views.view;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.component.DetailInformationComponent;
 import edu.square.views.component.GroupedListComponent;
-import edu.square.views.component.LeftSideComponent;
+import edu.square.views.component.LeftSideComponentView;
 import edu.square.views.component.MComponent;
 
 import javax.swing.*;
@@ -18,10 +18,10 @@ public class ListView extends MyView {
     public ListView(JFrame parentFrame, Dimension selfDimension) {
         super(parentFrame, selfDimension);
 
-        leftSideComponent = new LeftSideComponent(rootFrameDimension, this);
+        leftSideComponent = new LeftSideComponentView(rootFrameDimension, this);
 
-        LeftSideComponent leftSideComponent = (LeftSideComponent) this.leftSideComponent;
-        leftSideComponent.setGroupLabelWidgetsTitle(groupTitles);
+        LeftSideComponentView leftSideComponentView = (LeftSideComponentView) this.leftSideComponent;
+        leftSideComponentView.setGroupLabelWidgetsTitle(groupTitles);
 
         groupedListComponent = new GroupedListComponent(rootFrameDimension,this);
         detailInformationComponent = new DetailInformationComponent(rootFrameDimension,this);

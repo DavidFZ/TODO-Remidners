@@ -28,4 +28,9 @@ public class ComboBoxPanelView extends MWidget {
         jComboBox.setPreferredSize(new Dimension((int) (0.7 * dimension.width), (int) (0.8 * scalingRatio * dimension.height)));
         mainPanel.add(jComboBox);
     }
+
+    @Override
+    protected void setMainPanelFlowLayout(FlowLayout flowLayout) {
+
+    }
 }
