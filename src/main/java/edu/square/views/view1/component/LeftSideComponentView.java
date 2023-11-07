@@ -62,7 +62,7 @@ public class LeftSideComponentView extends MComponent {
     @Override
     protected void initializeJComponents() {
         //SEARCH PANEL
-        SearchPanelWidget searchPanelWidget = new SearchPanelWidget(selfDimension, font2);
+        SearchPanelWidget searchPanelWidget = new SearchPanelWidget(parentDimension,selfDimension);
         mainPanel.add(searchPanelWidget.getMainPanel());
 
         //BLOCK PANEL
