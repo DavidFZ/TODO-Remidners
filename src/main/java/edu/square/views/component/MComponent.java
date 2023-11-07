@@ -20,14 +20,6 @@ public abstract class MComponent {
         initializeFonts();
     }
 
-    public MComponent(Dimension parentDimension) {
-        this.parentDimension = parentDimension;
-        calculateSelfDimension();
-
-        initialize();
-
-    }
-
     public MComponent(MyView myView, Dimension selfDimension) {
         this.parentDimension = myView.getMainPanelDimension();
         this.selfDimension = selfDimension;
@@ -38,6 +30,7 @@ public abstract class MComponent {
     }
 
     private void initialize() {
+        calculateSelfDimension();
         initializeMainPanel();
         initializeFonts();
         initializeJComponents();
