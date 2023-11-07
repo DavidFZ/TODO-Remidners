@@ -1,5 +1,7 @@
 package edu.square.views.view1.view;
 
+import edu.square.controller.view1.component.LeftSideComponentController;
+import edu.square.model.view1.component.LeftSideComponentModel;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.view.MyView;
 import edu.square.views.view1.component.DetailInformationComponentView;
@@ -19,8 +21,9 @@ public class ListView extends MyView {
         super(parentFrame, selfDimension);
 
         leftSideComponent = new LeftSideComponentView(rootFrameDimension, this);
-        groupedListComponentView = new GroupedListComponentView(rootFrameDimension,this);
-        detailInformationComponent = new DetailInformationComponentView(rootFrameDimension,this);
+        LeftSideComponentController leftSideComponentController = new LeftSideComponentController(leftSideComponent, new LeftSideComponentModel());
+        groupedListComponentView = new GroupedListComponentView(rootFrameDimension, this);
+        detailInformationComponent = new DetailInformationComponentView(rootFrameDimension, this);
     }
 
     public static void main(String[] args) {

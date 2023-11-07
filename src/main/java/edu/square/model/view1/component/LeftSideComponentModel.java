@@ -1,6 +1,7 @@
 package edu.square.model.view1.component;
 
 import edu.square.entity.Reminder;
+import edu.square.model.MModel;
 import edu.square.model.view1.widget.ReminderModel;
 import lombok.Data;
 import lombok.Getter;
@@ -8,21 +9,21 @@ import lombok.Getter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupedListComponentModel {
+public class LeftSideComponentModel extends MModel {
     private static final String[] BASE_GROUP_TITLES = {"All", "Today", "Completed", "Flagged"};
     @Getter
     private List<GroupModel> groupModels;
 
 
-    public GroupedListComponentModel() {
+    public LeftSideComponentModel() {
         groupModels = queryBaseGroups();
     }
 
     public static void main(String[] args) {
-        GroupedListComponentModel groupedListComponentModel = new GroupedListComponentModel();
-        List<GroupModel> groupModels = groupedListComponentModel.getGroupModels();
+        LeftSideComponentModel leftSideComponentModel = new LeftSideComponentModel();
+        List<GroupModel> groupModels = leftSideComponentModel.getGroupModels();
         for (GroupModel groupModel : groupModels) {
-            System.out.println(groupModel.getGroupName());
+            System.out.println(groupModel.getGroupName() + " : " + groupModel.getReminderModels().size());
             for (Reminder reminderModel : groupModel.getReminderModels()) {
                 System.out.println(reminderModel.getContent());
             }

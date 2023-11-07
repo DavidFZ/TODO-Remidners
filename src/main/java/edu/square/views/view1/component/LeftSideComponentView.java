@@ -27,6 +27,7 @@ public class LeftSideComponentView extends MComponent {
 
     public LeftSideComponentView(Dimension rootFrameDimension, MyView myView) {
         super(myView, rootFrameDimension);
+        groupLabelWidgets = new ArrayList<>();
     }
 
 
@@ -75,7 +76,6 @@ public class LeftSideComponentView extends MComponent {
 
     @Override
     protected void initializeView() {
-        setGroupLabelWidgetsTitle(testGroupTitles);
     }
 
     public void setGroupLabelWidgetsTitle(String[] groupedTitles) {
@@ -90,6 +90,19 @@ public class LeftSideComponentView extends MComponent {
     public void setGroupLabelCount(int index, int count) {
         assert index >= 0 && index < groupLabelWidgets.size();
         groupLabelWidgets.get(index).setGroupViewCount(count);
+    }
+
+    public void setGroupLabelTitle(int index, String title) {
+        assert index >= 0 && index < groupLabelWidgets.size();
+        groupLabelWidgets.get(index).setGroupViewTitle(title);
+    }
+
+    public void addGroupLabel(String title, int count) {
+        GroupLabelWidget.ViewBuilder viewBuilder = new GroupLabelWidget.ViewBuilder(selfDimension);
+        GroupLabelWidget groupLabelWidget = viewBuilder.build(title);
+        groupLabelWidget.setGroupViewCount(count);
+        groupLabelWidgets.add(groupLabelWidget);
+        mainPanel.add(groupLabelWidget.getMainPanel());
     }
 
     public void addGroupLabelMouseListener(int index, MouseListener groupLabelWidgetMouseListener) {
