@@ -15,8 +15,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
-import static edu.square.utils.UIUtils.JFrameFactory.getDefaultJFrame;
 
 public class ReminderListWidgetView extends MWidget {
     //keep parentFrame var for future implementation resolution scaling
@@ -34,11 +34,7 @@ public class ReminderListWidgetView extends MWidget {
     private ActionListener completeActionListener;
 
     public ReminderListWidgetView(Dimension rootFrameDimension, Dimension selfDimension) {
-        super(rootFrameDimension, selfDimension);
-
-        this.rootFrameDimension = rootFrameDimension;
-        //TODO:给我去掉这个牛皮藓
-        this.selfDimension = new Dimension(resizeDimensionWidthAndHeight(selfDimension, 0.93, 0.06));
+        super(rootFrameDimension, resizeDimensionWidthAndHeight(selfDimension, 0.95, 0.06));
 
         frameHeightInit = rootFrameDimension.getHeight();
         frameWidthInit = scaling * rootFrameDimension.getWidth();
@@ -48,10 +44,8 @@ public class ReminderListWidgetView extends MWidget {
         reminderViews = new ArrayList<>();
 
 
-        int w = (int) (frameWidthInit);
-        int h = (int) (0.8 * rootFrameDimension.getHeight());
         scrollPane = new JScrollPane(mainPanel);
-        scrollPane.setPreferredSize(new Dimension(w, h));
+        scrollPane.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension,0.4, 0.8));
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setWheelScrollingEnabled(true);
 

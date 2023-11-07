@@ -15,7 +15,6 @@ import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
 public class GroupedListComponent extends MComponent {
     private final double scaling = 0.4;
-    //font定义
     Font font1;
     Font font2;
     Font font3;
@@ -40,7 +39,6 @@ public class GroupedListComponent extends MComponent {
                 GroupedListComponent groupedListComponent = new GroupedListComponent(jFrame.getSize(), myView);
             }
         };
-
     }
 
     @Override

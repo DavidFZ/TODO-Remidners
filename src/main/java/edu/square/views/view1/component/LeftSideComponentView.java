@@ -1,13 +1,13 @@
-package edu.square.views.component;
+package edu.square.views.view1.component;
 
-import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.utils.UIUtils.MComponentTestHelper;
+import edu.square.views.component.MComponent;
 import edu.square.views.view.MyView;
 import edu.square.views.widget.BlockPanelWidget;
 import edu.square.views.widget.GroupLabelWidget;
 import edu.square.views.widget.SearchPanelWidget;
 import lombok.Getter;
 
-import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -27,20 +27,18 @@ public class LeftSideComponentView extends MComponent {
     private List<GroupLabelWidget> groupLabelWidgets;
 
     public LeftSideComponentView(Dimension rootFrameDimension, MyView myView) {
-        super(myView,rootFrameDimension);
+        super(myView, rootFrameDimension);
     }
 
 
     public static void main(String[] args) {
-        JFrame jFrame = JFrameFactory.getDefaultJFrame(.8d, "Schedule");
-        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        jFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
-
-        MyView myView = new MyView(jFrame,jFrame.getSize());
-        LeftSideComponentView leftSideComponentView = new LeftSideComponentView(jFrame.getSize(),myView);
-        leftSideComponentView.setGroupLabelWidgetsTitle(testGroupTitles);
-
-        jFrame.setVisible(true);
+        MComponentTestHelper mComponentTestHelper = new MComponentTestHelper() {
+            @Override
+            public void initializeMComponent() {
+                LeftSideComponentView leftSideComponentView = new LeftSideComponentView(jFrame.getSize(), myView);
+                leftSideComponentView.setGroupLabelWidgetsTitle(testGroupTitles);
+            }
+        };
     }
 
     @Override
@@ -65,8 +63,7 @@ public class LeftSideComponentView extends MComponent {
     protected void initializeJComponents() {
         //SEARCH PANEL
         SearchPanelWidget searchPanelWidget = new SearchPanelWidget(selfDimension, font2);
-        mainPanel.add(searchPanelWidget.getSearchTipsPanel());
-        mainPanel.add(searchPanelWidget.getSearchPanel());
+        mainPanel.add(searchPanelWidget.getMainPanel());
 
         //BLOCK PANEL
         BlockPanelWidget blockPanelWidget = new BlockPanelWidget(getParentDimension(), 0.2);

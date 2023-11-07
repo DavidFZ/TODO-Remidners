@@ -1,9 +1,12 @@
 package edu.square.views.widget;
 
+import lombok.Getter;
+
 import javax.swing.*;
 import java.awt.*;
 
 public abstract class MWidget{
+    @Getter
     protected final JPanel mainPanel;
     protected Dimension selfDimension;
     protected Dimension rootFrameDimension;
@@ -15,10 +18,6 @@ public abstract class MWidget{
         this.rootFrameDimension = rootFrameDimension;
 
         initialize();
-    }
-
-    public JPanel getMainPanel() {
-        return mainPanel;
     }
 
     private void initialize(){

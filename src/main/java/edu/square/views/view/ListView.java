@@ -3,7 +3,7 @@ package edu.square.views.view;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.component.DetailInformationComponent;
 import edu.square.views.component.GroupedListComponent;
-import edu.square.views.component.LeftSideComponentView;
+import edu.square.views.view1.component.LeftSideComponentView;
 import edu.square.views.component.MComponent;
 
 import javax.swing.*;
