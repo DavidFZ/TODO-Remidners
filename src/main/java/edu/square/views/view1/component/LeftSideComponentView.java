@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthScale;
 import static edu.square.utils.UIUtils.FontUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getCenterFlowMainPanel;
@@ -36,7 +37,7 @@ public class LeftSideComponentView extends MComponent {
             @Override
             public void initializeMComponent() {
                 LeftSideComponentView leftSideComponentView = new LeftSideComponentView(jFrame.getSize(), myView);
-                leftSideComponentView.setGroupLabelWidgetsTitle(testGroupTitles);
+//                leftSideComponentView.setGroupLabelWidgetsTitle(testGroupTitles);
             }
         };
     }
@@ -50,6 +51,7 @@ public class LeftSideComponentView extends MComponent {
     protected void initializeMainPanel() {
         //ROOT COMPONENT OF LEFT GROUP VIEW
         mainPanel = getCenterFlowMainPanel(selfDimension);
+        mainPanel.setBackground(Color.black);
     }
 
     @Override
@@ -62,11 +64,11 @@ public class LeftSideComponentView extends MComponent {
     @Override
     protected void initializeJComponents() {
         //SEARCH PANEL
-        SearchPanelWidget searchPanelWidget = new SearchPanelWidget(parentDimension,selfDimension);
+        SearchPanelWidget searchPanelWidget = new SearchPanelWidget(parentDimension,resizeDimensionHeightScale(selfDimension,0.15));
         mainPanel.add(searchPanelWidget.getMainPanel());
 
         //BLOCK PANEL
-        BlockPanelWidget blockPanelWidget = new BlockPanelWidget(getParentDimension(), 0.2);
+        BlockPanelWidget blockPanelWidget = new BlockPanelWidget(selfDimension, 0.2);
         blockPanelWidget.getMainPanel().setBackground(Color.yellow);
         mainPanel.add(blockPanelWidget.getMainPanel());
 
@@ -76,7 +78,6 @@ public class LeftSideComponentView extends MComponent {
 
     @Override
     protected void setColors() {
-        mainPanel.setBackground(Color.green);
     }
 
     public void setGroupLabelWidgetsTitle(String[] groupedTitles) {
