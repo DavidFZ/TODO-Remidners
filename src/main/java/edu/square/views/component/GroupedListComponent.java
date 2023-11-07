@@ -3,7 +3,7 @@ package edu.square.views.component;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.MComponentTestHelper;
 import edu.square.views.view.MyView;
-import edu.square.views.widget.GroupedTitleWidgetView;
+import edu.square.views.view1.widget.GroupedTitleWidgetView;
 import edu.square.views.widget.ReminderListWidgetView;
 import lombok.Getter;
 
