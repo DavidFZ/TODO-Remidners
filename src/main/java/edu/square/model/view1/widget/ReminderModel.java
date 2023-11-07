@@ -1,4 +1,4 @@
-package edu.square.model;
+package edu.square.model.view1.widget;
 
 import edu.square.entity.Reminder;
 import edu.square.utils.TimeUtils;

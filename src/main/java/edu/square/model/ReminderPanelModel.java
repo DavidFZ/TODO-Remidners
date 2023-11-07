@@ -10,7 +10,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static edu.square.model.ReminderModel.updateReminderEntityDoneStatus;
+import static edu.square.model.view1.widget.ReminderModel.updateReminderEntityDoneStatus;
 
 public class ReminderPanelModel extends JPanel {
     public static Font font1;

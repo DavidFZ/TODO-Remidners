@@ -1,7 +1,7 @@
 package edu.square.views.widget;
 
 import edu.square.entity.Reminder;
-import edu.square.model.ReminderModel;
+import edu.square.model.view1.widget.ReminderModel;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.MWidgetTestHelper;
 import lombok.Getter;
@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
 
 public class ReminderListWidgetView extends MWidget {

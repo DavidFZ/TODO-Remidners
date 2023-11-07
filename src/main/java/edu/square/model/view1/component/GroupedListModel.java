@@ -1,9 +1,10 @@
-package edu.square.model.component;
+package edu.square.model.view1.component;
 
+import edu.square.model.component.MComponentModel;
 import edu.square.views.view1.component.GroupedListComponent;
 import edu.square.views.widget.ReminderListWidgetView;
 
-public class GroupedListModel extends MComponentModel{
+public class GroupedListModel extends MComponentModel {
 
     public GroupedListModel(GroupedListComponent groupedListComponent) {
         super(groupedListComponent);
