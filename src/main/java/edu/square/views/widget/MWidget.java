@@ -5,13 +5,13 @@ import lombok.Getter;
 import javax.swing.*;
 import java.awt.*;
 
-public abstract class MWidget{
+public abstract class MWidget {
     @Getter
     protected final JPanel mainPanel;
     protected Dimension selfDimension;
     protected Dimension rootFrameDimension;
 
-    public MWidget(Dimension rootFrameDimension, Dimension selfDimension){
+    public MWidget(Dimension rootFrameDimension, Dimension selfDimension) {
         mainPanel = new JPanel();
         mainPanel.setPreferredSize(selfDimension);
         this.selfDimension = selfDimension;
@@ -20,14 +20,14 @@ public abstract class MWidget{
         initialize();
     }
 
-    private void initialize(){
+    private void initialize() {
         initializeFonts();
-        initializeJComponents();
         initializeMainPanel();
-        setMainPanelFlowLayout((FlowLayout) mainPanel.getLayout());
+        setMainPanelFlowLayout();
+        initializeJComponents();
     }
 
-    protected abstract void setMainPanelFlowLayout(FlowLayout flowLayout);
+    protected abstract void setMainPanelFlowLayout();
 
     protected abstract void initializeMainPanel();
 

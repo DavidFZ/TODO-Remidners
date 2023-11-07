@@ -118,7 +118,7 @@ public class ReminderListWidgetView extends MWidget {
     }
 
     @Override
-    protected void setMainPanelFlowLayout(FlowLayout flowLayout) {
+    protected void setMainPanelFlowLayout() {
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
     }
 

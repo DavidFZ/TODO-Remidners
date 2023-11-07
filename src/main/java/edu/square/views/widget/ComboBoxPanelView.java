@@ -31,7 +31,7 @@ public class ComboBoxPanelView extends MWidget {
     }
 
     @Override
-    protected void setMainPanelFlowLayout(FlowLayout flowLayout) {
+    protected void setMainPanelFlowLayout() {
 
     }
 

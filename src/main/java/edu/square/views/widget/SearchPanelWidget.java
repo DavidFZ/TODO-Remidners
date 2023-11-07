@@ -46,8 +46,8 @@ public class SearchPanelWidget extends MWidget {
     }
 
     @Override
-    protected void setMainPanelFlowLayout(FlowLayout flowLayout) {
-        mainPanel.setLayout(flowLayout);
+    protected void setMainPanelFlowLayout() {
+        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
     }
 
     @Override
