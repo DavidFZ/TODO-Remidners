@@ -30,6 +30,7 @@ public class ReminderModel {
 
     /**
      * Select ALL Entities, which IS_DELETED are false;
+     *
      * @return List of Reminder
      */
     public static List<Reminder> queryAllEntities() {
@@ -250,5 +251,23 @@ public class ReminderModel {
         session.beginTransaction().commit();
 
         session.close();
+    }
+
+    //TODO: test this method
+    public static List<Reminder> queryReminderByTag(String tag) {
+        Session session = getSession();
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Reminder> criteriaQuery = getCriteriaQuery(session, Reminder.class);
+        Root<Reminder> root = criteriaQuery.from(Reminder.class);
+
+        Predicate predicate = criteriaBuilder.equal(root.get("tag"), tag);
+        criteriaQuery.select(root).where(predicate);
+
+        TypedQuery<Reminder> query = session.createQuery(criteriaQuery);
+        List<Reminder> list = query.getResultList();
+        session.close();
+
+        return list;
     }
 }

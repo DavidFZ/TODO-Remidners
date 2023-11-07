@@ -15,7 +15,7 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeight
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthScale;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
-public class GroupedListComponent extends MComponent {
+public class GroupedListComponentView extends MComponent {
     Font font1;
     Font font2;
     Font font3;
@@ -29,7 +29,7 @@ public class GroupedListComponent extends MComponent {
     private JButton confirmButton;
 
 
-    public GroupedListComponent(Dimension rootFrameDimension, MyView myView) {
+    public GroupedListComponentView(Dimension rootFrameDimension, MyView myView) {
         super(myView, rootFrameDimension);
     }
 
@@ -37,7 +37,7 @@ public class GroupedListComponent extends MComponent {
         MComponentTestHelper mComponentTestHelper = new MComponentTestHelper() {
             @Override
             public void initializeMComponent() {
-                GroupedListComponent groupedListComponent = new GroupedListComponent(jFrame.getSize(), myView);
+                GroupedListComponentView groupedListComponentView = new GroupedListComponentView(jFrame.getSize(), myView);
             }
         };
     }
