@@ -3,6 +3,7 @@ package edu.square.views.widget;
 import edu.square.entity.Reminder;
 import edu.square.model.ReminderModel;
 import edu.square.utils.UIUtils.FontUtil;
+import edu.square.utils.UIUtils.MWidgetTestHelper;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,33 +16,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
+import static edu.square.utils.UIUtils.JFrameFactory.getDefaultJFrame;
 
 public class ReminderListWidgetView extends MWidget {
     //keep parentFrame var for future implementation resolution scaling
-    private final Dimension parentDimension;
     @Getter
     private final List<ReminderView> reminderViews;
     private final List<Reminder> reminders;
-    //以第一次载入的窗口为准
     private final double frameWidthInit;
     private final double frameHeightInit;
     private final double scaling = 0.4;
     int reminderNum;
+    Font font;
     @Getter
     private JScrollPane scrollPane;
     @Setter
     private ActionListener completeActionListener;
-    Font font;
 
-    public ReminderListWidgetView(Dimension parentDimension, Dimension selfDimension) {
-        super(parentDimension, selfDimension);
+    public ReminderListWidgetView(Dimension rootFrameDimension, Dimension selfDimension) {
+        super(rootFrameDimension, selfDimension);
 
-        this.parentDimension = parentDimension;
+        this.rootFrameDimension = rootFrameDimension;
         //TODO:给我去掉这个牛皮藓
         this.selfDimension = new Dimension(resizeDimensionWidthAndHeight(selfDimension, 0.93, 0.06));
 
-        frameHeightInit = parentDimension.getHeight();
-        frameWidthInit = scaling * parentDimension.getWidth();
+        frameHeightInit = rootFrameDimension.getHeight();
+        frameWidthInit = scaling * rootFrameDimension.getWidth();
 
         reminders = ReminderModel.queryAllEntities();
         reminderNum = reminders.size();
@@ -49,7 +49,7 @@ public class ReminderListWidgetView extends MWidget {
 
 
         int w = (int) (frameWidthInit);
-        int h = (int) (0.8 * parentDimension.getHeight());
+        int h = (int) (0.8 * rootFrameDimension.getHeight());
         scrollPane = new JScrollPane(mainPanel);
         scrollPane.setPreferredSize(new Dimension(w, h));
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
@@ -61,6 +61,16 @@ public class ReminderListWidgetView extends MWidget {
             reminderViews.add(reminderView);
             mainPanel.add(reminderView.getInnerPanel());
         }
+    }
+
+    public static void main(String[] args) {
+        MWidgetTestHelper mWidgetTestHelper = new MWidgetTestHelper() {
+            @Override
+            public void initializeMWidget() {
+                ReminderListWidgetView reminderListWidgetView = new ReminderListWidgetView(jFrame.getSize(), jFrame.getSize());
+                jFrame.add(reminderListWidgetView.getScrollPane());
+            }
+        };
     }
 
     public void addNewReminderViewIntoReminderListView(Reminder reminder) {
@@ -126,7 +136,7 @@ public class ReminderListWidgetView extends MWidget {
 
     @Override
     protected void initializeFonts() {
-        font = FontUtil.getBoldFont(parentDimension, 0.03);
+        font = FontUtil.getBoldFont(rootFrameDimension, 0.03);
     }
 
     @Override
@@ -190,6 +200,5 @@ public class ReminderListWidgetView extends MWidget {
             }
         }
     }
-
 
 }
