@@ -16,7 +16,6 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthS
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
 public class GroupedListComponent extends MComponent {
-    private final double scaling = 0.4;
     Font font1;
     Font font2;
     Font font3;
@@ -45,7 +44,7 @@ public class GroupedListComponent extends MComponent {
 
     @Override
     protected void calculateSelfDimension() {
-        selfDimension = resizeDimensionWidthScale(parentDimension, scaling);
+        selfDimension = resizeDimensionWidthScale(parentDimension, 0.4);
     }
 
     @Override
@@ -64,7 +63,7 @@ public class GroupedListComponent extends MComponent {
     @Override
     protected void initializeJComponents() {
         //GROUP TITLE
-        groupedTitleWidgetView = new GroupedTitleWidgetView(parentDimension, resizeDimensionHeightScale(selfDimension,0.1));
+        groupedTitleWidgetView = new GroupedTitleWidgetView(parentDimension, resizeDimensionHeightScale(selfDimension, 0.1));
         mainPanel.add(groupedTitleWidgetView.getMainPanel());
 
         //GROUP LABEL

@@ -1,6 +1,7 @@
-package edu.square.views.view;
+package edu.square.views.view1.view;
 
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.views.view.MyView;
 import edu.square.views.view1.component.DetailInformationComponentView;
 import edu.square.views.view1.component.GroupedListComponent;
 import edu.square.views.view1.component.LeftSideComponentView;
@@ -11,20 +12,15 @@ import java.awt.*;
 
 public class ListView extends MyView {
     public static String[] groupTitles = {"All", "Today", "Completed", "Flagged"};
-    MComponent leftSideComponent;
-    MComponent groupedListComponent;
-    MComponent detailInformationComponent;
+    LeftSideComponentView leftSideComponent;
+    GroupedListComponent groupedListComponent;
+    DetailInformationComponentView detailInformationComponent;
 
     public ListView(JFrame parentFrame, Dimension selfDimension) {
         super(parentFrame, selfDimension);
 
         leftSideComponent = new LeftSideComponentView(rootFrameDimension, this);
-
-        LeftSideComponentView leftSideComponentView = (LeftSideComponentView) this.leftSideComponent;
-        leftSideComponentView.setGroupLabelWidgetsTitle(groupTitles);
-        //groupedListComponent
         groupedListComponent = new GroupedListComponent(rootFrameDimension,this);
-        //detailInformationComponent
         detailInformationComponent = new DetailInformationComponentView(rootFrameDimension,this);
     }
 
