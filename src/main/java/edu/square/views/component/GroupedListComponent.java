@@ -10,6 +10,7 @@ import lombok.Getter;
 import javax.swing.*;
 import java.awt.*;
 
+import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthScale;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
@@ -62,11 +63,11 @@ public class GroupedListComponent extends MComponent {
     @Override
     protected void initializeJComponents() {
         //GROUP TITLE
-        groupedTitleWidgetView = new GroupedTitleWidgetView(parentDimension, selfDimension);
+        groupedTitleWidgetView = new GroupedTitleWidgetView(parentDimension, resizeDimensionHeightScale(selfDimension,0.1));
         mainPanel.add(groupedTitleWidgetView.getMainPanel());
 
         //GROUP LABEL
-        reminderListWidgetView = new ReminderListWidgetView(parentDimension, selfDimension);
+        reminderListWidgetView = new ReminderListWidgetView(parentDimension, parentDimension);
         mainPanel.add(reminderListWidgetView.getScrollPane());
     }
 

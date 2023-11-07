@@ -41,7 +41,7 @@ public class GroupedTitleWidgetView extends MWidget {
 
     @Override
     protected void initializeFonts() {
-        font1 = FontUtil.getBoldFont(rootFrameDimension, 0.05);
+        font1 = FontUtil.getBoldFont(rootFrameDimension, 0.04);
         font2 = FontUtil.getBoldFont(rootFrameDimension, 0.03);
         font3 = FontUtil.getBoldFont(rootFrameDimension, 0.008);
     }
@@ -49,9 +49,9 @@ public class GroupedTitleWidgetView extends MWidget {
     @Override
     protected void initializeJComponents() {
         //left sub panel
-        JPanel groupTitlePanel = getFlowJpanel(FlowLayout.LEFT, resizeDimensionWidthAndHeight(selfDimension, 0.48, 0.11));
+        JPanel groupTitlePanel = getFlowJpanel(FlowLayout.LEFT, resizeDimensionWidthAndHeight(selfDimension, 0.48, 0.9));
         //right sub panel
-        JPanel buttonPanel = getFlowJpanel(FlowLayout.RIGHT, resizeDimensionWidthAndHeight(selfDimension, 0.48, 0.11));
+        JPanel buttonPanel = getFlowJpanel(FlowLayout.RIGHT, resizeDimensionWidthAndHeight(selfDimension, 0.48, 0.9));
 
         //set background color
         groupTitlePanel.setBackground(Color.blue);
