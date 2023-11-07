@@ -67,6 +67,7 @@ public class LeftSideComponentView extends MComponent {
 
         //BLOCK PANEL
         BlockPanelWidget blockPanelWidget = new BlockPanelWidget(getParentDimension(), 0.2);
+        blockPanelWidget.getMainPanel().setBackground(Color.yellow);
         mainPanel.add(blockPanelWidget.getMainPanel());
 
         //GROUP LABEL
