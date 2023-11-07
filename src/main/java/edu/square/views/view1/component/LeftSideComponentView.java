@@ -5,7 +5,7 @@ import edu.square.views.component.MComponent;
 import edu.square.views.view.MyView;
 import edu.square.views.widget.BlockPanelWidget;
 import edu.square.views.widget.GroupLabelWidget;
-import edu.square.views.widget.SearchPanelWidget;
+import edu.square.views.view1.widget.SearchPanelWidget;
 import lombok.Getter;
 
 import java.awt.*;
