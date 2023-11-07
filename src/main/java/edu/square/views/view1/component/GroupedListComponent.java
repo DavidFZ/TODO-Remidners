@@ -1,7 +1,8 @@
-package edu.square.views.component;
+package edu.square.views.view1.component;
 
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.MComponentTestHelper;
+import edu.square.views.component.MComponent;
 import edu.square.views.view.MyView;
 import edu.square.views.view1.widget.GroupedTitleWidgetView;
 import edu.square.views.widget.ReminderListWidgetView;
@@ -72,7 +73,7 @@ public class GroupedListComponent extends MComponent {
     }
 
     @Override
-    protected void setColors() {
+    protected void initializeView() {
 
     }
 }

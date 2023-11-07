@@ -1,6 +1,8 @@
-package edu.square.views.component;
+package edu.square.views.view1.component;
 
 import edu.square.utils.UIUtils.JPanelUtil;
+import edu.square.utils.UIUtils.MComponentTestHelper;
+import edu.square.views.component.MComponent;
 import edu.square.views.view.MyView;
 import edu.square.views.widget.BlockPanelWidget;
 import edu.square.views.widget.TextFieldPanelWidget;
@@ -14,11 +16,10 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthS
 import static edu.square.utils.UIUtils.FontUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
-public class DetailInformationComponent extends MComponent {
+public class DetailInformationComponentView extends MComponent {
     Font font1;
     Font font2;
     Font font3;
-    String[] options = {"None", "5 minutes before", "15 minutes before", "30 minutes before", "1 hour before", "2 hours before", "1 day before", "2 days before", "1 week before", "2 weeks before"};
     @Getter
     private JButton deleteButton;
     @Getter
@@ -27,16 +28,45 @@ public class DetailInformationComponent extends MComponent {
     private JButton doneButton;
     @Getter
     private JButton backButton;
-
     @Getter
     private TextFieldPanelWidget nameTextFieldPanelWidget;
     @Getter
     private TextFieldPanelWidget noteTextFieldPanelWidget;
 
-    public DetailInformationComponent(Dimension parentFrameDimension) {
-        super(parentFrameDimension, resizeDimensionWidthScale(parentFrameDimension, 0.38));
+    public DetailInformationComponentView(Dimension parentFrameDimension, MyView myView) {
+        super(myView, parentFrameDimension);
+//        myView.addMComponent(this);
+    }
 
+    public static void main(String[] args) {
+        MComponentTestHelper mComponentTestHelper = new MComponentTestHelper() {
+            @Override
+            public void initializeMComponent() {
+                DetailInformationComponentView detailInformationComponentView = new DetailInformationComponentView(jFrame.getSize(), myView);
+            }
+        };
+    }
 
+    @Override
+    protected void calculateSelfDimension() {
+        selfDimension = resizeDimensionWidthScale(parentDimension, 0.38);
+    }
+
+    @Override
+    protected void initializeMainPanel() {
+        mainPanel = JPanelUtil.getCenterFlowMainPanel(selfDimension);
+        mainPanel.setBackground(Color.yellow);
+    }
+
+    @Override
+    protected void initializeFonts() {
+        font1 = getBoldFont(parentDimension, FONT_SIZE_1);
+        font2 = getBoldFont(parentDimension, FONT_SIZE_2);
+        font3 = getBoldFont(parentDimension, FONT_SIZE_3);
+    }
+
+    @Override
+    protected void initializeJComponents() {
         //reminderStatusControllerPanel
         JPanel reminderStatusControllerPanel = reminderStatusControllerPanel();
         reminderStatusControllerPanel.setBackground(Color.red);
@@ -59,40 +89,6 @@ public class DetailInformationComponent extends MComponent {
         //BlockPanel
         BlockPanelWidget blockPanelView = new BlockPanelWidget(selfDimension, 0.1);
         mainPanel.add(blockPanelView.getMainPanel());
-
-//        //TextPanel
-//        JPanel textPanelEarlyReminder = getFlowJpanel(FlowLayout.LEFT, resizeDimensionHeightScale(componentPanelDimension, 0.06));
-//        textPanelEarlyReminder.add(labelBuilder("Early Reminder:", font2));
-//        mainPanel.add(textPanelEarlyReminder);
-
-        setColors();
-    }
-
-    @Override
-    protected void calculateSelfDimension() {
-
-    }
-
-    public DetailInformationComponent(Dimension parentFrameDimension, MyView myView) {
-        this(parentFrameDimension);
-        myView.addMComponent(this);
-    }
-
-    @Override
-    protected void initializeMainPanel() {
-        mainPanel = JPanelUtil.getCenterFlowMainPanel(selfDimension);
-    }
-
-    @Override
-    protected void initializeFonts() {
-        font1 = getBoldFont(parentDimension, FONT_SIZE_1);
-        font2 = getBoldFont(parentDimension, FONT_SIZE_2);
-        font3 = getBoldFont(parentDimension, FONT_SIZE_3);
-    }
-
-    @Override
-    protected void initializeJComponents() {
-
     }
 
     private JButton buttonBuilder(String buttonName) {
@@ -135,7 +131,12 @@ public class DetailInformationComponent extends MComponent {
     }
 
     @Override
-    protected void setColors() {
-        mainPanel.setBackground(Color.yellow);
+    protected void initializeView() {
+        //default can not see
+        mainPanel.setVisible(false);
+    }
+
+    public void setVisibility(boolean visibility) {
+        mainPanel.setVisible(visibility);
     }
 }

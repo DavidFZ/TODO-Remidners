@@ -1,6 +1,5 @@
 package edu.square.utils.UIUtils;
 
-import edu.square.views.component.GroupedListComponent;
 import edu.square.views.view.MyView;
 
 import javax.swing.*;

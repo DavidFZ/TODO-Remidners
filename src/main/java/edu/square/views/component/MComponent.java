@@ -34,7 +34,7 @@ public abstract class MComponent {
         initializeMainPanel();
         initializeFonts();
         initializeJComponents();
-        setColors();
+        initializeView();
     }
 
     protected abstract void calculateSelfDimension();
@@ -45,5 +45,5 @@ public abstract class MComponent {
 
     protected abstract void initializeJComponents();
 
-    protected abstract void setColors();
+    protected abstract void initializeView();
 }

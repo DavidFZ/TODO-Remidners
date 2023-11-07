@@ -77,7 +77,7 @@ public class LeftSideComponentView extends MComponent {
     }
 
     @Override
-    protected void setColors() {
+    protected void initializeView() {
     }
 
     public void setGroupLabelWidgetsTitle(String[] groupedTitles) {
