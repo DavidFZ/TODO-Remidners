@@ -63,14 +63,14 @@ public class LeftSideComponentView extends MComponent {
 
     @Override
     protected void initializeJComponents() {
-        //SEARCH PANEL
-        SearchPanelWidget searchPanelWidget = new SearchPanelWidget(parentDimension,resizeDimensionHeightScale(selfDimension,0.15));
-        mainPanel.add(searchPanelWidget.getMainPanel());
-
-        //BLOCK PANEL
-        BlockPanelWidget blockPanelWidget = new BlockPanelWidget(selfDimension, 0.2);
-        blockPanelWidget.getMainPanel().setBackground(Color.yellow);
-        mainPanel.add(blockPanelWidget.getMainPanel());
+//        //SEARCH PANEL
+//        SearchPanelWidget searchPanelWidget = new SearchPanelWidget(parentDimension,resizeDimensionHeightScale(selfDimension,0.15));
+//        mainPanel.add(searchPanelWidget.getMainPanel());
+//
+//        //BLOCK PANEL
+//        BlockPanelWidget blockPanelWidget = new BlockPanelWidget(selfDimension, 0.2);
+//        blockPanelWidget.getMainPanel().setBackground(Color.yellow);
+//        mainPanel.add(blockPanelWidget.getMainPanel());
 
         //GROUP LABEL
         //initialize as empty
