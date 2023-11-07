@@ -23,11 +23,9 @@ public abstract class MWidget {
     private void initialize() {
         initializeFonts();
         initializeMainPanel();
-        setMainPanelFlowLayout();
         initializeJComponents();
     }
 
-    protected abstract void setMainPanelFlowLayout();
 
     protected abstract void initializeMainPanel();
 

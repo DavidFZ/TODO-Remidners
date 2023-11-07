@@ -30,10 +30,6 @@ public class ComboBoxPanelView extends MWidget {
         mainPanel.add(jComboBox);
     }
 
-    @Override
-    protected void setMainPanelFlowLayout() {
-
-    }
 
     @Override
     protected void initializeMainPanel() {

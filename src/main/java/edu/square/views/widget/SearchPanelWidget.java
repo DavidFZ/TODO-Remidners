@@ -34,7 +34,6 @@ public class SearchPanelWidget extends MWidget {
         searchPanel.setBackground(Color.BLACK);
 
 
-
         JTextField searchText = new JTextField();
         searchText.setPreferredSize(resizeDimensionWidthAndHeight(dimension, 0.8, 0.04));
         searchText.setFont(font2);
@@ -46,13 +45,8 @@ public class SearchPanelWidget extends MWidget {
     }
 
     @Override
-    protected void setMainPanelFlowLayout() {
-        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-    }
-
-    @Override
     protected void initializeMainPanel() {
-
+        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
     }
 
     @Override

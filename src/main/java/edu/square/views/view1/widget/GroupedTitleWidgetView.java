@@ -12,7 +12,6 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthA
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
 public class GroupedTitleWidgetView extends MWidget {
-    private final static double scaling = 0.4;
     Font font1;
     Font font2;
     Font font3;
@@ -33,14 +32,11 @@ public class GroupedTitleWidgetView extends MWidget {
         };
     }
 
-    @Override
-    protected void setMainPanelFlowLayout() {
-        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-    }
 
     @Override
     protected void initializeMainPanel() {
         mainPanel.setPreferredSize(selfDimension);
+        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
     }
 
     @Override

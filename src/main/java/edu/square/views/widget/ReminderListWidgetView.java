@@ -117,15 +117,12 @@ public class ReminderListWidgetView extends MWidget {
         mainPanel.repaint();
     }
 
-    @Override
-    protected void setMainPanelFlowLayout() {
-        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-    }
 
     @Override
     protected void initializeMainPanel() {
         mainPanel.setPreferredSize(new Dimension((int) (frameWidthInit * 0.95), (int) ((frameHeightInit * 0.06) * reminderNum)));
         mainPanel.setBackground(Color.red);
+        mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
     }
 
     @Override
