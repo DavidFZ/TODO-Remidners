@@ -35,7 +35,12 @@ public class CalendarDayWidget extends MWidget {
 
     @Override
     protected void initializeJComponents() {
-        dayLabel.setText(String.valueOf(day));
+        if(day == 0){
+            dayLabel.setText("");
+        }
+        else {
+            dayLabel.setText(String.valueOf(day));
+        }
         dayLabel.setFont(numberFont);
         noteArea.setLineWrap(true);
         noteArea.setWrapStyleWord(true);
