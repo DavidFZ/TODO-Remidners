@@ -3,6 +3,8 @@ package edu.square.model.view1.component;
 import edu.square.entity.Reminder;
 import edu.square.model.component.MModel;
 import edu.square.model.view1.widget.ReminderModel;
+import edu.square.views.view1.component.LeftSideComponentView;
+import edu.square.views.view1.widget.GroupLabelWidget;
 import lombok.Data;
 import lombok.Getter;
 
@@ -64,6 +66,10 @@ public class LeftSideComponentModel extends MModel {
     @Deprecated
     public void addGroup(String groupName, List<Reminder> reminderModels) {
         groupModels.add(new GroupModel(groupName, reminderModels));
+    }
+
+    public String getGroupLabelText(int index) {
+        return groupModels.get(index).getGroupName();
     }
 
     /**
