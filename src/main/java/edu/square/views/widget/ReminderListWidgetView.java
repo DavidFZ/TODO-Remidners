@@ -17,7 +17,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
+import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
+import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
 
 public class ReminderListWidgetView extends MWidget {
     private final double panelWidthInit;
@@ -29,14 +30,14 @@ public class ReminderListWidgetView extends MWidget {
     @Getter
     private List<ReminderView> reminderViews;
     private List<Reminder> reminders;
-    private Map<Reminder, ReminderView> reminderViewMap;
+    private final Map<Reminder, ReminderView> reminderViewMap;
     @Getter
     private JScrollPane scrollPane;
     @Setter
     private ActionListener completeActionListener;
 
     public ReminderListWidgetView(Dimension rootFrameDimension, Dimension selfDimension) {
-        //mian将被加入到scrollPane中
+        //main将被加入到scrollPane中
         super(rootFrameDimension, resizeDimensionWidthAndHeight(selfDimension, 0.95, 0.85));//初始长度，但似乎没影响
         //init data structures
         reminderViewMap = new HashMap<>();
@@ -72,6 +73,7 @@ public class ReminderListWidgetView extends MWidget {
                 }
 
                 reminderListWidgetView.addNewReminderViewsIntoReminderListView(reminderListWidgetView.reminders);
+
             }
         };
     }
@@ -115,7 +117,7 @@ public class ReminderListWidgetView extends MWidget {
         reminders.remove(reminder);
         reminderViews.remove(reminderView);
 
-        //scrollPane不会改变，改变的是里面的mainpanel的大小
+        //scrollPane不会改变，改变的是里面的mainPanel的大小
         //实现自动缩小scrollPane
         changeMainPanelSize();
 
