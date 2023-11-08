@@ -172,7 +172,7 @@ public class ReminderListWidgetView extends MWidget {
         containerPanel.setBackground(Color.green);
 
         containerPanelDimension = containerPanel.getPreferredSize();
-        reminderViewDimension = resizeDimensionWidthAndHeight(rootFrameDimension, 0.35, 0.06);
+        reminderViewDimension = resizeDimensionWidthAndHeight(containerPanelDimension, 0.35, 0.06);
 
         scrollPane = new JScrollPane(containerPanel);
         scrollPane.setPreferredSize(resizeDimensionHeightScale(selfDimension, 0.9));//防止scrollPane过长
@@ -218,7 +218,7 @@ public class ReminderListWidgetView extends MWidget {
             label.setFont(font);
 
             innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-            innerPanel.setPreferredSize(rootFrameDimension);
+            innerPanel.setPreferredSize(new Dimension((int) (0.35 * rootFrameDimension.getWidth()), (int) (0.06 * rootFrameDimension.getHeight())));//13个
             innerPanel.setBackground(Color.yellow);
             innerPanel.setBorder(new LineBorder(Color.PINK));
 
