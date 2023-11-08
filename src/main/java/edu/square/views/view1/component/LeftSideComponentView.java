@@ -3,7 +3,7 @@ package edu.square.views.view1.component;
 import edu.square.utils.UIUtils.MComponentTestHelper;
 import edu.square.views.component.MComponent;
 import edu.square.views.view.MyView;
-import edu.square.views.widget.GroupLabelWidget;
+import edu.square.views.view1.widget.GroupLabelWidget;
 import lombok.Getter;
 
 import java.awt.*;
