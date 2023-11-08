@@ -1,13 +1,17 @@
 package edu.square.controller;
 
+import edu.square.model.MModel;
 import edu.square.views.component.MComponent;
 
-import java.util.List;
+public abstract class MController {
+    protected MComponent mComponentView;
+    protected MModel mModel;
 
-public class MController {
-    protected List<MComponent> mComponents;
-
-    public MController(MComponent... components) {
-        mComponents = List.of(components);
+    public MController(MComponent mComponentView, MModel mModel) {
+        this.mComponentView = mComponentView;
+        this.mModel = mModel;
+        initialize();
     }
+
+    public abstract void initialize();
 }

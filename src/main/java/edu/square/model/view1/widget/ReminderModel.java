@@ -1,4 +1,4 @@
-package edu.square.model;
+package edu.square.model.view1.widget;
 
 import edu.square.entity.Reminder;
 import edu.square.utils.TimeUtils;
@@ -30,6 +30,7 @@ public class ReminderModel {
 
     /**
      * Select ALL Entities, which IS_DELETED are false;
+     *
      * @return List of Reminder
      */
     public static List<Reminder> queryAllEntities() {
@@ -233,6 +234,16 @@ public class ReminderModel {
         return reminder;
     }
 
+    public static Reminder insertReminder(Reminder reminder) {
+        Session s = getSession();
+
+        reminder.setRemindTime(getTimeStamp());
+
+        s.merge(reminder);
+        s.beginTransaction().commit();
+        return reminder;
+    }
+
     public static void updateReminder(Reminder reminder) {
         Session session = getSession();
 
@@ -250,5 +261,23 @@ public class ReminderModel {
         session.beginTransaction().commit();
 
         session.close();
+    }
+
+    //TODO: test this method
+    public static List<Reminder> queryReminderByTag(String tag) {
+        Session session = getSession();
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Reminder> criteriaQuery = getCriteriaQuery(session, Reminder.class);
+        Root<Reminder> root = criteriaQuery.from(Reminder.class);
+
+        Predicate predicate = criteriaBuilder.equal(root.get("tag"), tag);
+        criteriaQuery.select(root).where(predicate);
+
+        TypedQuery<Reminder> query = session.createQuery(criteriaQuery);
+        List<Reminder> list = query.getResultList();
+        session.close();
+
+        return list;
     }
 }

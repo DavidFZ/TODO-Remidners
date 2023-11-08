@@ -5,20 +5,14 @@ import edu.square.entity.Reminder;
 import org.apache.poi.hssf.usermodel.HSSFCell;
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.formula.functions.T;
-import org.apache.poi.ss.usermodel.HeaderFooter;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.io.FileOutputStream;
 import java.lang.reflect.Field;
-import java.sql.Time;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import static edu.square.model.ReminderModel.queryAllEntities;
+import static edu.square.model.view1.widget.ReminderModel.queryAllEntities;
 
 public class ExportExcelUtil {
     public static void exportAllFromDB(Class<? extends Exportable> exportClass) {

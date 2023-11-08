@@ -3,6 +3,7 @@ package edu.square.entity;
 import lombok.Data;
 
 import java.sql.Timestamp;
+import java.util.UUID;
 
 import static edu.square.utils.DevUtils.getTimeStamp;
 
@@ -41,6 +42,24 @@ public class Reminder implements Exportable {
 
     public static void main(String[] args) {
         System.out.println(java.util.UUID.randomUUID());
+    }
 
+    @Override
+    public String toString() {
+        return UUID.randomUUID().toString() + " :" + content;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Reminder) {
+            Reminder reminder = (Reminder) obj;
+            return this.uuid.equals(reminder.uuid);
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return uuid.hashCode();
     }
 }

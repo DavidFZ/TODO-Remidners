@@ -3,6 +3,7 @@ package edu.square.views.view1.widget;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.MComponentTestHelper;
 import edu.square.views.widget.MWidget;
+import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -82,5 +83,9 @@ public class GroupedTitleWidgetView extends MWidget {
 
     public void setAddButtonListener(ActionListener actionListener) {
         addButton.addActionListener(actionListener);
+    }
+
+    public void setAddButtonEnable(boolean enable) {
+        addButton.setEnabled(enable);
     }
 }

@@ -1,6 +1,7 @@
 package edu.square.views.widget;
 
 import edu.square.utils.UIUtils.FontUtil;
+import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,6 +13,7 @@ public class GroupLabelWidget {
     private static final Font DEFAULT_FONT = FontUtil.getBoldFont(20);
     private final JLabel groupTitleLabel;
     private final JLabel countLabel;
+    @Getter
     private JPanel mainPanel;
 
 
@@ -46,10 +48,6 @@ public class GroupLabelWidget {
 
     public void addMouseListener(MouseListener mouseListener) {
         mainPanel.addMouseListener(mouseListener);
-    }
-
-    public JPanel getGroupView() {
-        return mainPanel;
     }
 
     public void repaint() {

@@ -7,7 +7,7 @@
 //
 //import java.awt.event.ActionListener;
 //
-//import static edu.square.model.ReminderModel.updateReminder;
+//import static edu.square.model.view1.widget.ReminderModel.updateReminder;
 //
 //public class DetailInformationModel extends MComponentModel {
 //    private final DetailInformationComponent detailInformationComponent;

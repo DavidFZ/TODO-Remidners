@@ -3,17 +3,15 @@ package edu.square.views.view1.component;
 import edu.square.utils.UIUtils.MComponentTestHelper;
 import edu.square.views.component.MComponent;
 import edu.square.views.view.MyView;
-import edu.square.views.widget.BlockPanelWidget;
 import edu.square.views.widget.GroupLabelWidget;
-import edu.square.views.view1.widget.SearchPanelWidget;
 import lombok.Getter;
 
 import java.awt.*;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthScale;
 import static edu.square.utils.UIUtils.FontUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getCenterFlowMainPanel;
@@ -29,6 +27,7 @@ public class LeftSideComponentView extends MComponent {
 
     public LeftSideComponentView(Dimension rootFrameDimension, MyView myView) {
         super(myView, rootFrameDimension);
+        groupLabelWidgets = new ArrayList<>();
     }
 
 
@@ -37,7 +36,6 @@ public class LeftSideComponentView extends MComponent {
             @Override
             public void initializeMComponent() {
                 LeftSideComponentView leftSideComponentView = new LeftSideComponentView(jFrame.getSize(), myView);
-//                leftSideComponentView.setGroupLabelWidgetsTitle(testGroupTitles);
             }
         };
     }
@@ -51,7 +49,7 @@ public class LeftSideComponentView extends MComponent {
     protected void initializeMainPanel() {
         //ROOT COMPONENT OF LEFT GROUP VIEW
         mainPanel = getCenterFlowMainPanel(selfDimension);
-        mainPanel.setBackground(Color.black);
+        mainPanel.setBackground(Color.yellow);
     }
 
     @Override
@@ -71,9 +69,9 @@ public class LeftSideComponentView extends MComponent {
 //        BlockPanelWidget blockPanelWidget = new BlockPanelWidget(selfDimension, 0.2);
 //        blockPanelWidget.getMainPanel().setBackground(Color.yellow);
 //        mainPanel.add(blockPanelWidget.getMainPanel());
-
-        //GROUP LABEL
-        //initialize as empty
+//
+//        //GROUP LABEL
+//        initialize as empty
     }
 
     @Override
@@ -85,7 +83,30 @@ public class LeftSideComponentView extends MComponent {
         List<String> titles = new ArrayList<>(Arrays.asList(groupedTitles));
         groupLabelWidgets = viewBuilder.build(titles);
         for (GroupLabelWidget groupLabelWidget : groupLabelWidgets) {
-            mainPanel.add(groupLabelWidget.getGroupView());
+            mainPanel.add(groupLabelWidget.getMainPanel());
         }
+    }
+
+    public void setGroupLabelCount(int index, int count) {
+        assert index >= 0 && index < groupLabelWidgets.size();
+        groupLabelWidgets.get(index).setGroupViewCount(count);
+    }
+
+    public void setGroupLabelTitle(int index, String title) {
+        assert index >= 0 && index < groupLabelWidgets.size();
+        groupLabelWidgets.get(index).setGroupViewTitle(title);
+    }
+
+    public void addGroupLabel(String title, int count) {
+        GroupLabelWidget.ViewBuilder viewBuilder = new GroupLabelWidget.ViewBuilder(selfDimension);
+        GroupLabelWidget groupLabelWidget = viewBuilder.build(title);
+        groupLabelWidget.setGroupViewCount(count);
+        groupLabelWidgets.add(groupLabelWidget);
+        mainPanel.add(groupLabelWidget.getMainPanel());
+    }
+
+    public void addGroupLabelMouseListener(int index, MouseListener groupLabelWidgetMouseListener) {
+        assert index >= 0 && index < groupLabelWidgets.size();
+        groupLabelWidgets.get(index).addMouseListener(groupLabelWidgetMouseListener);
     }
 }

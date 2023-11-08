@@ -1,4 +1,6 @@
-package edu.square.views.widget;
+package edu.square.views.view1.widget;
+
+import edu.square.views.widget.MWidget;
 
 import java.awt.*;
 
