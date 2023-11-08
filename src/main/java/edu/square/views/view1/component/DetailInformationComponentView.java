@@ -87,7 +87,7 @@ public class DetailInformationComponentView extends MComponent {
         mainPanel.add(noteTextFieldPanelWidget.getMainPanel());
 
         //BlockPanel
-        BlockPanelWidget blockPanelView = new BlockPanelWidget(selfDimension, 0.1);
+        BlockPanelWidget blockPanelView = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension,0.1));
         mainPanel.add(blockPanelView.getMainPanel());
     }
 

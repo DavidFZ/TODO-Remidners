@@ -8,8 +8,8 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeight
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
 
 public class BlockPanelWidget extends MWidget {
-    public BlockPanelWidget(Dimension parentJComponentDimension, double scalingRation) {
-        super(parentJComponentDimension, resizeDimensionHeightScale(parentJComponentDimension,scalingRation));
+    public BlockPanelWidget(Dimension parentJComponentDimension, Dimension selfDimension) {
+        super(parentJComponentDimension, selfDimension);
     }
 
 
