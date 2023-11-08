@@ -21,13 +21,14 @@ public class GroupedListComponentController extends MController {
         //Model Layer
         //default show all list
         ((GroupedListComponentModel) mModel).setList(ReminderModel.queryAllEntities(false));
-        List<Reminder> list= ((GroupedListComponentModel) mModel).getList();
+        List<Reminder> list = ((GroupedListComponentModel) mModel).getList();
 
         //View Layer
         ((GroupedListComponentView) mComponentView).addRemindersIntoList(list);
 
         //Controller Layer
         bindListenerOnAddButton((GroupedListComponentView) mComponentView);
+        bindListenerOnConfirmButton((GroupedListComponentView) mComponentView);
     }
 
     public void updateList(List<Reminder> list) {
@@ -57,6 +58,7 @@ public class GroupedListComponentController extends MController {
             String content = groupedListComponentView.getReminderContent();
             if (content == null || content.equals("")) {
                 JOptionPane.showMessageDialog(null, "Please input content");
+                return;
             }
             Reminder reminder = new Reminder(content);
             //update model
@@ -71,6 +73,10 @@ public class GroupedListComponentController extends MController {
             //enable add button
             groupedListComponentView.setAddButtonEnable(true);
         });
+    }
+
+    public void setGroupedTitle(String title) {
+        ((GroupedListComponentView) mComponentView).setGroupedTitle(title);
     }
 
 

@@ -39,6 +39,9 @@ public class AddReminderConfirmFrame {
         mainFrame.setAlwaysOnTop(true);
         mainFrame.add(inputPanel);
         mainFrame.add(confirmPanel);
+        mainFrame.setResizable(false);
+        mainFrame.setLocationRelativeTo(null);
+
     }
 
     public static void main(String[] args) {

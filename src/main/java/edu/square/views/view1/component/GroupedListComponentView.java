@@ -13,8 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthScale;
+import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
 public class GroupedListComponentView extends MComponent {
@@ -29,7 +28,7 @@ public class GroupedListComponentView extends MComponent {
     public GroupedListComponentView(Dimension rootFrameDimension, MyView myView) {
         super(myView, rootFrameDimension);
         //init sub frame
-        addReminderConfirmFrame = new AddReminderConfirmFrame(resizeDimensionWidthScale(selfDimension, 0.3));
+        addReminderConfirmFrame = new AddReminderConfirmFrame(resizeDimensionWidthAndHeight(selfDimension, 0.6,0.4));
     }
 
     public static void main(String[] args) {
