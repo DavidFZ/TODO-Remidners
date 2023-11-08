@@ -7,17 +7,16 @@ import edu.square.views.widget.MWidget;
 import edu.square.utils.UIUtils.ComponentResizeUtil;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
 
-public class CalenderFunctionWidget extends MWidget {
+public class CalendarFunctionWidget extends MWidget {
     Font fontBig;
     Font fontSmall;
 
     JLabel lastLabel = new JLabel("Last Month");
     JLabel nextLabel = new JLabel("Next Month");
 
-    CalenderFunctionWidget(Dimension rootFrameDimension, Dimension selfDimension){
+    public CalendarFunctionWidget(Dimension rootFrameDimension, Dimension selfDimension){
         super(rootFrameDimension,selfDimension);
     }
 
