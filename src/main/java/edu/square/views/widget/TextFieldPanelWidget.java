@@ -11,15 +11,15 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthA
 public class TextFieldPanelWidget extends MWidget {
 
     JTextField textField;
-    private String title;
 
     Font font2;
     Font font3;
 
-    public TextFieldPanelWidget(Dimension parentJComponentDimension, Dimension selfDimition,String title) {
-        super(parentJComponentDimension, selfDimition);
-        this.title = title;
+    JLabel label;
 
+    public TextFieldPanelWidget(Dimension parentJComponentDimension, Dimension selfDimition, String title) {
+        super(parentJComponentDimension, selfDimition);
+        setTitle(title);
 
     }
 
@@ -39,7 +39,7 @@ public class TextFieldPanelWidget extends MWidget {
 
     @Override
     protected void initializeJComponents() {
-        JLabel label = new JLabel(title);
+        label = new JLabel();
         label.setFont(font2);
         label.setForeground(Color.blue);
         label.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.2, 0.04));
@@ -58,5 +58,9 @@ public class TextFieldPanelWidget extends MWidget {
     public void setTextField(String text) {
         textField.setText(text);
         textField.repaint();
+    }
+
+    public void setTitle(String title) {
+        label.setText(title);
     }
 }
