@@ -15,7 +15,7 @@ public class MyView {
         this.rootFrameDimension = parentFrame.getSize();
         mainPanel = new JPanel();
         mainPanel.setSize(dimension);
-
+        setMainPanelLayout(new FlowLayout(FlowLayout.CENTER));
         parentFrame.add(mainPanel);
     }
 

@@ -25,6 +25,8 @@ public class ListView extends MyView {
         leftSideComponent = new LeftSideComponentView(rootFrameDimension, this);
         groupedListComponentView = new GroupedListComponentView(rootFrameDimension, this);
         detailInformationComponent = new DetailInformationComponentView(rootFrameDimension, this);
+
+        mainPanel.setVisible(true);
     }
 
     public static void main(String[] args) {

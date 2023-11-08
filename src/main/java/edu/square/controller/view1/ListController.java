@@ -38,15 +38,20 @@ public class ListController {
 
     public static void main(String[] args) {
         JFrame mainFrame = JFrameFactory.getDefaultJFrame(.8d, "Schedule");
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
+
 
         ListView listView = new ListView(mainFrame, mainFrame.getSize());
         ListController listController = new ListController(listView);
 
+        mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setVisible(true);
         mainFrame.add(listView.getMainPanel());
 
-        mainFrame.setVisible(true);
+
+
+
+
     }
 
     private void initialize() {
