@@ -4,6 +4,7 @@ import edu.square.controller.MController;
 import edu.square.entity.Reminder;
 import edu.square.model.MModel;
 import edu.square.model.view1.component.GroupedListComponentModel;
+import edu.square.model.view1.widget.ReminderModel;
 import edu.square.views.component.MComponent;
 import edu.square.views.view1.component.GroupedListComponentView;
 
@@ -17,6 +18,15 @@ public class GroupedListComponentController extends MController {
 
     @Override
     public void initialize() {
+        //Model Layer
+        //default show all list
+        ((GroupedListComponentModel) mModel).setList(ReminderModel.queryAllEntities(false));
+        List<Reminder> list= ((GroupedListComponentModel) mModel).getList();
+
+        //View Layer
+        ((GroupedListComponentView) mComponentView).addRemindersIntoList(list);
+
+        //Controller Layer
         bindListenerOnAddButton((GroupedListComponentView) mComponentView);
     }
 

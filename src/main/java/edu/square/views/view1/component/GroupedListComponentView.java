@@ -87,9 +87,9 @@ public class GroupedListComponentView extends MComponent {
         reminderListWidgetView.addNewReminderViewIntoReminderListView(reminder);
     }
 
-    public void addRemindersIntoList(List reminders) {
+    public void addRemindersIntoList(java.util.List<Reminder> reminders) {
         assert reminders != null;
-        reminderListWidgetView.addNewReminderViewsIntoReminderListView((java.util.List<Reminder>) reminders);
+        reminderListWidgetView.addNewReminderViewsIntoReminderListView(reminders);
     }
 
     public void removeReminderFromList(Reminder reminder) {
