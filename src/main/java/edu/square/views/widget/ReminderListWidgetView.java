@@ -171,6 +171,12 @@ public class ReminderListWidgetView extends MWidget {
         return new ReminderView(reminder);
     }
 
+    private void modifyListPanelSize(){
+        JPanel jPanel= new JPanel();
+
+        //TODO:根据reminderNum实现自动放大缩小scrollPane
+    }
+
     public class ReminderView {
         private final JLabel label;
         @Getter
