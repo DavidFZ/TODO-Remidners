@@ -1,6 +1,7 @@
-package edu.square.views.widget;
+package edu.square.views.view1.widget;
 
 import edu.square.utils.UIUtils.FontUtil;
+import edu.square.views.widget.MWidget;
 
 import javax.swing.*;
 import java.awt.*;
