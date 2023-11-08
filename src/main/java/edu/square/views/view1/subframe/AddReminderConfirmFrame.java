@@ -6,6 +6,7 @@ import edu.square.utils.UIUtils.JFrameFactory;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 public class AddReminderConfirmFrame {
     private final JFrame mainFrame;
@@ -13,13 +14,13 @@ public class AddReminderConfirmFrame {
     private final JButton confirmButton;
 
     public AddReminderConfirmFrame(Dimension selfDimension) {
-        Font font = FontUtil.getBoldFont(selfDimension, FontUtil.FONT_SIZE_1);
+        Font font = FontUtil.getBoldFont(selfDimension, 0.05);
 
         mainFrame = JFrameFactory.buildJFrame(selfDimension, "Please add item");
         confirmButton = new JButton("Confirm");
         itemName = new JTextField(40);
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        JLabel inputLabel = new JLabel("Item:");
+        JLabel inputLabel = new JLabel("Reminder Content:");
 
         inputLabel.setFont(font);
 
@@ -36,7 +37,7 @@ public class AddReminderConfirmFrame {
 
         //parent frame will not close when sub frame is closed
         mainFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        mainFrame.setAlwaysOnTop(true);
+//        mainFrame.setAlwaysOnTop(true);
         mainFrame.add(inputPanel);
         mainFrame.add(confirmPanel);
         mainFrame.setResizable(false);
@@ -46,6 +47,7 @@ public class AddReminderConfirmFrame {
 
     public static void main(String[] args) {
         AddReminderConfirmFrame addReminderConfirmFrame = new AddReminderConfirmFrame(new Dimension(500, 500));
+        addReminderConfirmFrame.mainFrame.setVisible(true);
     }
 
     public String getItemName() {
