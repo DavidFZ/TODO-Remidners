@@ -22,6 +22,10 @@ public class GroupLabelWidget extends MWidget {
         groupTitleLabel.setText(title);
     }
 
+    public String getGroupLabelText(){
+        return groupTitleLabel.getText();
+    }
+
     public void setGroupViewCount(int count) {
         countLabel.setText(String.valueOf(count));
     }

@@ -15,17 +15,15 @@ import java.awt.*;
 
 public class ListView extends MyView {
     public static String[] groupTitles = {"All", "Today", "Completed", "Flagged"};
-    LeftSideComponentView leftSideComponent;
-    GroupedListComponentView groupedListComponentView;
-    DetailInformationComponentView detailInformationComponent;
+    public final LeftSideComponentView leftSideComponent;
+    public final GroupedListComponentView groupedListComponentView;
+    public final DetailInformationComponentView detailInformationComponent;
 
     public ListView(JFrame parentFrame, Dimension selfDimension) {
         super(parentFrame, selfDimension);
 
         leftSideComponent = new LeftSideComponentView(rootFrameDimension, this);
-        LeftSideComponentController leftSideComponentController = new LeftSideComponentController(leftSideComponent, new LeftSideComponentModel());
         groupedListComponentView = new GroupedListComponentView(rootFrameDimension, this);
-        GroupedListComponentController groupedListComponentController = new GroupedListComponentController(groupedListComponentView, new GroupedListComponentModel());
         detailInformationComponent = new DetailInformationComponentView(rootFrameDimension, this);
     }
 

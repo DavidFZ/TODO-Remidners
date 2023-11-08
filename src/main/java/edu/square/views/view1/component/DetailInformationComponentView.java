@@ -5,7 +5,7 @@ import edu.square.utils.UIUtils.MComponentTestHelper;
 import edu.square.views.component.MComponent;
 import edu.square.views.view.MyView;
 import edu.square.views.view1.widget.BlockPanelWidget;
-import edu.square.views.widget.TextFieldPanelWidget;
+import edu.square.views.view1.widget.TextFieldPanelWidget;
 import lombok.Getter;
 
 import javax.swing.*;

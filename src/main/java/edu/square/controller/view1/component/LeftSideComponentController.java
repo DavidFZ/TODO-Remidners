@@ -5,6 +5,7 @@ import edu.square.model.component.MModel;
 import edu.square.model.view1.component.LeftSideComponentModel;
 import edu.square.views.component.MComponent;
 import edu.square.views.view1.component.LeftSideComponentView;
+import edu.square.views.view1.widget.GroupLabelWidget;
 
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -39,7 +40,7 @@ public class LeftSideComponentController extends MController {
         }
     }
 
-    public void addMouseListenerToGroupLabel(int index, MouseListener groupLabelMouseListener) {
+    public void setMouseListenerOnGroupLabel(int index, MouseListener groupLabelMouseListener) {
         ((LeftSideComponentView) mComponentView).addGroupLabelMouseListener(index, groupLabelMouseListener);
     }
 }

@@ -74,16 +74,18 @@ public class ReminderListWidgetView extends MWidget {
 
     public void addNewReminderViewIntoReminderListView(Reminder reminder) {
         reminderNum++;
-        reminders.add(reminder);
         ReminderView reminderView = new ReminderView(reminder);
+        reminders.add(reminder);
         reminderViews.add(reminderView);
-
+        System.out.println("加入"+reminder.getContent());
+        //TODO 无法显示？
         containerPanel.add(reminderView.getInnerPanel());
         // add complete button listener
         if (completeActionListener != null)
             reminderView.getRadioButton().addActionListener(completeActionListener);
 
         changeContainerPanelSize();
+        containerPanel.isVisible();
         containerPanel.repaint();
 
 
@@ -92,9 +94,11 @@ public class ReminderListWidgetView extends MWidget {
 
     public void addNewReminderViewsIntoReminderListView(List<Reminder> reminders) {
         reminderNum += reminders.size();
+        this.reminders.addAll(reminders);
         for (Reminder reminder : reminders) {
             this.reminders.add(reminder);
             ReminderView reminderView = new ReminderView(reminder);
+            reminderViews.add(reminderView);
             containerPanel.add(reminderView.getInnerPanel());
             // add complete button listener
             if (completeActionListener != null) {
@@ -159,7 +163,7 @@ public class ReminderListWidgetView extends MWidget {
         mainPanel.setBackground(Color.red);
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 //        containerPanel = new JPanel();
-        containerPanel = JPanelUtil.getFlowJpanel(new FlowLayout(FlowLayout.CENTER,0,0), resizeDimensionWidthAndHeight(selfDimension, 0.9, 0.9));
+        containerPanel = JPanelUtil.getFlowJpanel(new FlowLayout(FlowLayout.CENTER, 0, 0), resizeDimensionWidthAndHeight(selfDimension, 0.9, 0.9));
 //        containerPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.9, 0.9));
         containerPanel.setBackground(Color.green);
         containerPanelHeightInit = containerPanel.getHeight();
