@@ -17,8 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
+import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
 
 public class ReminderListWidgetView extends MWidget {
     private final Map<Reminder, ReminderView> reminderViewMap;
@@ -26,6 +25,7 @@ public class ReminderListWidgetView extends MWidget {
     private JPanel containerPanel;
     private int reminderNum;
     private Dimension containerPanelDimension;
+    private Dimension reminderViewDimension;
     //keep parentFrame var for future implementation resolution scaling
     @Getter
     private List<ReminderView> reminderViews;
@@ -84,7 +84,11 @@ public class ReminderListWidgetView extends MWidget {
             reminderView.getRadioButton().addActionListener(completeActionListener);
 
         modifyContainerPanelSize();
+        containerPanel.validate();
         containerPanel.repaint();
+        scrollPane.validate();
+        scrollPane.repaint();
+        mainPanel.validate();
         mainPanel.repaint();
 
 
@@ -95,7 +99,6 @@ public class ReminderListWidgetView extends MWidget {
         reminderNum += reminders.size();
         this.reminders.addAll(reminders);
         for (Reminder reminder : reminders) {
-            this.reminders.add(reminder);
             ReminderView reminderView = new ReminderView(reminder);
             reminderViews.add(reminderView);
             reminderViewMap.put(reminder, reminderView);
@@ -144,7 +147,7 @@ public class ReminderListWidgetView extends MWidget {
 
     public void modifyContainerPanelSize() {
         if (reminderNum > 13)
-            containerPanel.setPreferredSize(resizeDimensionHeightScale(containerPanelDimension, 0.06 * reminderNum));
+            containerPanel.setPreferredSize(addDimensionHeight(containerPanelDimension, (int) (reminderViewDimension.getHeight() * (reminderNum - 3))));
         else
             containerPanel.setPreferredSize(containerPanelDimension);
     }
@@ -169,6 +172,7 @@ public class ReminderListWidgetView extends MWidget {
         containerPanel.setBackground(Color.green);
 
         containerPanelDimension = containerPanel.getPreferredSize();
+        reminderViewDimension = resizeDimensionWidthAndHeight(containerPanelDimension, 0.35, 0.06);
 
         scrollPane = new JScrollPane(containerPanel);
         scrollPane.setPreferredSize(resizeDimensionHeightScale(selfDimension, 0.9));//防止scrollPane过长
