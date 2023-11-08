@@ -9,7 +9,6 @@ import java.awt.*;
 public class WeekOfDayWidget extends MWidget {
     Font font;
     int day;
-    JPanel mainPanel;
     JLabel dayName;
 
     WeekOfDayWidget(Dimension rootFrameDimension, Dimension selfDimension){
