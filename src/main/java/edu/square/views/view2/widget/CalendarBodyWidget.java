@@ -13,7 +13,7 @@ public class CalendarBodyWidget extends MWidget {
 
     int totalDay;
 
-    CalendarBodyWidget(Dimension rootFrameDimension,Dimension selfDimension){
+    public CalendarBodyWidget(Dimension rootFrameDimension, Dimension selfDimension){
         super(rootFrameDimension, selfDimension);
     }
     @Override
