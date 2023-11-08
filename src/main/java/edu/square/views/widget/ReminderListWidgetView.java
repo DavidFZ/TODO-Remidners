@@ -93,6 +93,7 @@ public class ReminderListWidgetView extends MWidget {
             if (completeActionListener != null)
                 reminderView.getRadioButton().addActionListener(completeActionListener);
         }
+        //TODO:确认是否需要
 //        if (reminderNum > 13) {
 //            jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.06) * reminders.size()));
 //        }

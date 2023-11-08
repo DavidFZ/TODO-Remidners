@@ -24,7 +24,7 @@ public class GroupedListComponentView extends MComponent {
     private GroupedTitleWidgetView groupedTitleWidgetView;
     private ReminderListWidgetView reminderListWidgetView;
     @Getter
-    private JFrame printFrame;
+    private JFrame subFrame;
     @Getter
     private JButton confirmButton;
 
@@ -74,5 +74,24 @@ public class GroupedListComponentView extends MComponent {
     @Override
     protected void initializeView() {
 
+    }
+
+    public void setGroupedTitle(String title) {
+        groupedTitleWidgetView.setTitleLabel(title);
+    }
+
+    public void clearReminderList() {
+        reminderListWidgetView.clearReminderListView();
+    }
+
+    public static class SubFrame extends JFrame {
+        public SubFrame() {
+            super();
+            this.setSize(300, 200);
+            this.setLocationRelativeTo(null);
+            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+            this.setResizable(false);
+            this.setVisible(true);
+        }
     }
 }
