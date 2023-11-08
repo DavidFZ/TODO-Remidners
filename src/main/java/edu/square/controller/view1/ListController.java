@@ -14,6 +14,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
+import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
+
 public class ListController {
     private final ListView listView;
     private final ListModel listModel;
@@ -30,6 +32,8 @@ public class ListController {
         this.leftSideComponentController = new LeftSideComponentController(listView.leftSideComponent, listModel.leftSideComponentModel);
         this.groupedListComponentController = new GroupedListComponentController(listView.groupedListComponentView, listModel.groupedListComponentModel);
         this.detailInformationComponentController = new DetailInformationComponentController(listView.detailInformationComponent, listModel.detailInformationModel);
+
+        initialize();
     }
 
     public static void main(String[] args) {
@@ -63,8 +67,6 @@ public class ListController {
 
                 @Override
                 public void mouseClicked(MouseEvent e) {
-                    System.out.println("Group " + finalI + " is clicked\n\n\n");
-
                     /* model layer */
                     //update groupedListComponentModel
                     List<Reminder> reminderList = listModel.leftSideComponentModel.getGroupModels().get(finalI).getReminderModels();
