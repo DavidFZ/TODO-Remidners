@@ -79,11 +79,11 @@ public class DetailInformationComponentView extends MComponent {
         mainPanel.add(textPanelDetail);
 
         //nameTextFieldPanelWidget
-        nameTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, "Content:", 0.07);
+        nameTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension,0.07),"Content:");
         mainPanel.add(nameTextFieldPanelWidget.getMainPanel());
 
         //nameTextFieldPanelWidget
-        noteTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, "Note:", 0.07);
+        noteTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension,resizeDimensionHeightScale(selfDimension,0.07),"Note:");
         mainPanel.add(noteTextFieldPanelWidget.getMainPanel());
 
         //BlockPanel

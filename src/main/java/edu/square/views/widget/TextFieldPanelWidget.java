@@ -16,8 +16,8 @@ public class TextFieldPanelWidget extends MWidget {
     Font font2;
     Font font3;
 
-    public TextFieldPanelWidget(Dimension parentJComponentDimension, String title, double scalingRatio) {
-        super(parentJComponentDimension, resizeDimensionHeightScale(parentJComponentDimension, scalingRatio));
+    public TextFieldPanelWidget(Dimension parentJComponentDimension, Dimension selfDimition,String title) {
+        super(parentJComponentDimension, selfDimition);
         this.title = title;
 
 
