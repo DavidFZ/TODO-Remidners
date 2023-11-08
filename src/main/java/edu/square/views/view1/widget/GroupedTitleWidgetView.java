@@ -17,7 +17,6 @@ public class GroupedTitleWidgetView extends MWidget {
     Font font2;
     Font font3;
     private JLabel titleLabel;
-    @Getter
     private JButton addButton;
 
     public GroupedTitleWidgetView(Dimension rootFrameDimension, Dimension selfDimension) {

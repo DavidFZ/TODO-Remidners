@@ -5,33 +5,31 @@ import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.MComponentTestHelper;
 import edu.square.views.component.MComponent;
 import edu.square.views.view.MyView;
+import edu.square.views.view1.subframe.AddReminderConfirmFrame;
 import edu.square.views.view1.widget.GroupedTitleWidgetView;
 import edu.square.views.widget.ReminderListWidgetView;
-import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
+import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
+import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthScale;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
 public class GroupedListComponentView extends MComponent {
     Font font1;
     Font font2;
     Font font3;
-    @Getter
-    JButton addButton;
     private GroupedTitleWidgetView groupedTitleWidgetView;
     private ReminderListWidgetView reminderListWidgetView;
-    @Getter
-    private JFrame subFrame;
-    @Getter
-    private JButton confirmButton;
+    private AddReminderConfirmFrame addReminderConfirmFrame;
 
 
     public GroupedListComponentView(Dimension rootFrameDimension, MyView myView) {
         super(myView, rootFrameDimension);
+        //init sub frame
+        addReminderConfirmFrame = new AddReminderConfirmFrame(resizeDimensionWidthScale(selfDimension, 0.3));
     }
 
     public static void main(String[] args) {
@@ -57,7 +55,7 @@ public class GroupedListComponentView extends MComponent {
     @Override
     protected void initializeFonts() {
         font1 = FontUtil.getBoldFont(parentDimension, 0.05);
-        font2 = FontUtil.getBoldFont(parentDimension, 0.03);
+        font2 = FontUtil.getBoldFont(parentDimension, FontUtil.FONT_SIZE_1);    //0.03
         font3 = FontUtil.getBoldFont(parentDimension, 0.008);
     }
 
@@ -66,11 +64,9 @@ public class GroupedListComponentView extends MComponent {
         //GROUP TITLE
         groupedTitleWidgetView = new GroupedTitleWidgetView(parentDimension, resizeDimensionHeightScale(selfDimension, 0.1));
         mainPanel.add(groupedTitleWidgetView.getMainPanel());
-        //reference sub components
-        addButton = groupedTitleWidgetView.getAddButton();
 
         //GROUP LABEL
-        reminderListWidgetView = new ReminderListWidgetView(parentDimension,  resizeDimensionHeightScale(selfDimension, 0.9));
+        reminderListWidgetView = new ReminderListWidgetView(parentDimension, resizeDimensionHeightScale(selfDimension, 0.9));
         mainPanel.add(reminderListWidgetView.getScrollPane());
     }
 
@@ -101,7 +97,7 @@ public class GroupedListComponentView extends MComponent {
     }
 
     public void setAddButtonListener(ActionListener actionListener) {
-        addButton.addActionListener(actionListener);
+        groupedTitleWidgetView.setAddButtonListener(actionListener);
     }
 
     public static class SubFrame extends JFrame {
