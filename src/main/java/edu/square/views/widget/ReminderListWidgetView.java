@@ -93,6 +93,7 @@ public class ReminderListWidgetView extends MWidget {
     public void addNewReminderViewsIntoReminderListView(List<Reminder> reminders) {
         reminderNum += reminders.size();
         for (Reminder reminder : reminders) {
+            this.reminders.add(reminder);
             ReminderView reminderView = new ReminderView(reminder);
             containerPanel.add(reminderView.getInnerPanel());
             // add complete button listener
