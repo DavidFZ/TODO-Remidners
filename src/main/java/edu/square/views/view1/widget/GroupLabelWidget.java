@@ -16,11 +16,10 @@ public class GroupLabelWidget extends MWidget {
     private JLabel groupTitleLabel;
     private JLabel countLabel;
 
-    private String title;
 
     public GroupLabelWidget(Dimension parentDimension, Dimension selfDimension, String title) {
         super(parentDimension, selfDimension);
-        this.title = title;
+        groupTitleLabel.setText(title);
     }
 
     public void setGroupViewCount(int count) {
@@ -55,16 +54,17 @@ public class GroupLabelWidget extends MWidget {
 
     @Override
     protected void initializeJComponents() {
-        groupTitleLabel = new JLabel(title);
+        groupTitleLabel = new JLabel();
         groupTitleLabel.setFont(DEFAULT_FONT);
         groupTitleLabel.setBackground(Color.black);
         groupTitleLabel.setPreferredSize(resizeDimensionWidthScale(selfDimension, 0.6));
-        mainPanel.add(groupTitleLabel);
 
         countLabel = new JLabel("0");
         countLabel.setPreferredSize(resizeDimensionWidthScale(selfDimension, 0.2));
         countLabel.setFont(DEFAULT_FONT);
+        mainPanel.add(groupTitleLabel);
         mainPanel.add(countLabel);
+        repaint();
     }
 
     public static class ViewBuilder {
