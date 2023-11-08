@@ -86,16 +86,16 @@ public class ReminderListWidgetView extends MWidget {
         // add complete button listener
         if (completeActionListener != null)
             reminderView.getRadioButton().addActionListener(completeActionListener);
-        if (reminderNum > 13) {
-            mainPanel.setPreferredSize(new Dimension((int)panelWidthInit, (int) (mainPanel.getHeight() + panelHeightInit * 0.06)));
-        }
+
+        changeMainPanelSize();
+
 
         //TODO:实现自动滚动到底部
     }
 
     public void addNewReminderViewsIntoReminderListView(List<Reminder> reminders) {
         reminderNum += reminders.size();
-
+        changeMainPanelSize();
         for (Reminder reminder : reminders) {
             ReminderView reminderView = new ReminderView(reminder);
             mainPanel.add(reminderView.getInnerPanel());
@@ -103,10 +103,7 @@ public class ReminderListWidgetView extends MWidget {
             if (completeActionListener != null)
                 reminderView.getRadioButton().addActionListener(completeActionListener);
         }
-        //TODO:确认是否需要
-        if (reminderNum > 13) {
-            mainPanel.setPreferredSize(new Dimension((int)panelWidthInit, (int) (mainPanel.getHeight() + panelHeightInit * 0.06)));
-        }
+
         repaint();
     }
 
@@ -120,9 +117,7 @@ public class ReminderListWidgetView extends MWidget {
 
         //scrollPane不会改变，改变的是里面的mainpanel的大小
         //实现自动缩小scrollPane
-        if (reminderNum > 13) {
-            mainPanel.setPreferredSize(new Dimension((int)panelWidthInit, (int) (mainPanel.getHeight() - panelHeightInit * 0.06)));
-        }
+        changeMainPanelSize();
 
 
         repaint();
@@ -137,8 +132,16 @@ public class ReminderListWidgetView extends MWidget {
         reminderViewMap.clear();
 
         //TODO:实现自动缩小scrollPane
-        mainPanel.setPreferredSize(new Dimension((int)panelWidthInit, (int)panelHeightInit));
+        changeMainPanelSize();
 
+    }
+
+    public void changeMainPanelSize() {
+        if (reminderNum > 13) {
+            mainPanel.setPreferredSize(new Dimension((int) panelWidthInit, (int) (reminderNum * panelHeightInit * 0.06)));
+        } else {
+            mainPanel.setPreferredSize(new Dimension((int) panelWidthInit, (int) (panelHeightInit)));
+        }
     }
 
     public void clearReminderListView() {
@@ -171,8 +174,8 @@ public class ReminderListWidgetView extends MWidget {
         return new ReminderView(reminder);
     }
 
-    private void modifyListPanelSize(){
-        JPanel jPanel= new JPanel();
+    private void modifyListPanelSize() {
+        JPanel jPanel = new JPanel();
 
         //TODO:根据reminderNum实现自动放大缩小scrollPane
     }
