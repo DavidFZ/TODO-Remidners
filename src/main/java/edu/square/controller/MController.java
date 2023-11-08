@@ -1,6 +1,6 @@
 package edu.square.controller;
 
-import edu.square.model.MModel;
+import edu.square.model.component.MModel;
 import edu.square.views.component.MComponent;
 
 public abstract class MController {

@@ -1,7 +1,7 @@
 package edu.square.controller.view1.component;
 
 import edu.square.controller.MController;
-import edu.square.model.MModel;
+import edu.square.model.component.MModel;
 import edu.square.model.view1.component.LeftSideComponentModel;
 import edu.square.views.component.MComponent;
 import edu.square.views.view1.component.LeftSideComponentView;

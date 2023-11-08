@@ -2,7 +2,7 @@ package edu.square.controller.view1.component;
 
 import edu.square.controller.MController;
 import edu.square.entity.Reminder;
-import edu.square.model.MModel;
+import edu.square.model.component.MModel;
 import edu.square.model.view1.component.GroupedListComponentModel;
 import edu.square.model.view1.widget.ReminderModel;
 import edu.square.views.component.MComponent;
