@@ -2,6 +2,7 @@ package edu.square.views.view1.subframe;
 
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.utils.UIUtils.JPanelUtil;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,8 +30,6 @@ public class AddReminderConfirmFrame {
         inputPanel.add(itemName);
 
         JPanel confirmPanel = new JPanel(new BorderLayout());
-        confirmPanel.setBounds(50, 100, 200, 200);
-        confirmButton.setSize(100, 100);
 
         //while input Enter will be same as click confirm button
         confirmPanel.add(confirmButton, BorderLayout.SOUTH);
