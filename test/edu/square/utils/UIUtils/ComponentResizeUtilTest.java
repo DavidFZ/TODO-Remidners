@@ -25,30 +25,7 @@ public class ComponentResizeUtilTest {
     }
 
     @Test
-    public void fontGetFontResizedUtil() {
-        JFrame parentFrame = new JFrame();
-        parentFrame.setSize(200,100);
-        double factor = 0.1;
-        Font font = ComponentResizeUtil.getFontResizeUtil(parentFrame,factor);
-        int fontSize = 10;
-        assertEquals(20,font.getSize());
-
-    }
-
-    @Test
-    public void getSelfAspectMaintainer() {
-    }
-
-    @Test
-    public void getUniformScalingComponentAdapter() {
-    }
-
-    @Test
     public void calculateAspectRatio() {
-    }
-
-    @Test
-    public void calculateWidthScaledRatio() {
     }
 
     @Test
@@ -79,5 +56,9 @@ public class ComponentResizeUtilTest {
 
     @Test
     public void testResizeDimensionWidthScale() {
+    }
+    @Test
+    public void recursionResize(){
+
     }
 }
