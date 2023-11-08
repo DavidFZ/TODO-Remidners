@@ -26,6 +26,7 @@ public class TextFieldPanelWidget extends MWidget {
 
     @Override
     protected void initializeMainPanel() {
+        mainPanel.setPreferredSize(selfDimension);
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
         mainPanel.setBackground(Color.magenta);
     }
