@@ -1,5 +1,6 @@
 package edu.square.views.view1.component;
 
+import edu.square.entity.Reminder;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.MComponentTestHelper;
 import edu.square.views.component.MComponent;
@@ -10,6 +11,7 @@ import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthScale;
@@ -65,6 +67,8 @@ public class GroupedListComponentView extends MComponent {
         //GROUP TITLE
         groupedTitleWidgetView = new GroupedTitleWidgetView(parentDimension, resizeDimensionHeightScale(selfDimension, 0.1));
         mainPanel.add(groupedTitleWidgetView.getMainPanel());
+        //reference sub components
+        addButton = groupedTitleWidgetView.getAddButton();
 
         //GROUP LABEL
         reminderListWidgetView = new ReminderListWidgetView(parentDimension, parentDimension);
@@ -82,6 +86,23 @@ public class GroupedListComponentView extends MComponent {
 
     public void clearReminderList() {
         reminderListWidgetView.clearReminderListView();
+    }
+
+    public void addReminderIntoList(Reminder reminder) {
+        reminderListWidgetView.addNewReminderViewIntoReminderListView(reminder);
+    }
+
+    public void addRemindersIntoList(List reminders) {
+        assert reminders != null;
+        reminderListWidgetView.addNewReminderViewsIntoReminderListView((java.util.List<Reminder>) reminders);
+    }
+
+    public void removeReminderFromList(Reminder reminder) {
+        reminderListWidgetView.removeReminderViewFromReminderListView(reminder);
+    }
+
+    public void setAddButtonListener(ActionListener actionListener) {
+        addButton.addActionListener(actionListener);
     }
 
     public static class SubFrame extends JFrame {

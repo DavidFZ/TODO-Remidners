@@ -3,6 +3,7 @@ package edu.square.views.view1.widget;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.MComponentTestHelper;
 import edu.square.views.widget.MWidget;
+import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,6 +17,7 @@ public class GroupedTitleWidgetView extends MWidget {
     Font font2;
     Font font3;
     private JLabel titleLabel;
+    @Getter
     private JButton addButton;
 
     public GroupedTitleWidgetView(Dimension rootFrameDimension, Dimension selfDimension) {
