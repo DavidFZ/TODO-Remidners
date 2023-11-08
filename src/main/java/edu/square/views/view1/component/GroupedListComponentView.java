@@ -13,8 +13,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthScale;
+import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
 public class GroupedListComponentView extends MComponent {
@@ -71,7 +70,7 @@ public class GroupedListComponentView extends MComponent {
         addButton = groupedTitleWidgetView.getAddButton();
 
         //GROUP LABEL
-        reminderListWidgetView = new ReminderListWidgetView(parentDimension, parentDimension);
+        reminderListWidgetView = new ReminderListWidgetView(parentDimension,  resizeDimensionHeightScale(selfDimension, 0.9));
         mainPanel.add(reminderListWidgetView.getScrollPane());
     }
 

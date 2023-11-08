@@ -17,11 +17,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
+import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
 
 public class ReminderListWidgetView extends MWidget {
-    private final double frameWidthInit;
-    private final double frameHeightInit;
+    private final double panelWidthInit;
+    private final double panelHeightInit;
     private final double scaling = 0.4;
     int reminderNum;
     Font font;
@@ -36,7 +36,8 @@ public class ReminderListWidgetView extends MWidget {
     private ActionListener completeActionListener;
 
     public ReminderListWidgetView(Dimension rootFrameDimension, Dimension selfDimension) {
-        super(rootFrameDimension, resizeDimensionWidthAndHeight(selfDimension, 0.95, 0.06));
+        //mian将被加入到scrollPane中
+        super(rootFrameDimension, resizeDimensionWidthAndHeight(selfDimension, 0.95, 0.85));//初始长度，但似乎没影响
         //init data structures
         reminderViewMap = new HashMap<>();
         reminders = new ArrayList<>();
@@ -44,11 +45,11 @@ public class ReminderListWidgetView extends MWidget {
         reminderViews = new ArrayList<>();
 
 
-        frameHeightInit = rootFrameDimension.getHeight();
-        frameWidthInit = scaling * rootFrameDimension.getWidth();
+        panelHeightInit = getMainPanel().getHeight();
+        panelWidthInit = getMainPanel().getWidth();
 
         scrollPane = new JScrollPane(mainPanel);
-        scrollPane.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.8));
+        scrollPane.setPreferredSize(resizeDimensionHeightScale(selfDimension, 0.9));//防止scrollPane过长
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setWheelScrollingEnabled(true);
     }
@@ -86,7 +87,7 @@ public class ReminderListWidgetView extends MWidget {
         if (completeActionListener != null)
             reminderView.getRadioButton().addActionListener(completeActionListener);
         if (reminderNum > 13) {
-            mainPanel.setPreferredSize(new Dimension(mainPanel.getWidth(), (int) (mainPanel.getHeight() + frameHeightInit * 0.06)));
+            mainPanel.setPreferredSize(new Dimension((int)panelWidthInit, (int) (mainPanel.getHeight() + panelHeightInit * 0.06)));
         }
 
         //TODO:实现自动滚动到底部
@@ -103,9 +104,9 @@ public class ReminderListWidgetView extends MWidget {
                 reminderView.getRadioButton().addActionListener(completeActionListener);
         }
         //TODO:确认是否需要
-//        if (reminderNum > 13) {
-//            jPanelManager.setPreferredSize(new Dimension(jPanelManager.getWidth(), (int) (jPanelManager.getHeight() + frameHeightInit * 0.06) * reminders.size()));
-//        }
+        if (reminderNum > 13) {
+            mainPanel.setPreferredSize(new Dimension((int)panelWidthInit, (int) (mainPanel.getHeight() + panelHeightInit * 0.06)));
+        }
         repaint();
     }
 
@@ -117,9 +118,13 @@ public class ReminderListWidgetView extends MWidget {
         reminders.remove(reminder);
         reminderViews.remove(reminderView);
 
-        if (reminderNum < 13) {
-            //TODO:实现自动缩小scrollPane
+        //scrollPane不会改变，改变的是里面的mainpanel的大小
+        //实现自动缩小scrollPane
+        if (reminderNum > 13) {
+            mainPanel.setPreferredSize(new Dimension((int)panelWidthInit, (int) (mainPanel.getHeight() - panelHeightInit * 0.06)));
         }
+
+
         repaint();
     }
 
@@ -132,6 +137,8 @@ public class ReminderListWidgetView extends MWidget {
         reminderViewMap.clear();
 
         //TODO:实现自动缩小scrollPane
+        mainPanel.setPreferredSize(new Dimension((int)panelWidthInit, (int)panelHeightInit));
+
     }
 
     public void clearReminderListView() {
@@ -146,7 +153,7 @@ public class ReminderListWidgetView extends MWidget {
 
     @Override
     protected void initializeMainPanel() {
-        mainPanel.setPreferredSize(new Dimension((int) (frameWidthInit * 0.95), (int) ((frameHeightInit * 0.06) * reminderNum)));
+        mainPanel.setPreferredSize(selfDimension);
         mainPanel.setBackground(Color.red);
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
     }
@@ -190,9 +197,8 @@ public class ReminderListWidgetView extends MWidget {
         private void initView() {
             //innerPanel View
             innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
-            innerPanel.setPreferredSize(new Dimension((int) (0.85 * frameWidthInit), (int) (0.06 * frameHeightInit)));//13个
+            innerPanel.setPreferredSize(new Dimension((int) (0.85 * panelWidthInit), (int) (0.06 * panelHeightInit)));//13个
             innerPanel.setBorder(new LineBorder(Color.PINK));
-            innerPanel.setBackground(Color.yellow);
 
 
             //reload done status from db
