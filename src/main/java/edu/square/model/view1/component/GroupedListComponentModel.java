@@ -1,7 +1,7 @@
 package edu.square.model.view1.component;
 
 import edu.square.entity.Reminder;
-import edu.square.model.MModel;
+import edu.square.model.component.MModel;
 import edu.square.model.view1.widget.ReminderModel;
 import lombok.Getter;
 import lombok.Setter;

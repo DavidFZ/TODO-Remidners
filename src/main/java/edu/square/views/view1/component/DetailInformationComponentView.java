@@ -28,9 +28,8 @@ public class DetailInformationComponentView extends MComponent {
     private JButton doneButton;
     @Getter
     private JButton backButton;
-    @Getter
-    private TextFieldPanelWidget nameTextFieldPanelWidget;
-    @Getter
+
+    private TextFieldPanelWidget contentTextFieldPanelWidget;
     private TextFieldPanelWidget noteTextFieldPanelWidget;
 
     public DetailInformationComponentView(Dimension parentFrameDimension, MyView myView) {
@@ -79,15 +78,15 @@ public class DetailInformationComponentView extends MComponent {
         mainPanel.add(textPanelDetail);
 
         //nameTextFieldPanelWidget
-        nameTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension,0.07),"Content:");
-        mainPanel.add(nameTextFieldPanelWidget.getMainPanel());
+        contentTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.07), "Content:");
+        mainPanel.add(contentTextFieldPanelWidget.getMainPanel());
 
         //nameTextFieldPanelWidget
-        noteTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension,resizeDimensionHeightScale(selfDimension,0.07),"Note:");
+        noteTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.07), "Note:");
         mainPanel.add(noteTextFieldPanelWidget.getMainPanel());
 
         //BlockPanel
-        BlockPanelWidget blockPanelView = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension,0.1));
+        BlockPanelWidget blockPanelView = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.1));
         mainPanel.add(blockPanelView.getMainPanel());
     }
 
@@ -138,5 +137,20 @@ public class DetailInformationComponentView extends MComponent {
 
     public void setVisibility(boolean visibility) {
         mainPanel.setVisible(visibility);
+    }
+
+    public void setContentTextField(String content) {
+        contentTextFieldPanelWidget.setTextField(content);
+    }
+    public void setNoteTextField(String note) {
+        noteTextFieldPanelWidget.setTextField(note);
+    }
+
+    public String getContentTextField() {
+        return contentTextFieldPanelWidget.getTextField().getText();
+    }
+
+    public String getNoteTextField() {
+        return noteTextFieldPanelWidget.getTextField().getText();
     }
 }

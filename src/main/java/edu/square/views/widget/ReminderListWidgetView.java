@@ -96,6 +96,7 @@ public class ReminderListWidgetView extends MWidget {
         reminderNum += reminders.size();
         this.reminders.addAll(reminders);
         for (Reminder reminder : reminders) {
+            this.reminders.add(reminder);
             ReminderView reminderView = new ReminderView(reminder);
             reminderViews.add(reminderView);
             containerPanel.add(reminderView.getInnerPanel());

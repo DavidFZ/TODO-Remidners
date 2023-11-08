@@ -2,13 +2,14 @@ package edu.square.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.UUID;
 
 import static edu.square.utils.DevUtils.getTimeStamp;
 
 @Data
-public class Reminder implements Exportable {
+public class Reminder implements Exportable, Serializable {
     private String uuid;
     private String content;
     private String tag;

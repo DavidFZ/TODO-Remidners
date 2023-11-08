@@ -81,11 +81,19 @@ public class GroupedTitleWidgetView extends MWidget {
         titleLabel.setText(title);
     }
 
+    public JLabel getTitleLabel(){
+        return this.titleLabel;
+    }
+
     public void setAddButtonListener(ActionListener actionListener) {
         addButton.addActionListener(actionListener);
     }
 
     public void setAddButtonEnable(boolean enable) {
         addButton.setEnabled(enable);
+    }
+
+    public JButton getAddButton(){
+        return this.addButton;
     }
 }
