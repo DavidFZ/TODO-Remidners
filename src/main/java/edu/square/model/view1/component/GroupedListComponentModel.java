@@ -2,7 +2,7 @@ package edu.square.model.view1.component;
 
 import edu.square.entity.Reminder;
 import edu.square.model.MModel;
-import lombok.Data;
+import edu.square.model.view1.widget.ReminderModel;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,9 +20,11 @@ public class GroupedListComponentModel extends MModel {
 
     public void addReminder(Reminder reminder) {
         list.add(reminder);
+        //persist layer
+        ReminderModel.insertReminder(reminder);
     }
 
-    public void removeReminder(Reminder reminder) {
+    public void deleteReminder(Reminder reminder) {
         list.remove(reminder);
     }
 

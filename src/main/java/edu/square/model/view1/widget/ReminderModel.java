@@ -234,6 +234,16 @@ public class ReminderModel {
         return reminder;
     }
 
+    public static Reminder insertReminder(Reminder reminder) {
+        Session s = getSession();
+
+        reminder.setRemindTime(getTimeStamp());
+
+        s.merge(reminder);
+        s.beginTransaction().commit();
+        return reminder;
+    }
+
     public static void updateReminder(Reminder reminder) {
         Session session = getSession();
 

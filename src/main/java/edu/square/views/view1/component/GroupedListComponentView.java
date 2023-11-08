@@ -100,14 +100,19 @@ public class GroupedListComponentView extends MComponent {
         groupedTitleWidgetView.setAddButtonListener(actionListener);
     }
 
-    public static class SubFrame extends JFrame {
-        public SubFrame() {
-            super();
-            this.setSize(300, 200);
-            this.setLocationRelativeTo(null);
-            this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            this.setResizable(false);
-            this.setVisible(true);
-        }
+    public void setSubFrameVisibility(boolean visibility) {
+        addReminderConfirmFrame.setVisibility(visibility);
+    }
+
+    public void setConfirmButtonListener(ActionListener actionListener) {
+        addReminderConfirmFrame.setConfirmButtonListener(actionListener);
+    }
+
+    public String getReminderContent() {
+        return addReminderConfirmFrame.getItemName();
+    }
+
+    public void setAddButtonEnable(boolean enable) {
+        groupedTitleWidgetView.setAddButtonEnable(enable);
     }
 }

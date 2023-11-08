@@ -84,4 +84,8 @@ public class GroupedTitleWidgetView extends MWidget {
     public void setAddButtonListener(ActionListener actionListener) {
         addButton.addActionListener(actionListener);
     }
+
+    public void setAddButtonEnable(boolean enable) {
+        addButton.setEnabled(enable);
+    }
 }
