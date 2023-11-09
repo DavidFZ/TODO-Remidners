@@ -9,9 +9,9 @@ import edu.square.views.view1.subframe.AddReminderConfirmFrame;
 import edu.square.views.view1.widget.GroupedTitleWidgetView;
 import edu.square.views.widget.ReminderListWidgetView;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
@@ -22,13 +22,13 @@ public class GroupedListComponentView extends MComponent {
     Font font3;
     private GroupedTitleWidgetView groupedTitleWidgetView;
     private ReminderListWidgetView reminderListWidgetView;
-    private AddReminderConfirmFrame addReminderConfirmFrame;
+    private final AddReminderConfirmFrame addReminderConfirmFrame;
 
 
     public GroupedListComponentView(Dimension rootFrameDimension, MyView myView) {
         super(myView, rootFrameDimension);
         //init sub frame
-        addReminderConfirmFrame = new AddReminderConfirmFrame(resizeDimensionWidthAndHeight(selfDimension, 0.6,0.4));
+        addReminderConfirmFrame = new AddReminderConfirmFrame(resizeDimensionWidthAndHeight(selfDimension, 0.6, 0.4));
     }
 
     public static void main(String[] args) {
@@ -78,6 +78,10 @@ public class GroupedListComponentView extends MComponent {
         groupedTitleWidgetView.setTitleLabel(title);
     }
 
+    public void cleanSubFrameTextFiled() {
+        addReminderConfirmFrame.cleanTextField();
+    }
+
     public void clearReminderList() {
         reminderListWidgetView.clearReminderListView();
     }
@@ -113,5 +117,9 @@ public class GroupedListComponentView extends MComponent {
 
     public void setAddButtonEnable(boolean enable) {
         groupedTitleWidgetView.setAddButtonEnable(enable);
+    }
+
+    public List<ReminderListWidgetView.ReminderView> getReminderViews() {
+        return reminderListWidgetView.getReminderViews();
     }
 }
