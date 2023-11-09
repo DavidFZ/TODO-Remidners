@@ -8,14 +8,4 @@ public class DatabaseStatementUtil {
         return DatabaseConnectionUtil.getConnection().createStatement();
     }
 
-
-//    public static void executeSQL(String s) {
-//        try {
-//            Statement statement = getStatement();
-//            statement.execute(s);
-//            statement.close();
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//    }
 }
