@@ -18,17 +18,30 @@ public class LeftSideComponentController extends MController {
 
     @Override
     public void initialize() {
-        updateGroupCounterByModel();
+        initializeGroupLabel();
     }
 
-    public void updateGroupCounterByModel() {
+    private void initializeGroupLabel() {
+        LeftSideComponentView leftSideComponentView = (LeftSideComponentView) mComponentView;
+
         List<LeftSideComponentModel.GroupModel> list = ((LeftSideComponentModel) mModel).getGroupModels();
         for (int i = 0; i < list.size(); i++) {
             LeftSideComponentModel.GroupModel groupModel = list.get(i);
             //set group name
-            ((LeftSideComponentView) mComponentView).addGroupLabel(groupModel.getGroupName(), groupModel.getReminderModels().size());
+            leftSideComponentView.addGroupLabel(groupModel.getGroupName(), groupModel.getReminderModels().size());
             //set group counter
-            ((LeftSideComponentView) mComponentView).setGroupLabelCount(i, groupModel.getReminderModels().size());
+            leftSideComponentView.setGroupLabelCount(i, groupModel.getReminderModels().size());
+        }
+    }
+
+    public void updateGroupCounterByModel() {
+        LeftSideComponentView leftSideComponentView = (LeftSideComponentView) mComponentView;
+
+        List<LeftSideComponentModel.GroupModel> list = ((LeftSideComponentModel) mModel).getGroupModels();
+        for (int i = 0; i < list.size(); i++) {
+            LeftSideComponentModel.GroupModel groupModel = list.get(i);
+            //set group counter
+            leftSideComponentView.setGroupLabelCount(i, groupModel.getReminderModels().size());
         }
     }
 

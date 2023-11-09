@@ -12,12 +12,14 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
+import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
+import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
 
 public class ReminderListWidgetView extends MWidget {
     private final Map<Reminder, ReminderView> reminderViewMap;
@@ -134,7 +136,7 @@ public class ReminderListWidgetView extends MWidget {
 
     public void modifyContainerPanelSize() {
 
-        containerPanel.setPreferredSize(new Dimension(defaultcontainerPanelDimension.width,(int) (0.065 * rootFrameDimension.getHeight()*reminderNum)));
+        containerPanel.setPreferredSize(new Dimension(defaultcontainerPanelDimension.width, (int) (0.065 * rootFrameDimension.getHeight() * reminderNum)));
         containerPanel.updateUI();
     }
 
@@ -236,6 +238,10 @@ public class ReminderListWidgetView extends MWidget {
 
         public void addActionListenerOnDoneStatusButton(ActionListener actionListener) {
             radioButton.addActionListener(actionListener);
+        }
+
+        public void addMouseListenerOnReminderView(MouseAdapter mouseAdapter) {
+            innerPanel.addMouseListener(mouseAdapter);
         }
     }
 }
