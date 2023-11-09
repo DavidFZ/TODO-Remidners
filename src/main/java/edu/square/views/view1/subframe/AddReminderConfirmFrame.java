@@ -33,6 +33,7 @@ public class AddReminderConfirmFrame {
         JLabel inputLabel = new JLabel("Reminder Content:");
         inputLabel.setFont(font);
         itemName = new JTextField(40);
+        itemName.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension,0.8,0.05));
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         inputPanel.setBounds((int) (0.1 * mainFrame.getHeight()), (int) (0.2 * mainFrame.getHeight()), (int) (0.8 * mainFrame.getWidth()), (int) (0.2 * mainFrame.getWidth()));
         flagRadio = new JRadioButton("flagged");
