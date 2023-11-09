@@ -26,7 +26,7 @@ public class DetailInformationComponentView extends MComponent {
     @Getter
     private JButton resetButton;
     @Getter
-    private JButton doneButton;
+    private JButton saveButton;
     @Getter
     private JButton backButton;
 
@@ -121,9 +121,9 @@ public class DetailInformationComponentView extends MComponent {
 
         JPanel donePanel = getFlowJpanel(FlowLayout.RIGHT, new Dimension((int) (0.48 * selfDimension.width), (int) (0.08 * selfDimension.height)), Color.orange);
         resetButton = buttonBuilder("Rest");
-        doneButton = buttonBuilder("Done");
+        saveButton = buttonBuilder("Save");
         donePanel.add(resetButton);
-        donePanel.add(doneButton);
+        donePanel.add(saveButton);
 
         reminderStatusControllerPanel.add(donePanel);
 

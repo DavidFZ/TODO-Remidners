@@ -89,8 +89,8 @@ public class DetailInformationComponentController extends MController {
         });
     }
 
-    private void bindListenerOnDoneButton() {
-        detailInformationComponentView.getDoneButton().addActionListener(e -> {
+    private void bindListenerOnSaveButton() {
+        detailInformationComponentView.getSaveButton().addActionListener(e -> {
             //model layer
             detailInformationModel.getReminder().setContent(detailInformationComponentView.getContentTextField());
             detailInformationModel.getReminder().setNote(detailInformationComponentView.getNoteTextField());
@@ -104,9 +104,9 @@ public class DetailInformationComponentController extends MController {
         bindListenerOnDeleteButton();
     }
 
-    public void addListenerOnDoneButton(ActionListener actionListener) {
+    public void addListenerOnSaveButton(ActionListener actionListener) {
         DetailInformationComponentView detailInformationComponentView = (DetailInformationComponentView) mComponentView;
-        detailInformationComponentView.getDoneButton().addActionListener(actionListener);
-        bindListenerOnDoneButton();
+        detailInformationComponentView.getSaveButton().addActionListener(actionListener);
+        bindListenerOnSaveButton();
     }
 }
