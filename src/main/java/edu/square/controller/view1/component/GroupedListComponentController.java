@@ -7,8 +7,11 @@ import edu.square.model.view1.component.GroupedListComponentModel;
 import edu.square.model.view1.widget.ReminderModel;
 import edu.square.views.component.MComponent;
 import edu.square.views.view1.component.GroupedListComponentView;
+import edu.square.views.widget.ReminderListWidgetView;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class GroupedListComponentController extends MController {
@@ -29,18 +32,34 @@ public class GroupedListComponentController extends MController {
         //Controller Layer
         bindListenerOnAddButton((GroupedListComponentView) mComponentView);
         bindListenerOnConfirmButton((GroupedListComponentView) mComponentView);
+        bindListenerOnAddButton((GroupedListComponentView) mComponentView);
     }
 
     public void updateList(List<Reminder> list) {
         //update model
         updateListByModel(list);
         //update view
-
+        ((GroupedListComponentView) mComponentView).clearReminderList();
+        ((GroupedListComponentView) mComponentView).addRemindersIntoList(list);
+        bindListenerOnAddButton((GroupedListComponentView) mComponentView);
     }
 
     public void updateListByModel(List<Reminder> list) {
         //update model
         ((GroupedListComponentModel) mModel).setList(list);
+    }
+
+    private void bindListenerOnDoneStatusButton(GroupedListComponentView groupedListComponentView) {
+        //TODO implement this
+        List<ReminderListWidgetView.ReminderView> list = groupedListComponentView.getReminderViews();
+        for (ReminderListWidgetView.ReminderView reminderView : list) {
+            reminderView.addActionListenerOnDoneStatusButton(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+
+                }
+            });
+        }
     }
 
     private void bindListenerOnAddButton(GroupedListComponentView groupedListComponentView) {

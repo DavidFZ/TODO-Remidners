@@ -12,6 +12,7 @@ import edu.square.views.widget.ReminderListWidgetView;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
@@ -113,5 +114,9 @@ public class GroupedListComponentView extends MComponent {
 
     public void setAddButtonEnable(boolean enable) {
         groupedTitleWidgetView.setAddButtonEnable(enable);
+    }
+
+    public List<ReminderListWidgetView.ReminderView> getReminderViews() {
+        return reminderListWidgetView.getReminderViews();
     }
 }

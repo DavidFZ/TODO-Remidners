@@ -14,8 +14,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
-
 public class ListController {
     private final ListView listView;
     private final ListModel listModel;
@@ -80,9 +78,8 @@ public class ListController {
                     /* view layer */
                     //update group title
                     groupedListComponentController.setGroupedTitle(groupTitle);
-                    //update group view
-                    listView.groupedListComponentView.clearReminderList();  //clean
-                    listView.groupedListComponentView.addRemindersIntoList(reminderList);    //add
+                    //update groupedListComponent's model and view
+                    groupedListComponentController.updateList(reminderList);
                 }
             });
         }
