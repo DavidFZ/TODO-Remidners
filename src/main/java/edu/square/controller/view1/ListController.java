@@ -7,13 +7,11 @@ import edu.square.entity.Reminder;
 import edu.square.model.view1.ListModel;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.view1.view.ListView;
+import edu.square.views.widget.ReminderListWidgetView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.awt.event.*;
 import java.util.List;
 
 public class ListController {
@@ -53,6 +51,7 @@ public class ListController {
         addListenersOnGroupedTitle();
         addListenersOnDoneStatusButtons();
         addListenersOnConfirmButton();
+        addListenerOnReminderViews();
     }
 
     /**
@@ -84,6 +83,7 @@ public class ListController {
 
                     /* controller layer */
                     addListenersOnDoneStatusButtons();
+                    addListenerOnReminderViews();
                 }
             });
         }
@@ -114,10 +114,31 @@ public class ListController {
 
                 //Controller
                 addListenersOnDoneStatusButtons();
+                //add listener on new insert reminder view
+                addListenerOnReminderView(listView.groupedListComponentView.getReminderViews().get(listView.groupedListComponentView.getReminderViews().size() - 1));
             }
         });
     }
 
+    private void addListenerOnReminderViews() {
+        List<ReminderListWidgetView.ReminderView> list = listView.groupedListComponentView.getReminderViews();
+        for (ReminderListWidgetView.ReminderView reminderView : list) {
+            addListenerOnReminderView(reminderView);
+        }
+    }
+
+    private void addListenerOnReminderView(ReminderListWidgetView.ReminderView reminderView) {
+        reminderView.addMouseListenerOnReminderView(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //update model
+                detailInformationComponentController.reminderUpdate(reminderView.getReminder());
+
+                //update view
+                detailInformationComponentController.setVisibleByModel();
+            }
+        });
+    }
 
     /**
      * Refresh view

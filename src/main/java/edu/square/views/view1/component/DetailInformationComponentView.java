@@ -1,5 +1,6 @@
 package edu.square.views.view1.component;
 
+import edu.square.entity.Reminder;
 import edu.square.utils.UIUtils.JPanelUtil;
 import edu.square.utils.UIUtils.MComponentTestHelper;
 import edu.square.views.component.MComponent;
@@ -139,18 +140,24 @@ public class DetailInformationComponentView extends MComponent {
         mainPanel.setVisible(visibility);
     }
 
-    public void setContentTextField(String content) {
-        contentTextFieldPanelWidget.setTextField(content);
-    }
-    public void setNoteTextField(String note) {
-        noteTextFieldPanelWidget.setTextField(note);
-    }
-
     public String getContentTextField() {
         return contentTextFieldPanelWidget.getTextField().getText();
     }
 
+    public void setContentTextField(String content) {
+        contentTextFieldPanelWidget.setTextField(content);
+    }
+
     public String getNoteTextField() {
         return noteTextFieldPanelWidget.getTextField().getText();
+    }
+
+    public void setNoteTextField(String note) {
+        noteTextFieldPanelWidget.setTextField(note);
+    }
+
+    public void updateReminderDetail(Reminder reminder) {
+        setContentTextField(reminder.getContent());
+        setNoteTextField(reminder.getNote());
     }
 }

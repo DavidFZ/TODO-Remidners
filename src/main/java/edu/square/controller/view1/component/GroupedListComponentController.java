@@ -12,6 +12,7 @@ import edu.square.views.widget.ReminderListWidgetView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import static edu.square.model.view1.widget.ReminderModel.updateReminderDoneStatus;
@@ -131,5 +132,19 @@ public class GroupedListComponentController extends MController {
         }
         //component inner listener
         bindListenerOnDoneStatusButton((GroupedListComponentView) mComponentView);
+    }
+
+    public void addListenerOnAllReminderListWidgetView(MouseListener mouseListener) {
+        List<ReminderListWidgetView.ReminderView> list = ((GroupedListComponentView) mComponentView).getReminderViews();
+        for (ReminderListWidgetView.ReminderView reminderView : list) {
+            JPanel mainPanel = reminderView.getInnerPanel();
+            mainPanel.addMouseListener(mouseListener);
+        }
+    }
+
+    public void addListenerOnLastInsertReminderListWidgetView(MouseListener mouseListener) {
+        List<ReminderListWidgetView.ReminderView> list = ((GroupedListComponentView) mComponentView).getReminderViews();
+        JPanel mainPanel = list.get(list.size() - 1).getInnerPanel();
+        mainPanel.addMouseListener(mouseListener);
     }
 }

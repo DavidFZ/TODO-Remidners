@@ -76,4 +76,19 @@ public class DetailInformationComponentController extends MController {
         reminderUpdate(detailInformationModel.getReminder());
     }
 
+    public void setVisible(Reminder reminder) {
+        DetailInformationModel detailInformationModel = (DetailInformationModel) mModel;
+        DetailInformationComponentView detailInformationComponentView = (DetailInformationComponentView) mComponentView;
+        //model layer
+        detailInformationModel.updateReminder(reminder);
+
+        //view layer
+        detailInformationComponentView.updateReminderDetail(detailInformationModel.getReminder());
+        detailInformationComponentView.setVisibility(true);
+    }
+
+    public void setVisibleByModel() {
+        DetailInformationModel detailInformationModel = (DetailInformationModel) mModel;
+        setVisible(detailInformationModel.getReminder());
+    }
 }
