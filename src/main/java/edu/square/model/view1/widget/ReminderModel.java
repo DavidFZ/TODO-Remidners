@@ -12,6 +12,7 @@ import org.hibernate.Session;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 import static edu.square.utils.DBUtils.hibernate.CriteriaQueryUtil.getCriteriaQuery;
 import static edu.square.utils.DBUtils.hibernate.SessionFactoryUtil.getSession;
@@ -19,7 +20,7 @@ import static edu.square.utils.DevUtils.getTimeStamp;
 import static edu.square.utils.TimeUtils.getStartOrEndTimestampOfDate;
 
 public class ReminderModel {
-
+    public static final String UUID = "UUID";
     public static final String CREATE_TIME = "createTime";
     public static final String LAST_MODIFIED_TIME = "lastModifiedTime";
     public static final String REMIND_TIME = "remindTime";
@@ -279,5 +280,31 @@ public class ReminderModel {
         session.close();
 
         return list;
+    }
+
+    public static void updateReminderDoneStatus(Reminder reminder, boolean isDone) {
+        if (isDone)
+            reminder.setDoneTime(TimeUtils.getCurrentTimestamp());
+        else
+            reminder.setDoneTime(null);
+        updateReminder(reminder);
+    }
+
+    public static Reminder queryReminderByUUID(String uuid) {
+        //寻找主键为uuid的Reminder
+        Session session = getSession();
+
+        CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
+        CriteriaQuery<Reminder> criteriaQuery = criteriaBuilder.createQuery(Reminder.class);
+        Root<Reminder> root = criteriaQuery.from(Reminder.class);
+
+        criteriaQuery.select(root).where(criteriaBuilder.equal(root.get("uuid"), uuid));
+
+        TypedQuery<Reminder> query = session.createQuery(criteriaQuery);
+        Reminder reminder = query.getSingleResult();
+
+        session.close();
+
+        return reminder;
     }
 }

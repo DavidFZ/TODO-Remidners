@@ -1,4 +1,5 @@
 package edu.square.model.component;
 
-public class MModel {
+public abstract class MModel {
+    public abstract void updateModelGlobally();
 }

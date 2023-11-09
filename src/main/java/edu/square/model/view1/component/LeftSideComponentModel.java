@@ -3,8 +3,6 @@ package edu.square.model.view1.component;
 import edu.square.entity.Reminder;
 import edu.square.model.component.MModel;
 import edu.square.model.view1.widget.ReminderModel;
-import edu.square.views.view1.component.LeftSideComponentView;
-import edu.square.views.view1.widget.GroupLabelWidget;
 import lombok.Data;
 import lombok.Getter;
 
@@ -47,14 +45,6 @@ public class LeftSideComponentModel extends MModel {
         return list;
     }
 
-    /**
-     * Update groupModels
-     * update group counter & reminder models
-     */
-    public void updateGroupModels() {
-        groupModels = queryBaseGroups();
-    }
-
 
     @Deprecated
     public List<GroupModel> queryGroupsByTag(String tag) {
@@ -70,6 +60,15 @@ public class LeftSideComponentModel extends MModel {
 
     public String getGroupLabelText(int index) {
         return groupModels.get(index).getGroupName();
+    }
+
+    /**
+     * Update groupModels
+     * update group counter & reminder models
+     */
+    @Override
+    public void updateModelGlobally() {
+        groupModels = queryBaseGroups();
     }
 
     /**
