@@ -11,7 +11,10 @@ import edu.square.views.widget.ReminderListWidgetView;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 public class ListController {
@@ -52,6 +55,7 @@ public class ListController {
         addListenersOnDoneStatusButtons();
         addListenersOnConfirmButton();
         addListenerOnReminderViews();
+        addListenerOnDeleteButton();
     }
 
     /**
@@ -136,6 +140,22 @@ public class ListController {
 
                 //update view
                 detailInformationComponentController.setVisibleByModel();
+            }
+        });
+    }
+
+    private void addListenerOnDeleteButton() {
+        detailInformationComponentController.addListenerOnDeleteButton(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Model
+                listModel.updateModelGlobally();
+
+                //View
+                leftSideComponentController.updateGroupCounterByModel();
+                //delete reminder view
+                Reminder deletedReminder = listModel.detailInformationModel.getReminder();
+                listView.groupedListComponentView.removeReminderFromList(deletedReminder);
             }
         });
     }

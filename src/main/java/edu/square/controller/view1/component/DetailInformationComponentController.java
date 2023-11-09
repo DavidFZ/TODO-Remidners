@@ -7,17 +7,21 @@ import edu.square.model.view1.component.DetailInformationModel;
 import edu.square.views.component.MComponent;
 import edu.square.views.view1.component.DetailInformationComponentView;
 
+import java.awt.event.ActionListener;
+
 public class DetailInformationComponentController extends MController {
+    private final DetailInformationComponentView detailInformationComponentView;
+    private final DetailInformationModel detailInformationModel;
 
     public DetailInformationComponentController(MComponent mComponent, MModel mModel) {
         super(mComponent, mModel);
+
+        detailInformationComponentView = (DetailInformationComponentView) mComponentView;
+        detailInformationModel = (DetailInformationModel) mModel;
     }
 
     @Override
     public void initialize() {
-        DetailInformationComponentView detailInformationComponentView = (DetailInformationComponentView) mComponentView;
-        DetailInformationModel detailInformationModel = (DetailInformationModel) mModel;
-
         //controller layer
         bindButton();
     }
@@ -32,12 +36,8 @@ public class DetailInformationComponentController extends MController {
         });
 
         //delete button
-        detailInformationComponentView.getDeleteButton().addActionListener(e -> {
-            //model layer
-            detailInformationModel.deleteReminder();
-            //view layer
-            detailInformationComponentView.setVisibility(false);
-        });
+//        initialize in ListController
+//        bindListenerOnDeleteButton();
 
         //reset button
         detailInformationComponentView.getResetButton().addActionListener(e -> {
@@ -46,13 +46,7 @@ public class DetailInformationComponentController extends MController {
         });
 
         //update button
-        detailInformationComponentView.getDoneButton().addActionListener(e -> {
-            //model layer
-            detailInformationModel.getReminder().setContent(detailInformationComponentView.getContentTextField());
-            detailInformationModel.getReminder().setNote(detailInformationComponentView.getNoteTextField());
-            detailInformationModel.updateReminder(detailInformationModel.getReminder());
-        });
-
+//        same as delete button
     }
 
     /**
@@ -61,9 +55,6 @@ public class DetailInformationComponentController extends MController {
      * @param reminder updated reminder entity
      */
     public void reminderUpdate(Reminder reminder) {
-        DetailInformationModel detailInformationModel = (DetailInformationModel) mModel;
-        DetailInformationComponentView detailInformationComponentView = (DetailInformationComponentView) mComponentView;
-
         //model layer
         detailInformationModel.updateReminder(reminder);
         //view layer
@@ -72,13 +63,10 @@ public class DetailInformationComponentController extends MController {
     }
 
     public void updateViewByModel() {
-        DetailInformationModel detailInformationModel = (DetailInformationModel) mModel;
         reminderUpdate(detailInformationModel.getReminder());
     }
 
     public void setVisible(Reminder reminder) {
-        DetailInformationModel detailInformationModel = (DetailInformationModel) mModel;
-        DetailInformationComponentView detailInformationComponentView = (DetailInformationComponentView) mComponentView;
         //model layer
         detailInformationModel.updateReminder(reminder);
 
@@ -88,7 +76,37 @@ public class DetailInformationComponentController extends MController {
     }
 
     public void setVisibleByModel() {
-        DetailInformationModel detailInformationModel = (DetailInformationModel) mModel;
         setVisible(detailInformationModel.getReminder());
+    }
+
+
+    private void bindListenerOnDeleteButton() {
+        detailInformationComponentView.getDeleteButton().addActionListener(e -> {
+            //model layer
+            detailInformationModel.deleteReminder();
+            //view layer
+            detailInformationComponentView.setVisibility(false);
+        });
+    }
+
+    private void bindListenerOnDoneButton() {
+        detailInformationComponentView.getDoneButton().addActionListener(e -> {
+            //model layer
+            detailInformationModel.getReminder().setContent(detailInformationComponentView.getContentTextField());
+            detailInformationModel.getReminder().setNote(detailInformationComponentView.getNoteTextField());
+            detailInformationModel.updateReminder(detailInformationModel.getReminder());
+        });
+    }
+
+    public void addListenerOnDeleteButton(ActionListener actionListener) {
+        DetailInformationComponentView detailInformationComponentView = (DetailInformationComponentView) mComponentView;
+        detailInformationComponentView.getDeleteButton().addActionListener(actionListener);
+        bindListenerOnDeleteButton();
+    }
+
+    public void addListenerOnDoneButton(ActionListener actionListener) {
+        DetailInformationComponentView detailInformationComponentView = (DetailInformationComponentView) mComponentView;
+        detailInformationComponentView.getDoneButton().addActionListener(actionListener);
+        bindListenerOnDoneButton();
     }
 }
