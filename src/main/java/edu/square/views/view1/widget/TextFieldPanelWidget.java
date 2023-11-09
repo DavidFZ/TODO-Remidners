@@ -13,13 +13,13 @@ public class TextFieldPanelWidget extends MWidget {
 
     JTextField textField;
 
-    Font font2;
+    Font font;
     Font font3;
 
     JLabel label;
 
-    public TextFieldPanelWidget(Dimension parentJComponentDimension, Dimension selfDimition, String title) {
-        super(parentJComponentDimension, selfDimition);
+    public TextFieldPanelWidget(Dimension parentJComponentDimension, Dimension selfDimension, String title) {
+        super(parentJComponentDimension, selfDimension);
         setTitle(title);
 
     }
@@ -43,21 +43,20 @@ public class TextFieldPanelWidget extends MWidget {
 
     @Override
     protected void initializeFonts() {
-        font2 = FontUtil.getBoldFont(rootFrameDimension, FontUtil.FONT_SIZE_2);
-        font3 = FontUtil.getBoldFont(rootFrameDimension, FontUtil.FONT_SIZE_3);
+        font = FontUtil.getBoldFont(rootFrameDimension, FontUtil.FONT_SIZE_1);
     }
 
     @Override
     protected void initializeJComponents() {
         label = new JLabel();
-        label.setFont(font2);
+        label.setFont(font);
         label.setForeground(Color.blue);
-        label.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.2, 0.04));
+        label.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.2, 0.5));
         mainPanel.add(label);
 
         textField = new JTextField();
-        textField.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.75, 0.04));
-        textField.setFont(font3);
+        textField.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.75, 0.5));
+        textField.setFont(font);
         mainPanel.add(textField);
     }
 

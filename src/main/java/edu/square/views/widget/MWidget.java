@@ -2,6 +2,7 @@ package edu.square.views.widget;
 
 import lombok.Getter;
 
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -25,7 +26,6 @@ public abstract class MWidget {
         initializeMainPanel();
         initializeJComponents();
     }
-
 
     protected abstract void initializeMainPanel();
 
