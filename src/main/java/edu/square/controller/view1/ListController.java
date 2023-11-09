@@ -10,6 +10,8 @@ import edu.square.views.view1.view.ListView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
@@ -36,25 +38,20 @@ public class ListController {
 
     public static void main(String[] args) {
         JFrame mainFrame = JFrameFactory.getDefaultJFrame(.8d, "Schedule");
-
+        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         ListView listView = new ListView(mainFrame, mainFrame.getSize());
         ListController listController = new ListController(listView);
 
-        mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setVisible(true);
         mainFrame.add(listView.getMainPanel());
-
-
-
-
-
+        mainFrame.setVisible(true);
     }
 
     private void initialize() {
         //controller layer
         addListenersOnGroupedTitle();
+        addListenersOnDoneStatusButtons();
     }
 
     /**
@@ -79,10 +76,42 @@ public class ListController {
                     //update group title
                     groupedListComponentController.setGroupedTitle(groupTitle);
                     //update groupedListComponent's model and view
-                    groupedListComponentController.updateList(reminderList);
+                    groupedListComponentController.updateListModelAndView(reminderList);
                 }
             });
         }
     }
+
+    private void addListenersOnDoneStatusButtons() {
+        groupedListComponentController.addListenerOnDoneStatusButtons(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateModelAndView();
+            }
+        });
+    }
+
+    /**
+     * Refresh view
+     * This method is called when exchange Views
+     */
+    public void refreshView() {
+        addListenersOnDoneStatusButtons();
+    }
+
+    /**
+     * Update list view & model
+     * This method is called when component internal data is changed
+     */
+    public void updateModelAndView() {
+        //Model
+        listModel.updateModelGlobally();
+
+        //View
+        leftSideComponentController.updateGroupCounterByModel();
+        groupedListComponentController.updateListViewByModel();
+//        detailInformationComponentController.updateViewByModel();
+    }
+
 
 }

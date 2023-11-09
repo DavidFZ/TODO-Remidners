@@ -14,6 +14,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+import static edu.square.model.view1.widget.ReminderModel.updateReminderDoneStatus;
+
 public class GroupedListComponentController extends MController {
     public GroupedListComponentController(MComponent mComponentView, MModel mModel) {
         super(mComponentView, mModel);
@@ -35,28 +37,38 @@ public class GroupedListComponentController extends MController {
         bindListenerOnDoneStatusButton((GroupedListComponentView) mComponentView);
     }
 
-    public void updateList(List<Reminder> list) {
+    public void updateListModelAndView(List<Reminder> list) {
         //update model
-        updateListByModel(list);
+        updateModel(list);
         //update view
+        updateListView(list);
+    }
+
+    private void updateListView(List<Reminder> list) {
         ((GroupedListComponentView) mComponentView).clearReminderList();
         ((GroupedListComponentView) mComponentView).addRemindersIntoList(list);
         bindListenerOnAddButton((GroupedListComponentView) mComponentView);
     }
 
-    public void updateListByModel(List<Reminder> list) {
+    public void updateListViewByModel() {
+        updateListView(((GroupedListComponentModel) mModel).getList());
+    }
+
+    public void updateModel(List<Reminder> list) {
         //update model
         ((GroupedListComponentModel) mModel).setList(list);
     }
 
     private void bindListenerOnDoneStatusButton(GroupedListComponentView groupedListComponentView) {
-        //TODO implement this
         List<ReminderListWidgetView.ReminderView> list = groupedListComponentView.getReminderViews();
         for (ReminderListWidgetView.ReminderView reminderView : list) {
             reminderView.addActionListenerOnDoneStatusButton(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-
+                    //update model
+                    Reminder reminder = reminderView.getReminder();
+                    boolean doneStatus = reminderView.getReminderViewDoneStatus();
+                    updateReminderDoneStatus(reminder, doneStatus);
                 }
             });
         }
@@ -99,5 +111,21 @@ public class GroupedListComponentController extends MController {
         ((GroupedListComponentView) mComponentView).setGroupedTitle(title);
     }
 
+    /**
+     * Batch add mouse outside(Component) listener on Done Status Button
+     *
+     * @param actionListener listener
+     */
+    public void addListenerOnDoneStatusButtons(ActionListener actionListener) {
+        //component inner listener
+        bindListenerOnDoneStatusButton((GroupedListComponentView) mComponentView);
+        //component outer listener
+        GroupedListComponentView groupedListComponentView = (GroupedListComponentView) mComponentView;
+        List<ReminderListWidgetView.ReminderView> list = groupedListComponentView.getReminderViews();
 
+        for (ReminderListWidgetView.ReminderView reminderView : list) {
+            //add external listener
+            reminderView.addActionListenerOnDoneStatusButton(actionListener);
+        }
+    }
 }

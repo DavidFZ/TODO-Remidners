@@ -6,8 +6,6 @@ import edu.square.model.view1.widget.ReminderModel;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.UUID;
-
 public class DetailInformationModel extends MModel {
     @Getter
     @Setter
@@ -18,11 +16,13 @@ public class DetailInformationModel extends MModel {
     }
 
     public DetailInformationModel() {
-        this.reminder = new Reminder();
     }
 
     public void updateReminder(Reminder reminder) {
-        assert this.reminder.getUuid().equals(reminder.getUuid());
+        if (this.reminder == null)
+            this.reminder = reminder;
+        else
+            assert this.reminder.getUuid().equals(reminder.getUuid());
 
         this.reminder = reminder;
         ReminderModel.updateReminder(reminder);

@@ -47,7 +47,7 @@ public class Reminder implements Exportable, Serializable {
 
     @Override
     public String toString() {
-        return UUID.randomUUID().toString() + " :" + content;
+        return UUID.randomUUID() + " :" + content;
     }
 
     @Override

@@ -71,4 +71,9 @@ public class DetailInformationComponentController extends MController {
         detailInformationComponentView.setNoteTextField(detailInformationModel.getReminder().getNote());
     }
 
+    public void updateViewByModel() {
+        DetailInformationModel detailInformationModel = (DetailInformationModel) mModel;
+        reminderUpdate(detailInformationModel.getReminder());
+    }
+
 }

@@ -5,7 +5,6 @@ import edu.square.model.component.MModel;
 import edu.square.model.view1.component.LeftSideComponentModel;
 import edu.square.views.component.MComponent;
 import edu.square.views.view1.component.LeftSideComponentView;
-import edu.square.views.view1.widget.GroupLabelWidget;
 
 import java.awt.event.MouseListener;
 import java.util.List;
@@ -22,14 +21,7 @@ public class LeftSideComponentController extends MController {
         updateGroupCounterByModel();
     }
 
-    public void updateGroupCounter() {
-        //update model
-        ((LeftSideComponentModel) mModel).updateGroupModels();
-        //update view
-        updateGroupCounterByModel();
-    }
-
-    private void updateGroupCounterByModel() {
+    public void updateGroupCounterByModel() {
         List<LeftSideComponentModel.GroupModel> list = ((LeftSideComponentModel) mModel).getGroupModels();
         for (int i = 0; i < list.size(); i++) {
             LeftSideComponentModel.GroupModel groupModel = list.get(i);
