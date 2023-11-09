@@ -3,7 +3,6 @@ package edu.square.utils.UIUtils;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.util.List;
 
 public class ComponentResizeUtil {
@@ -97,5 +96,13 @@ public class ComponentResizeUtil {
                 recursionResize(List.of(c1), ratio);
             c.revalidate();
         }
+    }
+
+    public static Dimension addDimensionHeight(Dimension dimension, int height) {
+        return new Dimension(dimension.width, dimension.height + height);
+    }
+
+    public static Dimension addDimensionHeight(Dimension dimension, Dimension addDimension) {
+        return new Dimension(dimension.width, (int) (dimension.height + addDimension.getHeight()));
     }
 }
