@@ -12,10 +12,22 @@ import java.util.List;
 @Getter
 public class GroupedListComponentModel extends MModel {
     @Setter
+    private int groupIndex;
+    @Setter
     private List<Reminder> list;
 
+    /**
+     * Default constructor
+     * Group index is 0
+     */
     public GroupedListComponentModel() {
         list = new ArrayList<>();
+        this.groupIndex = 0;
+    }
+
+    public GroupedListComponentModel(int groupIndex) {
+        list = new ArrayList<>();
+        this.groupIndex = groupIndex;
     }
 
     public void addReminder(Reminder reminder) {
@@ -28,4 +40,8 @@ public class GroupedListComponentModel extends MModel {
         list.remove(reminder);
     }
 
+    @Override
+    public void updateModelGlobally() {
+
+    }
 }
