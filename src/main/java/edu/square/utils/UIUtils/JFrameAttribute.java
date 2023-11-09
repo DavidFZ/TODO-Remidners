@@ -3,7 +3,6 @@ package edu.square.utils.UIUtils;
 import java.awt.*;
 
 public class JFrameAttribute {
-
     private int windowWidth;
     private int windowHeight;
     private String title;
@@ -11,8 +10,6 @@ public class JFrameAttribute {
     private boolean isExit;
     private boolean isVisible;
     private int defaultCloseOperation;
-
-
     /**
      * Get default JFrame attribute
      * Default window size is 80% of the screen size
