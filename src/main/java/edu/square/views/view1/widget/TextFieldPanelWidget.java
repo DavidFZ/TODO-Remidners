@@ -1,12 +1,12 @@
 package edu.square.views.view1.widget;
 
 import edu.square.utils.UIUtils.FontUtil;
+import edu.square.utils.UIUtils.MWidgetTestHelper;
 import edu.square.views.widget.MWidget;
 
 import javax.swing.*;
 import java.awt.*;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
 
 public class TextFieldPanelWidget extends MWidget {
@@ -24,6 +24,15 @@ public class TextFieldPanelWidget extends MWidget {
 
     }
 
+    public static void main(String[] args) {
+        MWidgetTestHelper mWidgetTestHelper = new MWidgetTestHelper() {
+            @Override
+            public void initializeMWidget() {
+                TextFieldPanelWidget textFieldPanelWidget = new TextFieldPanelWidget(jFrame.getSize(), jFrame.getSize(), "Title");
+                jFrame.add(textFieldPanelWidget.getMainPanel());
+            }
+        };
+    }
 
     @Override
     protected void initializeMainPanel() {

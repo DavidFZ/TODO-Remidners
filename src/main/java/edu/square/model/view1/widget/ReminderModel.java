@@ -84,7 +84,8 @@ public class ReminderModel {
         Root<Reminder> root = criteriaQuery.from(Reminder.class);
 
         Predicate predicate = criteriaBuilder.between(root.get(String.valueOf(attribute)), start, end);
-        criteriaQuery.select(root).where(predicate);
+        Predicate predicate1 = criteriaBuilder.isFalse(root.get(IS_DELETED));
+        criteriaQuery.select(root).where(criteriaBuilder.and(predicate, predicate1));
 
         TypedQuery<Reminder> query = s.createQuery(criteriaQuery);
         List<Reminder> list = query.getResultList();
@@ -115,7 +116,8 @@ public class ReminderModel {
             predicate = criteriaBuilder.isTrue(root.get(attribute));
         else
             predicate = criteriaBuilder.isFalse(root.get(attribute));
-        criteriaQuery.select(root).where(predicate);
+        Predicate predicate1 = criteriaBuilder.isFalse(root.get(IS_DELETED));
+        criteriaQuery.select(root).where(criteriaBuilder.and(predicate, predicate1));
 
         TypedQuery<Reminder> query = s.createQuery(criteriaQuery);
         List<Reminder> list = query.getResultList();
@@ -162,7 +164,8 @@ public class ReminderModel {
             predicate = criteriaBuilder.isNotNull(root.get(DONE_TIME));
         else
             predicate = criteriaBuilder.isNull(root.get(DONE_TIME));
-        criteriaQuery.select(root).where(predicate);
+        Predicate predicate1 = criteriaBuilder.isFalse(root.get(IS_DELETED));
+        criteriaQuery.select(root).where(criteriaBuilder.and(predicate, predicate1));
 
         TypedQuery<Reminder> query = s.createQuery(criteriaQuery);
         List<Reminder> list = query.getResultList();
@@ -195,7 +198,9 @@ public class ReminderModel {
             predicate = criteriaBuilder.and(criteriaBuilder.isFalse(root.get(IS_IMPORTANT)), criteriaBuilder.isTrue(root.get(IS_EMERGENCY)));
         else
             predicate = criteriaBuilder.and(criteriaBuilder.isFalse(root.get(IS_IMPORTANT)), criteriaBuilder.isFalse(root.get(IS_EMERGENCY)));
-        criteriaQuery.select(root).where(predicate);
+
+        Predicate predicate1 = criteriaBuilder.isFalse(root.get(IS_DELETED));
+        criteriaQuery.select(root).where(criteriaBuilder.and(predicate, predicate1));
 
         TypedQuery<Reminder> query = s.createQuery(criteriaQuery);
         List<Reminder> list = query.getResultList();

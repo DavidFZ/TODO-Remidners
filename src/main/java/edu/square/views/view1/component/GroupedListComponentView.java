@@ -9,6 +9,7 @@ import edu.square.views.view1.subframe.AddReminderConfirmFrame;
 import edu.square.views.view1.widget.GroupedTitleWidgetView;
 import edu.square.views.widget.ReminderListWidgetView;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -17,12 +18,12 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
 public class GroupedListComponentView extends MComponent {
+    private final AddReminderConfirmFrame addReminderConfirmFrame;
     Font font1;
     Font font2;
     Font font3;
     private GroupedTitleWidgetView groupedTitleWidgetView;
     private ReminderListWidgetView reminderListWidgetView;
-    private final AddReminderConfirmFrame addReminderConfirmFrame;
 
 
     public GroupedListComponentView(Dimension rootFrameDimension, MyView myView) {
@@ -117,6 +118,11 @@ public class GroupedListComponentView extends MComponent {
 
     public void setAddButtonEnable(boolean enable) {
         groupedTitleWidgetView.setAddButtonEnable(enable);
+    }
+
+    public void setAddButtonVisibility(boolean visibility) {
+        JButton jButton = groupedTitleWidgetView.getAddButton();
+        jButton.setVisible(visibility);
     }
 
     public List<ReminderListWidgetView.ReminderView> getReminderViews() {

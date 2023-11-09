@@ -7,6 +7,7 @@ import edu.square.entity.Reminder;
 import edu.square.model.view1.ListModel;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.view1.view.ListView;
+import edu.square.views.widget.ReminderListWidgetView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -50,8 +51,15 @@ public class ListController {
 
     private void initialize() {
         //controller layer
+        //left side component
         addListenersOnGroupedTitle();
+        //grouped list component
         addListenersOnDoneStatusButtons();
+        addListenersOnConfirmButton();
+        addListenerOnReminderViews();
+        //detail information component
+        addListenerOnDeleteButton();
+        addListenerOnSaveButton();
     }
 
     /**
@@ -71,12 +79,19 @@ public class ListController {
                     //update groupedListComponentModel
                     List<Reminder> reminderList = listModel.leftSideComponentModel.getGroupModels().get(finalI).getReminderModels();
                     listModel.groupedListComponentModel.setList(reminderList);
+                    //set invisible for add button in COMPLETED & FLAGGED group
+                    listView.groupedListComponentView.setAddButtonVisibility(finalI < 2);
+
 
                     /* view layer */
                     //update group title
                     groupedListComponentController.setGroupedTitle(groupTitle);
                     //update groupedListComponent's model and view
                     groupedListComponentController.updateListModelAndView(reminderList);
+
+                    /* controller layer */
+                    addListenersOnDoneStatusButtons();
+                    addListenerOnReminderViews();
                 }
             });
         }
@@ -91,6 +106,79 @@ public class ListController {
 
                 //View
                 leftSideComponentController.updateGroupCounterByModel();
+            }
+        });
+    }
+
+    private void addListenersOnConfirmButton() {
+        groupedListComponentController.addListenerOnConfirmButton(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Model
+                listModel.updateModelGlobally();
+
+                //View
+                leftSideComponentController.updateGroupCounterByModel();
+
+                //Controller
+                addListenersOnDoneStatusButtons();
+                //add listener on new insert reminder view
+                addListenerOnReminderView(listView.groupedListComponentView.getReminderViews().get(listView.groupedListComponentView.getReminderViews().size() - 1));
+            }
+        });
+    }
+
+    private void addListenerOnReminderViews() {
+        List<ReminderListWidgetView.ReminderView> list = listView.groupedListComponentView.getReminderViews();
+        for (ReminderListWidgetView.ReminderView reminderView : list) {
+            addListenerOnReminderView(reminderView);
+        }
+    }
+
+    private void addListenerOnReminderView(ReminderListWidgetView.ReminderView reminderView) {
+        reminderView.addMouseListenerOnReminderView(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                //update model
+                detailInformationComponentController.reminderUpdate(reminderView.getReminder());
+
+                //update view
+                detailInformationComponentController.setVisibleByModel();
+            }
+        });
+    }
+
+    private void addListenerOnDeleteButton() {
+        detailInformationComponentController.addListenerOnDeleteButton(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Model
+                listModel.updateModelGlobally();
+
+                //View
+                leftSideComponentController.updateGroupCounterByModel();
+                //delete reminder view
+                Reminder deletedReminder = listModel.detailInformationModel.getReminder();
+                listModel.detailInformationModel.setReminder(null);
+                listView.groupedListComponentView.removeReminderFromList(deletedReminder);
+                groupedListComponentController.updateListViewByModel();
+
+                //Controller
+                addListenersOnDoneStatusButtons();
+                addListenerOnReminderViews();
+            }
+        });
+    }
+
+    //TODO：test this method
+    private void addListenerOnSaveButton() {
+        detailInformationComponentController.addListenerOnSaveButton(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Model
+                listModel.updateModelGlobally();
+
+                //View
                 groupedListComponentController.updateListViewByModel();
             }
         });

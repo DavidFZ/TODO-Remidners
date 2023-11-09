@@ -12,6 +12,7 @@ import edu.square.views.widget.ReminderListWidgetView;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
 import java.util.List;
 
 import static edu.square.model.view1.widget.ReminderModel.updateReminderDoneStatus;
@@ -33,7 +34,7 @@ public class GroupedListComponentController extends MController {
 
         //Controller Layer
         bindListenerOnAddButton((GroupedListComponentView) mComponentView);
-        bindListenerOnConfirmButton((GroupedListComponentView) mComponentView);
+//        bindListenerOnConfirmButton((GroupedListComponentView) mComponentView);
         bindListenerOnDoneStatusButton((GroupedListComponentView) mComponentView);
     }
 
@@ -81,6 +82,11 @@ public class GroupedListComponentController extends MController {
         });
     }
 
+    public void addListenerOnConfirmButton(ActionListener actionListener) {
+        ((GroupedListComponentView) mComponentView).setConfirmButtonListener(actionListener);
+        bindListenerOnConfirmButton((GroupedListComponentView) mComponentView);
+    }
+
     private void bindListenerOnConfirmButton(GroupedListComponentView groupedListComponentView) {
         groupedListComponentView.setConfirmButtonListener(e -> {
             /* Model Layer */
@@ -126,5 +132,19 @@ public class GroupedListComponentController extends MController {
         }
         //component inner listener
         bindListenerOnDoneStatusButton((GroupedListComponentView) mComponentView);
+    }
+
+    public void addListenerOnAllReminderListWidgetView(MouseListener mouseListener) {
+        List<ReminderListWidgetView.ReminderView> list = ((GroupedListComponentView) mComponentView).getReminderViews();
+        for (ReminderListWidgetView.ReminderView reminderView : list) {
+            JPanel mainPanel = reminderView.getInnerPanel();
+            mainPanel.addMouseListener(mouseListener);
+        }
+    }
+
+    public void addListenerOnLastInsertReminderListWidgetView(MouseListener mouseListener) {
+        List<ReminderListWidgetView.ReminderView> list = ((GroupedListComponentView) mComponentView).getReminderViews();
+        JPanel mainPanel = list.get(list.size() - 1).getInnerPanel();
+        mainPanel.addMouseListener(mouseListener);
     }
 }

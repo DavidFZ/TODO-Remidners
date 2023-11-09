@@ -35,13 +35,16 @@ public class CalendarDayWidget extends MWidget {
 
     @Override
     protected void initializeJComponents() {
+        dayLabel = new JLabel();
         if(day == 0){
             dayLabel.setText("");
         }
         else {
             dayLabel.setText(String.valueOf(day));
         }
+
         dayLabel.setFont(numberFont);
+        noteArea = new JTextArea();
         noteArea.setLineWrap(true);
         noteArea.setWrapStyleWord(true);
         dayPanel = JPanelUtil.getFlowJpanel(FlowLayout.LEFT, ComponentResizeUtil.resizeDimensionWidthAndHeight(selfDimension,1,0.3));
