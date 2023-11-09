@@ -61,15 +61,13 @@ public class JFrameFactory {
         jFrame.setSize(dimension);
         return jFrame;
     }
-
-
-    public static void main(String[] args) {
-        // test cases
-        JFrame frame = getDefaultJFrame(.7d, null);
-        frame = getDefaultJFrame(.7d, "test");
-        frame = buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowWidth(200).setWindowHeight(100).build());
-        frame = getDefaultJFrameWithLayout(.7d, "test", new BorderLayout());
-
-        frame.setVisible(true);
-    }
+//    public static void main(String[] args) {
+//        // test cases
+//        JFrame frame = getDefaultJFrame(.7d, null);
+//        frame = getDefaultJFrame(.7d, "test");
+//        frame = buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowWidth(200).setWindowHeight(100).build());
+//        frame = getDefaultJFrameWithLayout(.7d, "test", new BorderLayout());
+//
+//        frame.setVisible(true);
+//    }
 }
