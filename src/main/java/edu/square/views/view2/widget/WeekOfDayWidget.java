@@ -28,6 +28,7 @@ public class WeekOfDayWidget extends MWidget {
 
     @Override
     protected void initializeJComponents() {
+        dayName= new JLabel();
         dayName.setFont(font);
         mainPanel.add(dayName);
     }

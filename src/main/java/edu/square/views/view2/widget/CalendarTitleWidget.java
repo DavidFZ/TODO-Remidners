@@ -13,6 +13,7 @@ public class CalendarTitleWidget extends MWidget {
 
     public CalendarTitleWidget(Dimension rootFrameDimension, Dimension selfDimension){
         super(rootFrameDimension, selfDimension);
+
     }
 
     @Override
@@ -28,6 +29,7 @@ public class CalendarTitleWidget extends MWidget {
 
     @Override
     protected void initializeJComponents() {
+        titleLabel= new JLabel("Calendar");
         titleLabel.setFont(titleFont);
         mainPanel.add(titleLabel);
     }
