@@ -52,6 +52,7 @@ public class ListController {
         //controller layer
         addListenersOnGroupedTitle();
         addListenersOnDoneStatusButtons();
+        addListenersOnConfirmButton();
     }
 
     /**
@@ -97,6 +98,23 @@ public class ListController {
             }
         });
     }
+
+    private void addListenersOnConfirmButton() {
+        groupedListComponentController.addListenerOnConfirmButton(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Model
+                listModel.updateModelGlobally();
+
+                //View
+                leftSideComponentController.updateGroupCounterByModel();
+
+                //Controller
+                addListenersOnDoneStatusButtons();
+            }
+        });
+    }
+
 
     /**
      * Refresh view

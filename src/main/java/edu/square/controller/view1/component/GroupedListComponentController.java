@@ -33,7 +33,7 @@ public class GroupedListComponentController extends MController {
 
         //Controller Layer
         bindListenerOnAddButton((GroupedListComponentView) mComponentView);
-        bindListenerOnConfirmButton((GroupedListComponentView) mComponentView);
+//        bindListenerOnConfirmButton((GroupedListComponentView) mComponentView);
         bindListenerOnDoneStatusButton((GroupedListComponentView) mComponentView);
     }
 
@@ -79,6 +79,11 @@ public class GroupedListComponentController extends MController {
             groupedListComponentView.setSubFrameVisibility(true);
 //            groupedListComponentView.setAddButtonEnable(false);
         });
+    }
+
+    public void addListenerOnConfirmButton(ActionListener actionListener) {
+        ((GroupedListComponentView) mComponentView).setConfirmButtonListener(actionListener);
+        bindListenerOnConfirmButton((GroupedListComponentView) mComponentView);
     }
 
     private void bindListenerOnConfirmButton(GroupedListComponentView groupedListComponentView) {
