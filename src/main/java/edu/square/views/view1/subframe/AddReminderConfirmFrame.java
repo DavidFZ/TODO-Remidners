@@ -60,4 +60,8 @@ public class AddReminderConfirmFrame {
     public void setConfirmButtonListener(ActionListener actionListener) {
         confirmButton.addActionListener(actionListener);
     }
+
+    public void cleanTextField() {
+        itemName.setText("");
+    }
 }

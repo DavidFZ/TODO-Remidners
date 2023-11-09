@@ -9,7 +9,6 @@ import edu.square.views.view1.subframe.AddReminderConfirmFrame;
 import edu.square.views.view1.widget.GroupedTitleWidgetView;
 import edu.square.views.widget.ReminderListWidgetView;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -23,13 +22,13 @@ public class GroupedListComponentView extends MComponent {
     Font font3;
     private GroupedTitleWidgetView groupedTitleWidgetView;
     private ReminderListWidgetView reminderListWidgetView;
-    private AddReminderConfirmFrame addReminderConfirmFrame;
+    private final AddReminderConfirmFrame addReminderConfirmFrame;
 
 
     public GroupedListComponentView(Dimension rootFrameDimension, MyView myView) {
         super(myView, rootFrameDimension);
         //init sub frame
-        addReminderConfirmFrame = new AddReminderConfirmFrame(resizeDimensionWidthAndHeight(selfDimension, 0.6,0.4));
+        addReminderConfirmFrame = new AddReminderConfirmFrame(resizeDimensionWidthAndHeight(selfDimension, 0.6, 0.4));
     }
 
     public static void main(String[] args) {
@@ -77,6 +76,10 @@ public class GroupedListComponentView extends MComponent {
 
     public void setGroupedTitle(String title) {
         groupedTitleWidgetView.setTitleLabel(title);
+    }
+
+    public void cleanSubFrameTextFiled() {
+        addReminderConfirmFrame.cleanTextField();
     }
 
     public void clearReminderList() {

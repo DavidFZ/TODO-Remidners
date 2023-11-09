@@ -32,7 +32,7 @@ public class GroupedListComponentController extends MController {
         //Controller Layer
         bindListenerOnAddButton((GroupedListComponentView) mComponentView);
         bindListenerOnConfirmButton((GroupedListComponentView) mComponentView);
-        bindListenerOnAddButton((GroupedListComponentView) mComponentView);
+        bindListenerOnDoneStatusButton((GroupedListComponentView) mComponentView);
     }
 
     public void updateList(List<Reminder> list) {
@@ -84,7 +84,8 @@ public class GroupedListComponentController extends MController {
             ((GroupedListComponentModel) mModel).addReminder(reminder);
 
             /* View Layer */
-
+            //clean text field
+            groupedListComponentView.cleanSubFrameTextFiled();
             //close sub frame
             groupedListComponentView.setSubFrameVisibility(false);
             //update list
