@@ -155,7 +155,13 @@ public class ListController {
                 leftSideComponentController.updateGroupCounterByModel();
                 //delete reminder view
                 Reminder deletedReminder = listModel.detailInformationModel.getReminder();
+                listModel.detailInformationModel.setReminder(null);
                 listView.groupedListComponentView.removeReminderFromList(deletedReminder);
+                groupedListComponentController.updateListViewByModel();
+
+                //Controller
+                addListenersOnDoneStatusButtons();
+                addListenerOnReminderViews();
             }
         });
     }
