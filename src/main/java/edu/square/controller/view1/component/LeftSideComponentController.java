@@ -22,12 +22,12 @@ public class LeftSideComponentController extends MController {
         updateGroupCounterByModel();
     }
 
-    public void updateGroupCounter() {
-        //update model
-        ((LeftSideComponentModel) mModel).updateGroupModels();
-        //update view
-        updateGroupCounterByModel();
-    }
+//    public void updateGroupCounter() {
+//        //update model
+//        ((LeftSideComponentModel) mModel).updateGroupModels();
+//        //update view
+//        updateGroupCounterByModel();
+//    }
 
     private void updateGroupCounterByModel() {
         List<LeftSideComponentModel.GroupModel> list = ((LeftSideComponentModel) mModel).getGroupModels();
