@@ -134,7 +134,7 @@ public class ReminderListWidgetView extends MWidget {
 
     public void modifyContainerPanelSize() {
 
-        containerPanel.setPreferredSize(new Dimension(defaultcontainerPanelDimension.width,(int) (0.06 * rootFrameDimension.getHeight()*reminderNum)));
+        containerPanel.setPreferredSize(new Dimension(defaultcontainerPanelDimension.width,(int) (0.065 * rootFrameDimension.getHeight()*reminderNum)));
         containerPanel.updateUI();
     }
 
@@ -153,7 +153,7 @@ public class ReminderListWidgetView extends MWidget {
         mainPanel.setBackground(Color.red);
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
-        containerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, 0));
+        containerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, (int) (0.005 * rootFrameDimension.getHeight())));
         containerPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.9, 0.85));
         containerPanel.setBackground(Color.green);
 
