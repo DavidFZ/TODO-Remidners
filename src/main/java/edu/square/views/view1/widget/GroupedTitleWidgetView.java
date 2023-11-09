@@ -50,9 +50,9 @@ public class GroupedTitleWidgetView extends MWidget {
     @Override
     protected void initializeJComponents() {
         //left sub panel
-        JPanel groupTitlePanel = getFlowJpanel(FlowLayout.LEFT, resizeDimensionWidthAndHeight(selfDimension, 0.48, 0.9));
+        JPanel groupTitlePanel = getFlowJpanel(FlowLayout.LEFT, resizeDimensionWidthAndHeight(selfDimension, 0.7, 0.9));
         //right sub panel
-        JPanel buttonPanel = getFlowJpanel(FlowLayout.RIGHT, resizeDimensionWidthAndHeight(selfDimension, 0.48, 0.9));
+        JPanel buttonPanel = getFlowJpanel(FlowLayout.RIGHT, resizeDimensionWidthAndHeight(selfDimension, 0.28, 0.9));
 
         //set background color
         groupTitlePanel.setBackground(Color.blue);
