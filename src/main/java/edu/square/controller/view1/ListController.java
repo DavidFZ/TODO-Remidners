@@ -86,7 +86,12 @@ public class ListController {
         groupedListComponentController.addListenerOnDoneStatusButtons(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                updateModelAndView();
+                //Model
+                listModel.updateModelGlobally();
+
+                //View
+                leftSideComponentController.updateGroupCounterByModel();
+                groupedListComponentController.updateListViewByModel();
             }
         });
     }
@@ -110,7 +115,7 @@ public class ListController {
         //View
         leftSideComponentController.updateGroupCounterByModel();
         groupedListComponentController.updateListViewByModel();
-//        detailInformationComponentController.updateViewByModel();
+        detailInformationComponentController.updateViewByModel();
     }
 
 

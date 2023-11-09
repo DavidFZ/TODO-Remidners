@@ -117,15 +117,14 @@ public class GroupedListComponentController extends MController {
      * @param actionListener listener
      */
     public void addListenerOnDoneStatusButtons(ActionListener actionListener) {
-        //component inner listener
-        bindListenerOnDoneStatusButton((GroupedListComponentView) mComponentView);
         //component outer listener
         GroupedListComponentView groupedListComponentView = (GroupedListComponentView) mComponentView;
         List<ReminderListWidgetView.ReminderView> list = groupedListComponentView.getReminderViews();
-
         for (ReminderListWidgetView.ReminderView reminderView : list) {
             //add external listener
             reminderView.addActionListenerOnDoneStatusButton(actionListener);
         }
+        //component inner listener
+        bindListenerOnDoneStatusButton((GroupedListComponentView) mComponentView);
     }
 }
