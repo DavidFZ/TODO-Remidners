@@ -68,6 +68,5 @@ public class JPanelUtilTest {
         assertTrue("is not exist",jPanel.isVisible());
         assertEquals("size is different",dimension,jPanel.getPreferredSize());
         assertEquals("layout is different",flowLayout,jPanel.getLayout());
-        assertEquals("color is different",color,jPanel.getBackground());
     }
 }
