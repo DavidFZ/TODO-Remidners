@@ -77,6 +77,9 @@ public class ListController {
                     groupedListComponentController.setGroupedTitle(groupTitle);
                     //update groupedListComponent's model and view
                     groupedListComponentController.updateListModelAndView(reminderList);
+
+                    /* controller layer */
+                    addListenersOnDoneStatusButtons();
                 }
             });
         }
