@@ -6,7 +6,6 @@
 
         <id name="uuid" type="string">
             <column name="uuid" length="36"/>
-            <generator class="assigned"/>
         </id>
 
         <property name="content" type="string"/>
