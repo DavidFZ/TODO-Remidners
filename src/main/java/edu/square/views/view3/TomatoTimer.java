@@ -2,7 +2,10 @@ package edu.square.views.view3;
 
 
 import edu.square.utils.UIUtils.JFrameFactory;
-import edu.square.views.widget.MWidget;
+import edu.square.utils.UIUtils.JPanelUtil;
+import edu.square.views.component.MComponent;
+import edu.square.views.view.MyView;
+import edu.square.views.view2.component.CalendarComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +15,7 @@ import java.awt.geom.Ellipse2D;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 
-public class TomatoTimer extends MWidget {
+public class TomatoTimer extends MComponent {
     private int initialHours = 0;
     private int initialMinutes = 25;
     private int initialSeconds = 0;
@@ -28,15 +31,36 @@ public class TomatoTimer extends MWidget {
     private JButton stopButton;
     private JButton resetButton;
 
-    public TomatoTimer(Dimension parentFrameDimension, Dimension selfdimension) {
-        super(parentFrameDimension, selfdimension);
-//        tomatoTimerJPanel.setSize(400, 400);
+    public TomatoTimer(MyView myView, Dimension selfDimension) {
+        super(myView, selfDimension);
+    }
 
+    private String getTime() {
+        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
+    }
+
+    private void drawClockHand(Graphics2D g2d, int centerX, int centerY, int length, int angle, Color color, int thickness) {
+        double radians = Math.toRadians(angle);
+        int x = (int) (centerX + length * Math.cos(radians));
+        int y = (int) (centerY + length * Math.sin(radians));
+        g2d.setColor(color);
+        g2d.setStroke(new BasicStroke(thickness)); // 设置指针粗细
+        g2d.drawLine(centerX, centerY, x, y);
     }
 
 
+    public JPanel getTomatoTimerJPanel() {
+        return mainPanel;
+    }
+
+    @Override
+    protected void calculateSelfDimension() {
+
+    }
+
     @Override
     protected void initializeMainPanel() {
+        mainPanel = JPanelUtil.getCenterFlowMainPanel(selfDimension);
         mainPanel.setLayout(new BorderLayout());
     }
 
@@ -181,34 +205,18 @@ public class TomatoTimer extends MWidget {
 //        });
     }
 
-    private String getTime() {
-        return String.format("%02d:%02d:%02d", hours, minutes, seconds);
-    }
+    @Override
+    protected void initializeView() {
 
-    public JPanel getTomatoTimerMainPanel() {
-        return mainPanel;
-    }
-
-    private void drawClockHand(Graphics2D g2d, int centerX, int centerY, int length, int angle, Color color, int thickness) {
-        double radians = Math.toRadians(angle);
-        int x = (int) (centerX + length * Math.cos(radians));
-        int y = (int) (centerY + length * Math.sin(radians));
-        g2d.setColor(color);
-        g2d.setStroke(new BasicStroke(thickness)); // 设置指针粗细
-        g2d.drawLine(centerX, centerY, x, y);
     }
 
     public static void main(String[] args) {
         JFrame mainFrame = JFrameFactory.getDefaultJFrame(.8d, "Schedule");
-
-        TomatoTimer tomatoTimer = new TomatoTimer(mainFrame.getSize(), resizeDimensionHeightScale(mainFrame.getSize(), 0.9));
-
+        MyView myView = new MyView(mainFrame, mainFrame.getSize());
+        TomatoTimer tomatoTimer = new TomatoTimer(myView, resizeDimensionHeightScale(mainFrame.getSize(), 0.9));
         mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        mainFrame.add(tomatoTimer.getTomatoTimerJPanel());
         mainFrame.setVisible(true);
-        mainFrame.add(tomatoTimer.getTomatoTimerMainPanel());
-
-
     }
 }
-
