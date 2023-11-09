@@ -91,7 +91,6 @@ public class ListController {
 
                 //View
                 leftSideComponentController.updateGroupCounterByModel();
-                groupedListComponentController.updateListViewByModel();
             }
         });
     }
