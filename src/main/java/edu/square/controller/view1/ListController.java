@@ -51,11 +51,15 @@ public class ListController {
 
     private void initialize() {
         //controller layer
+        //left side component
         addListenersOnGroupedTitle();
+        //grouped list component
         addListenersOnDoneStatusButtons();
         addListenersOnConfirmButton();
         addListenerOnReminderViews();
+        //detail information component
         addListenerOnDeleteButton();
+        addListenerOnSaveButton();
     }
 
     /**
@@ -162,6 +166,20 @@ public class ListController {
                 //Controller
                 addListenersOnDoneStatusButtons();
                 addListenerOnReminderViews();
+            }
+        });
+    }
+
+    //TODO：test this method
+    private void addListenerOnSaveButton() {
+        detailInformationComponentController.addListenerOnSaveButton(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Model
+                listModel.updateModelGlobally();
+
+                //View
+                groupedListComponentController.updateListViewByModel();
             }
         });
     }
