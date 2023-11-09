@@ -291,7 +291,8 @@ public class ReminderModel {
     }
 
     public static Reminder queryReminderByUUID(String uuid) {
-        //寻找主键为uuid的Reminder
+        System.out.println(uuid);
+
         Session session = getSession();
 
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
@@ -306,5 +307,10 @@ public class ReminderModel {
         session.close();
 
         return reminder;
+    }
+
+    public static void main(String[] args) {
+        Reminder reminder = queryReminderByUUID("a0afc37b-742c-4be2-a647-24816f1509c7");
+        System.out.println(reminder);
     }
 }

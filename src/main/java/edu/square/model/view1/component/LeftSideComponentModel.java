@@ -39,7 +39,7 @@ public class LeftSideComponentModel extends MModel {
         //Group - Today
         list.add(new GroupModel(BASE_GROUP_TITLES[1], ReminderModel.queryReminderOfToday()));
         //Group - Completed
-        list.add(new GroupModel(BASE_GROUP_TITLES[2], ReminderModel.queryReminderByDoneStatus(false)));
+        list.add(new GroupModel(BASE_GROUP_TITLES[2], ReminderModel.queryReminderByDoneStatus(true)));
         //Group - Flagged
         list.add(new GroupModel(BASE_GROUP_TITLES[3], ReminderModel.queryReminderByImportantStatus(true)));
         return list;
