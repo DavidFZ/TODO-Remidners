@@ -36,7 +36,7 @@ public class CalenderCompoentView extends MComponent {
 
     @Override
     protected void initializeJComponents() {
-        CalendarPanel calendarPanel = new CalendarPanel(resizeDimensionWidthScale(selfDimension,0.4));
+        CalendarPanel calendarPanel = new CalendarPanel(resizeDimensionWidthScale(selfDimension,0.9));
         mainPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         mainPanel.add(calendarPanel.getCalenderPanel());
     }
