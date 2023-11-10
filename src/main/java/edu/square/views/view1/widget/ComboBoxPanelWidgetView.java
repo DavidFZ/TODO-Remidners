@@ -64,6 +64,9 @@ public class ComboBoxPanelWidgetView extends MWidget {
         mainPanel.add(jComboBox);
     }
 
+    /**
+     * update view by self options
+     */
     private void updateView() {
         titleLabel.setText(title);
         if (options != null && options.size() > 0)
