@@ -5,7 +5,6 @@ import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.utils.UIUtils.JPanelUtil;
 import edu.square.views.component.MComponent;
 import edu.square.views.view.MyView;
-import edu.square.views.view2.component.CalendarComponent;
 
 import javax.swing.*;
 import java.awt.*;
