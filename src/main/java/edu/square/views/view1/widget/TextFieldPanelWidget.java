@@ -51,11 +51,11 @@ public class TextFieldPanelWidget extends MWidget {
         label = new JLabel();
         label.setFont(font);
         label.setForeground(Color.blue);
-        label.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.2, 0.5));
+        label.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.3, 0.9));
         mainPanel.add(label);
 
         textField = new JTextField();
-        textField.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.75, 0.5));
+        textField.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.65, 0.9));
         textField.setFont(font);
         mainPanel.add(textField);
     }
