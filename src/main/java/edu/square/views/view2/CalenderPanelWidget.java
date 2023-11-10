@@ -1,4 +1,4 @@
-package edu.square.views.view2.view;
+package edu.square.views.view2;
 
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.views.widget.MWidget;

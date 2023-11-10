@@ -1,4 +1,4 @@
-package edu.square.views.view2.view;
+package edu.square.views.view2;
 
 import javax.swing.*;
 import java.awt.*;

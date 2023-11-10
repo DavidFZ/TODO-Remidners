@@ -1,4 +1,4 @@
-package edu.square.views.view2.view;
+package edu.square.views.view2;
 
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.component.MComponent;
@@ -10,9 +10,9 @@ import java.awt.*;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getCenterFlowMainPanel;
 
-public class CalenderCompoentView extends MComponent {
+public class CalendarComponentView extends MComponent {
 
-    public CalenderCompoentView(MyView myView, Dimension selfDimension) {
+    public CalendarComponentView(MyView myView, Dimension selfDimension) {
         super(myView, selfDimension);
 
     }
@@ -25,7 +25,7 @@ public class CalenderCompoentView extends MComponent {
     @Override
     protected void initializeMainPanel() {
         mainPanel = getCenterFlowMainPanel(selfDimension);
-        mainPanel.setBackground(Color.yellow);
+//        mainPanel.setBackground(Color.yellow);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class CalenderCompoentView extends MComponent {
         mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
         MyView myView = new MyView(mainFrame, mainFrame.getSize());
 
-        CalenderCompoentView calenderCompoentView = new CalenderCompoentView(myView, resizeDimensionWidthScale(mainFrame.getSize(), 0.45));
+        CalendarComponentView calendarComponentView = new CalendarComponentView(myView, resizeDimensionWidthScale(mainFrame.getSize(), 0.45));
         mainFrame.add(myView.getMainPanel());
         mainFrame.setVisible(true);
     }
