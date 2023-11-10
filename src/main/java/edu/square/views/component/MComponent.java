@@ -12,12 +12,11 @@ public abstract class MComponent {
     protected Dimension selfDimension;
     protected JPanel mainPanel;
 
-    public MComponent(Dimension parentDimension, Dimension componentPanelDimension) {
+    public MComponent(Dimension parentDimension, Dimension selfDimension) {
         this.parentDimension = parentDimension;
-        selfDimension = componentPanelDimension;
+        this.selfDimension = selfDimension;
 
-        initializeMainPanel();
-        initializeFonts();
+        initialize();
     }
 
     public MComponent(MyView myView, Dimension selfDimension) {

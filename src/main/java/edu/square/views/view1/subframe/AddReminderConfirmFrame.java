@@ -1,7 +1,7 @@
 package edu.square.views.view1.subframe;
 
 import edu.square.entity.Reminder;
-import edu.square.model.view1.subframe.AddReminderConfirmFrameModel;
+import edu.square.model.view1.component.TimeSelectorComponentModel;
 import edu.square.utils.TimeUtils;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JFrameFactory;
@@ -29,24 +29,25 @@ public class AddReminderConfirmFrame {
     private final ComboBoxPanelWidgetView datesComboBoxPanelWidgetView;
     private final ComboBoxPanelWidgetView hoursComboBoxPanelWidgetView;
 
-    private final List<String> YEARS = AddReminderConfirmFrameModel.getFutureYears(5);
-    private final List<String> MONTHS = AddReminderConfirmFrameModel.getMonths();
-    private final List<String> HOURS = AddReminderConfirmFrameModel.getHours();
+    private final List<String> YEARS = TimeSelectorComponentModel.getFutureYears(5);
+    private final List<String> MONTHS = TimeSelectorComponentModel.getMonths();
+    private final List<String> HOURS = TimeSelectorComponentModel.getHours();
     List<String> days;
     private JRadioButton emergentRadio;
 
     public AddReminderConfirmFrame(Dimension selfDimension) {
-        days = AddReminderConfirmFrameModel.getDaysInThisMonth();
+        days = TimeSelectorComponentModel.getDaysInThisMonth();
 
-        Font font1 = FontUtil.getBoldFont(selfDimension, 0.05);
+        Font font = FontUtil.getBoldFont(selfDimension, FontUtil.FONT_SIZE_1);
 
         mainFrame = JFrameFactory.buildJFrame(selfDimension, "Please add Reminder");
         mainFrame.setLayout(new BorderLayout());
 
         //inputPanel
-        JLabel inputLabel = new JLabel("Reminder Content");
-        inputLabel.setFont(font1);
-        JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JLabel inputLabel = new JLabel("Set Reminder Content");
+        inputLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.8, 0.1));
+        inputLabel.setFont(font);
+        JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
         inputPanel.setBackground(Color.green);
         inputPanel.add(inputLabel);
@@ -58,7 +59,7 @@ public class AddReminderConfirmFrame {
 
         JLabel tipsLabel = new JLabel("Set Reminder Time");
         tipsLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.8, 0.1));
-        tipsLabel.setFont(FontUtil.getBoldFont(selfDimension, FontUtil.FONT_SIZE_1));
+        tipsLabel.setFont(font);
 
 
         yearsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "year:", YEARS);
@@ -99,7 +100,7 @@ public class AddReminderConfirmFrame {
         monthsComboBoxPanelWidgetView.getjComboBox().addActionListener(e -> {
             int year = Integer.parseInt((String) yearsComboBoxPanelWidgetView.getjComboBox().getSelectedItem());
             int month = Integer.parseInt((String) monthsComboBoxPanelWidgetView.getjComboBox().getSelectedItem());
-            days = AddReminderConfirmFrameModel.getDaysInMonth(year, month);
+            days = TimeSelectorComponentModel.getDaysInMonth(year, month);
             datesComboBoxPanelWidgetView.updateOptionsView(days);
         });
     }

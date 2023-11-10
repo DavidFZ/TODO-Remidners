@@ -64,11 +64,15 @@ public class ComboBoxPanelWidgetView extends MWidget {
         mainPanel.add(jComboBox);
     }
 
+    /**
+     * update view by self options
+     */
     private void updateView() {
         titleLabel.setText(title);
-        for (String option : options) {
-            jComboBox.addItem(option);
-        }
+        if (options != null && options.size() > 0)
+            for (String option : options) {
+                jComboBox.addItem(option);
+            }
     }
 
     public void updateOptionsView(List<String> options) {
