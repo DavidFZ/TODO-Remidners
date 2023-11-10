@@ -58,7 +58,7 @@ public class TimeSelectorComponentView extends MComponent {
 
     @Override
     protected void initializeFonts() {
-        font = FontUtil.getBoldFont(parentDimension, FontUtil.FONT_SIZE_0);
+        font = FontUtil.getBoldFont(parentDimension, FontUtil.FONT_SIZE_2);
     }
 
     @Override

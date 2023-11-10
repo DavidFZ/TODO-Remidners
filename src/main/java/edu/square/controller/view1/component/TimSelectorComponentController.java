@@ -3,10 +3,12 @@ package edu.square.controller.view1.component;
 import edu.square.controller.MController;
 import edu.square.model.component.MModel;
 import edu.square.model.view1.component.TimeSelectorComponentModel;
+import edu.square.utils.TimeUtils;
 import edu.square.views.component.MComponent;
 import edu.square.views.view1.component.TimeSelectorComponentView;
 
 import javax.swing.*;
+import java.sql.Timestamp;
 
 import static edu.square.utils.UIUtils.JFrameFactory.getDefaultJFrame;
 
@@ -43,5 +45,29 @@ public class TimSelectorComponentController extends MController {
     @Override
     public void initialize() {
 
+    }
+
+    public void isFlagged() {
+        timeSelectorComponentView.getFlaggedRadio().isSelected();
+    }
+
+    public Timestamp getTimestamp() {
+        //time judge
+        String years = (String) timeSelectorComponentView.getYearsComboBoxPanelWidgetView().getjComboBox().getSelectedItem();
+        String months = (String) timeSelectorComponentView.getMonthsComboBoxPanelWidgetView().getjComboBox().getSelectedItem();
+        String dates = (String) timeSelectorComponentView.getDatesComboBoxPanelWidgetView().getjComboBox().getSelectedItem();
+        String hours = (String) timeSelectorComponentView.getHoursComboBoxPanelWidgetView().getjComboBox().getSelectedItem();
+
+        Timestamp timestamp = TimeUtils.convertToTimestamp(years, months, dates, hours);
+        if (timestamp == null) {
+            JOptionPane.showMessageDialog(null, "Please input correct time");
+        }
+
+        //time should be later than now
+        if (timestamp.before(TimeUtils.getOneHourFormerTimestamp())) {
+            JOptionPane.showMessageDialog(null, "Please input time later than now");
+            return null;
+        }
+        return timestamp;
     }
 }

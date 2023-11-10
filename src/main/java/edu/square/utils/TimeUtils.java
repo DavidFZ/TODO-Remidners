@@ -125,6 +125,11 @@ public class TimeUtils {
         return new Timestamp(currentTIme);
     }
 
+    public static Timestamp getOneHourFormerTimestamp() {
+        long currentTIme = System.currentTimeMillis() - 3600000;
+        return new Timestamp(currentTIme);
+    }
+
     public static Timestamp convertToTimestamp(String year, String month, String day, String hour) {
         StringHourTime stringHourTime = new StringHourTime(year, month, day, hour);
         if (!stringHourTime.stringLegalJudge())

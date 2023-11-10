@@ -1,18 +1,17 @@
 package edu.square.views.view1.subframe;
 
+import edu.square.controller.view1.component.TimSelectorComponentController;
 import edu.square.entity.Reminder;
 import edu.square.model.view1.component.TimeSelectorComponentModel;
-import edu.square.utils.TimeUtils;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.views.view1.component.TimeSelectorComponentView;
 import edu.square.views.view1.widget.BlockPanelWidget;
-import edu.square.views.view1.widget.ComboBoxPanelWidgetView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
-import java.util.Calendar;
 import java.util.List;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
@@ -22,16 +21,8 @@ public class AddReminderConfirmFrame {
     private final JFrame mainFrame;
     private final JTextField itemName;
     private final JButton confirmButton;
-    private final JRadioButton flagRadio;
-
-    private final ComboBoxPanelWidgetView yearsComboBoxPanelWidgetView;
-    private final ComboBoxPanelWidgetView monthsComboBoxPanelWidgetView;
-    private final ComboBoxPanelWidgetView datesComboBoxPanelWidgetView;
-    private final ComboBoxPanelWidgetView hoursComboBoxPanelWidgetView;
-
-    private final List<String> YEARS = TimeSelectorComponentModel.getFutureYears(5);
-    private final List<String> MONTHS = TimeSelectorComponentModel.getMonths();
-    private final List<String> HOURS = TimeSelectorComponentModel.getHours();
+    private final TimSelectorComponentController timSelectorComponentController;
+    private final TimeSelectorComponentView timeSelectorComponentView;
     List<String> days;
     private JRadioButton emergentRadio;
 
@@ -61,27 +52,17 @@ public class AddReminderConfirmFrame {
         tipsLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.8, 0.1));
         tipsLabel.setFont(font);
 
-
-        yearsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "year:", YEARS);
-        monthsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "month:", MONTHS);
-        datesComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "day:", days);
-        hoursComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "hour:", HOURS);
         BlockPanelWidget blockPanelWidget = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.05));
 
-        flagRadio = new JRadioButton("Flagged");
+        timeSelectorComponentView = new TimeSelectorComponentView(selfDimension, resizeDimensionHeightScale(selfDimension, 0.5));
+        timSelectorComponentController = new TimSelectorComponentController(timeSelectorComponentView, new TimeSelectorComponentModel());
+
 
         JPanel detailMessagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         detailMessagePanel.add(blockPanelWidget.getMainPanel());
         detailMessagePanel.add(itemName);
         detailMessagePanel.add(blockPanelWidget0.getMainPanel());
-        detailMessagePanel.add(tipsLabel);
-        detailMessagePanel.add(yearsComboBoxPanelWidgetView.getMainPanel());
-        detailMessagePanel.add(monthsComboBoxPanelWidgetView.getMainPanel());
-        detailMessagePanel.add(datesComboBoxPanelWidgetView.getMainPanel());
-        detailMessagePanel.add(hoursComboBoxPanelWidgetView.getMainPanel());
-        detailMessagePanel.add(blockPanelWidget.getMainPanel());
-
-        detailMessagePanel.add(flagRadio);
+        detailMessagePanel.add(timeSelectorComponentView.getMainPanel());
 
         confirmButton = new JButton("Confirm");
         JPanel confirmPanel = new JPanel(new BorderLayout());
@@ -95,27 +76,11 @@ public class AddReminderConfirmFrame {
         mainFrame.add(BorderLayout.SOUTH, confirmPanel);
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
-        setTextAsToday();
-
-        monthsComboBoxPanelWidgetView.getjComboBox().addActionListener(e -> {
-            int year = Integer.parseInt((String) yearsComboBoxPanelWidgetView.getjComboBox().getSelectedItem());
-            int month = Integer.parseInt((String) monthsComboBoxPanelWidgetView.getjComboBox().getSelectedItem());
-            days = TimeSelectorComponentModel.getDaysInMonth(year, month);
-            datesComboBoxPanelWidgetView.updateOptionsView(days);
-        });
     }
 
     public static void main(String[] args) {
         AddReminderConfirmFrame addReminderConfirmFrame = new AddReminderConfirmFrame(new Dimension(500, 500));
         addReminderConfirmFrame.mainFrame.setVisible(true);
-    }
-
-    private void setTextAsToday() {
-        Calendar calendar = Calendar.getInstance();
-        yearsComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(calendar.get(Calendar.YEAR)));
-        monthsComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(calendar.get(Calendar.MONTH) + 1));
-        datesComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(calendar.get(Calendar.DATE)));
-        hoursComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)));
     }
 
     public String getItemName() {
@@ -134,48 +99,24 @@ public class AddReminderConfirmFrame {
         itemName.setText("");
     }
 
-    public boolean isFlagged() {
-        return flagRadio.isSelected();
-    }
-
     public Reminder getReminderFromInput() {
         Reminder reminder = new Reminder(itemName.getText());
-        Timestamp timestamp = illegalInputJudge();
+        illegalInputJudge();
+        Timestamp timestamp = timSelectorComponentController.getTimestamp();
         if (timestamp == null)
             return null;
 
         reminder.setRemindTime(timestamp);
-        reminder.setIsImportant(isFlagged());
+        reminder.setIsImportant(timeSelectorComponentView.getFlaggedRadio().isSelected());
         return reminder;
     }
 
-    private Timestamp illegalInputJudge() {
+    private void illegalInputJudge() {
         //item judge
         String content = itemName.getText();
-        if (content == null || content.equals("")) {
+        if (content == null || content.equals(""))
             JOptionPane.showMessageDialog(null, "Please input content");
-            return null;
-        } else if (content.length() > 30) {
+        else if (content.length() > 30)
             JOptionPane.showMessageDialog(null, "Please input content less than 30 characters");
-            return null;
-        }
-
-        //time judge
-        String years = (String) yearsComboBoxPanelWidgetView.getjComboBox().getSelectedItem();
-        String months = (String) monthsComboBoxPanelWidgetView.getjComboBox().getSelectedItem();
-        String dates = (String) datesComboBoxPanelWidgetView.getjComboBox().getSelectedItem();
-        String hours = (String) hoursComboBoxPanelWidgetView.getjComboBox().getSelectedItem();
-
-        Timestamp timestamp = TimeUtils.convertToTimestamp(years, months, dates, hours);
-        if (timestamp == null) {
-            JOptionPane.showMessageDialog(null, "Please input correct time");
-        }
-
-        //time should be later than now
-        if (timestamp.before(TimeUtils.getCurrentTimestamp())) {
-            JOptionPane.showMessageDialog(null, "Please input time later than now");
-            return null;
-        }
-        return timestamp;
     }
 }
