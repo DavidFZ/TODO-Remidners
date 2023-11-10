@@ -57,7 +57,6 @@ public class AddReminderConfirmFrame {
 
     public AddReminderConfirmFrame(Dimension selfDimension) {
         Font font1 = FontUtil.getBoldFont(selfDimension, 0.05);
-        Font font2 = FontUtil.getBoldFont(selfDimension, 0.03);
 
         mainFrame = JFrameFactory.buildJFrame(selfDimension, "Please add Reminder");
         mainFrame.setLayout(new BorderLayout());
