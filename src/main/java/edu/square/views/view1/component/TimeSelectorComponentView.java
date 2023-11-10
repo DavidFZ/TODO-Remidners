@@ -17,10 +17,10 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthA
 
 
 public class TimeSelectorComponentView extends MComponent {
-    private final List<String> YEARS = AddReminderConfirmFrameModel.getFutureYears(5);
-    private final List<String> MONTHS = AddReminderConfirmFrameModel.getMonths();
-    private final List<String> HOURS = AddReminderConfirmFrameModel.getHours();
-    List<String> days = AddReminderConfirmFrameModel.getDaysInThisMonth();
+    private List<String> YEARS;
+    private List<String> MONTHS;
+    private List<String> HOURS;
+    private List<String> DAYS;
     @Getter
     private ComboBoxPanelWidgetView yearsComboBoxPanelWidgetView;
     @Getter
@@ -41,11 +41,7 @@ public class TimeSelectorComponentView extends MComponent {
         MComponentTestHelper mComponentTestHelper = new MComponentTestHelper() {
             @Override
             public void initializeMComponent() {
-                TimeSelectorComponentView timeSelectorComponentView =
-                        new TimeSelectorComponentView(
-                                jFrame.getSize(),
-                                resizeDimensionScale(jFrame.getSize(), 0.8)
-                        );
+                TimeSelectorComponentView timeSelectorComponentView = new TimeSelectorComponentView(jFrame.getSize(), resizeDimensionScale(jFrame.getSize(), 0.8));
                 jFrame.add(timeSelectorComponentView.getMainPanel());
             }
         };
@@ -67,6 +63,11 @@ public class TimeSelectorComponentView extends MComponent {
 
     @Override
     protected void initializeJComponents() {
+        YEARS = AddReminderConfirmFrameModel.getFutureYears(5);
+        MONTHS = AddReminderConfirmFrameModel.getMonths();
+        HOURS = AddReminderConfirmFrameModel.getHours();
+        DAYS = AddReminderConfirmFrameModel.getDaysInThisMonth();
+
         JLabel tipsLabel = new JLabel("Set Reminder Time");
         tipsLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.8, 0.1));
         tipsLabel.setFont(font);
@@ -75,7 +76,7 @@ public class TimeSelectorComponentView extends MComponent {
 
         yearsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(parentDimension, d, "Year", YEARS);
         monthsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(parentDimension, d, "Month", MONTHS);
-        datesComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(parentDimension, d, "Date", days);
+        datesComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(parentDimension, d, "Date", DAYS);
         hoursComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(parentDimension, d, "Hour", HOURS);
 
         JPanel detailMessagePanel = JPanelUtil.getFlowJpanel(FlowLayout.CENTER, selfDimension);
