@@ -5,7 +5,7 @@ import edu.square.utils.TimeUtils;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.view1.widget.BlockPanelWidget;
-import edu.square.views.widget.ComboBoxPanelWidgetView;
+import edu.square.views.view1.widget.ComboBoxPanelWidgetView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,17 +27,11 @@ public class AddReminderConfirmFrame {
     private final ComboBoxPanelWidgetView monthsComboBoxPanelWidgetView;
     private final ComboBoxPanelWidgetView datesComboBoxPanelWidgetView;
     private final ComboBoxPanelWidgetView hoursComboBoxPanelWidgetView;
-    private JRadioButton emergentRadio;
     String[] years = {
-             "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"
+            "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"
     };
     String[] months = {
-             "1", "2", "3", "4",
-            "5", "6", "7", "8",
-            "9", "10", "11", "12"
-    };
-    String[] days = {
-             "1", "2", "3", "4",
+            "1", "2", "3", "4",
             "5", "6", "7", "8",
             "9", "10", "11", "12"
     };
@@ -47,20 +41,29 @@ public class AddReminderConfirmFrame {
             "9", "10", "11", "12",
             "13", "14", "15", "16",
             "17", "18", "19", "20",
+            "21", "22", "23", "24"
+    };
+    String[] days = {
+            "1", "2", "3", "4",
+            "5", "6", "7", "8",
+            "9", "10", "11", "12",
+            "13", "14", "15", "16",
+            "17", "18", "19", "20",
             "21", "22", "23", "24",
             "25", "26", "27", "28",
             "29", "30", "31",
     };
+    private JRadioButton emergentRadio;
 
     public AddReminderConfirmFrame(Dimension selfDimension) {
         Font font1 = FontUtil.getBoldFont(selfDimension, 0.05);
         Font font2 = FontUtil.getBoldFont(selfDimension, 0.03);
 
-        mainFrame = JFrameFactory.buildJFrame(selfDimension, "Please add item");
+        mainFrame = JFrameFactory.buildJFrame(selfDimension, "Please add Reminder");
         mainFrame.setLayout(new BorderLayout());
 
         //inputPanel
-        JLabel inputLabel = new JLabel("Reminder Content:");
+        JLabel inputLabel = new JLabel("Reminder Content");
         inputLabel.setFont(font1);
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
@@ -68,37 +71,34 @@ public class AddReminderConfirmFrame {
         inputPanel.add(inputLabel);
 
         itemName = new JTextField();
-        itemName.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.9, 0.05));
-        JLabel tipsLabel = new JLabel("Reminder Time (number):");
-        tipsLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.8, 0.05));
+        itemName.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.9, 0.1));
+
+        BlockPanelWidget blockPanelWidget0 = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.1));
+
+        JLabel tipsLabel = new JLabel("Set Reminder Time");
+        tipsLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.8, 0.1));
+        tipsLabel.setFont(FontUtil.getBoldFont(selfDimension, FontUtil.FONT_SIZE_1));
 
 
-        yearsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "years:", List.of(years));
-        monthsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "months:", List.of(months));
-        datesComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "days:", List.of(days));
-        hoursComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "hours:", List.of(hours));
+        yearsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "year:", List.of(years));
+        monthsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "month:", List.of(months));
+        datesComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "day:", List.of(days));
+        hoursComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "hour:", List.of(hours));
         BlockPanelWidget blockPanelWidget = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.05));
-
-//        yearsTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "years:");
-//        monthsTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "months:");
-//        datesTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "dates:");
-//        hoursTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "hours:");
 
         flagRadio = new JRadioButton("Flagged");
 
         JPanel detailMessagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
         detailMessagePanel.add(blockPanelWidget.getMainPanel());
         detailMessagePanel.add(itemName);
+        detailMessagePanel.add(blockPanelWidget0.getMainPanel());
         detailMessagePanel.add(tipsLabel);
         detailMessagePanel.add(yearsComboBoxPanelWidgetView.getMainPanel());
         detailMessagePanel.add(monthsComboBoxPanelWidgetView.getMainPanel());
         detailMessagePanel.add(datesComboBoxPanelWidgetView.getMainPanel());
         detailMessagePanel.add(hoursComboBoxPanelWidgetView.getMainPanel());
         detailMessagePanel.add(blockPanelWidget.getMainPanel());
-//        detailMessagePanel.add(yearsTextFieldPanelWidget.getMainPanel());
-//        detailMessagePanel.add(monthsTextFieldPanelWidget.getMainPanel());
-//        detailMessagePanel.add(datesTextFieldPanelWidget.getMainPanel());
-//        detailMessagePanel.add(hoursTextFieldPanelWidget.getMainPanel());
+
         detailMessagePanel.add(flagRadio);
 
         confirmButton = new JButton("Confirm");
@@ -127,10 +127,6 @@ public class AddReminderConfirmFrame {
         monthsComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(calendar.get(Calendar.MONTH) + 1));
         datesComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(calendar.get(Calendar.DATE)));
         hoursComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)));
-//        yearsTextFieldPanelWidget.setTextField(String.valueOf(calendar.get(Calendar.YEAR)));
-//        monthsTextFieldPanelWidget.setTextField(String.valueOf(calendar.get(Calendar.MONTH) + 1));
-//        datesTextFieldPanelWidget.setTextField(String.valueOf(calendar.get(Calendar.DATE)));
-//        hoursTextFieldPanelWidget.setTextField(String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)));
     }
 
     public String getItemName() {
@@ -180,10 +176,6 @@ public class AddReminderConfirmFrame {
         String months = (String) monthsComboBoxPanelWidgetView.getjComboBox().getSelectedItem();
         String dates = (String) datesComboBoxPanelWidgetView.getjComboBox().getSelectedItem();
         String hours = (String) hoursComboBoxPanelWidgetView.getjComboBox().getSelectedItem();
-//        String years = yearsTextFieldPanelWidget.getTextField().getText();
-//        String months = monthsTextFieldPanelWidget.getTextField().getText();
-//        String dates = datesTextFieldPanelWidget.getTextField().getText();
-//        String hours = hoursTextFieldPanelWidget.getTextField().getText();
 
         Timestamp timestamp = TimeUtils.convertToTimestamp(years, months, dates, hours);
         if (timestamp == null) {

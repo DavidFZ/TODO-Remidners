@@ -1,7 +1,8 @@
-package edu.square.views.widget;
+package edu.square.views.view1.widget;
 
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.MWidgetTestHelper;
+import edu.square.views.widget.MWidget;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,7 +46,7 @@ public class ComboBoxPanelWidgetView extends MWidget {
 
     @Override
     protected void initializeFonts() {
-        font = FontUtil.getBoldFont(selfDimension, 0.07);
+        font = FontUtil.getBoldFont(selfDimension, FontUtil.FONT_SIZE_0);
     }
 
     @Override

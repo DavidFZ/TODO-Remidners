@@ -29,7 +29,7 @@ public class GroupedListComponentView extends MComponent {
     public GroupedListComponentView(Dimension rootFrameDimension, MyView myView) {
         super(myView, rootFrameDimension);
         //init sub frame
-        addReminderConfirmFrame = new AddReminderConfirmFrame(resizeDimensionWidthAndHeight(selfDimension, 0.6, 0.4));
+        addReminderConfirmFrame = new AddReminderConfirmFrame(resizeDimensionWidthAndHeight(rootFrameDimension, 0.6, 0.4));
     }
 
     public static void main(String[] args) {
