@@ -1,6 +1,6 @@
 package edu.square.views.view1.component;
 
-import edu.square.model.view1.subframe.AddReminderConfirmFrameModel;
+import edu.square.model.view1.component.TimeSelectorComponentModel;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JPanelUtil;
 import edu.square.utils.UIUtils.MComponentTestHelper;
@@ -26,6 +26,7 @@ public class TimeSelectorComponentView extends MComponent {
     @Getter
     private ComboBoxPanelWidgetView hoursComboBoxPanelWidgetView;
     private Font font;
+    @Getter
     private JRadioButton flaggedRadio;
 
     public TimeSelectorComponentView(Dimension parentDimension, Dimension selfDimension) {
@@ -96,27 +97,31 @@ public class TimeSelectorComponentView extends MComponent {
     @Override
     protected void initializeView() {
         updateViews();
-        selectDefaultItem();
+        setSelectedDefaultItem();
     }
 
     private void updateViews() {
-        yearsComboBoxPanelWidgetView.updateOptionsView(AddReminderConfirmFrameModel.getFutureYears(5));
-        monthsComboBoxPanelWidgetView.updateOptionsView(AddReminderConfirmFrameModel.getMonths());
-        datesComboBoxPanelWidgetView.updateOptionsView(AddReminderConfirmFrameModel.getDaysInThisMonth());
-        hoursComboBoxPanelWidgetView.updateOptionsView(AddReminderConfirmFrameModel.getHours());
+        yearsComboBoxPanelWidgetView.updateOptionsView(TimeSelectorComponentModel.getFutureYears(5));
+        monthsComboBoxPanelWidgetView.updateOptionsView(TimeSelectorComponentModel.getMonths());
+        datesComboBoxPanelWidgetView.updateOptionsView(TimeSelectorComponentModel.getDaysInThisMonth());
+        hoursComboBoxPanelWidgetView.updateOptionsView(TimeSelectorComponentModel.getHours());
     }
 
-    private void selectDefaultItem() {
+    private void setSelectedDefaultItem(int y, int m, int d, int h) {
+        yearsComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(y));
+        monthsComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(m));
+        datesComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(d));
+        hoursComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(h));
+    }
+
+    private void setSelectedDefaultItem() {
         Calendar calendar = Calendar.getInstance();
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH) + 1;
         int date = calendar.get(Calendar.DATE);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
-        yearsComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(year));
-        monthsComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(month));
-        datesComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(date));
-        hoursComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(hour));
+        setSelectedDefaultItem(year, month, date, hour);
     }
 
 

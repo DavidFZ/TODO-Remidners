@@ -1,7 +1,7 @@
 package edu.square.views.view1.subframe;
 
 import edu.square.entity.Reminder;
-import edu.square.model.view1.subframe.AddReminderConfirmFrameModel;
+import edu.square.model.view1.component.TimeSelectorComponentModel;
 import edu.square.utils.TimeUtils;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JFrameFactory;
@@ -29,14 +29,14 @@ public class AddReminderConfirmFrame {
     private final ComboBoxPanelWidgetView datesComboBoxPanelWidgetView;
     private final ComboBoxPanelWidgetView hoursComboBoxPanelWidgetView;
 
-    private final List<String> YEARS = AddReminderConfirmFrameModel.getFutureYears(5);
-    private final List<String> MONTHS = AddReminderConfirmFrameModel.getMonths();
-    private final List<String> HOURS = AddReminderConfirmFrameModel.getHours();
+    private final List<String> YEARS = TimeSelectorComponentModel.getFutureYears(5);
+    private final List<String> MONTHS = TimeSelectorComponentModel.getMonths();
+    private final List<String> HOURS = TimeSelectorComponentModel.getHours();
     List<String> days;
     private JRadioButton emergentRadio;
 
     public AddReminderConfirmFrame(Dimension selfDimension) {
-        days = AddReminderConfirmFrameModel.getDaysInThisMonth();
+        days = TimeSelectorComponentModel.getDaysInThisMonth();
 
         Font font = FontUtil.getBoldFont(selfDimension, FontUtil.FONT_SIZE_1);
 
@@ -100,7 +100,7 @@ public class AddReminderConfirmFrame {
         monthsComboBoxPanelWidgetView.getjComboBox().addActionListener(e -> {
             int year = Integer.parseInt((String) yearsComboBoxPanelWidgetView.getjComboBox().getSelectedItem());
             int month = Integer.parseInt((String) monthsComboBoxPanelWidgetView.getjComboBox().getSelectedItem());
-            days = AddReminderConfirmFrameModel.getDaysInMonth(year, month);
+            days = TimeSelectorComponentModel.getDaysInMonth(year, month);
             datesComboBoxPanelWidgetView.updateOptionsView(days);
         });
     }
