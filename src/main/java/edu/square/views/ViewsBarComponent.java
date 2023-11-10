@@ -13,13 +13,10 @@ import static edu.square.utils.UIUtils.FontUtil.*;
 
 public class ViewsBarComponent extends MComponent {
     private static final String[] viewsTitles = {"To do", "Calender", "TomatoTimer"};
-    Font font1;
-    Font font2;
-    Font font3;
+    Font font;
 
     public ViewsBarComponent(MyView rootFrame, Dimension selfDimension) {
         super(rootFrame, selfDimension);
-
     }
 
     @Override
@@ -36,16 +33,17 @@ public class ViewsBarComponent extends MComponent {
 
     @Override
     protected void initializeFonts() {
-        font1 = getBoldFont(parentDimension, FONT_SIZE_1);
-        font2 = getBoldFont(parentDimension, FONT_SIZE_2);
-        font3 = getBoldFont(parentDimension, FONT_SIZE_3);
+        font = getBoldFont(parentDimension, FONT_SIZE_1);
     }
 
     @Override
     protected void initializeJComponents() {
         LabelPanelWidget todoPanel = new LabelPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.3), "To do");
+        todoPanel.getMainPanel().setFont(font);
         LabelPanelWidget CalenderPanel = new LabelPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.3), "Calender");
+        CalenderPanel.getMainPanel().setFont(font);
         LabelPanelWidget TomatoTimerPanel = new LabelPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.3), "TomatoTimer");
+        TomatoTimerPanel.getMainPanel().setFont(font);
 
         mainPanel.add(todoPanel.getMainPanel());
         mainPanel.add(CalenderPanel.getMainPanel());
