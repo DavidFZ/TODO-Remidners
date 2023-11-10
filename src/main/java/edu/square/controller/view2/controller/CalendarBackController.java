@@ -1,14 +1,15 @@
-package edu.square.views.view2.controller;
+package edu.square.controller.view2.controller;
 
-import edu.square.views.view2.view.CalendarFrame;
+import edu.square.views.view2.view.CalendarPanel;
+import edu.square.views.view2.view.CalendarPanel;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 public class CalendarBackController {
-    private CalendarFrame c;
-    public CalendarBackController(CalendarFrame calendarFrame){
-        this.c = calendarFrame;
+    private CalendarPanel c;
+    public CalendarBackController(CalendarPanel calendarPanel){
+        this.c = calendarPanel;
         initialize();
     }
 
@@ -20,7 +21,7 @@ public class CalendarBackController {
         c.GetBackButton().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                c.calenderFrame.dispose();
+                c.calenderPanel.setVisible(false);
             }
         });
     }

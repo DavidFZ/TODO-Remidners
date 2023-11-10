@@ -1,6 +1,6 @@
-package edu.square.views.view2.controller;
+package edu.square.controller.view2.controller;
 
-import edu.square.views.view2.view.CalendarFrame;
+import edu.square.views.view2.view.CalendarPanel;
 import edu.square.views.view2.view.MonthPanel;
 
 import java.awt.event.MouseAdapter;
@@ -8,8 +8,8 @@ import java.awt.event.MouseEvent;
 import java.util.Calendar;
 
 public class CalendarLastController {
-    private final CalendarFrame c;
-    public CalendarLastController(CalendarFrame c){
+    private final CalendarPanel c;
+    public CalendarLastController(CalendarPanel c){
         this.c = c;
         initialize();
     }
@@ -31,7 +31,7 @@ public class CalendarLastController {
                 }
                 calendar.set(calendar.get(Calendar.YEAR),c.month-1,1);
                 day = calendar.get(Calendar.DAY_OF_WEEK);
-                c.eachDayPanel = new MonthPanel(c.month,(int)(0.98*c.calenderFrame.getWidth()),(int)(0.8*c.calenderFrame.getHeight()),day-1).monthPanel;
+                c.eachDayPanel = new MonthPanel(c.month,(int)(0.98*c.calenderPanel.getWidth()),(int)(0.8*c.calenderPanel.getHeight()),day-1).monthPanel;
                 c.eachDayPanel.setVisible(true);
                 c.dayPanel.add(c.eachDayPanel);
             }
