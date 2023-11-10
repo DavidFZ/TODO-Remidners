@@ -1,6 +1,9 @@
 package edu.square.views.view1.component;
 
+import edu.square.controller.view1.component.TimSelectorComponentController;
 import edu.square.entity.Reminder;
+import edu.square.model.view1.component.DetailInformationModel;
+import edu.square.model.view1.component.TimeSelectorComponentModel;
 import edu.square.utils.UIUtils.JPanelUtil;
 import edu.square.utils.UIUtils.MComponentTestHelper;
 import edu.square.views.component.MComponent;
@@ -18,6 +21,8 @@ import static edu.square.utils.UIUtils.FontUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
 public class DetailInformationComponentView extends MComponent {
+    public TimeSelectorComponentView timeSelectorComponentView;
+    public TimSelectorComponentController timSelectorComponentController;
     Font font1;
     Font font2;
     Font font3;
@@ -29,7 +34,6 @@ public class DetailInformationComponentView extends MComponent {
     private JButton saveButton;
     @Getter
     private JButton backButton;
-
     private TextFieldPanelWidget contentTextFieldPanelWidget;
     private TextFieldPanelWidget noteTextFieldPanelWidget;
 
@@ -89,6 +93,11 @@ public class DetailInformationComponentView extends MComponent {
         //BlockPanel
         BlockPanelWidget blockPanelView = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.1));
         mainPanel.add(blockPanelView.getMainPanel());
+
+        //timeSelectorComponentView
+        timeSelectorComponentView = new TimeSelectorComponentView(parentDimension, resizeDimensionHeightScale(selfDimension, 0.5));
+        timSelectorComponentController = new TimSelectorComponentController(timeSelectorComponentView, new TimeSelectorComponentModel());
+        mainPanel.add(timeSelectorComponentView.getMainPanel());
     }
 
     private JButton buttonBuilder(String buttonName) {

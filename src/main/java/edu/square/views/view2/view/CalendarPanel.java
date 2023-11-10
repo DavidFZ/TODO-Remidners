@@ -6,7 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Calendar;
 
-public class CalendarFrame extends JPanel {
+public class CalendarPanel extends JPanel {
     public JPanel calenderPanel = new JPanel();
     JPanel backPanel = new JPanel();//back function
     JPanel titlePanel = new JPanel();
@@ -24,7 +24,7 @@ public class CalendarFrame extends JPanel {
 
     public JPanel dayPanel = new JPanel();
     //日历除了日期以外的部分
-    CalendarFrame(Dimension dimension) {
+    CalendarPanel(Dimension dimension) {
         //can change size
         calenderPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         calenderPanel.setSize(dimension);
@@ -155,7 +155,7 @@ public class CalendarFrame extends JPanel {
 
     public static void main(String[] args) {
         Dimension dimension = new Dimension(500,900);
-        JPanel jPanel = new CalendarFrame(dimension).calenderPanel;
+        JPanel jPanel = new CalendarPanel(dimension).calenderPanel;
         JFrame frame = new JFrame();
         frame.setSize(500,900);
         frame.add(jPanel);
