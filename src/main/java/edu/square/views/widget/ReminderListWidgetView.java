@@ -2,6 +2,7 @@ package edu.square.views.widget;
 
 import edu.square.entity.Reminder;
 import edu.square.model.view1.widget.ReminderModel;
+import edu.square.utils.ColorUtil;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.MWidgetTestHelper;
 import lombok.Getter;
@@ -153,20 +154,21 @@ public class ReminderListWidgetView extends MWidget {
 
     @Override
     protected void initializeMainPanel() {
-        mainPanel.setBackground(Color.red);
+        mainPanel.setBackground(ColorUtil.getColor1());
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         containerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, (int) (0.005 * rootFrameDimension.getHeight())));
         containerPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.9, 0.85));
-        containerPanel.setBackground(Color.green);
+        containerPanel.setBackground(ColorUtil.getColor5());
 
         scrollPane = new JScrollPane(containerPanel);
         scrollPane.setPreferredSize(resizeDimensionHeightScale(selfDimension, 0.9));//防止scrollPane过长
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setWheelScrollingEnabled(true);
-        scrollPane.setBackground(Color.blue);
+        scrollPane.setBackground(ColorUtil.getColor5());
 
         mainPanel.add(scrollPane);
+        mainPanel.setBackground(ColorUtil.getColor5());
 
     }
 
@@ -204,8 +206,8 @@ public class ReminderListWidgetView extends MWidget {
 
             innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
             innerPanel.setPreferredSize(new Dimension((int) (0.35 * rootFrameDimension.getWidth()), (int) (0.06 * rootFrameDimension.getHeight())));
-            innerPanel.setBackground(Color.yellow);
-            innerPanel.setBorder(new LineBorder(Color.PINK));
+//            innerPanel.setBackground(ColorUtil.getColor4());
+            innerPanel.setBorder(new LineBorder(ColorUtil.getColor1()));
 
             setReminderViewDoneStatus(reminder.getDoneTime() != null);
 
@@ -230,10 +232,10 @@ public class ReminderListWidgetView extends MWidget {
             radioButton.setSelected(isDone);
             if (isDone) {
                 radioButton.setSelected(true);
-                label.setForeground(Color.GRAY);
+//                label.setForeground(Color.BLACK);
             } else {
                 radioButton.setSelected(false);
-                label.setForeground(Color.BLACK);
+//                label.setForeground(Color.BLACK);
             }
         }
 
