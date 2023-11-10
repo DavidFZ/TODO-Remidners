@@ -6,6 +6,7 @@ import edu.square.controller.view1.component.LeftSideComponentController;
 import edu.square.entity.Reminder;
 import edu.square.model.view1.ListModel;
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.views.view1.component.TimeSelectorComponentView;
 import edu.square.views.view1.view.ListView;
 import edu.square.views.widget.ReminderListWidgetView;
 
@@ -60,6 +61,7 @@ public class ListController {
         //detail information component
         addListenerOnDeleteButton();
         addListenerOnSaveButton();
+        addListenerOnRestButton();
     }
 
     /**
@@ -145,6 +147,19 @@ public class ListController {
 
                 //update view
                 detailInformationComponentController.setVisibleByModel();
+            }
+        });
+    }
+
+    private void addListenerOnRestButton() {
+        detailInformationComponentController.addListenerOnRestButton(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //sub frame view
+                Reminder reminder = listModel.detailInformationModel.getReminder();
+                TimeSelectorComponentView timeSelectorComponentView = listView.detailInformationComponent.timeSelectorComponentView;
+                timeSelectorComponentView.setSelectedItem(reminder);
+                timeSelectorComponentView.getFlaggedRadio().setSelected(reminder.getIsImportant());
             }
         });
     }

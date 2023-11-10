@@ -41,10 +41,7 @@ public class DetailInformationComponentController extends MController {
 //        bindListenerOnDeleteButton();
 
         //reset button
-        detailInformationComponentView.getResetButton().addActionListener(e -> {
-            detailInformationComponentView.setContentTextField(detailInformationModel.getReminder().getContent());
-            detailInformationComponentView.setNoteTextField(detailInformationModel.getReminder().getNote());
-        });
+//        same as delete button
 
         //update button
 //        same as delete button
@@ -107,6 +104,13 @@ public class DetailInformationComponentController extends MController {
         });
     }
 
+    private void bindListenerOnResetButton() {
+        detailInformationComponentView.getResetButton().addActionListener(e -> {
+            detailInformationComponentView.setContentTextField(detailInformationModel.getReminder().getContent());
+            detailInformationComponentView.setNoteTextField(detailInformationModel.getReminder().getNote());
+        });
+    }
+
     public void addListenerOnDeleteButton(ActionListener actionListener) {
         DetailInformationComponentView detailInformationComponentView = (DetailInformationComponentView) mComponentView;
         detailInformationComponentView.getDeleteButton().addActionListener(actionListener);
@@ -117,5 +121,11 @@ public class DetailInformationComponentController extends MController {
         DetailInformationComponentView detailInformationComponentView = (DetailInformationComponentView) mComponentView;
         detailInformationComponentView.getSaveButton().addActionListener(actionListener);
         bindListenerOnSaveButton();
+    }
+
+    public void  addListenerOnRestButton(ActionListener actionListener){
+        DetailInformationComponentView detailInformationComponentView = (DetailInformationComponentView) mComponentView;
+        detailInformationComponentView.getResetButton().addActionListener(actionListener);
+        bindListenerOnResetButton();
     }
 }
