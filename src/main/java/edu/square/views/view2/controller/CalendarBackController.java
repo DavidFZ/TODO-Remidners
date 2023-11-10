@@ -20,7 +20,7 @@ public class CalendarBackController {
         c.GetBackButton().addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                c.calenderFrame.dispose();
+                c.calenderPanel.setVisible(false);
             }
         });
     }

@@ -6,8 +6,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Calendar;
 
-public class CalendarFrame extends Frame {
-    public Frame calenderFrame = new JFrame();
+public class CalendarFrame extends JPanel {
+    public JPanel calenderPanel = new JPanel();
     JPanel backPanel = new JPanel();//back function
     JPanel titlePanel = new JPanel();
     JPanel lastAndNextPanel =new JPanel();
@@ -26,38 +26,38 @@ public class CalendarFrame extends Frame {
     //日历除了日期以外的部分
     CalendarFrame(Dimension dimension) {
         //can change size
-        calenderFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
-        calenderFrame.setSize(dimension);
+        calenderPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        calenderPanel.setSize(dimension);
         //back button
         backPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        backPanel.setPreferredSize(new Dimension((calenderFrame.getWidth()),(int)(0.05*calenderFrame.getHeight())));
+        backPanel.setPreferredSize(new Dimension((calenderPanel.getWidth()),(int)(0.05*calenderPanel.getHeight())));
         backLabel.setFont(new Font("宋体",Font.BOLD,13));
         backPanel.add(backLabel);
         //title
         titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        titlePanel.setPreferredSize(new Dimension((calenderFrame.getWidth()),(int)(0.05*calenderFrame.getHeight())));
+        titlePanel.setPreferredSize(new Dimension((calenderPanel.getWidth()),(int)(0.05*calenderPanel.getHeight())));
         JLabel titleLabel = new JLabel("Calender");
         titleLabel.setFont(new Font("宋体",Font.BOLD,25));
         titlePanel.add(titleLabel);
 
         //last month and next month
-        lastAndNextPanel.setPreferredSize(new Dimension(calenderFrame.getWidth(),(int)(0.1*calenderFrame.getHeight())));
+        lastAndNextPanel.setPreferredSize(new Dimension(calenderPanel.getWidth(),(int)(0.1*calenderPanel.getHeight())));
         lastAndNextPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         lastPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        lastPanel.setPreferredSize(new Dimension((int)(0.48*calenderFrame.getWidth()),(int)(0.1*calenderFrame.getHeight())));
+        lastPanel.setPreferredSize(new Dimension((int)(0.48*calenderPanel.getWidth()),(int)(0.1*calenderPanel.getHeight())));
         nextPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        nextPanel.setPreferredSize(new Dimension((int)(0.48*calenderFrame.getWidth()),(int)(0.1*calenderFrame.getHeight())));
+        nextPanel.setPreferredSize(new Dimension((int)(0.48*calenderPanel.getWidth()),(int)(0.1*calenderPanel.getHeight())));
         lastPanel.add(lastLabel);
         nextPanel.add(nextLabel);
         lastAndNextPanel.add(lastPanel);
         lastAndNextPanel.add(nextPanel);
         //panel of days
         dayPanel.setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
-        dayPanel.setPreferredSize(new Dimension((int)(1*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight())));
+        dayPanel.setPreferredSize(new Dimension((int)(1*calenderPanel.getWidth()),(int)(0.8*calenderPanel.getHeight())));
 //      dayPanel.setBackground(Color.BLUE);
         int dayOfWeek = this.GetThisMonthFirstDay()-1;
         month = this.GetMonth();
-        eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),dayOfWeek).monthPanel;
+        eachDayPanel = new MonthPanel(month,(int)(0.98*calenderPanel.getWidth()),(int)(0.8*calenderPanel.getHeight()),dayOfWeek).monthPanel;
 //      eachDayPanel.setBackground(Color.GREEN);
         dayPanel.add(eachDayPanel);
 
@@ -78,7 +78,7 @@ public class CalendarFrame extends Frame {
                 if(month >= 1){
                     calendar.set(calendar.get(Calendar.YEAR),month-1,1);
                     day = calendar.get(Calendar.DAY_OF_WEEK);
-                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),day-1).monthPanel;
+                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderPanel.getWidth()),(int)(0.8*calenderPanel.getHeight()),day-1).monthPanel;
                     eachDayPanel.setVisible(true);
                     dayPanel.add(eachDayPanel);
                 }
@@ -86,7 +86,7 @@ public class CalendarFrame extends Frame {
                     month = 12;
                     calendar.set(calendar.get(Calendar.YEAR),month-1,1);
                     day = calendar.get(Calendar.DAY_OF_WEEK);
-                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),day-1).monthPanel;
+                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderPanel.getWidth()),(int)(0.8*calenderPanel.getHeight()),day-1).monthPanel;
                     eachDayPanel.setVisible(true);
                     dayPanel.add(eachDayPanel);
                 }
@@ -102,7 +102,7 @@ public class CalendarFrame extends Frame {
                 if(month <= 12){
                     calendar.set(calendar.get(Calendar.YEAR),month-1,1);
                     day = calendar.get(Calendar.DAY_OF_WEEK);
-                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),day-1).monthPanel;
+                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderPanel.getWidth()),(int)(0.8*calenderPanel.getHeight()),day-1).monthPanel;
                     eachDayPanel.setVisible(true);
                     dayPanel.add(eachDayPanel);
                 }
@@ -110,7 +110,7 @@ public class CalendarFrame extends Frame {
                     month = 1;
                     calendar.set(calendar.get(Calendar.YEAR),month-1,1);
                     day = calendar.get(Calendar.DAY_OF_WEEK);
-                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderFrame.getWidth()),(int)(0.8*calenderFrame.getHeight()),day-1).monthPanel;
+                    eachDayPanel = new MonthPanel(month,(int)(0.98*calenderPanel.getWidth()),(int)(0.8*calenderPanel.getHeight()),day-1).monthPanel;
                     eachDayPanel.setVisible(true);
                     dayPanel.add(eachDayPanel);
                 }
@@ -121,10 +121,10 @@ public class CalendarFrame extends Frame {
 
 
 
-        calenderFrame.add(titlePanel);
-        calenderFrame.add(backPanel);
-        calenderFrame.add(lastAndNextPanel);
-        calenderFrame.add(dayPanel);
+        calenderPanel.add(titlePanel);
+        calenderPanel.add(backPanel);
+        calenderPanel.add(lastAndNextPanel);
+        calenderPanel.add(dayPanel);
 
     }
 
@@ -155,8 +155,10 @@ public class CalendarFrame extends Frame {
 
     public static void main(String[] args) {
         Dimension dimension = new Dimension(500,900);
-        Frame frame = new CalendarFrame(dimension).calenderFrame;
-
+        JPanel jPanel = new CalendarFrame(dimension).calenderPanel;
+        JFrame frame = new JFrame();
+        frame.setSize(500,900);
+        frame.add(jPanel);
         frame.setVisible(true);
         System.out.println();
     }
