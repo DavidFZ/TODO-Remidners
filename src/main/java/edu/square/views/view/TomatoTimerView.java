@@ -13,7 +13,7 @@ public class TomatoTimerView extends MyView {
 
     public TomatoTimerView(JFrame parentFrame, Dimension dimension) {
         super(parentFrame, dimension);
-        tomatoTimer = new TomatoTimer(resizeDimensionHeightScale(rootFrameDimension.getSize(), 0.9), this);
+        tomatoTimer = new TomatoTimer(rootFrameDimension, this);
     }
 
 

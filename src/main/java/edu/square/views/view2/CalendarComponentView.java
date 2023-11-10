@@ -12,14 +12,14 @@ import static edu.square.utils.UIUtils.JPanelUtil.getCenterFlowMainPanel;
 
 public class CalendarComponentView extends MComponent {
 
-    public CalendarComponentView(MyView myView, Dimension selfDimension) {
+    public CalendarComponentView(Dimension selfDimension, MyView myView) {
         super(myView, selfDimension);
 
     }
 
     @Override
     protected void calculateSelfDimension() {
-
+        selfDimension = resizeDimensionWidthScale(parentDimension, 0.45);
     }
 
     @Override
@@ -51,7 +51,7 @@ public class CalendarComponentView extends MComponent {
         mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
         MyView myView = new MyView(mainFrame, mainFrame.getSize());
 
-        CalendarComponentView calendarComponentView = new CalendarComponentView(myView, resizeDimensionWidthScale(mainFrame.getSize(), 0.45));
+        CalendarComponentView calendarComponentView = new CalendarComponentView(resizeDimensionWidthScale(mainFrame.getSize(), 0.45), myView);
         mainFrame.add(myView.getMainPanel());
         mainFrame.setVisible(true);
     }

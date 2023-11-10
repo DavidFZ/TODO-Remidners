@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
+import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
 
 public class TomatoTimer extends MComponent {
     private int initialHours = 0;
@@ -54,7 +54,7 @@ public class TomatoTimer extends MComponent {
 
     @Override
     protected void calculateSelfDimension() {
-
+        selfDimension = resizeDimensionWidthAndHeight(parentDimension, 0.8, 0.92);
     }
 
     @Override
