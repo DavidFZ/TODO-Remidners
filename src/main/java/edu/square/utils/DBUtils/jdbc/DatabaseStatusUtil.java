@@ -72,7 +72,7 @@ public class DatabaseStatusUtil extends Thread {
     }
 
     private static void useSQLFileInitDB() throws SQLException, IOException {
-        List<String> sqlList = FileUtil.parseSQLFile("sql/init.sql");
+        List<String> sqlList = FileUtil.parseSQLFile("src/main/resources/sql/init.sql");
         Statement statement = DatabaseStatementUtil.getStatement();
         for (String sqlStatement : sqlList) {
             statement.execute(sqlStatement);
