@@ -97,7 +97,8 @@ public class AddReminderConfirmFrame {
 
     public Reminder getReminderFromInput() {
         Reminder reminder = new Reminder(itemName.getText());
-        illegalInputJudge();
+        if (!illegalInputJudge())
+            return null;
         Timestamp timestamp = timSelectorComponentController.getTimestamp();
         if (timestamp == null)
             return null;
@@ -107,12 +108,16 @@ public class AddReminderConfirmFrame {
         return reminder;
     }
 
-    private void illegalInputJudge() {
+    private boolean illegalInputJudge() {
         //item judge
         String content = itemName.getText();
-        if (content == null || content.equals(""))
+        if (content == null || content.equals("")) {
             JOptionPane.showMessageDialog(null, "Please input content");
-        else if (content.length() > 30)
+            return false;
+        } else if (content.length() > 30) {
             JOptionPane.showMessageDialog(null, "Please input content less than 30 characters");
+            return false;
+        }
+        return true;
     }
 }
