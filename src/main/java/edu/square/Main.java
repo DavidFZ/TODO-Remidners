@@ -21,7 +21,7 @@ public class Main {
 
         JFrame mainFrame = JFrameFactory.getDefaultJFrame(.8d, "TODO");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
+        mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 
         MyView myView = new MyView(mainFrame, mainFrame.getSize());
         ViewsBarComponent viewsBarComponent = new ViewsBarComponent(myView, resizeDimensionWidthScale(mainFrame.getSize(), 0.1));

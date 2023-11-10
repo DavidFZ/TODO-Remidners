@@ -56,7 +56,7 @@ public class LeftSideComponentView extends MComponent {
     protected void initializeFonts() {
         font1 = getBoldFont(parentDimension, FONT_SIZE_1);
         font2 = getBoldFont(parentDimension, FONT_SIZE_2);
-        font3 = getBoldFont(parentDimension, FONT_SIZE_3);
+        font3 = getBoldFont(parentDimension, FONT_SIZE_4);
     }
 
     @Override

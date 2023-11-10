@@ -2,7 +2,6 @@ package edu.square.views.view1.component;
 
 import edu.square.controller.view1.component.TimSelectorComponentController;
 import edu.square.entity.Reminder;
-import edu.square.model.view1.component.DetailInformationModel;
 import edu.square.model.view1.component.TimeSelectorComponentModel;
 import edu.square.utils.UIUtils.JPanelUtil;
 import edu.square.utils.UIUtils.MComponentTestHelper;
@@ -66,7 +65,7 @@ public class DetailInformationComponentView extends MComponent {
     protected void initializeFonts() {
         font1 = getBoldFont(parentDimension, FONT_SIZE_1);
         font2 = getBoldFont(parentDimension, FONT_SIZE_2);
-        font3 = getBoldFont(parentDimension, FONT_SIZE_3);
+        font3 = getBoldFont(parentDimension, FONT_SIZE_4);
     }
 
     @Override
