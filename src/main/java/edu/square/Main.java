@@ -4,6 +4,8 @@ import edu.square.controller.ViewsBarComponentController;
 import edu.square.controller.view1.ListController;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.ViewsBarComponentView;
+import edu.square.views.view.CalenderView;
+import edu.square.views.view.TomatoTimerView;
 import edu.square.views.view1.view.ListView;
 
 import javax.swing.*;
@@ -26,21 +28,35 @@ public class Main {
 
 
         //list view
-//        ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame, 0.9));
-        ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame, 1));
+        ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame, 0.9));
+//        ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame, 1));
         ListController listController = new ListController(listView);
         JPanel listPanel = listView.getMainPanel();
         listPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
+        //calender view
+        CalenderView calenderView = new CalenderView(mainFrame, resizeDimensionWidthScale(mainFrame, 0.9));
+        JPanel calenderPanel = calenderView.getMainPanel();
+        calenderPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+
+        //TomatoTimer view
+        TomatoTimerView tomatoTimerView = new TomatoTimerView(mainFrame, resizeDimensionWidthScale(mainFrame, 0.9));
+        JPanel tomatoTimerPanel = tomatoTimerView.getMainPanel();
+        tomatoTimerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+
         //bar view
         Dimension barDimension = resizeDimensionWidthScale(mainFrame.getSize(), 0.1);
-        ViewsBarComponentController viewsBarComponentController = new ViewsBarComponentController(mainFrame.getSize(), barDimension, listView);
+        ViewsBarComponentController viewsBarComponentController = new ViewsBarComponentController(mainFrame.getSize(), barDimension, listView,calenderView,tomatoTimerView);
         ViewsBarComponentView viewsBarComponentView = viewsBarComponentController.viewsBarComponentView;
         viewsBarComponentView.getMainPanel().setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
 
-//        mainFrame.add(viewsBarComponentView.getMainPanel());
+        mainFrame.add(viewsBarComponentView.getMainPanel());
         mainFrame.add(listView.getMainPanel());
+        mainFrame.add(calenderView.getMainPanel());
+        calenderPanel.setVisible(false);
+        mainFrame.add(tomatoTimerView.getMainPanel());
+        tomatoTimerPanel.setVisible(false);
 
         mainFrame.setVisible(true);
 

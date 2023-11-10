@@ -20,11 +20,14 @@ public class ViewsBarComponentView {
     private final Font font;
     @Getter
     private JPanel mainPanel;
+    private int viewNum = 1;
 
 
     public ViewsBarComponentView(Dimension rootDimension, Dimension selfDimension, String... viewsTitles) {
         this.parentDimension = rootDimension;
         this.selfDimension = selfDimension;
+        viewNum = viewsTitles.length;
+
         //initializeMainPanel
         mainPanel = new JPanel();
         mainPanel.setPreferredSize(selfDimension);
@@ -40,7 +43,7 @@ public class ViewsBarComponentView {
     }
 
     private void addLabelPanelWidget(String title) {
-        LabelPanelWidget labelPanelWidget = new LabelPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 1.0 / labelPanelWidgets.size()), title);
+        LabelPanelWidget labelPanelWidget = new LabelPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 1.0 / viewNum), title);
 
         labelPanelWidget.getMainPanel().setFont(font);
         labelPanelWidget.getMainPanel().setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
