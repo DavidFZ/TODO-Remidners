@@ -10,7 +10,6 @@ import java.awt.event.MouseEvent;
 import static edu.square.utils.UIUtils.FontUtil.getBoldFont;
 
 public class LabelPanelWidget extends MWidget {
-    private boolean beSelected = false;
     private Font font;
 
     private JLabel label;
@@ -18,14 +17,6 @@ public class LabelPanelWidget extends MWidget {
     public LabelPanelWidget(Dimension parentDimension, Dimension selfDimension, String title) {
         super(parentDimension, selfDimension);
         label.setText(title);
-
-        mainPanel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                setBeSelected();
-            }
-        });
     }
 
     @Override
@@ -47,13 +38,12 @@ public class LabelPanelWidget extends MWidget {
     }
 
     public void setBeSelected() {
-        if (beSelected) {
-            label.setForeground(Color.white);
-            mainPanel.setBackground(Color.black);
-        } else {
-            label.setForeground(Color.black);
-            mainPanel.setBackground(Color.white);
-        }
-        beSelected = !beSelected;
+        label.setForeground(Color.black);
+        mainPanel.setBackground(Color.white);
+    }
+
+    public void setNotSelected() {
+        label.setForeground(Color.white);
+        mainPanel.setBackground(Color.black);
     }
 }

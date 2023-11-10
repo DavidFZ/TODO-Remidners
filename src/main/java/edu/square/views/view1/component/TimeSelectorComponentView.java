@@ -27,7 +27,8 @@ public class TimeSelectorComponentView extends MComponent {
     private ComboBoxPanelWidgetView datesComboBoxPanelWidgetView;
     @Getter
     private ComboBoxPanelWidgetView hoursComboBoxPanelWidgetView;
-    private Font font;
+    private Font font1;
+    private Font font2;
     @Getter
     private JRadioButton flaggedRadio;
 
@@ -60,21 +61,22 @@ public class TimeSelectorComponentView extends MComponent {
 
     @Override
     protected void initializeFonts() {
-        font = FontUtil.getBoldFont(parentDimension, FontUtil.FONT_SIZE_2);
+        font1 = FontUtil.getBoldFont(parentDimension, FontUtil.FONT_SIZE_2);
+        font2 = FontUtil.getBoldFont(parentDimension, FontUtil.FONT_SIZE_3);
     }
 
     @Override
     protected void initializeJComponents() {
         JLabel tipsLabel = new JLabel("Set Reminder Time");
         tipsLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.8, 0.1));
-        tipsLabel.setFont(font);
+        tipsLabel.setFont(font1);
 
         Dimension d = resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.1);
 
-        yearsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(parentDimension, d, "Year", null);
-        monthsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(parentDimension, d, "Month", null);
-        datesComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(parentDimension, d, "Date", null);
-        hoursComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(parentDimension, d, "Hour", null);
+        yearsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(parentDimension, d, "Year", null,font2);
+        monthsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(parentDimension, d, "Month", null,font2);
+        datesComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(parentDimension, d, "Date", null,font2);
+        hoursComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(parentDimension, d, "Hour", null,font2);
 
         flaggedRadio = new JRadioButton("Flagged");
         flaggedRadio.setFont(FontUtil.getBoldFont(parentDimension, FontUtil.FONT_SIZE_2));
