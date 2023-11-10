@@ -58,7 +58,7 @@ public class DetailInformationComponentView extends MComponent {
     @Override
     protected void initializeMainPanel() {
         mainPanel = JPanelUtil.getCenterFlowMainPanel(selfDimension);
-        mainPanel.setBackground(Color.yellow);
+        mainPanel.setBackground(new Color(195,215,223));
     }
 
     @Override
