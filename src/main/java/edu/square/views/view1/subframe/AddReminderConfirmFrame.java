@@ -11,6 +11,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
+import java.util.Calendar;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
@@ -54,6 +55,7 @@ public class AddReminderConfirmFrame {
         datesTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "dates:");
         hoursTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "hours:");
 
+        setTextAsToday();
 
         inputPanel.setBackground(Color.green);
         inputPanel.add(inputLabel);
@@ -84,6 +86,14 @@ public class AddReminderConfirmFrame {
     public static void main(String[] args) {
         AddReminderConfirmFrame addReminderConfirmFrame = new AddReminderConfirmFrame(new Dimension(500, 500));
         addReminderConfirmFrame.mainFrame.setVisible(true);
+    }
+
+    private void setTextAsToday() {
+        Calendar calendar = Calendar.getInstance();
+        yearsTextFieldPanelWidget.setTextField(String.valueOf(calendar.get(Calendar.YEAR)));
+        monthsTextFieldPanelWidget.setTextField(String.valueOf(calendar.get(Calendar.MONTH) + 1));
+        datesTextFieldPanelWidget.setTextField(String.valueOf(calendar.get(Calendar.DATE)));
+        hoursTextFieldPanelWidget.setTextField(String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)));
     }
 
     public String getItemName() {
