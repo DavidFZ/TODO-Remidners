@@ -3,10 +3,9 @@ package edu.square.views.widget;
 import javax.swing.*;
 import java.awt.*;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
 
-public class ComboBoxPanelView extends MWidget {
+public class ComboBoxPanelWidget extends MWidget {
 
     JComboBox<String> jComboBox;
 
@@ -15,7 +14,7 @@ public class ComboBoxPanelView extends MWidget {
     Font font;
     String title;
 
-    public ComboBoxPanelView(Dimension rootFrameDimension, Dimension selfDimension, Font font, String title, String[] options) {
+    public ComboBoxPanelWidget(Dimension rootFrameDimension, Dimension selfDimension, Font font, String title, String[] options) {
         super(rootFrameDimension, selfDimension);
         this.options = options;
         this.font = font;
@@ -53,5 +52,9 @@ public class ComboBoxPanelView extends MWidget {
 
         jComboBox.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.6, 0.8));
         mainPanel.add(jComboBox);
+    }
+
+    public JComboBox<String> getjComboBox() {
+        return jComboBox;
     }
 }
