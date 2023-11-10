@@ -18,26 +18,30 @@ public class ComboBoxPanelWidgetView extends MWidget {
     private JComboBox<String> jComboBox;
     private JLabel titleLabel;
 
-    public ComboBoxPanelWidgetView(Dimension rootFrameDimension, Dimension selfDimension, String title, List<String> options) {
+    public ComboBoxPanelWidgetView(Dimension rootFrameDimension, Dimension selfDimension, String title, List<String> options, Font font) {
         super(rootFrameDimension, selfDimension);
         this.options = options;
         this.title = title;
 
+        titleLabel.setFont(font);
+        jComboBox.setFont(font);
+
+
         updateView();
     }
 
-    public static void main(String[] args) {
-        MWidgetTestHelper mWidgetTestHelper = new MWidgetTestHelper() {
-            @Override
-            public void initializeMWidget() {
-                String[] years = {
-                        "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"
-                };
-                ComboBoxPanelWidgetView comboBoxPanelWidgetView = new ComboBoxPanelWidgetView(jFrame.getSize(), resizeDimensionWidthAndHeight(jFrame.getSize(), 0.4, 0.07), "years:", List.of(years));
-                jFrame.add(comboBoxPanelWidgetView.getMainPanel());
-            }
-        };
-    }
+//    public static void main(String[] args) {
+//        MWidgetTestHelper mWidgetTestHelper = new MWidgetTestHelper() {
+//            @Override
+//            public void initializeMWidget() {
+//                String[] years = {
+//                        "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"
+//                };
+//                ComboBoxPanelWidgetView comboBoxPanelWidgetView = new ComboBoxPanelWidgetView(jFrame.getSize(), resizeDimensionWidthAndHeight(jFrame.getSize(), 0.4, 0.07), "years:", List.of(years));
+//                jFrame.add(comboBoxPanelWidgetView.getMainPanel());
+//            }
+//        };
+//    }
 
     @Override
     protected void initializeMainPanel() {
@@ -46,20 +50,20 @@ public class ComboBoxPanelWidgetView extends MWidget {
 
     @Override
     protected void initializeFonts() {
-        font = FontUtil.getBoldFont(selfDimension, 0.1);
+        font = FontUtil.getBoldFont(selfDimension, 0.08);
     }
 
     @Override
     protected void initializeJComponents() {
         //initialize title label
         titleLabel = new JLabel();
-        titleLabel.setFont(font);
+//        titleLabel.setFont(font);
         titleLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.3, 0.8));
         mainPanel.add(titleLabel);
 
         //initialize jComboBox
         jComboBox = new JComboBox<String>();
-        jComboBox.setFont(font);
+//        jComboBox.setFont(font);
         jComboBox.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.6, 0.8));
         mainPanel.add(jComboBox);
     }

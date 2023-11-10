@@ -22,7 +22,7 @@ public class Main {
         //main frame
         JFrame mainFrame = JFrameFactory.getDefaultJFrame(.8d, "TODO");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
+        mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
 
         //bar view
         ViewsBarComponentView viewsBarComponentView = new ViewsBarComponentView(mainFrame.getSize(), resizeDimensionWidthScale(mainFrame.getSize(), 0.1));
