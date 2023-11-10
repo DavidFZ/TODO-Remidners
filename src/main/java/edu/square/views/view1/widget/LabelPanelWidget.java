@@ -5,7 +5,6 @@ import edu.square.views.widget.MWidget;
 import javax.swing.*;
 import java.awt.*;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.FontUtil.*;
 
 public class LabelPanelWidget extends MWidget {

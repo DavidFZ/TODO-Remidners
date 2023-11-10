@@ -29,7 +29,6 @@ public class Main {
 
 //        ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame,0.9));
 //        ListController listController = new ListController(listView);
-//
 //        mainFrame.add(listView.getMainPanel());
         mainFrame.setVisible(true);
     }
