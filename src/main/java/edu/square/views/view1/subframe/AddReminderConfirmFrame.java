@@ -72,10 +72,10 @@ public class AddReminderConfirmFrame {
         tipsLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.8, 0.05));
 
 
-        yearsComboBoxPanelWidget = new ComboBoxPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.05), font2, "years:", years);
-        monthsComboBoxPanelWidget = new ComboBoxPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.05), font2, "months:", months);
-        datesComboBoxPanelWidget = new ComboBoxPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.05), font2, "days:", days);
-        hoursComboBoxPanelWidget = new ComboBoxPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.05), font2, "hours:", hours);
+        yearsComboBoxPanelWidget = new ComboBoxPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), font2, "years:", years);
+        monthsComboBoxPanelWidget = new ComboBoxPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), font2, "months:", months);
+        datesComboBoxPanelWidget = new ComboBoxPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), font2, "days:", days);
+        hoursComboBoxPanelWidget = new ComboBoxPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), font2, "hours:", hours);
         BlockPanelWidget blockPanelWidget = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.05));
 
 //        yearsTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "years:");
