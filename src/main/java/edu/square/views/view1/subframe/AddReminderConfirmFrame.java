@@ -1,6 +1,7 @@
 package edu.square.views.view1.subframe;
 
 import edu.square.entity.Reminder;
+import edu.square.model.view1.subframe.AddReminderConfirmFrameModel;
 import edu.square.utils.TimeUtils;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JFrameFactory;
@@ -27,35 +28,16 @@ public class AddReminderConfirmFrame {
     private final ComboBoxPanelWidgetView monthsComboBoxPanelWidgetView;
     private final ComboBoxPanelWidgetView datesComboBoxPanelWidgetView;
     private final ComboBoxPanelWidgetView hoursComboBoxPanelWidgetView;
-    String[] years = {
-            "2023", "2024", "2025", "2026", "2027", "2028", "2029", "2030"
-    };
-    String[] months = {
-            "1", "2", "3", "4",
-            "5", "6", "7", "8",
-            "9", "10", "11", "12"
-    };
-    String[] hours = {
-            "1", "2", "3", "4",
-            "5", "6", "7", "8",
-            "9", "10", "11", "12",
-            "13", "14", "15", "16",
-            "17", "18", "19", "20",
-            "21", "22", "23", "24"
-    };
-    String[] days = {
-            "1", "2", "3", "4",
-            "5", "6", "7", "8",
-            "9", "10", "11", "12",
-            "13", "14", "15", "16",
-            "17", "18", "19", "20",
-            "21", "22", "23", "24",
-            "25", "26", "27", "28",
-            "29", "30", "31",
-    };
+
+    private final List<String> YEARS = AddReminderConfirmFrameModel.getFutureYears(5);
+    private final List<String> MONTHS = AddReminderConfirmFrameModel.getMonths();
+    private final List<String> HOURS = AddReminderConfirmFrameModel.getHours();
+    List<String> days;
     private JRadioButton emergentRadio;
 
     public AddReminderConfirmFrame(Dimension selfDimension) {
+        days = AddReminderConfirmFrameModel.getDaysInThisMonth();
+
         Font font1 = FontUtil.getBoldFont(selfDimension, 0.05);
 
         mainFrame = JFrameFactory.buildJFrame(selfDimension, "Please add Reminder");
@@ -79,10 +61,10 @@ public class AddReminderConfirmFrame {
         tipsLabel.setFont(FontUtil.getBoldFont(selfDimension, FontUtil.FONT_SIZE_1));
 
 
-        yearsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "year:", List.of(years));
-        monthsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "month:", List.of(months));
-        datesComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "day:", List.of(days));
-        hoursComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "hour:", List.of(hours));
+        yearsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "year:", YEARS);
+        monthsComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "month:", MONTHS);
+        datesComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "day:", days);
+        hoursComboBoxPanelWidgetView = new ComboBoxPanelWidgetView(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.4, 0.07), "hour:", HOURS);
         BlockPanelWidget blockPanelWidget = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.05));
 
         flagRadio = new JRadioButton("Flagged");
@@ -113,6 +95,13 @@ public class AddReminderConfirmFrame {
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
         setTextAsToday();
+
+        monthsComboBoxPanelWidgetView.getjComboBox().addActionListener(e -> {
+            int year = Integer.parseInt((String) yearsComboBoxPanelWidgetView.getjComboBox().getSelectedItem());
+            int month = Integer.parseInt((String) monthsComboBoxPanelWidgetView.getjComboBox().getSelectedItem());
+            days = AddReminderConfirmFrameModel.getDaysInMonth(year, month);
+            datesComboBoxPanelWidgetView.updateOptionsView(days);
+        });
     }
 
     public static void main(String[] args) {

@@ -74,6 +74,7 @@ public class ComboBoxPanelWidgetView extends MWidget {
     public void updateOptionsView(List<String> options) {
         assert options != null && options.size() > 0;
         this.options = options;
+        jComboBox.removeAllItems();
 
         for (String option : options) {
             jComboBox.addItem(option);

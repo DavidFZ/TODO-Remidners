@@ -24,8 +24,13 @@ public class AddReminderConfirmFrameModel {
         return convertIntToStringListStepOne(1, daysInMonth);
     }
 
+    public static List<String> getDaysInThisMonth() {
+        Calendar calendar = Calendar.getInstance();
+        return getDaysInMonth(calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH) + 1);
+    }
 
-    private static List<String> getHours() {
+
+    public static List<String> getHours() {
         return convertIntToStringListStepOne(0, 23);
     }
 
