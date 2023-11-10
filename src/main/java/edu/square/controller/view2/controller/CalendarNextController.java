@@ -1,7 +1,7 @@
 package edu.square.controller.view2.controller;
 
-import edu.square.views.view2.view.CalenderPanelWidget;
-import edu.square.views.view2.view.MonthPanel;
+import edu.square.views.view2.CalenderPanelWidget;
+import edu.square.views.view2.MonthPanel;
 
 import java.util.Calendar;
 
