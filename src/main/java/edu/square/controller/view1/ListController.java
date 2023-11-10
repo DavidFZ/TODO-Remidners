@@ -79,6 +79,7 @@ public class ListController {
                     //update groupedListComponentModel
                     List<Reminder> reminderList = listModel.leftSideComponentModel.getGroupModels().get(finalI).getReminderModels();
                     listModel.groupedListComponentModel.setList(reminderList);
+                    listModel.groupedListComponentModel.setGroupIndex(finalI);
                     //set invisible for add button in COMPLETED & FLAGGED group
                     listView.groupedListComponentView.setAddButtonVisibility(finalI < 2);
 
