@@ -1,6 +1,6 @@
-package edu.square.views.view2.controller;
+package edu.square.controller.view2.controller;
 
-import edu.square.views.view2.view.CalendarFrame;
+import edu.square.views.view2.view.CalendarPanel;
 import edu.square.views.view2.view.MonthPanel;
 
 import java.awt.event.MouseAdapter;
@@ -8,8 +8,8 @@ import java.awt.event.MouseEvent;
 import java.util.Calendar;
 
 public class CalendarLastController {
-    private final CalendarFrame c;
-    public CalendarLastController(CalendarFrame c){
+    private final CalendarPanel c;
+    public CalendarLastController(CalendarPanel c){
         this.c = c;
         initialize();
     }

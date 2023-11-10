@@ -1,13 +1,13 @@
-package edu.square.views.view2.controller;
+package edu.square.controller.view2.controller;
 
-import edu.square.views.view2.view.CalendarFrame;
+import edu.square.views.view2.view.CalendarPanel;
 import edu.square.views.view2.view.MonthPanel;
 
 import java.util.Calendar;
 
 public class CalendarNextController {
-    private final CalendarFrame c;
-    public CalendarNextController(CalendarFrame c){
+    private final CalendarPanel c;
+    public CalendarNextController(CalendarPanel c){
         this.c = c;
         initialize();
     }
