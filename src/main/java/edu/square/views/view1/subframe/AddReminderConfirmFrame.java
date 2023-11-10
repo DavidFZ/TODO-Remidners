@@ -148,6 +148,12 @@ public class AddReminderConfirmFrame {
         if (timestamp == null) {
             JOptionPane.showMessageDialog(null, "Please input correct time");
         }
+
+        //time should be later than now
+        if (timestamp.before(TimeUtils.getCurrentTimestamp())) {
+            JOptionPane.showMessageDialog(null, "Please input time later than now");
+            return null;
+        }
         return timestamp;
     }
 }

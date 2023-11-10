@@ -93,6 +93,8 @@ public class GroupedListComponentController extends MController {
 
             //get data from sub frame
             Reminder reminder = groupedListComponentView.getReminderFromSubFrame();
+            if (reminder == null)
+                return;
             //update model
             ((GroupedListComponentModel) mModel).addReminder(reminder);
 
