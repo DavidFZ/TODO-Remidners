@@ -22,24 +22,24 @@ public class Main {
         //main frame
         JFrame mainFrame = JFrameFactory.getDefaultJFrame(.8d, "TODO");
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT,0,0));
+        mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
-        //bar view
-        ViewsBarComponentView viewsBarComponentView = new ViewsBarComponentView(mainFrame.getSize(), resizeDimensionWidthScale(mainFrame.getSize(), 0.1));
-        viewsBarComponentView.getMainPanel().setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        mainFrame.add(viewsBarComponentView.getMainPanel());
 
         //list view
         ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame, 0.9));
         ListController listController = new ListController(listView);
         JPanel listPanel = listView.getMainPanel();
         listPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        mainFrame.add(listView.getMainPanel());
 
-
-
+        //bar view
         Dimension barDimension = resizeDimensionWidthScale(mainFrame.getSize(), 0.1);
         ViewsBarComponentController viewsBarComponentController = new ViewsBarComponentController(mainFrame.getSize(), barDimension, listView);
+        ViewsBarComponentView viewsBarComponentView = viewsBarComponentController.viewsBarComponentView;
+        viewsBarComponentView.getMainPanel().setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
+
+
+        mainFrame.add(viewsBarComponentView.getMainPanel());
+        mainFrame.add(listView.getMainPanel());
 
         mainFrame.setVisible(true);
 

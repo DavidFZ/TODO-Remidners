@@ -12,6 +12,7 @@ import java.util.List;
 
 public class ViewsBarComponentController {
     private static final String[] viewsTitles = {"TODO", "Calender", "TomatoTimer"};
+//    private static final String[] viewsTitles = {"TODO"};
     private final List<MyView> viewList;
     public ViewsBarComponentView viewsBarComponentView;
     private int selectedViewIndex = 0;
