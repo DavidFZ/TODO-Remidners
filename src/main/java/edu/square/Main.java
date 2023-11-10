@@ -26,7 +26,8 @@ public class Main {
 
 
         //list view
-        ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame, 0.9));
+//        ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame, 0.9));
+        ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame, 1));
         ListController listController = new ListController(listView);
         JPanel listPanel = listView.getMainPanel();
         listPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
@@ -38,7 +39,7 @@ public class Main {
         viewsBarComponentView.getMainPanel().setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
 
-        mainFrame.add(viewsBarComponentView.getMainPanel());
+//        mainFrame.add(viewsBarComponentView.getMainPanel());
         mainFrame.add(listView.getMainPanel());
 
         mainFrame.setVisible(true);
