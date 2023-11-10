@@ -25,11 +25,11 @@ public class Main {
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
         MyView myView = new MyView(mainFrame, mainFrame.getSize());
-        ViewsBarComponent viewsBarComponent = new ViewsBarComponent(myView, resizeDimensionWidthScale(mainFrame.getSize(), 0.1));
+        ViewsBarComponent viewsBarComponent = new ViewsBarComponent(myView, resizeDimensionWidthScale(mainFrame.getSize(), 0.18));
 
-//        ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame,0.9));
+//        ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame,0.8));
 //        ListController listController = new ListController(listView);
 //        mainFrame.add(listView.getMainPanel());
-        mainFrame.setVisible(true);
+//        mainFrame.setVisible(true);
     }
 }
