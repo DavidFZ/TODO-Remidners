@@ -1,15 +1,16 @@
 package edu.square.views.view1.subframe;
 
+import edu.square.entity.Reminder;
+import edu.square.utils.TimeUtils;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JFrameFactory;
-import edu.square.utils.UIUtils.JPanelUtil;
 import edu.square.views.view1.widget.BlockPanelWidget;
 import edu.square.views.view1.widget.TextFieldPanelWidget;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.Map;
+import java.sql.Timestamp;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
@@ -18,8 +19,12 @@ public class AddReminderConfirmFrame {
     private final JFrame mainFrame;
     private final JTextField itemName;
     private final JButton confirmButton;
-    private JRadioButton flagRadio;
-    private JRadioButton importRadio;
+    private final JRadioButton flagRadio;
+    private final TextFieldPanelWidget yearsTextFieldPanelWidget;
+    private final TextFieldPanelWidget monthsTextFieldPanelWidget;
+    private final TextFieldPanelWidget datesTextFieldPanelWidget;
+    private final TextFieldPanelWidget hoursTextFieldPanelWidget;
+    private JRadioButton emergentRadio;
 
     public AddReminderConfirmFrame(Dimension selfDimension) {
         Font font = FontUtil.getBoldFont(selfDimension, 0.05);
@@ -33,20 +38,21 @@ public class AddReminderConfirmFrame {
         //inputPanel
         JLabel inputLabel = new JLabel("Reminder Content:");
         inputLabel.setFont(font);
-        JLabel tipsLabel = new JLabel("Deadline:");
-        tipsLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension,0.8,0.05));
+        JLabel tipsLabel = new JLabel("Reminder Time (number):");
+        tipsLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.8, 0.05));
         inputLabel.setFont(font);
         itemName = new JTextField(30);
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
-        flagRadio = new JRadioButton("flagged");
+        flagRadio = new JRadioButton("Flagged");
         JPanel detailMessagePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
         detailMessagePanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension.getSize(), 0.8, 0.1));
         detailMessagePanel.add(flagRadio);
-        TextFieldPanelWidget yearsTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension,resizeDimensionWidthAndHeight(selfDimension,0.45,0.05),"years:");
-        TextFieldPanelWidget monthsTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension,resizeDimensionWidthAndHeight(selfDimension,0.45,0.05),"months:");
-        TextFieldPanelWidget datesTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension,resizeDimensionWidthAndHeight(selfDimension,0.45,0.05),"dates:");
-        TextFieldPanelWidget hoursTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension,resizeDimensionWidthAndHeight(selfDimension,0.45,0.05),"hours:");
+
+        yearsTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "years:");
+        monthsTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "months:");
+        datesTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "dates:");
+        hoursTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "hours:");
 
 
         inputPanel.setBackground(Color.green);
@@ -98,5 +104,40 @@ public class AddReminderConfirmFrame {
 
     public boolean isFlagged() {
         return flagRadio.isSelected();
+    }
+
+    public Reminder getReminderFromInput() {
+        Reminder reminder = new Reminder(itemName.getText());
+        Timestamp timestamp = illegalInputJudge();
+        if (timestamp == null)
+            return null;
+
+        reminder.setRemindTime(timestamp);
+        reminder.setIsImportant(isFlagged());
+        return reminder;
+    }
+
+    private Timestamp illegalInputJudge() {
+        //item judge
+        String content = itemName.getText();
+        if (content == null || content.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please input content");
+            return null;
+        } else if (content.length() > 30) {
+            JOptionPane.showMessageDialog(null, "Please input content less than 30 characters");
+            return null;
+        }
+
+        //time judge
+        String years = yearsTextFieldPanelWidget.getTextField().getText();
+        String months = monthsTextFieldPanelWidget.getTextField().getText();
+        String dates = datesTextFieldPanelWidget.getTextField().getText();
+        String hours = hoursTextFieldPanelWidget.getTextField().getText();
+
+        Timestamp timestamp = TimeUtils.convertToTimestamp(years, months, dates, hours);
+        if (timestamp == null) {
+            JOptionPane.showMessageDialog(null, "Please input correct time");
+        }
+        return timestamp;
     }
 }

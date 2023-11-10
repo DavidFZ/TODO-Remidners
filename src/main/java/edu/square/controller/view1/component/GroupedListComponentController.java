@@ -92,12 +92,7 @@ public class GroupedListComponentController extends MController {
             /* Model Layer */
 
             //get data from sub frame
-            String content = groupedListComponentView.getReminderContent();
-            if (content == null || content.equals("")) {
-                JOptionPane.showMessageDialog(null, "Please input content");
-                return;
-            }
-            Reminder reminder = new Reminder(content);
+            Reminder reminder = groupedListComponentView.getReminderFromSubFrame();
             //update model
             ((GroupedListComponentModel) mModel).addReminder(reminder);
 

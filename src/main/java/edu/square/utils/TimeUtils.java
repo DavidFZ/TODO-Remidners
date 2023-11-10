@@ -125,14 +125,20 @@ public class TimeUtils {
         return new Timestamp(currentTIme);
     }
 
-    public static Timestamp convertToTimestamp(String year, String month, String day, String hour) throws ParseException {
+    public static Timestamp convertToTimestamp(String year, String month, String day, String hour) {
         StringHourTime stringHourTime = new StringHourTime(year, month, day, hour);
         if (!stringHourTime.stringLegalJudge())
             return null;
         //将数组转化为Timestamp
         String yearMonthDayHour = stringHourTime.yearMonthDayHour[0] + "-" + stringHourTime.yearMonthDayHour[1] + "-" + stringHourTime.yearMonthDayHour[2] + " " + stringHourTime.yearMonthDayHour[3] + ":00:00";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date date = simpleDateFormat.parse(yearMonthDayHour);
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(yearMonthDayHour);
+        } catch (ParseException e) {
+            e.printStackTrace();
+            return null;
+        }
 
         return new Timestamp(date.getTime());
     }

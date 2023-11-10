@@ -12,7 +12,6 @@ import org.hibernate.Session;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 import static edu.square.utils.DBUtils.hibernate.CriteriaQueryUtil.getCriteriaQuery;
 import static edu.square.utils.DBUtils.hibernate.SessionFactoryUtil.getSession;
@@ -229,21 +228,10 @@ public class ReminderModel {
         updateReminder(reminder);
     }
 
-    public static Reminder insertReminder(String content) {
-        Session s = getSession();
-
-        Reminder reminder = new Reminder(content);
-        reminder.setRemindTime(getTimeStamp());
-
-        s.merge(reminder);
-        s.beginTransaction().commit();
-        return reminder;
-    }
-
     public static Reminder insertReminder(Reminder reminder) {
         Session s = getSession();
 
-        reminder.setRemindTime(getTimeStamp());
+        reminder.setRemindTime(reminder.getRemindTime() == null ? getTimeStamp() : reminder.getRemindTime());
 
         s.merge(reminder);
         s.beginTransaction().commit();

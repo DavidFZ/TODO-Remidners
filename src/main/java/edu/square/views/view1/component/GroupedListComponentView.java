@@ -128,4 +128,8 @@ public class GroupedListComponentView extends MComponent {
     public List<ReminderListWidgetView.ReminderView> getReminderViews() {
         return reminderListWidgetView.getReminderViews();
     }
+
+    public Reminder getReminderFromSubFrame() {
+        return addReminderConfirmFrame.getReminderFromInput();
+    }
 }
