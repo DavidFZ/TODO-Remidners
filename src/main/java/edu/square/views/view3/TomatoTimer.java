@@ -30,7 +30,7 @@ public class TomatoTimer extends MComponent {
     private JButton stopButton;
     private JButton resetButton;
 
-    public TomatoTimer(MyView myView, Dimension selfDimension) {
+    public TomatoTimer(Dimension selfDimension, MyView myView) {
         super(myView, selfDimension);
     }
 
@@ -212,7 +212,7 @@ public class TomatoTimer extends MComponent {
     public static void main(String[] args) {
         JFrame mainFrame = JFrameFactory.getDefaultJFrame(.8d, "Schedule");
         MyView myView = new MyView(mainFrame, mainFrame.getSize());
-        TomatoTimer tomatoTimer = new TomatoTimer(myView, resizeDimensionHeightScale(mainFrame.getSize(), 0.9));
+        TomatoTimer tomatoTimer = new TomatoTimer(resizeDimensionHeightScale(mainFrame.getSize(), 0.9), myView);
         mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.add(tomatoTimer.getTomatoTimerJPanel());
