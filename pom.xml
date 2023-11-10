@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>edu.square</groupId>
-    <artifactId>DEMO</artifactId>
+    <artifactId>TODO_REMINDER</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -124,6 +124,12 @@
                     <include>**/*.xml</include>
                     <include>**/*.properties</include>
                     <include>**/*.sql</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>derbyDB</directory>
+                <includes>
+                    <include>**</include>
                 </includes>
             </resource>
         </resources>

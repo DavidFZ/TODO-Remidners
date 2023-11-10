@@ -18,7 +18,7 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthS
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        if (!isDirExist("derbyDB"))
+        if (!isDirExist("./derbyDB"))
             forcedInitDB();
 
         //main frame
@@ -52,11 +52,8 @@ public class Main {
 
 
         mainFrame.add(viewsBarComponentView.getMainPanel());
-        mainFrame.add(listView.getMainPanel());
-        mainFrame.add(calenderView.getMainPanel());
-        calenderPanel.setVisible(false);
-        mainFrame.add(tomatoTimerView.getMainPanel());
-        tomatoTimerPanel.setVisible(false);
+        mainFrame.add(viewsBarComponentController.getCardPanel());
+
 
         mainFrame.setVisible(true);
 
