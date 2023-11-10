@@ -38,12 +38,12 @@ public class LabelPanelWidget extends MWidget {
     }
 
     public void setBeSelected() {
-        label.setForeground(Color.black);
-        mainPanel.setBackground(Color.white);
+        label.setForeground(new Color(81,196,211));
+        mainPanel.setBackground(new Color(216,227,231));
     }
 
     public void setNotSelected() {
-        label.setForeground(Color.white);
-        mainPanel.setBackground(Color.black);
+        label.setForeground(new Color(198,230,232));
+        mainPanel.setBackground(new Color(198,230,232));
     }
 }
