@@ -63,11 +63,11 @@ public class TimSelectorComponentController extends MController {
             JOptionPane.showMessageDialog(null, "Please input correct time");
         }
 
-        //time should be later than now
-        if (timestamp.before(TimeUtils.getOneHourFormerTimestamp())) {
-            JOptionPane.showMessageDialog(null, "Please input time later than now");
-            return null;
-        }
+//        //time should be later than now
+//        if (timestamp.before(TimeUtils.getOneHourFormerTimestamp())) {
+//            JOptionPane.showMessageDialog(null, "Please input time later than now");
+//            return null;
+//        }
         return timestamp;
     }
 }

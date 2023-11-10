@@ -1,5 +1,6 @@
 package edu.square.views.view1.component;
 
+import edu.square.entity.Reminder;
 import edu.square.model.view1.component.TimeSelectorComponentModel;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JPanelUtil;
@@ -11,6 +12,7 @@ import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.Timestamp;
 import java.util.Calendar;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
@@ -107,11 +109,23 @@ public class TimeSelectorComponentView extends MComponent {
         hoursComboBoxPanelWidgetView.updateOptionsView(TimeSelectorComponentModel.getHours());
     }
 
-    private void setSelectedDefaultItem(int y, int m, int d, int h) {
+    public void setSelectedItem(int y, int m, int d, int h) {
         yearsComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(y));
         monthsComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(m));
         datesComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(d));
         hoursComboBoxPanelWidgetView.getjComboBox().setSelectedItem(String.valueOf(h));
+    }
+
+    public void setSelectedItem(Reminder reminder) {
+        assert reminder != null && reminder.getRemindTime() != null;
+        Timestamp timestamp = reminder.getRemindTime();
+
+        int year = timestamp.getYear() + 1900;
+        int month = timestamp.getMonth() + 1;
+        int date = timestamp.getDate();
+        int hour = timestamp.getHours();
+
+        setSelectedItem(year, month, date, hour);
     }
 
     private void setSelectedDefaultItem() {
@@ -121,7 +135,7 @@ public class TimeSelectorComponentView extends MComponent {
         int date = calendar.get(Calendar.DATE);
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
 
-        setSelectedDefaultItem(year, month, date, hour);
+        setSelectedItem(year, month, date, hour);
     }
 
 

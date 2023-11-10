@@ -180,6 +180,7 @@ public class ListController {
                 listModel.updateModelGlobally();
 
                 //View
+                leftSideComponentController.updateGroupCounterByModel();
                 groupedListComponentController.updateListViewByModel();
 
                 //Controller

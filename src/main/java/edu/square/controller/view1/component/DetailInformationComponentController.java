@@ -6,6 +6,7 @@ import edu.square.model.component.MModel;
 import edu.square.model.view1.component.DetailInformationModel;
 import edu.square.views.component.MComponent;
 import edu.square.views.view1.component.DetailInformationComponentView;
+import edu.square.views.view1.component.TimeSelectorComponentView;
 
 import java.awt.event.ActionListener;
 
@@ -77,6 +78,10 @@ public class DetailInformationComponentController extends MController {
 
     public void setVisibleByModel() {
         setVisible(detailInformationModel.getReminder());
+
+        TimeSelectorComponentView timeSelectorComponentView = detailInformationComponentView.timeSelectorComponentView;
+        timeSelectorComponentView.setSelectedItem(detailInformationModel.getReminder());
+        timeSelectorComponentView.getFlaggedRadio().setSelected(detailInformationModel.getReminder().getIsImportant());
     }
 
 
@@ -94,7 +99,11 @@ public class DetailInformationComponentController extends MController {
             //model layer
             detailInformationModel.getReminder().setContent(detailInformationComponentView.getContentTextField());
             detailInformationModel.getReminder().setNote(detailInformationComponentView.getNoteTextField());
-            detailInformationModel.updateReminder(detailInformationModel.getReminder());
+            Reminder reminder = detailInformationModel.getReminder();
+            //sub component
+            reminder.setRemindTime(detailInformationComponentView.timSelectorComponentController.getTimestamp());
+            reminder.setIsImportant(detailInformationComponentView.timeSelectorComponentView.getFlaggedRadio().isSelected());
+            detailInformationModel.updateReminder(reminder);
         });
     }
 

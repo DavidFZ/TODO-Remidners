@@ -48,10 +48,6 @@ public class AddReminderConfirmFrame {
 
         BlockPanelWidget blockPanelWidget0 = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.1));
 
-        JLabel tipsLabel = new JLabel("Set Reminder Time");
-        tipsLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.8, 0.1));
-        tipsLabel.setFont(font);
-
         BlockPanelWidget blockPanelWidget = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.05));
 
         timeSelectorComponentView = new TimeSelectorComponentView(selfDimension, resizeDimensionHeightScale(selfDimension, 0.5));
