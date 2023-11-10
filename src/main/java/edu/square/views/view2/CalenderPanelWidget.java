@@ -1,5 +1,6 @@
 package edu.square.views.view2;
 
+import edu.square.utils.ColorUtil;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.views.widget.MWidget;
 
@@ -43,7 +44,7 @@ public class CalenderPanelWidget extends MWidget {
         JLabel titleLabel = new JLabel("Calender");
         titleLabel.setFont(font1);
         titlePanel.add(titleLabel);
-        titlePanel.setBackground(Color.black);
+        titlePanel.setBackground(ColorUtil.getColor1());
         mainPanel.add(titlePanel);
 
         //last month and next month
