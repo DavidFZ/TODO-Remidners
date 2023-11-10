@@ -181,6 +181,10 @@ public class ListController {
 
                 //View
                 groupedListComponentController.updateListViewByModel();
+
+                //Controller
+                addListenersOnDoneStatusButtons();
+                addListenerOnReminderViews();
             }
         });
     }
