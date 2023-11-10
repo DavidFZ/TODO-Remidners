@@ -78,7 +78,8 @@ public class DetailInformationComponentController extends MController {
 
         TimeSelectorComponentView timeSelectorComponentView = detailInformationComponentView.timeSelectorComponentView;
         timeSelectorComponentView.setSelectedItem(detailInformationModel.getReminder());
-        timeSelectorComponentView.getFlaggedRadio().setSelected(detailInformationModel.getReminder().getIsImportant());
+        Boolean isImportant = detailInformationModel.getReminder().getIsImportant();
+        timeSelectorComponentView.getFlaggedRadio().setSelected(isImportant != null && isImportant);
     }
 
 
@@ -123,7 +124,7 @@ public class DetailInformationComponentController extends MController {
         bindListenerOnSaveButton();
     }
 
-    public void  addListenerOnRestButton(ActionListener actionListener){
+    public void addListenerOnRestButton(ActionListener actionListener) {
         DetailInformationComponentView detailInformationComponentView = (DetailInformationComponentView) mComponentView;
         detailInformationComponentView.getResetButton().addActionListener(actionListener);
         bindListenerOnResetButton();

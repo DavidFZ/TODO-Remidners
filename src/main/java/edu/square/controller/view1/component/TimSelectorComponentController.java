@@ -27,7 +27,6 @@ public class TimSelectorComponentController extends MController {
         timeSelectorComponentView.getMonthsComboBoxPanelWidgetView().getjComboBox().addActionListener(e -> {
             int year = Integer.parseInt((String) timeSelectorComponentView.getYearsComboBoxPanelWidgetView().getjComboBox().getSelectedItem());
             int month = Integer.parseInt((String) timeSelectorComponentView.getMonthsComboBoxPanelWidgetView().getjComboBox().getSelectedItem());
-            System.out.println(year + " " + month + "\n\n\n\n");
             timeSelectorComponentModel.days = TimeSelectorComponentModel.getDaysInMonth(year, month);
             timeSelectorComponentView.getDatesComboBoxPanelWidgetView().updateOptionsView(timeSelectorComponentModel.days);
         });
