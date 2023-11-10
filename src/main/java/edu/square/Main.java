@@ -1,7 +1,6 @@
 package edu.square;
 
-import edu.square.views.view.View1;
-
+import javax.swing.text.View;
 import java.sql.SQLException;
 
 import static edu.square.utils.DBUtils.jdbc.DatabaseStatusUtil.forcedInitDB;
@@ -12,8 +11,6 @@ public class Main {
         if (!isDirExist("derbyDB"))
             forcedInitDB();
 
-
-        View1 view1 = new View1();
 
     }
 }

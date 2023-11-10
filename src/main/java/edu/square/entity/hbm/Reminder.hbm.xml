@@ -6,7 +6,6 @@
 
         <id name="uuid" type="string">
             <column name="uuid" length="36"/>
-            <generator class="assigned"/>
         </id>
 
         <property name="content" type="string"/>
@@ -37,6 +36,14 @@
 
         <property name="isImportant" type="boolean">
             <column name="is_important"/>
+        </property>
+
+        <property name="isDeleted" type="boolean">
+            <column name="is_deleted"/>
+        </property>
+
+        <property name="note" type="string">
+            <column name="note"/>
         </property>
     </class>
 </hibernate-mapping>

@@ -22,16 +22,4 @@ public class SessionFactoryUtil {
     public static Session getSession() {
         return sessionFactory.openSession();
     }
-
-
-
-    public static void main(String[] args) {
-        Session s = getSession();
-
-        Reminder reminder = new Reminder("test sessionFactoryUtil");
-        reminder.setRemindTime(getTimeStamp());
-
-        s.merge(reminder);
-        s.beginTransaction().commit();
-    }
 }

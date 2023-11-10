@@ -3,8 +3,6 @@ package edu.square.utils.UIUtils;
 import javax.swing.*;
 import java.awt.*;
 
-import edu.square.utils.UIUtils.JFrameAttribute;
-
 import static edu.square.utils.UIUtils.JFrameAttribute.getDefaultAttribute;
 
 public class JFrameFactory {
@@ -58,14 +56,18 @@ public class JFrameFactory {
         return buildJFrameWithLayout(getDefaultAttribute(percent, title), layoutManager);
     }
 
-
-    public static void main(String[] args) {
-        // test cases
-        JFrame frame = getDefaultJFrame(.7d,null);
-        frame = getDefaultJFrame(.7d,"test");
-        frame = buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowWidth(200).setWindowHeight(100).build());
-        frame = getDefaultJFrameWithLayout(.7d,"test",new BorderLayout());
-
-        frame.setVisible(true);
+    public static JFrame buildJFrame(Dimension dimension, String title) {
+        JFrame jFrame = new JFrame(title);
+        jFrame.setSize(dimension);
+        return jFrame;
     }
+//    public static void main(String[] args) {
+//        // test cases
+//        JFrame frame = getDefaultJFrame(.7d, null);
+//        frame = getDefaultJFrame(.7d, "test");
+//        frame = buildJFrame(JFrameAttribute.getAttributeBuilder().setWindowWidth(200).setWindowHeight(100).build());
+//        frame = getDefaultJFrameWithLayout(.7d, "test", new BorderLayout());
+//
+//        frame.setVisible(true);
+//    }
 }

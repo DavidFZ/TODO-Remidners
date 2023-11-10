@@ -3,7 +3,6 @@ package edu.square.utils.UIUtils;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
 import java.util.List;
 
 public class ComponentResizeUtil {
@@ -20,51 +19,6 @@ public class ComponentResizeUtil {
         };
     }
 
-    public static Font getFontResizeUtil(JFrame parentFrame, double factor) {
-        int newFontSize = Math.max(10, (int) (parentFrame.getWidth() * factor));
-        // Adjust the factor as needed
-        Font currentFont = parentFrame.getFont();
-        Font newFont = currentFont.deriveFont((float) newFontSize);
-        return newFont;
-    }
-
-    /**
-     * Get Uniform Scaling Component Adapter
-     * Keep the aspect ratio of the component while resizing
-     *
-     * @param formerDimension former dimension
-     * @return ComponentAdapter
-     */
-    public static ComponentAdapter getSelfAspectMaintainer(Dimension formerDimension) {
-        return new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                Dimension newDimension = e.getComponent().getSize();
-                e.getComponent().setSize(maintainsFormerAspectRatio(formerDimension, newDimension));
-            }
-        };
-    }
-
-    /**
-     * Get the component adapter for uniform scaling, which is used to resize the component while frame size changes
-     * Injected into the component to be resized
-     *
-     * @param componentList List of components to be resized
-     * @return ComponentAdapter
-     */
-    public static ComponentAdapter getUniformScalingComponentAdapter(List<Component> componentList, double ratio) {
-        assert componentList != null;
-        return new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                if (componentList.isEmpty()) return;
-                for (Component c : componentList) {
-                    recursionResize(componentList, ratio);
-                }
-            }
-        };
-    }
-
     /**
      * Calculate the scale ratio of the dimension
      *
@@ -75,9 +29,6 @@ public class ComponentResizeUtil {
         return (double) dimension.width / dimension.height;
     }
 
-    public static double calculateWidthScaledRatio(double formerWidth, double newWidth) {
-        return (double) newWidth / formerWidth;
-    }
 
     /**
      * Get the component adapter for uniform scaling, which is used to resize the component while frame size changess
@@ -147,5 +98,11 @@ public class ComponentResizeUtil {
         }
     }
 
+    public static Dimension addDimensionHeight(Dimension dimension, int height) {
+        return new Dimension(dimension.width, dimension.height + height);
+    }
 
+    public static Dimension addDimensionHeight(Dimension dimension, Dimension addDimension) {
+        return new Dimension(dimension.width, (int) (dimension.height + addDimension.getHeight()));
+    }
 }

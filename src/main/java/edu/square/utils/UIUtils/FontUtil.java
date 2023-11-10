@@ -1,9 +1,10 @@
 package edu.square.utils.UIUtils;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class FontUtil {
-
+    public static final double FONT_SIZE_0 = 0.04;
     public static final double FONT_SIZE_1 = 0.03;
     public static final double FONT_SIZE_2 = 0.02;
     public static final double FONT_SIZE_3 = 0.01;
@@ -12,8 +13,8 @@ public class FontUtil {
         return new Font("Trebuchet MS", Font.BOLD, fontSize);
     }
 
-    public static Font getBoldFont(Dimension parentFrameDimension, double fontSize) {
-        return new Font("Trebuchet MS", Font.BOLD, (int) (parentFrameDimension.getWidth() * fontSize));
+    public static Font getBoldFont(Dimension parentFrameDimension, double scalingSize) {
+        return new Font("Trebuchet MS", Font.BOLD, (int) (parentFrameDimension.getWidth() * scalingSize));
     }
 
 }
