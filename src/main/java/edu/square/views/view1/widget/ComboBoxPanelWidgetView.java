@@ -46,7 +46,7 @@ public class ComboBoxPanelWidgetView extends MWidget {
 
     @Override
     protected void initializeFonts() {
-        font = FontUtil.getBoldFont(selfDimension, FontUtil.FONT_SIZE_0);
+        font = FontUtil.getBoldFont(selfDimension, 0.1);
     }
 
     @Override
