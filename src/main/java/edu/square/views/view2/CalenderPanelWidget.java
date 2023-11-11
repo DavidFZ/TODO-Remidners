@@ -38,13 +38,14 @@ public class CalenderPanelWidget extends MWidget {
         //can change size
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         mainPanel.setSize(selfDimension);
+        mainPanel.setBackground(new Color(195,215,223));
         //title
         titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         titlePanel.setPreferredSize(resizeDimensionHeightScale(selfDimension, 0.05));
         JLabel titleLabel = new JLabel("Calender");
         titleLabel.setFont(font1);
         titlePanel.add(titleLabel);
-        titlePanel.setBackground(ColorUtil.getColor1());
+        titlePanel.setBackground(new Color(195,215,223));
         mainPanel.add(titlePanel);
 
         //last month and next month
@@ -52,13 +53,15 @@ public class CalenderPanelWidget extends MWidget {
         lastAndNextPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         lastPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         lastPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.48, 0.05));
+        lastPanel.setBackground(new Color(195,215,223));
         nextPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         nextPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.48, 0.05));
+        nextPanel.setBackground(new Color(195,215,223));
         lastPanel.add(lastLabel);
         nextPanel.add(nextLabel);
         lastAndNextPanel.add(lastPanel);
         lastAndNextPanel.add(nextPanel);
-        lastAndNextPanel.setBackground(Color.yellow);
+        lastAndNextPanel.setBackground(new Color(195,215,223));
         mainPanel.add(lastAndNextPanel);
 
 

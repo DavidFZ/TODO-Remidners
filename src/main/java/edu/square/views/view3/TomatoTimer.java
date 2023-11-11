@@ -102,14 +102,15 @@ public class TomatoTimer extends MComponent {
                 }
 
                 // 绘制时钟指针
-                drawClockHand(g2d, centerX, centerY, radius - 50, (hours % 12) * 30 - 90, Color.BLUE, 6);//时钟
-                drawClockHand(g2d, centerX, centerY, radius - 30, minutes * 6 - 90, Color.RED, 4);//分针
-                drawClockHand(g2d, centerX, centerY, radius - 10, seconds * 6 - 90, Color.GREEN, 2);//秒针
+                drawClockHand(g2d, centerX, centerY, radius - 50, (hours % 12) * 30 - 90, new Color(185,227,251), 6);//时钟
+                drawClockHand(g2d, centerX, centerY, radius - 30, minutes * 6 - 90, new Color(116,227,245), 4);//分针
+                drawClockHand(g2d, centerX, centerY, radius - 10, seconds * 6 - 90, new Color(119,195,227), 2);//秒针
             }
         };
 
         timerPanel.add(clockPanel, BorderLayout.CENTER);
         mainPanel.add(timerPanel, BorderLayout.CENTER);
+        mainPanel.setBackground(new Color(220,238,248));
 
         JPanel controlPanel = new JPanel(new FlowLayout());
 

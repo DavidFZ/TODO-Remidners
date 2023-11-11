@@ -48,7 +48,7 @@ public class GroupLabelWidget extends MWidget {
     protected void initializeMainPanel() {
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         mainPanel.setPreferredSize(selfDimension);
-        mainPanel.setBackground(Color.red);
+        mainPanel.setBackground(new Color(198,230,232));
     }
 
     @Override
@@ -60,7 +60,7 @@ public class GroupLabelWidget extends MWidget {
     protected void initializeJComponents() {
         groupTitleLabel = new JLabel();
         groupTitleLabel.setFont(DEFAULT_FONT);
-        groupTitleLabel.setBackground(Color.black);
+        groupTitleLabel.setBackground(new Color(81,196,211));
         groupTitleLabel.setPreferredSize(resizeDimensionWidthScale(selfDimension, 0.6));
 
         countLabel = new JLabel("0");

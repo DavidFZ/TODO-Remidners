@@ -50,5 +50,6 @@ public class ViewsBarComponentView {
 
         labelPanelWidgets.add(labelPanelWidget);
         mainPanel.add(labelPanelWidget.getMainPanel());
+        mainPanel.setBackground(new Color(81,196,211));
     }
 }
