@@ -17,9 +17,18 @@ public class CalendarDayPanel {
         dayPanel.setLayout(new BorderLayout());
         dayPanel.add(dayLabel, BorderLayout.NORTH);
 
+        JLabel jLabel = new JLabel();
+        jLabel.setForeground(new Color(92,179,204));
+        jLabel.setFont(new Font("宋体", Font.BOLD, (int) (0.4 * size)));
+        jLabel.setText("label");
+
         JPanel notePanel = new JPanel();
         notePanel.setBackground(new Color(216,227,231));
+        notePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        notePanel.add(jLabel);
         dayPanel.add(notePanel);
+
+
 //        dayTextArea.setLineWrap(true);
 //        dayTextArea.setBorder(null);
 //        dayPanel.add(dayTextArea, BorderLayout.CENTER);
