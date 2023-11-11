@@ -26,6 +26,8 @@ public class CalenderViewController {
         indexMonth = Calendar.getInstance().get(Calendar.MONTH);
 
         groupedListComponentController = new GroupedListComponentController(calenderView.getGroupedListComponentView(), new GroupedListComponentModel());
+        //disable add button
+        groupedListComponentController.setAddButtonVisibility(false);
         initialize();
     }
 

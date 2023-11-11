@@ -144,4 +144,8 @@ public class GroupedListComponentController extends MController {
         JPanel mainPanel = list.get(list.size() - 1).getInnerPanel();
         mainPanel.addMouseListener(mouseListener);
     }
+
+    public void setAddButtonVisibility(boolean visible) {
+        ((GroupedListComponentView) mComponentView).setAddButtonVisibility(visible);
+    }
 }
