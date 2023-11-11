@@ -19,13 +19,22 @@ public class CalendarDayPanel {
 
         JLabel jLabel = new JLabel();
         jLabel.setForeground(new Color(92,179,204));
+
+        JPanel heightPanel = new JPanel();
+        heightPanel.setPreferredSize(new Dimension(size,((int)(0.15*size))));
+        heightPanel.setBackground(new Color(216,227,231));
+        JPanel mainPanel = new JPanel();
+        mainPanel.setPreferredSize(new Dimension(size,((int)(0.75*size))));
+        mainPanel.setBackground(new Color(216,227,231));
         jLabel.setFont(new Font("宋体", Font.BOLD, (int) (0.4 * size)));
-        jLabel.setText("1");
+        jLabel.setText("11");
 
         JPanel notePanel = new JPanel();
         notePanel.setBackground(new Color(216,227,231));
-        notePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        notePanel.add(jLabel);
+        notePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+        mainPanel.add(jLabel);
+        notePanel.add(heightPanel);
+        notePanel.add(mainPanel);
         dayPanel.add(notePanel);
 
 
