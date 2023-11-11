@@ -46,6 +46,7 @@ public class CalenderViewController {
                 super.mouseClicked(e);
                 indexMonth++;
                 indexMonth %= 12;
+                calenderView.getCalendarComponentView().getCalenderPanelWidget().changeToNextMonth();
 
                 updateThisYearListModelAndView();
                 updateCalenderModelAndView();
@@ -57,6 +58,7 @@ public class CalenderViewController {
                 super.mouseClicked(e);
                 indexMonth--;
                 indexMonth = (indexMonth + 12) % 12;
+                calenderView.getCalendarComponentView().getCalenderPanelWidget().changeToLastMonth();
 
                 updateThisYearListModelAndView();
                 updateCalenderModelAndView();

@@ -123,6 +123,19 @@ public class CalenderPanelWidget extends MWidget {
         dayPanel.add(currentMonthPanel);
     }
 
+    public void changeToNextMonth(){
+        month++;
+        month %= 12;
+
+        changeCurrentMonthPanel();
+    }
+    public void changeToLastMonth(){
+        month--;
+        month = (month + 12) % 12;
+
+        changeCurrentMonthPanel();
+    }
+
     public List<CalendarDayPanel> getCurrentMonthCalendarDayPanelList() {
         return currentMonthPanelWidget.getCalendarDayPanelList();
     }
