@@ -53,8 +53,8 @@ public class ViewsBarComponentController {
 
                     setLabelWidgetViewSelection(finalI);
 //                    setOtherIndexMyViewInVisible(finalI);
-                    CardLayout cl = (CardLayout)(cardPanel.getLayout());
-                    cl.show(cardPanel, viewsTitles[finalI]);
+                    CardLayout cardLayout = (CardLayout)(cardPanel.getLayout());
+                    cardLayout.show(cardPanel, viewsTitles[finalI]);
                     selectedViewIndex = finalI;
                 }
             });

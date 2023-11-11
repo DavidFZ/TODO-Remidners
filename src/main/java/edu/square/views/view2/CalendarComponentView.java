@@ -3,6 +3,7 @@ package edu.square.views.view2;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.component.MComponent;
 import edu.square.views.view.MyView;
+import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,9 +12,11 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getCenterFlowMainPanel;
 
 public class CalendarComponentView extends MComponent {
+    @Getter
+    private CalenderPanelWidget calenderPanelWidget;
 
-    public CalendarComponentView(Dimension selfDimension, MyView myView) {
-        super(myView, selfDimension);
+    public CalendarComponentView(Dimension rootFrameDimension, MyView myView) {
+        super(myView, rootFrameDimension);
 
     }
 
@@ -35,7 +38,7 @@ public class CalendarComponentView extends MComponent {
 
     @Override
     protected void initializeJComponents() {
-        CalenderPanelWidget calenderPanelWidget = new CalenderPanelWidget(selfDimension, selfDimension);
+        calenderPanelWidget = new CalenderPanelWidget(selfDimension, selfDimension);
         mainPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         mainPanel.add(calenderPanelWidget.getMainPanel());
     }
