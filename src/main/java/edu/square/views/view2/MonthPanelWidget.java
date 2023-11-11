@@ -108,12 +108,5 @@ public class MonthPanelWidget {
         return calendarDayPanelList;
     }
 
-    public static void main(String[] args) {
-        JFrame f = new JFrame();
-        f.setSize(1000, 1000);
-        JPanel j = new MonthPanelWidget(3, 600, 800, 6).monthPanel;
-        f.add(j);
-        f.setVisible(true);
-    }
 }
 

@@ -14,22 +14,17 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeight
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
 
 public class CalenderPanelWidget extends MWidget {
+    public static int month;
+    public static MonthPanelWidget currentMonthPanelWidget;
+    public static JPanel currentMonthPanel = new JPanel();
+    public JPanel dayPanel = new JPanel();
     JPanel titlePanel = new JPanel();
     JPanel lastAndNextPanel = new JPanel();
     JPanel lastPanel = new JPanel();
     JPanel nextPanel = new JPanel();
     JLabel lastLabel = new JLabel("<<Last Month");
     JLabel nextLabel = new JLabel("Next Month>>");
-
     JLabel backLabel = new JLabel("back");
-
-    public static int month;
-
-    public static MonthPanelWidget currentMonthPanelWidget;
-    public static JPanel currentMonthPanel = new JPanel();
-
-    public JPanel dayPanel = new JPanel();
-
     Font font1;
     Font font2;
     Font font3;
@@ -111,27 +106,31 @@ public class CalenderPanelWidget extends MWidget {
     }
 
     private void changeCurrentMonthPanel() {
-        currentMonthPanel.setVisible(false);
-        dayPanel.remove(currentMonthPanel);
+//        currentMonthPanel.setVisible(false);
+
         Calendar calendar = Calendar.getInstance();
-        int day;
         calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
-        day = calendar.get(Calendar.DAY_OF_WEEK);
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+
         currentMonthPanelWidget = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1);
+        dayPanel.remove(currentMonthPanel);
         currentMonthPanel = currentMonthPanelWidget.getMonthDayPanel();
         currentMonthPanel.setVisible(true);
         dayPanel.add(currentMonthPanel);
     }
 
-    public void changeToNextMonth(){
+    public void changeToNextMonth() {
         month++;
-        month %= 12;
+        if (month > 12)
+            month = 1;
 
         changeCurrentMonthPanel();
     }
-    public void changeToLastMonth(){
+
+    public void changeToLastMonth() {
         month--;
-        month = (month + 12) % 12;
+        if (month == 0)
+            month = 12;
 
         changeCurrentMonthPanel();
     }
@@ -187,11 +186,11 @@ public class CalenderPanelWidget extends MWidget {
 
     public void addListenerOnNextLabel(MouseAdapter mouseAdapter) {
         nextLabel.addMouseListener(mouseAdapter);
-        bindListenerOnNextLabel();
+
     }
 
     public void addListenerOnLastLabel(MouseAdapter mouseAdapter) {
         lastLabel.addMouseListener(mouseAdapter);
-        bindListenerOnLastLabel();
+
     }
 }

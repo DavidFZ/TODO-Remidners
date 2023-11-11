@@ -4,7 +4,6 @@ import edu.square.controller.view1.component.GroupedListComponentController;
 import edu.square.entity.Reminder;
 import edu.square.model.view1.component.GroupedListComponentModel;
 import edu.square.model.view1.widget.ReminderModel;
-import edu.square.utils.UIUtils.FontUtil;
 import edu.square.views.view.CalenderView;
 import edu.square.views.view2.CalendarDayPanel;
 
@@ -48,11 +47,11 @@ public class CalenderViewController {
                 indexMonth %= 12;
                 calenderView.getCalendarComponentView().getCalenderPanelWidget().changeToNextMonth();
 
-                updateThisYearListModelAndView();
                 updateCalenderModelAndView();
+                updateThisYearListModelAndView();
             }
         });
-        calenderView.addListenerOnLastLaberl(new MouseAdapter() {
+        calenderView.addListenerOnLastLabel(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
@@ -60,8 +59,8 @@ public class CalenderViewController {
                 indexMonth = (indexMonth + 12) % 12;
                 calenderView.getCalendarComponentView().getCalenderPanelWidget().changeToLastMonth();
 
-                updateThisYearListModelAndView();
                 updateCalenderModelAndView();
+                updateThisYearListModelAndView();
             }
         });
     }
