@@ -1,7 +1,10 @@
 package edu.square.views.view2;
 
+import lombok.Getter;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 //对于某一个月的panel
 public class MonthPanel {
@@ -9,6 +12,8 @@ public class MonthPanel {
     JPanel monthNamePanel = new JPanel();
     JPanel weekOfDayPanel = new JPanel();
     JPanel monthDayPanel = new JPanel();
+    @Getter
+    private List<CalendarDayPanel> calendarDayPanelList;
 
     JLabel monthNameLabel = new JLabel();
     int width,height;
