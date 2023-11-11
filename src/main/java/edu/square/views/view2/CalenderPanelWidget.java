@@ -41,7 +41,7 @@ public class CalenderPanelWidget extends MWidget {
         //title
         titlePanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         titlePanel.setPreferredSize(resizeDimensionHeightScale(selfDimension, 0.05));
-        JLabel titleLabel = new JLabel("Calender");
+        JLabel titleLabel = new JLabel("This Year Calender");
         titleLabel.setFont(font1);
         titlePanel.add(titleLabel);
         titlePanel.setBackground(new Color(195,215,223));
@@ -177,5 +177,13 @@ public class CalenderPanelWidget extends MWidget {
     @Override
     protected void initializeJComponents() {
 
+    }
+
+    public void addListenerOnNextLabel(MouseAdapter mouseAdapter){
+        nextLabel.addMouseListener(mouseAdapter);
+    }
+
+    public void addListenerOnLastLabel(MouseAdapter mouseAdapter){
+        lastLabel.addMouseListener(mouseAdapter);
     }
 }

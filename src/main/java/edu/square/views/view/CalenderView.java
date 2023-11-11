@@ -7,6 +7,8 @@ import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseListener;
 
 public class CalenderView extends MyView {
     @Getter
@@ -31,5 +33,13 @@ public class CalenderView extends MyView {
         mainFrame.add(calenderView.getMainPanel());
 
         mainFrame.setVisible(true);
+    }
+
+    public void addListenerOnNextLabel(MouseAdapter mouseAdapter) {
+        calendarComponentView.getCalenderPanelWidget().addListenerOnNextLabel(mouseAdapter);
+    }
+
+    public void addListenerOnLastLaberl(MouseAdapter mouseAdapter){
+        calendarComponentView.getCalenderPanelWidget().addListenerOnLastLabel(mouseAdapter);
     }
 }

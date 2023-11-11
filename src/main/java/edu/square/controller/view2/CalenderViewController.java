@@ -6,6 +6,8 @@ import edu.square.model.view1.component.GroupedListComponentModel;
 import edu.square.model.view1.widget.ReminderModel;
 import edu.square.views.view.CalenderView;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Calendar;
 import java.util.List;
 
@@ -30,6 +32,26 @@ public class CalenderViewController {
     private void initialize() {
         indexMonth = Calendar.getInstance().get(Calendar.MONTH);
         updateThisYearListModelAndView();
+
+        //bind button, refresh ui and model while click
+        calenderView.addListenerOnNextLabel(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                indexMonth++;
+                indexMonth %= 12;
+                updateThisYearListModelAndView();
+            }
+        });
+        calenderView.addListenerOnLastLaberl(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                indexMonth--;
+                indexMonth = (indexMonth + 12) % 12;
+                updateThisYearListModelAndView();
+            }
+        });
     }
 
     public void updateThisYearListModelAndView() {
