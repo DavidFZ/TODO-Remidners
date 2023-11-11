@@ -1,19 +1,24 @@
 package edu.square.views.view;
 
 import edu.square.utils.UIUtils.JFrameFactory;
-import edu.square.views.view1.view.ListView;
+import edu.square.views.view1.component.GroupedListComponentView;
 import edu.square.views.view2.CalendarComponentView;
+import lombok.Getter;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class CalenderView extends MyView {
-
-    public final CalendarComponentView calendarComponentView;
+    @Getter
+    private final CalendarComponentView calendarComponentView;
+    @Getter
+    private final GroupedListComponentView groupedListComponentView;
 
     public CalenderView(JFrame parentFrame, Dimension dimension) {
         super(parentFrame, dimension);
+
         calendarComponentView = new CalendarComponentView(rootFrameDimension, this);
+        groupedListComponentView = new GroupedListComponentView(rootFrameDimension, this);
     }
 
     public static void main(String[] args) {
