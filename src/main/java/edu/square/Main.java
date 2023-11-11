@@ -18,8 +18,6 @@ import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthS
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-        System.out.println(isDirExist("./derbyDB"));
-        System.out.println(isDirExist("src/main/resources/sql/init.sql"));
         if (!isDirExist("./derbyDB"))
             forcedInitDB();
 
