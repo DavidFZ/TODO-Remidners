@@ -38,7 +38,7 @@ public class TextFieldPanelWidget extends MWidget {
     protected void initializeMainPanel() {
         mainPanel.setPreferredSize(selfDimension);
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        mainPanel.setBackground(Color.magenta);
+        mainPanel.setBackground(new Color(198,230,232));
     }
 
     @Override
@@ -50,7 +50,7 @@ public class TextFieldPanelWidget extends MWidget {
     protected void initializeJComponents() {
         label = new JLabel();
         label.setFont(font);
-        label.setForeground(Color.blue);
+        label.setForeground(new Color(92,179,204));
         label.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.3, 0.9));
         mainPanel.add(label);
 

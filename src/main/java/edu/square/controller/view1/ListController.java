@@ -6,6 +6,8 @@ import edu.square.controller.view1.component.LeftSideComponentController;
 import edu.square.entity.Reminder;
 import edu.square.model.view1.ListModel;
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.views.view1.component.DetailInformationComponentView;
+import edu.square.views.view1.component.TimeSelectorComponentView;
 import edu.square.views.view1.view.ListView;
 import edu.square.views.widget.ReminderListWidgetView;
 
@@ -60,6 +62,7 @@ public class ListController {
         //detail information component
         addListenerOnDeleteButton();
         addListenerOnSaveButton();
+        addListenerOnRestButton();
     }
 
     /**
@@ -140,11 +143,33 @@ public class ListController {
         reminderView.addMouseListenerOnReminderView(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
+
+//                button.addActionListener(getColorListener(panel, initialColor, targetColor))
+
                 //update model
                 detailInformationComponentController.reminderUpdate(reminderView.getReminder());
 
                 //update view
                 detailInformationComponentController.setVisibleByModel();
+            }
+        });
+    }
+
+    private void addListenerOnRestButton() {
+        detailInformationComponentController.addListenerOnRestButton(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //sub frame view
+                Reminder reminder = listModel.detailInformationModel.getReminder();
+                TimeSelectorComponentView timeSelectorComponentView = listView.detailInformationComponent.timeSelectorComponentView;
+                timeSelectorComponentView.setSelectedItem(reminder);
+                Boolean isImportant = reminder.getIsImportant();
+                timeSelectorComponentView.getFlaggedRadio().setSelected(isImportant != null && isImportant);
+
+                //Show dialog
+                DetailInformationComponentView detailInformationComponentView = listView.detailInformationComponent;
+                JOptionPane.showMessageDialog(detailInformationComponentView.getMainPanel(), "Reset this reminder successfully", "Reset", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
@@ -167,6 +192,10 @@ public class ListController {
                 //Controller
                 addListenersOnDoneStatusButtons();
                 addListenerOnReminderViews();
+
+                //Show dialog
+                DetailInformationComponentView detailInformationComponentView = listView.detailInformationComponent;
+                JOptionPane.showMessageDialog(detailInformationComponentView.getMainPanel(), "Delete this reminder successfully", "Delete", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
@@ -180,11 +209,16 @@ public class ListController {
                 listModel.updateModelGlobally();
 
                 //View
+                leftSideComponentController.updateGroupCounterByModel();
                 groupedListComponentController.updateListViewByModel();
 
                 //Controller
                 addListenersOnDoneStatusButtons();
                 addListenerOnReminderViews();
+
+                //Show dialog
+                DetailInformationComponentView detailInformationComponentView = listView.detailInformationComponent;
+                JOptionPane.showMessageDialog(detailInformationComponentView.getMainPanel(), "Save this reminder successfully", "Save", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }

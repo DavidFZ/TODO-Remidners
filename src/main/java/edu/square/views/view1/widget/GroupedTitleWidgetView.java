@@ -55,8 +55,8 @@ public class GroupedTitleWidgetView extends MWidget {
         JPanel buttonPanel = getFlowJpanel(FlowLayout.RIGHT, resizeDimensionWidthAndHeight(selfDimension, 0.28, 0.9));
 
         //set background color
-        groupTitlePanel.setBackground(Color.blue);
-        buttonPanel.setBackground(Color.yellow);
+        groupTitlePanel.setBackground(new Color(198,230,232));
+        buttonPanel.setBackground(new Color(198,230,232));
 
         //left side label
         titleLabel = new JLabel("All");

@@ -302,8 +302,26 @@ public class ReminderModel {
         return reminder;
     }
 
+    public static List<Reminder> queryReminderThisMonth() {
+        Timestamp startOfThisMonth = TimeUtils.getStartOrEndTimestampOfDate(LocalDate.now().withDayOfMonth(1), true);
+        Timestamp endOfThisMonth = TimeUtils.getStartOrEndTimestampOfDate(LocalDate.now().withDayOfMonth(LocalDate.now().lengthOfMonth()), false);
+        return queryReminderByDate(REMIND_TIME, startOfThisMonth, endOfThisMonth);
+    }
+
+    public static List<Reminder> queryReminderByMonth(int year, int month) {
+        Timestamp startOfThisMonth = TimeUtils.getStartOrEndTimestampOfDate(LocalDate.of(year, month, 1), true);
+        Timestamp endOfThisMonth = TimeUtils.getStartOrEndTimestampOfDate(LocalDate.of(year, month, LocalDate.of(year, month, 1).lengthOfMonth()), false);
+        return queryReminderByDate(REMIND_TIME, startOfThisMonth, endOfThisMonth);
+    }
+
+
+    public static List<Reminder> queryReminderByDate(LocalDate date) {
+        Timestamp startOfThisMonth = TimeUtils.getStartOrEndTimestampOfDate(date, true);
+        Timestamp endOfThisMonth = TimeUtils.getStartOrEndTimestampOfDate(date, false);
+        return queryReminderByDate(REMIND_TIME, startOfThisMonth, endOfThisMonth);
+    }
+
     public static void main(String[] args) {
-        Reminder reminder = queryReminderByUUID("a0afc37b-742c-4be2-a647-24816f1509c7");
-        System.out.println(reminder);
+        System.out.println(queryReminderThisMonth().size());
     }
 }

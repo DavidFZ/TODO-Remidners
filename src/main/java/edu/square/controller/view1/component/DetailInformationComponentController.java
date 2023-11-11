@@ -6,7 +6,9 @@ import edu.square.model.component.MModel;
 import edu.square.model.view1.component.DetailInformationModel;
 import edu.square.views.component.MComponent;
 import edu.square.views.view1.component.DetailInformationComponentView;
+import edu.square.views.view1.component.TimeSelectorComponentView;
 
+import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public class DetailInformationComponentController extends MController {
@@ -40,10 +42,7 @@ public class DetailInformationComponentController extends MController {
 //        bindListenerOnDeleteButton();
 
         //reset button
-        detailInformationComponentView.getResetButton().addActionListener(e -> {
-            detailInformationComponentView.setContentTextField(detailInformationModel.getReminder().getContent());
-            detailInformationComponentView.setNoteTextField(detailInformationModel.getReminder().getNote());
-        });
+//        same as delete button
 
         //update button
 //        same as delete button
@@ -77,6 +76,11 @@ public class DetailInformationComponentController extends MController {
 
     public void setVisibleByModel() {
         setVisible(detailInformationModel.getReminder());
+
+        TimeSelectorComponentView timeSelectorComponentView = detailInformationComponentView.timeSelectorComponentView;
+        timeSelectorComponentView.setSelectedItem(detailInformationModel.getReminder());
+        Boolean isImportant = detailInformationModel.getReminder().getIsImportant();
+        timeSelectorComponentView.getFlaggedRadio().setSelected(isImportant != null && isImportant);
     }
 
 
@@ -94,7 +98,18 @@ public class DetailInformationComponentController extends MController {
             //model layer
             detailInformationModel.getReminder().setContent(detailInformationComponentView.getContentTextField());
             detailInformationModel.getReminder().setNote(detailInformationComponentView.getNoteTextField());
-            detailInformationModel.updateReminder(detailInformationModel.getReminder());
+            Reminder reminder = detailInformationModel.getReminder();
+            //sub component
+            reminder.setRemindTime(detailInformationComponentView.timSelectorComponentController.getTimestamp());
+            reminder.setIsImportant(detailInformationComponentView.timeSelectorComponentView.getFlaggedRadio().isSelected());
+            detailInformationModel.updateReminder(reminder);
+        });
+    }
+
+    private void bindListenerOnResetButton() {
+        detailInformationComponentView.getResetButton().addActionListener(e -> {
+            detailInformationComponentView.setContentTextField(detailInformationModel.getReminder().getContent());
+            detailInformationComponentView.setNoteTextField(detailInformationModel.getReminder().getNote());
         });
     }
 
@@ -108,5 +123,11 @@ public class DetailInformationComponentController extends MController {
         DetailInformationComponentView detailInformationComponentView = (DetailInformationComponentView) mComponentView;
         detailInformationComponentView.getSaveButton().addActionListener(actionListener);
         bindListenerOnSaveButton();
+    }
+
+    public void addListenerOnRestButton(ActionListener actionListener) {
+        DetailInformationComponentView detailInformationComponentView = (DetailInformationComponentView) mComponentView;
+        detailInformationComponentView.getResetButton().addActionListener(actionListener);
+        bindListenerOnResetButton();
     }
 }

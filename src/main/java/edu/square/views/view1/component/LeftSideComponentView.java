@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static edu.square.utils.ColorChangeUtil.getColorListener;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthScale;
 import static edu.square.utils.UIUtils.FontUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getCenterFlowMainPanel;
@@ -49,14 +50,13 @@ public class LeftSideComponentView extends MComponent {
     protected void initializeMainPanel() {
         //ROOT COMPONENT OF LEFT GROUP VIEW
         mainPanel = getCenterFlowMainPanel(selfDimension);
-        mainPanel.setBackground(Color.yellow);
     }
 
     @Override
     protected void initializeFonts() {
         font1 = getBoldFont(parentDimension, FONT_SIZE_1);
         font2 = getBoldFont(parentDimension, FONT_SIZE_2);
-        font3 = getBoldFont(parentDimension, FONT_SIZE_3);
+        font3 = getBoldFont(parentDimension, FONT_SIZE_4);
     }
 
     @Override

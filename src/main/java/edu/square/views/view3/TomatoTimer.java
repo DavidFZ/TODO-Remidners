@@ -5,7 +5,6 @@ import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.utils.UIUtils.JPanelUtil;
 import edu.square.views.component.MComponent;
 import edu.square.views.view.MyView;
-import edu.square.views.view2.component.CalendarComponent;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,7 +12,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 
-import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
+import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
 
 public class TomatoTimer extends MComponent {
     private int initialHours = 0;
@@ -31,7 +30,7 @@ public class TomatoTimer extends MComponent {
     private JButton stopButton;
     private JButton resetButton;
 
-    public TomatoTimer(MyView myView, Dimension selfDimension) {
+    public TomatoTimer(Dimension selfDimension, MyView myView) {
         super(myView, selfDimension);
     }
 
@@ -55,7 +54,7 @@ public class TomatoTimer extends MComponent {
 
     @Override
     protected void calculateSelfDimension() {
-
+        selfDimension = resizeDimensionWidthAndHeight(parentDimension, 0.8, 0.92);
     }
 
     @Override
@@ -103,14 +102,15 @@ public class TomatoTimer extends MComponent {
                 }
 
                 // 绘制时钟指针
-                drawClockHand(g2d, centerX, centerY, radius - 50, (hours % 12) * 30 - 90, Color.BLUE, 6);//时钟
-                drawClockHand(g2d, centerX, centerY, radius - 30, minutes * 6 - 90, Color.RED, 4);//分针
-                drawClockHand(g2d, centerX, centerY, radius - 10, seconds * 6 - 90, Color.GREEN, 2);//秒针
+                drawClockHand(g2d, centerX, centerY, radius - 50, (hours % 12) * 30 - 90, Color.BLACK, 6);//时钟
+                drawClockHand(g2d, centerX, centerY, radius - 30, minutes * 6 - 90, new Color(185, 227, 251), 4);//分针
+                drawClockHand(g2d, centerX, centerY, radius - 10, seconds * 6 - 90, Color.RED, 2);//秒针
             }
         };
 
         timerPanel.add(clockPanel, BorderLayout.CENTER);
         mainPanel.add(timerPanel, BorderLayout.CENTER);
+        mainPanel.setBackground(new Color(220, 238, 248));
 
         JPanel controlPanel = new JPanel(new FlowLayout());
 
@@ -213,7 +213,7 @@ public class TomatoTimer extends MComponent {
     public static void main(String[] args) {
         JFrame mainFrame = JFrameFactory.getDefaultJFrame(.8d, "Schedule");
         MyView myView = new MyView(mainFrame, mainFrame.getSize());
-        TomatoTimer tomatoTimer = new TomatoTimer(myView, resizeDimensionHeightScale(mainFrame.getSize(), 0.9));
+        TomatoTimer tomatoTimer = new TomatoTimer(resizeDimensionHeightScale(mainFrame.getSize(), 0.9), myView);
         mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.add(tomatoTimer.getTomatoTimerJPanel());

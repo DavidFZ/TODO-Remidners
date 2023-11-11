@@ -10,6 +10,7 @@ import edu.square.views.view1.component.GroupedListComponentView;
 import edu.square.views.widget.ReminderListWidgetView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
@@ -93,6 +94,8 @@ public class GroupedListComponentController extends MController {
 
             //get data from sub frame
             Reminder reminder = groupedListComponentView.getReminderFromSubFrame();
+            if (reminder == null)
+                return;
             //update model
             ((GroupedListComponentModel) mModel).addReminder(reminder);
 
@@ -110,6 +113,10 @@ public class GroupedListComponentController extends MController {
 
     public void setGroupedTitle(String title) {
         ((GroupedListComponentView) mComponentView).setGroupedTitle(title);
+    }
+
+    public void setGroupedTitleFont(Font font) {
+        ((GroupedListComponentView) mComponentView).getTitleLabel().setFont(font);
     }
 
     /**
@@ -141,5 +148,9 @@ public class GroupedListComponentController extends MController {
         List<ReminderListWidgetView.ReminderView> list = ((GroupedListComponentView) mComponentView).getReminderViews();
         JPanel mainPanel = list.get(list.size() - 1).getInnerPanel();
         mainPanel.addMouseListener(mouseListener);
+    }
+
+    public void setAddButtonVisibility(boolean visible) {
+        ((GroupedListComponentView) mComponentView).setAddButtonVisibility(visible);
     }
 }

@@ -29,7 +29,11 @@ public class GroupedListComponentView extends MComponent {
     public GroupedListComponentView(Dimension rootFrameDimension, MyView myView) {
         super(myView, rootFrameDimension);
         //init sub frame
-        addReminderConfirmFrame = new AddReminderConfirmFrame(resizeDimensionWidthAndHeight(selfDimension, 0.6, 0.4));
+        addReminderConfirmFrame = new AddReminderConfirmFrame(resizeDimensionWidthAndHeight(rootFrameDimension, 0.6, 0.4));
+    }
+
+    public GroupedTitleWidgetView getGroupedTitleWidgetView() {
+        return groupedTitleWidgetView;
     }
 
     public static void main(String[] args) {
@@ -50,6 +54,7 @@ public class GroupedListComponentView extends MComponent {
     protected void initializeMainPanel() {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, 0, 0);
         mainPanel = getFlowJpanel(flowLayout, selfDimension);
+        mainPanel.setBackground(new Color(238,238,238));
     }
 
     @Override
@@ -63,11 +68,15 @@ public class GroupedListComponentView extends MComponent {
     protected void initializeJComponents() {
         //GROUP TITLE
         groupedTitleWidgetView = new GroupedTitleWidgetView(parentDimension, resizeDimensionHeightScale(selfDimension, 0.1));
+        JPanel groupedTitleWidgetPanel = new JPanel();
+        groupedTitleWidgetPanel.setBackground(new Color(195,215,223));
         mainPanel.add(groupedTitleWidgetView.getMainPanel());
 
         //GROUP LABEL
         reminderListWidgetView = new ReminderListWidgetView(parentDimension, resizeDimensionHeightScale(selfDimension, 0.9));
-        mainPanel.add(reminderListWidgetView.getScrollPane());
+        JPanel reminderListPanel = reminderListWidgetView.getMainPanel();
+        reminderListPanel.setBackground(new Color(238,238,238));
+        mainPanel.add(reminderListPanel);
     }
 
     @Override
@@ -77,6 +86,10 @@ public class GroupedListComponentView extends MComponent {
 
     public void setGroupedTitle(String title) {
         groupedTitleWidgetView.setTitleLabel(title);
+    }
+
+    public JLabel getTitleLabel() {
+        return groupedTitleWidgetView.getTitleLabel();
     }
 
     public void cleanSubFrameTextFiled() {

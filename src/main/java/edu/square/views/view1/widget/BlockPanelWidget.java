@@ -17,6 +17,7 @@ public class BlockPanelWidget extends MWidget {
     protected void initializeMainPanel() {
         mainPanel.setPreferredSize(selfDimension);
         mainPanel.setLayout(new FlowLayout(FlowLayout.RIGHT, 0, 0));
+        mainPanel.setBackground(new Color(238,238,238));
     }
 
     @Override

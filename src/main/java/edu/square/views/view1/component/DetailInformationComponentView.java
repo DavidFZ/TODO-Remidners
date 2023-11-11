@@ -1,6 +1,8 @@
 package edu.square.views.view1.component;
 
+import edu.square.controller.view1.component.TimSelectorComponentController;
 import edu.square.entity.Reminder;
+import edu.square.model.view1.component.TimeSelectorComponentModel;
 import edu.square.utils.UIUtils.JPanelUtil;
 import edu.square.utils.UIUtils.MComponentTestHelper;
 import edu.square.views.component.MComponent;
@@ -18,6 +20,8 @@ import static edu.square.utils.UIUtils.FontUtil.*;
 import static edu.square.utils.UIUtils.JPanelUtil.getFlowJpanel;
 
 public class DetailInformationComponentView extends MComponent {
+    public TimeSelectorComponentView timeSelectorComponentView;
+    public TimSelectorComponentController timSelectorComponentController;
     Font font1;
     Font font2;
     Font font3;
@@ -29,7 +33,6 @@ public class DetailInformationComponentView extends MComponent {
     private JButton saveButton;
     @Getter
     private JButton backButton;
-
     private TextFieldPanelWidget contentTextFieldPanelWidget;
     private TextFieldPanelWidget noteTextFieldPanelWidget;
 
@@ -55,21 +58,21 @@ public class DetailInformationComponentView extends MComponent {
     @Override
     protected void initializeMainPanel() {
         mainPanel = JPanelUtil.getCenterFlowMainPanel(selfDimension);
-        mainPanel.setBackground(Color.yellow);
+        mainPanel.setBackground(new Color(195,215,223));
     }
 
     @Override
     protected void initializeFonts() {
         font1 = getBoldFont(parentDimension, FONT_SIZE_1);
         font2 = getBoldFont(parentDimension, FONT_SIZE_2);
-        font3 = getBoldFont(parentDimension, FONT_SIZE_3);
+        font3 = getBoldFont(parentDimension, FONT_SIZE_4);
     }
 
     @Override
     protected void initializeJComponents() {
         //reminderStatusControllerPanel
         JPanel reminderStatusControllerPanel = reminderStatusControllerPanel();
-        reminderStatusControllerPanel.setBackground(Color.red);
+        reminderStatusControllerPanel.setBackground(new Color(195,215,223));
         mainPanel.add(reminderStatusControllerPanel);
 
 
@@ -89,6 +92,11 @@ public class DetailInformationComponentView extends MComponent {
         //BlockPanel
         BlockPanelWidget blockPanelView = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.1));
         mainPanel.add(blockPanelView.getMainPanel());
+
+        //timeSelectorComponentView
+        timeSelectorComponentView = new TimeSelectorComponentView(parentDimension, resizeDimensionHeightScale(selfDimension, 0.5));
+        timSelectorComponentController = new TimSelectorComponentController(timeSelectorComponentView, new TimeSelectorComponentModel());
+        mainPanel.add(timeSelectorComponentView.getMainPanel());
     }
 
     private JButton buttonBuilder(String buttonName) {
@@ -110,7 +118,7 @@ public class DetailInformationComponentView extends MComponent {
     private JPanel reminderStatusControllerPanel() {
         JPanel reminderStatusControllerPanel = getFlowJpanel(FlowLayout.CENTER, resizeDimensionHeightScale(selfDimension, 0.1));
 
-        JPanel deletePanel = getFlowJpanel(FlowLayout.LEFT, new Dimension((int) (0.48 * selfDimension.width), (int) (0.08 * selfDimension.height)), Color.orange);
+        JPanel deletePanel = getFlowJpanel(FlowLayout.LEFT, new Dimension((int) (0.48 * selfDimension.width), (int) (0.05 * selfDimension.height)), new Color(198,230,232));
         backButton = buttonBuilder("Back");
         deleteButton = buttonBuilder("Delete");
         deletePanel.add(backButton);
@@ -119,7 +127,7 @@ public class DetailInformationComponentView extends MComponent {
         reminderStatusControllerPanel.add(deletePanel);
 
 
-        JPanel donePanel = getFlowJpanel(FlowLayout.RIGHT, new Dimension((int) (0.48 * selfDimension.width), (int) (0.08 * selfDimension.height)), Color.orange);
+        JPanel donePanel = getFlowJpanel(FlowLayout.RIGHT, new Dimension((int) (0.48 * selfDimension.width), (int) (0.05 * selfDimension.height)), new Color(198,230,232));
         resetButton = buttonBuilder("Rest");
         saveButton = buttonBuilder("Save");
         donePanel.add(resetButton);
@@ -134,6 +142,7 @@ public class DetailInformationComponentView extends MComponent {
     protected void initializeView() {
         //default can not see
         mainPanel.setVisible(false);
+        mainPanel.setBackground(new Color(238,238,238));
     }
 
     public void setVisibility(boolean visibility) {

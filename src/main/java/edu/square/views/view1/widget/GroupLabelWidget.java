@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static edu.square.utils.ColorChangeUtil.getColorListener;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
 
 public class GroupLabelWidget extends MWidget {
@@ -37,6 +38,7 @@ public class GroupLabelWidget extends MWidget {
 
     public void addMouseListener(MouseListener mouseListener) {
         mainPanel.addMouseListener(mouseListener);
+        mainPanel.addMouseListener(getColorListener(mainPanel,mainPanel.getBackground(), new Color(81,196,211)));
     }
 
     public void repaint() {
@@ -48,7 +50,7 @@ public class GroupLabelWidget extends MWidget {
     protected void initializeMainPanel() {
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         mainPanel.setPreferredSize(selfDimension);
-        mainPanel.setBackground(Color.red);
+        mainPanel.setBackground(new Color(198,230,232));
     }
 
     @Override
@@ -60,7 +62,7 @@ public class GroupLabelWidget extends MWidget {
     protected void initializeJComponents() {
         groupTitleLabel = new JLabel();
         groupTitleLabel.setFont(DEFAULT_FONT);
-        groupTitleLabel.setBackground(Color.black);
+        groupTitleLabel.setBackground(new Color(81,196,211));
         groupTitleLabel.setPreferredSize(resizeDimensionWidthScale(selfDimension, 0.6));
 
         countLabel = new JLabel("0");

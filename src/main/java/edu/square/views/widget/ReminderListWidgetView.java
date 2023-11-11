@@ -2,6 +2,7 @@ package edu.square.views.widget;
 
 import edu.square.entity.Reminder;
 import edu.square.model.view1.widget.ReminderModel;
+import edu.square.utils.ColorUtil;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.MWidgetTestHelper;
 import lombok.Getter;
@@ -19,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static edu.square.utils.ColorChangeUtil.getColorListener;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
 
@@ -39,7 +41,6 @@ public class ReminderListWidgetView extends MWidget {
     private ActionListener completeActionListener;
 
     public ReminderListWidgetView(Dimension rootFrameDimension, Dimension selfDimension) {
-        //main将被加入到scrollPane中
         super(rootFrameDimension, selfDimension);
 
         //init dimensions
@@ -153,20 +154,20 @@ public class ReminderListWidgetView extends MWidget {
 
     @Override
     protected void initializeMainPanel() {
-        mainPanel.setBackground(Color.red);
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         containerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, (int) (0.005 * rootFrameDimension.getHeight())));
         containerPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.9, 0.85));
-        containerPanel.setBackground(Color.green);
+//        containerPanel.setBackground(new Color(195,215,223));
 
         scrollPane = new JScrollPane(containerPanel);
         scrollPane.setPreferredSize(resizeDimensionHeightScale(selfDimension, 0.9));//防止scrollPane过长
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setWheelScrollingEnabled(true);
-        scrollPane.setBackground(Color.blue);
+        scrollPane.setBackground(new Color(195, 215, 223));
 
         mainPanel.add(scrollPane);
+        mainPanel.setBackground(new Color(195, 215, 223));
 
     }
 
@@ -204,8 +205,8 @@ public class ReminderListWidgetView extends MWidget {
 
             innerPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
             innerPanel.setPreferredSize(new Dimension((int) (0.35 * rootFrameDimension.getWidth()), (int) (0.06 * rootFrameDimension.getHeight())));
-            innerPanel.setBackground(Color.yellow);
-            innerPanel.setBorder(new LineBorder(Color.PINK));
+//            innerPanel.setBackground(ColorUtil.getColor4());
+            innerPanel.setBorder(new LineBorder(ColorUtil.getColor1()));
 
             setReminderViewDoneStatus(reminder.getDoneTime() != null);
 
@@ -230,10 +231,10 @@ public class ReminderListWidgetView extends MWidget {
             radioButton.setSelected(isDone);
             if (isDone) {
                 radioButton.setSelected(true);
-                label.setForeground(Color.GRAY);
+//                label.setForeground(Color.BLACK);
             } else {
                 radioButton.setSelected(false);
-                label.setForeground(Color.BLACK);
+//                label.setForeground(Color.BLACK);
             }
         }
 
@@ -243,6 +244,7 @@ public class ReminderListWidgetView extends MWidget {
 
         public void addMouseListenerOnReminderView(MouseListener mouseListener) {
             innerPanel.addMouseListener(mouseListener);
+            innerPanel.addMouseListener(getColorListener(innerPanel,innerPanel.getBackground(), new Color(81,196,211)));
         }
     }
 }

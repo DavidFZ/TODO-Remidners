@@ -1,17 +1,18 @@
 package edu.square.views.view1.subframe;
 
+import edu.square.controller.view1.component.TimSelectorComponentController;
 import edu.square.entity.Reminder;
-import edu.square.utils.TimeUtils;
+import edu.square.model.view1.component.TimeSelectorComponentModel;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.views.view1.component.TimeSelectorComponentView;
 import edu.square.views.view1.widget.BlockPanelWidget;
-import edu.square.views.view1.widget.TextFieldPanelWidget;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.sql.Timestamp;
-import java.util.Calendar;
+import java.util.List;
 
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
@@ -20,52 +21,45 @@ public class AddReminderConfirmFrame {
     private final JFrame mainFrame;
     private final JTextField itemName;
     private final JButton confirmButton;
-    private final JRadioButton flagRadio;
-    private final TextFieldPanelWidget yearsTextFieldPanelWidget;
-    private final TextFieldPanelWidget monthsTextFieldPanelWidget;
-    private final TextFieldPanelWidget datesTextFieldPanelWidget;
-    private final TextFieldPanelWidget hoursTextFieldPanelWidget;
+    private final TimSelectorComponentController timSelectorComponentController;
+    private final TimeSelectorComponentView timeSelectorComponentView;
+    List<String> days;
     private JRadioButton emergentRadio;
 
     public AddReminderConfirmFrame(Dimension selfDimension) {
-        Font font = FontUtil.getBoldFont(selfDimension, 0.05);
+        days = TimeSelectorComponentModel.getDaysInThisMonth();
 
-        mainFrame = JFrameFactory.buildJFrame(selfDimension, "Please add item");
+        Font font = FontUtil.getBoldFont(selfDimension, FontUtil.FONT_SIZE_1);
+
+        mainFrame = JFrameFactory.buildJFrame(selfDimension, "Please add Reminder");
         mainFrame.setLayout(new BorderLayout());
 
-        BlockPanelWidget blockPanelView = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.3));
-
-
         //inputPanel
-        JLabel inputLabel = new JLabel("Reminder Content:");
+        JLabel inputLabel = new JLabel("Set Reminder Content");
+        inputLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.8, 0.1));
         inputLabel.setFont(font);
-        JLabel tipsLabel = new JLabel("Reminder Time (number):");
-        tipsLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.8, 0.05));
-        inputLabel.setFont(font);
-        itemName = new JTextField(30);
-        JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        flagRadio = new JRadioButton("Flagged");
-        JPanel detailMessagePanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
-        detailMessagePanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension.getSize(), 0.8, 0.1));
-        detailMessagePanel.add(flagRadio);
-
-        yearsTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "years:");
-        monthsTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "months:");
-        datesTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "dates:");
-        hoursTextFieldPanelWidget = new TextFieldPanelWidget(selfDimension, resizeDimensionWidthAndHeight(selfDimension, 0.45, 0.05), "hours:");
-
-        setTextAsToday();
-
-        inputPanel.setBackground(Color.green);
+        inputLabel.setForeground(new Color(92,179,204));
+        inputPanel.setBackground(new Color(195,215,223));
         inputPanel.add(inputLabel);
-        inputPanel.add(itemName);
-        inputPanel.add(tipsLabel);
-        inputPanel.add(yearsTextFieldPanelWidget.getMainPanel());
-        inputPanel.add(monthsTextFieldPanelWidget.getMainPanel());
-        inputPanel.add(datesTextFieldPanelWidget.getMainPanel());
-        inputPanel.add(hoursTextFieldPanelWidget.getMainPanel());
-        inputPanel.add(detailMessagePanel);
+
+        itemName = new JTextField();
+        itemName.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.9, 0.1));
+
+        BlockPanelWidget blockPanelWidget0 = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.05));
+
+        BlockPanelWidget blockPanelWidget = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.01));
+
+        timeSelectorComponentView = new TimeSelectorComponentView(selfDimension, resizeDimensionHeightScale(selfDimension, 0.7));
+        timSelectorComponentController = new TimSelectorComponentController(timeSelectorComponentView, new TimeSelectorComponentModel());
+
+
+        JPanel detailMessagePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        detailMessagePanel.add(blockPanelWidget.getMainPanel());
+        detailMessagePanel.add(itemName);
+        detailMessagePanel.add(blockPanelWidget0.getMainPanel());
+        detailMessagePanel.add(timeSelectorComponentView.getMainPanel());
 
         confirmButton = new JButton("Confirm");
         JPanel confirmPanel = new JPanel(new BorderLayout());
@@ -74,26 +68,16 @@ public class AddReminderConfirmFrame {
 
         //parent frame will not close when sub frame is closed
         mainFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-//        mainFrame.setAlwaysOnTop(true);
-        mainFrame.add(BorderLayout.NORTH, blockPanelView.getMainPanel());
-        mainFrame.add(BorderLayout.CENTER, inputPanel);
+        mainFrame.add(BorderLayout.NORTH, inputPanel);
+        mainFrame.add(BorderLayout.CENTER, detailMessagePanel);
         mainFrame.add(BorderLayout.SOUTH, confirmPanel);
         mainFrame.setResizable(false);
         mainFrame.setLocationRelativeTo(null);
-
     }
 
     public static void main(String[] args) {
         AddReminderConfirmFrame addReminderConfirmFrame = new AddReminderConfirmFrame(new Dimension(500, 500));
         addReminderConfirmFrame.mainFrame.setVisible(true);
-    }
-
-    private void setTextAsToday() {
-        Calendar calendar = Calendar.getInstance();
-        yearsTextFieldPanelWidget.setTextField(String.valueOf(calendar.get(Calendar.YEAR)));
-        monthsTextFieldPanelWidget.setTextField(String.valueOf(calendar.get(Calendar.MONTH) + 1));
-        datesTextFieldPanelWidget.setTextField(String.valueOf(calendar.get(Calendar.DATE)));
-        hoursTextFieldPanelWidget.setTextField(String.valueOf(calendar.get(Calendar.HOUR_OF_DAY)));
     }
 
     public String getItemName() {
@@ -112,42 +96,29 @@ public class AddReminderConfirmFrame {
         itemName.setText("");
     }
 
-    public boolean isFlagged() {
-        return flagRadio.isSelected();
-    }
-
     public Reminder getReminderFromInput() {
         Reminder reminder = new Reminder(itemName.getText());
-        Timestamp timestamp = illegalInputJudge();
+        if (!illegalInputJudge())
+            return null;
+        Timestamp timestamp = timSelectorComponentController.getTimestamp();
         if (timestamp == null)
             return null;
 
         reminder.setRemindTime(timestamp);
-        reminder.setIsImportant(isFlagged());
+        reminder.setIsImportant(timeSelectorComponentView.getFlaggedRadio().isSelected());
         return reminder;
     }
 
-    private Timestamp illegalInputJudge() {
+    private boolean illegalInputJudge() {
         //item judge
         String content = itemName.getText();
         if (content == null || content.equals("")) {
             JOptionPane.showMessageDialog(null, "Please input content");
-            return null;
+            return false;
         } else if (content.length() > 30) {
             JOptionPane.showMessageDialog(null, "Please input content less than 30 characters");
-            return null;
+            return false;
         }
-
-        //time judge
-        String years = yearsTextFieldPanelWidget.getTextField().getText();
-        String months = monthsTextFieldPanelWidget.getTextField().getText();
-        String dates = datesTextFieldPanelWidget.getTextField().getText();
-        String hours = hoursTextFieldPanelWidget.getTextField().getText();
-
-        Timestamp timestamp = TimeUtils.convertToTimestamp(years, months, dates, hours);
-        if (timestamp == null) {
-            JOptionPane.showMessageDialog(null, "Please input correct time");
-        }
-        return timestamp;
+        return true;
     }
 }
