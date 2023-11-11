@@ -49,7 +49,6 @@ public class LeftSideComponentView extends MComponent {
     protected void initializeMainPanel() {
         //ROOT COMPONENT OF LEFT GROUP VIEW
         mainPanel = getCenterFlowMainPanel(selfDimension);
-        mainPanel.setBackground(Color.yellow);
     }
 
     @Override
