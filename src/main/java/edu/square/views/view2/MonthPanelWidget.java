@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //对于某一个月的panel
-public class MonthPanel {
+public class MonthPanelWidget {
     private JPanel monthPanel = new JPanel();
     JPanel monthNamePanel = new JPanel();
     JPanel weekOfDayPanel = new JPanel();
@@ -19,7 +19,7 @@ public class MonthPanel {
     JLabel monthNameLabel = new JLabel();
     int width, height;
 
-    public MonthPanel(int i, int width, int height, int blockDay) {//i表示月份，1基
+    public MonthPanelWidget(int i, int width, int height, int blockDay) {//i表示月份，1基
         this.width = width;
         this.height = height;
         monthPanel.setPreferredSize(new Dimension((int) width, (int) height));
@@ -102,10 +102,14 @@ public class MonthPanel {
         return monthDayPanel;
     }
 
+    public List<CalendarDayPanel> getCalendarDayPanelList() {
+        return calendarDayPanelList;
+    }
+
     public static void main(String[] args) {
         JFrame f = new JFrame();
         f.setSize(1000, 1000);
-        JPanel j = new MonthPanel(3, 600, 800, 6).monthPanel;
+        JPanel j = new MonthPanelWidget(3, 600, 800, 6).monthPanel;
         f.add(j);
         f.setVisible(true);
     }

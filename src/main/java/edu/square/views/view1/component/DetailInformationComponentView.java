@@ -118,7 +118,7 @@ public class DetailInformationComponentView extends MComponent {
     private JPanel reminderStatusControllerPanel() {
         JPanel reminderStatusControllerPanel = getFlowJpanel(FlowLayout.CENTER, resizeDimensionHeightScale(selfDimension, 0.1));
 
-        JPanel deletePanel = getFlowJpanel(FlowLayout.LEFT, new Dimension((int) (0.48 * selfDimension.width), (int) (0.08 * selfDimension.height)), new Color(198,230,232));
+        JPanel deletePanel = getFlowJpanel(FlowLayout.LEFT, new Dimension((int) (0.48 * selfDimension.width), (int) (0.05 * selfDimension.height)), new Color(198,230,232));
         backButton = buttonBuilder("Back");
         deleteButton = buttonBuilder("Delete");
         deletePanel.add(backButton);
@@ -127,7 +127,7 @@ public class DetailInformationComponentView extends MComponent {
         reminderStatusControllerPanel.add(deletePanel);
 
 
-        JPanel donePanel = getFlowJpanel(FlowLayout.RIGHT, new Dimension((int) (0.48 * selfDimension.width), (int) (0.08 * selfDimension.height)), new Color(198,230,232));
+        JPanel donePanel = getFlowJpanel(FlowLayout.RIGHT, new Dimension((int) (0.48 * selfDimension.width), (int) (0.05 * selfDimension.height)), new Color(198,230,232));
         resetButton = buttonBuilder("Rest");
         saveButton = buttonBuilder("Save");
         donePanel.add(resetButton);

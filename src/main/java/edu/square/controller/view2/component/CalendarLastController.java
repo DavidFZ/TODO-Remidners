@@ -1,7 +1,7 @@
 package edu.square.controller.view2.component;
 
 import edu.square.views.view2.CalenderPanelWidget;
-import edu.square.views.view2.MonthPanel;
+import edu.square.views.view2.MonthPanelWidget;
 
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -23,7 +23,7 @@ public class CalendarLastController {
             @Override
             public void mouseClicked(MouseEvent e) {
                 c.month--;
-                c.eachDayPanel.setVisible(false);
+                c.currentMonthPanel.setVisible(false);
                 Calendar calendar = Calendar.getInstance();
                 int day;
                 if (c.month < 1) {
@@ -31,9 +31,9 @@ public class CalendarLastController {
                 }
                 calendar.set(calendar.get(Calendar.YEAR),c.month-1,1);
                 day = calendar.get(Calendar.DAY_OF_WEEK);
-                c.eachDayPanel = new MonthPanel(c.month,(int)(0.98*c.getmainPanel().getWidth()),(int)(0.8*c.getmainPanel().getHeight()),day-1).getMonthDayPanel();
-                c.eachDayPanel.setVisible(true);
-                c.dayPanel.add(c.eachDayPanel);
+                c.currentMonthPanel = new MonthPanelWidget(c.month,(int)(0.98*c.getmainPanel().getWidth()),(int)(0.8*c.getmainPanel().getHeight()),day-1).getMonthDayPanel();
+                c.currentMonthPanel.setVisible(true);
+                c.dayPanel.add(c.currentMonthPanel);
             }
         });
     }
