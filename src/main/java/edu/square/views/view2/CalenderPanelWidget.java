@@ -70,9 +70,9 @@ public class CalenderPanelWidget extends MWidget {
         month = this.GetMonth();
         Dimension dimension = resizeDimensionWidthAndHeight(selfDimension, 0.99, 0.6);
         eachDayPanel = new MonthPanel(month, dimension.width, dimension.height, dayOfWeek).monthPanel;
-//      eachDayPanel.setBackground(Color.GREEN);
+        eachDayPanel.setBackground(new Color(198,230,232));
         dayPanel.add(eachDayPanel);
-        dayPanel.setBackground(Color.green);
+//        dayPanel.setBackground(Color.BLACK);
         mainPanel.add(dayPanel);
 //        backLabel.addMouseListener(new MouseAdapter() {
 //            @Override
