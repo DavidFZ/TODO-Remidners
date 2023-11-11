@@ -91,51 +91,67 @@ public class CalenderPanelWidget extends MWidget {
             @Override
             public void mouseClicked(MouseEvent e) {
                 month--;
-                currentMonthPanel.setVisible(false);
-                Calendar calendar = Calendar.getInstance();
-                int day;
-                if (month >= 1) {
-                    calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
-                    day = calendar.get(Calendar.DAY_OF_WEEK);
-                    currentMonthPanel = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
-                    currentMonthPanel.setVisible(true);
-                    dayPanel.add(currentMonthPanel);
-                } else {
+                if (month == 0) {
                     month = 12;
-                    calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
-                    day = calendar.get(Calendar.DAY_OF_WEEK);
-                    currentMonthPanel = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
-                    currentMonthPanel.setVisible(true);
-                    dayPanel.add(currentMonthPanel);
                 }
+                changeCurrentMonthPanel();
+//                if (month >= 1) {
+//                    calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
+//                    day = calendar.get(Calendar.DAY_OF_WEEK);
+//                    currentMonthPanel = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
+//                    currentMonthPanel.setVisible(true);
+//                    dayPanel.add(currentMonthPanel);
+//                } else {
+//                    month = 12;
+//                    calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
+//                    day = calendar.get(Calendar.DAY_OF_WEEK);
+//                    currentMonthPanel = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
+//                    currentMonthPanel.setVisible(true);
+//                    dayPanel.add(currentMonthPanel);
+//                }
             }
         });
         nextLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 month++;
-                currentMonthPanel.setVisible(false);
-                Calendar calendar = Calendar.getInstance();
-                int day;
-                if (month <= 12) {
-                    calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
-                    day = calendar.get(Calendar.DAY_OF_WEEK);
-                    currentMonthPanel = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
-                    currentMonthPanel.setVisible(true);
-                    dayPanel.add(currentMonthPanel);
-                } else {
+                if (month > 12) {
                     month = 1;
-                    calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
-                    day = calendar.get(Calendar.DAY_OF_WEEK);
-                    currentMonthPanel = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
-                    currentMonthPanel.setVisible(true);
-                    dayPanel.add(currentMonthPanel);
                 }
+                changeCurrentMonthPanel();
+//                currentMonthPanel.setVisible(false);
+//                Calendar calendar = Calendar.getInstance();
+//                int day;
+//                if (month <= 12) {
+//                    calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
+//                    day = calendar.get(Calendar.DAY_OF_WEEK);
+//                    currentMonthPanel = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
+//                    currentMonthPanel.setVisible(true);
+//                    dayPanel.add(currentMonthPanel);
+//                } else {
+//                    month = 1;
+//                    calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
+//                    day = calendar.get(Calendar.DAY_OF_WEEK);
+//                    currentMonthPanel = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
+//                    currentMonthPanel.setVisible(true);
+//                    dayPanel.add(currentMonthPanel);
+//                }
 
             }
         });
 
 
+    }
+
+    private void changeCurrentMonthPanel() {
+        currentMonthPanel.setVisible(false);
+        Calendar calendar = Calendar.getInstance();
+        int day;
+        calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
+        day = calendar.get(Calendar.DAY_OF_WEEK);
+        currentMonthPanel = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
+        currentMonthPanel.setVisible(true);
+        dayPanel.add(currentMonthPanel);
     }
 
     public List<CalendarDayPanel> getCurrentMonthCalendarDayPanelList() {
