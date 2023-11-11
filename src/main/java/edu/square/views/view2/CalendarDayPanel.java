@@ -20,7 +20,7 @@ public class CalendarDayPanel {
         JLabel jLabel = new JLabel();
         jLabel.setForeground(new Color(92,179,204));
         jLabel.setFont(new Font("宋体", Font.BOLD, (int) (0.4 * size)));
-        jLabel.setText("label");
+        jLabel.setText("1");
 
         JPanel notePanel = new JPanel();
         notePanel.setBackground(new Color(216,227,231));
