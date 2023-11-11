@@ -1,6 +1,7 @@
 package edu.square.views.view2;
 
 import edu.square.entity.Reminder;
+import edu.square.utils.UIUtils.FontUtil;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -36,7 +37,7 @@ public class CalendarDayPanel {
         JPanel mainPanel = new JPanel();
         mainPanel.setPreferredSize(new Dimension(size, ((int) (0.75 * size))));
         mainPanel.setBackground(new Color(216, 227, 231));
-        reminderCounterLabel.setFont(new Font("宋体", Font.BOLD, (int) (0.4 * size)));
+        reminderCounterLabel.setFont(FontUtil.getBoldFont((int) (0.4 * size)));
 
         JPanel notePanel = new JPanel();
         notePanel.setBackground(new Color(216, 227, 231));
