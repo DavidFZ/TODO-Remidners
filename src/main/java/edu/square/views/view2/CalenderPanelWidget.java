@@ -48,6 +48,8 @@ public class CalenderPanelWidget extends MWidget {
         lastAndNextPanel.setPreferredSize(resizeDimensionHeightScale(selfDimension, 0.05));
         lastAndNextPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         lastLabel.setForeground(new Color(92, 179, 204));
+        lastLabel.setFont(FontUtil.getBoldFont((int)(0.04*selfDimension.width)));
+        nextLabel.setFont(FontUtil.getBoldFont((int)(0.04*selfDimension.width)));
         lastPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         lastPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.48, 0.05));
         lastPanel.setBackground(new Color(195, 215, 223));
