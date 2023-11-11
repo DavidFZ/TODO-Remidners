@@ -32,6 +32,10 @@ public class GroupedListComponentView extends MComponent {
         addReminderConfirmFrame = new AddReminderConfirmFrame(resizeDimensionWidthAndHeight(rootFrameDimension, 0.6, 0.4));
     }
 
+    public GroupedTitleWidgetView getGroupedTitleWidgetView() {
+        return groupedTitleWidgetView;
+    }
+
     public static void main(String[] args) {
         MComponentTestHelper mComponentTestHelper = new MComponentTestHelper() {
             @Override

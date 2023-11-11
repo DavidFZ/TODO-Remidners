@@ -1,5 +1,6 @@
 package edu.square.views.view;
 
+import edu.square.utils.UIUtils.FontUtil;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.view1.component.GroupedListComponentView;
 import edu.square.views.view2.CalendarComponentView;
@@ -21,6 +22,8 @@ public class CalenderView extends MyView {
 
         calendarComponentView = new CalendarComponentView(rootFrameDimension, this);
         groupedListComponentView = new GroupedListComponentView(rootFrameDimension, this);
+        groupedListComponentView.getGroupedTitleWidgetView().getTitleLabel().setFont(FontUtil.getBoldFont(rootFrameDimension, 0.02));
+
     }
 
     public static void main(String[] args) {
@@ -39,7 +42,7 @@ public class CalenderView extends MyView {
         calendarComponentView.getCalenderPanelWidget().addListenerOnNextLabel(mouseAdapter);
     }
 
-    public void addListenerOnLastLaberl(MouseAdapter mouseAdapter){
+    public void addListenerOnLastLaberl(MouseAdapter mouseAdapter) {
         calendarComponentView.getCalenderPanelWidget().addListenerOnLastLabel(mouseAdapter);
     }
 }
