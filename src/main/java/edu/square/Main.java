@@ -68,5 +68,6 @@ public class Main {
         mainFrame.setBackground(new Color(238, 238, 238));
 
         mainFrame.setVisible(true);
+        mainFrame.setResizable(false);
     }
 }
