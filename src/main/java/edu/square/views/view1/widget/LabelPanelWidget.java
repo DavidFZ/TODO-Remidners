@@ -34,18 +34,18 @@ public class LabelPanelWidget extends MWidget {
         label = new JLabel("");
         label.setFont(font);
         label.setLayout(new FlowLayout(FlowLayout.CENTER));
-        label.setForeground(new Color(216,227,231));
+        label.setForeground(new Color(81, 196, 211));
         mainPanel.add(label);
-        mainPanel.setBackground(new Color(81,196,211));
+        mainPanel.setBackground(new Color(216, 227, 231));
     }
 
     public void setBeSelected() {
-        label.setForeground(new Color(81,196,211));
-        mainPanel.setBackground(new Color(216,227,231));
+        label.setForeground(new Color(216, 227, 231));
+        mainPanel.setBackground(new Color(81, 196, 211));
     }
 
     public void setNotSelected() {
-        label.setForeground(new Color(216,227,231));
-        mainPanel.setBackground(new Color(81,196,211));
+        label.setForeground(new Color(81, 196, 211));
+        mainPanel.setBackground(new Color(216, 227, 231));
     }
 }

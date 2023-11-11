@@ -31,20 +31,20 @@ public class Main {
 
 
         //list view
-        ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame, 0.9));
+        ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame, 0.8));
 //        ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame, 1));
         ListController listController = new ListController(listView);
         JPanel listPanel = listView.getMainPanel();
         listPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         //calender view
-        CalenderView calenderView = new CalenderView(mainFrame, resizeDimensionWidthScale(mainFrame, 0.9));
+        CalenderView calenderView = new CalenderView(mainFrame, resizeDimensionWidthScale(mainFrame, 0.8));
         CalenderViewController calenderViewController = new CalenderViewController(calenderView);
         JPanel calenderPanel = calenderView.getMainPanel();
         calenderPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         //TomatoTimer view
-        TomatoTimerView tomatoTimerView = new TomatoTimerView(mainFrame, resizeDimensionWidthScale(mainFrame, 0.9));
+        TomatoTimerView tomatoTimerView = new TomatoTimerView(mainFrame, resizeDimensionWidthScale(mainFrame, 0.8));
         JPanel tomatoTimerPanel = tomatoTimerView.getMainPanel();
         tomatoTimerPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
