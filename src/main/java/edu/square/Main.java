@@ -23,6 +23,7 @@ public class Main {
 
         //main frame
         JFrame mainFrame = JFrameFactory.getDefaultJFrame(.8d, "TODO");
+        mainFrame.setBackground(new Color(92,179,204));
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainFrame.setLayout(new FlowLayout(FlowLayout.LEFT, 0, 0));
 
@@ -32,6 +33,7 @@ public class Main {
 //        ListView listView = new ListView(mainFrame, resizeDimensionWidthScale(mainFrame, 1));
         ListController listController = new ListController(listView);
         JPanel listPanel = listView.getMainPanel();
+        listPanel.setBackground(new Color(216,227,231));
         listPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         //calender view
