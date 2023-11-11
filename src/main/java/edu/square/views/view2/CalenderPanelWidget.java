@@ -18,8 +18,8 @@ public class CalenderPanelWidget extends MWidget {
     JPanel lastAndNextPanel = new JPanel();
     JPanel lastPanel = new JPanel();
     JPanel nextPanel = new JPanel();
-    JLabel lastLabel = new JLabel("Last Month");
-    JLabel nextLabel = new JLabel("Next Month");
+    JLabel lastLabel = new JLabel("<<Last Month");
+    JLabel nextLabel = new JLabel("Next Month>>");
 
     JLabel backLabel = new JLabel("back");
 
@@ -52,9 +52,11 @@ public class CalenderPanelWidget extends MWidget {
         //last month and next month
         lastAndNextPanel.setPreferredSize(resizeDimensionHeightScale(selfDimension, 0.05));
         lastAndNextPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        lastLabel.setForeground(new Color(92,179,204));
         lastPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         lastPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.48, 0.05));
         lastPanel.setBackground(new Color(195, 215, 223));
+        nextLabel.setForeground(new Color(92,179,204));
         nextPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         nextPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.48, 0.05));
         nextPanel.setBackground(new Color(195, 215, 223));
