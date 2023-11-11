@@ -143,6 +143,10 @@ public class ListController {
         reminderView.addMouseListenerOnReminderView(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
+
+//                button.addActionListener(getColorListener(panel, initialColor, targetColor))
+
                 //update model
                 detailInformationComponentController.reminderUpdate(reminderView.getReminder());
 

@@ -5,6 +5,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 public class ColorChangeUtil {
 
@@ -22,12 +24,12 @@ public class ColorChangeUtil {
 //            button.addActionListener(new ActionListener() {
 //                @Override
 //                public void actionPerformed(ActionEvent e) {
-                    Color initialColor = panel.getBackground();
-                    Color targetColor = Color.BLUE; // 目标背景颜色
+            Color initialColor = panel.getBackground();
+            Color targetColor = Color.BLUE; // 目标背景颜色
 //                    animateBackgroundColor(panel, initialColor, targetColor, 1000, 1000);
 //                }
 //            });
-            button.addActionListener(getColorListener(panel,initialColor,targetColor));
+            button.addMouseListener(getColorListener(panel, initialColor, targetColor));
 
             frame.add(button, BorderLayout.SOUTH);
             frame.setVisible(true);
@@ -88,12 +90,39 @@ public class ColorChangeUtil {
         fadeOutTimer.start();
     }
 
-    public static ActionListener getColorListener(JPanel targetPanel, Color initialColor, Color targetColor) {
-        return new ActionListener() {
+    public static MouseListener getColorListener(JPanel targetPanel, Color initialColor, Color targetColor) {
+        return new MouseListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                animateBackgroundColor(targetPanel, initialColor, targetColor, 1000, 1000);
+            public void mouseClicked(MouseEvent e) {
+                animateBackgroundColor(targetPanel, initialColor, targetColor, 500, 500);
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+
             }
         };
+
+//        return new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                animateBackgroundColor(targetPanel, initialColor, targetColor, 1000, 1000);
+//            }
+//        };
     }
 }

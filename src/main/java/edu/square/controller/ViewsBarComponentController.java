@@ -32,7 +32,7 @@ public class ViewsBarComponentController {
 
         //initializeCardPanel
         cardPanel = new JPanel();
-        Dimension dimension = new Dimension((int) (rootFrameDimension.getWidth() - selfDimension.getWidth()), (int) selfDimension.getHeight());
+        Dimension dimension = new Dimension((int) (rootFrameDimension.getWidth() - selfDimension.getWidth()*1.1), (int) selfDimension.getHeight());
         cardPanel.setPreferredSize(dimension);
         cardPanel.setLayout(new CardLayout());
 

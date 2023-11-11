@@ -12,7 +12,7 @@ public class ColorUtil {
     private static Color colorW2;
     private static Color colorW3;
     private static Color colorW4;
-    ColorUtil(){
+    public ColorUtil(){
         //云峰白
         color1 = new Color(216,227,231);
         //井天蓝

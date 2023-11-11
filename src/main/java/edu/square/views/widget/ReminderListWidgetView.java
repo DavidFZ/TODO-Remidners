@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static edu.square.utils.ColorChangeUtil.getColorListener;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionHeightScale;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.resizeDimensionWidthAndHeight;
 
@@ -40,7 +41,6 @@ public class ReminderListWidgetView extends MWidget {
     private ActionListener completeActionListener;
 
     public ReminderListWidgetView(Dimension rootFrameDimension, Dimension selfDimension) {
-        //main将被加入到scrollPane中
         super(rootFrameDimension, selfDimension);
 
         //init dimensions
@@ -164,10 +164,10 @@ public class ReminderListWidgetView extends MWidget {
         scrollPane.setPreferredSize(resizeDimensionHeightScale(selfDimension, 0.9));//防止scrollPane过长
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setWheelScrollingEnabled(true);
-        scrollPane.setBackground(new Color(195,215,223));
+        scrollPane.setBackground(new Color(195, 215, 223));
 
         mainPanel.add(scrollPane);
-        mainPanel.setBackground(new Color(195,215,223));
+        mainPanel.setBackground(new Color(195, 215, 223));
 
     }
 
@@ -244,6 +244,7 @@ public class ReminderListWidgetView extends MWidget {
 
         public void addMouseListenerOnReminderView(MouseListener mouseListener) {
             innerPanel.addMouseListener(mouseListener);
+            innerPanel.addMouseListener(getColorListener(innerPanel,innerPanel.getBackground(), new Color(81,196,211)));
         }
     }
 }
