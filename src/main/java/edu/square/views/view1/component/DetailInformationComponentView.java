@@ -142,7 +142,7 @@ public class DetailInformationComponentView extends MComponent {
     protected void initializeView() {
         //default can not see
         mainPanel.setVisible(false);
-        mainPanel.setBackground(new Color(198,230,232));
+        mainPanel.setBackground(new Color(238,238,238));
     }
 
     public void setVisibility(boolean visibility) {

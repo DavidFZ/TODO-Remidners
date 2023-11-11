@@ -64,7 +64,7 @@ public class Main {
 
         mainFrame.add(viewsBarComponentView.getMainPanel());
         mainFrame.add(viewsBarComponentController.getCardPanel());
-
+        mainFrame.setBackground(new Color(238, 238, 238));
 
         mainFrame.setVisible(true);
     }

@@ -154,21 +154,20 @@ public class ReminderListWidgetView extends MWidget {
 
     @Override
     protected void initializeMainPanel() {
-        mainPanel.setBackground(ColorUtil.getColor1());
         mainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
         containerPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 0, (int) (0.005 * rootFrameDimension.getHeight())));
         containerPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.9, 0.85));
-        containerPanel.setBackground(ColorUtil.getColor5());
+//        containerPanel.setBackground(new Color(195,215,223));
 
         scrollPane = new JScrollPane(containerPanel);
         scrollPane.setPreferredSize(resizeDimensionHeightScale(selfDimension, 0.9));//防止scrollPane过长
         scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setWheelScrollingEnabled(true);
-        scrollPane.setBackground(ColorUtil.getColor5());
+        scrollPane.setBackground(new Color(195,215,223));
 
         mainPanel.add(scrollPane);
-        mainPanel.setBackground(ColorUtil.getColor5());
+        mainPanel.setBackground(new Color(195,215,223));
 
     }
 

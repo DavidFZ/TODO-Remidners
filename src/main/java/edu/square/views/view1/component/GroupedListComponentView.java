@@ -50,6 +50,7 @@ public class GroupedListComponentView extends MComponent {
     protected void initializeMainPanel() {
         FlowLayout flowLayout = new FlowLayout(FlowLayout.CENTER, 0, 0);
         mainPanel = getFlowJpanel(flowLayout, selfDimension);
+        mainPanel.setBackground(new Color(238,238,238));
     }
 
     @Override
@@ -64,13 +65,13 @@ public class GroupedListComponentView extends MComponent {
         //GROUP TITLE
         groupedTitleWidgetView = new GroupedTitleWidgetView(parentDimension, resizeDimensionHeightScale(selfDimension, 0.1));
         JPanel groupedTitleWidgetPanel = new JPanel();
-        groupedTitleWidgetPanel.setBackground(new Color(198,230,232));
+        groupedTitleWidgetPanel.setBackground(new Color(195,215,223));
         mainPanel.add(groupedTitleWidgetView.getMainPanel());
 
         //GROUP LABEL
         reminderListWidgetView = new ReminderListWidgetView(parentDimension, resizeDimensionHeightScale(selfDimension, 0.9));
         JPanel reminderListPanel = reminderListWidgetView.getMainPanel();
-        reminderListPanel.setBackground(new Color(198,230,232));
+        reminderListPanel.setBackground(new Color(238,238,238));
         mainPanel.add(reminderListPanel);
     }
 
