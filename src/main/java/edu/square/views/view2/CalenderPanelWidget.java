@@ -52,11 +52,11 @@ public class CalenderPanelWidget extends MWidget {
         //last month and next month
         lastAndNextPanel.setPreferredSize(resizeDimensionHeightScale(selfDimension, 0.05));
         lastAndNextPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
-        lastLabel.setForeground(new Color(92,179,204));
+        lastLabel.setForeground(new Color(92, 179, 204));
         lastPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
         lastPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.48, 0.05));
         lastPanel.setBackground(new Color(195, 215, 223));
-        nextLabel.setForeground(new Color(92,179,204));
+        nextLabel.setForeground(new Color(92, 179, 204));
         nextPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
         nextPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.48, 0.05));
         nextPanel.setBackground(new Color(195, 215, 223));
@@ -116,7 +116,8 @@ public class CalenderPanelWidget extends MWidget {
         int day;
         calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
         day = calendar.get(Calendar.DAY_OF_WEEK);
-        currentMonthPanel = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
+        currentMonthPanelWidget = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1);
+        currentMonthPanel = currentMonthPanelWidget.getMonthDayPanel();
         currentMonthPanel.setVisible(true);
         dayPanel.add(currentMonthPanel);
     }
