@@ -1,5 +1,6 @@
 package edu.square.views.view2;
 
+import edu.square.utils.UIUtils.FontUtil;
 import lombok.Getter;
 
 import javax.swing.*;
@@ -30,7 +31,8 @@ public class MonthPanelWidget {
                 "January", "February", "March", "April", "May", "Jun", "July", "August", "September", "October", "November", "December"
         };
         monthNameLabel.setText(months[i - 1]);
-        monthNameLabel.setFont(new Font("宋体", Font.BOLD, (int) (0.05 * width)));
+        monthNameLabel.setFont(FontUtil.getBoldFont((int) (0.05 * width)));
+//        new Font("宋体", Font.BOLD, (int) (0.05 * width))
         monthNamePanel.add(monthNameLabel);
         monthNamePanel.setBackground(new Color(198, 230, 232));
         monthPanel.add(monthNamePanel);
@@ -46,7 +48,7 @@ public class MonthPanelWidget {
             JPanel SundayPanel = new JPanel();
             SundayPanel.setPreferredSize(new Dimension((int) (width / 7.5), (int) (0.06 * height)));
             JLabel SundayLabel = new JLabel(weekdayText);
-            SundayLabel.setFont(new Font("宋体", Font.BOLD, (int) (0.02 * width)));
+            SundayLabel.setFont(FontUtil.getBoldFont((int) (0.02 * width)));
             SundayPanel.add(SundayLabel);
             SundayPanel.setBackground(new Color(198, 230, 232));
             weekOfDayPanel.add(SundayPanel);
