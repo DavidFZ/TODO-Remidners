@@ -27,7 +27,6 @@ public class CalenderViewController {
     public CalenderViewController(CalenderView calenderView) {
         this.calenderView = calenderView;
 
-        Calendar calendar = Calendar.getInstance();
         indexMonth = Calendar.getInstance().get(Calendar.MONTH);
 
         groupedListComponentController = new GroupedListComponentController(calenderView.getGroupedListComponentView(), new GroupedListComponentModel());

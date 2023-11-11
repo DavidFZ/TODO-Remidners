@@ -112,6 +112,7 @@ public class CalenderPanelWidget extends MWidget {
 
     private void changeCurrentMonthPanel() {
         currentMonthPanel.setVisible(false);
+        dayPanel.remove(currentMonthPanel);
         Calendar calendar = Calendar.getInstance();
         int day;
         calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
