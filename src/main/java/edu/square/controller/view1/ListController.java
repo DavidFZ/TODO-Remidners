@@ -6,6 +6,7 @@ import edu.square.controller.view1.component.LeftSideComponentController;
 import edu.square.entity.Reminder;
 import edu.square.model.view1.ListModel;
 import edu.square.utils.UIUtils.JFrameFactory;
+import edu.square.views.view1.component.DetailInformationComponentView;
 import edu.square.views.view1.component.TimeSelectorComponentView;
 import edu.square.views.view1.view.ListView;
 import edu.square.views.widget.ReminderListWidgetView;
@@ -159,7 +160,12 @@ public class ListController {
                 Reminder reminder = listModel.detailInformationModel.getReminder();
                 TimeSelectorComponentView timeSelectorComponentView = listView.detailInformationComponent.timeSelectorComponentView;
                 timeSelectorComponentView.setSelectedItem(reminder);
-                timeSelectorComponentView.getFlaggedRadio().setSelected(reminder.getIsImportant());
+                Boolean isImportant = reminder.getIsImportant();
+                timeSelectorComponentView.getFlaggedRadio().setSelected(isImportant != null && isImportant);
+
+                //Show dialog
+                DetailInformationComponentView detailInformationComponentView = listView.detailInformationComponent;
+                JOptionPane.showMessageDialog(detailInformationComponentView.getMainPanel(), "Reset this reminder successfully", "Reset", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
@@ -182,6 +188,10 @@ public class ListController {
                 //Controller
                 addListenersOnDoneStatusButtons();
                 addListenerOnReminderViews();
+
+                //Show dialog
+                DetailInformationComponentView detailInformationComponentView = listView.detailInformationComponent;
+                JOptionPane.showMessageDialog(detailInformationComponentView.getMainPanel(), "Delete this reminder successfully", "Delete", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }
@@ -201,6 +211,10 @@ public class ListController {
                 //Controller
                 addListenersOnDoneStatusButtons();
                 addListenerOnReminderViews();
+
+                //Show dialog
+                DetailInformationComponentView detailInformationComponentView = listView.detailInformationComponent;
+                JOptionPane.showMessageDialog(detailInformationComponentView.getMainPanel(), "Save this reminder successfully", "Save", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     }

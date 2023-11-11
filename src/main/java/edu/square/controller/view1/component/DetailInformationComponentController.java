@@ -8,6 +8,7 @@ import edu.square.views.component.MComponent;
 import edu.square.views.view1.component.DetailInformationComponentView;
 import edu.square.views.view1.component.TimeSelectorComponentView;
 
+import javax.swing.*;
 import java.awt.event.ActionListener;
 
 public class DetailInformationComponentController extends MController {
