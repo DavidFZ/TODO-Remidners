@@ -155,7 +155,7 @@ public class MonthPanel {
         }
         for(int k = 0; k < day; k++){
             JPanel blankPanel = new JPanel();
-            blankPanel.setPreferredSize(new Dimension((int)(width/7.5),(int)(0.8*width/7.5)));
+            blankPanel.setPreferredSize(new Dimension((int)(width/7.5),(int)(width/7.5)));
             monthDayPanel.add(blankPanel);
         }
         if(i == 1 || i== 3 || i==5 || i == 7 || i == 8 || i == 10 || i == 12){

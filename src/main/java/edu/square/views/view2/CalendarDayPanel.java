@@ -10,15 +10,19 @@ public class CalendarDayPanel {
     JTextArea dayTextArea = new JTextArea();
 
     CalendarDayPanel(int size, String s) {
-        dayPanel.setPreferredSize(new Dimension(size, (int) (0.8 * size)));
+        dayPanel.setPreferredSize(new Dimension(size, size));
         dayPanel.setBackground(Color.WHITE);
         dayLabel.setText(s);
         dayLabel.setFont(new Font("宋体", Font.BOLD, (int) (0.2 * size)));
         dayPanel.setLayout(new BorderLayout());
         dayPanel.add(dayLabel, BorderLayout.NORTH);
-        dayTextArea.setLineWrap(true);
-        dayTextArea.setBorder(null);
-        dayPanel.add(dayTextArea, BorderLayout.CENTER);
+
+        JPanel notePanel = new JPanel();
+        notePanel.setBackground(new Color(216,227,231));
+        dayPanel.add(notePanel);
+//        dayTextArea.setLineWrap(true);
+//        dayTextArea.setBorder(null);
+//        dayPanel.add(dayTextArea, BorderLayout.CENTER);
 
         dayPanel.addMouseListener(new MouseAdapter() {
             @Override

@@ -67,11 +67,11 @@ public class CalenderPanelWidget extends MWidget {
 
         //panel of days
         dayPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
-        dayPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.99, 0.6));
+        dayPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.99, 0.77));
 //      dayPanel.setBackground(Color.BLUE);
         int dayOfWeek = this.GetThisMonthFirstDay() - 1;
         month = this.GetMonth();
-        Dimension dimension = resizeDimensionWidthAndHeight(selfDimension, 0.99, 0.6);
+        Dimension dimension = resizeDimensionWidthAndHeight(selfDimension, 0.99, 0.77);
         eachDayPanel = new MonthPanel(month, dimension.width, dimension.height, dayOfWeek).monthPanel;
         eachDayPanel.setBackground(new Color(198,230,232));
         dayPanel.add(eachDayPanel);
