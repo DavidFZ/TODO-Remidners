@@ -1,5 +1,6 @@
 package edu.square.utils.DBUtils.jdbc;
 
+import edu.square.utils.DBUtils.InitSQL;
 import edu.square.utils.FileUtil;
 
 import java.io.File;
@@ -63,7 +64,8 @@ public class DatabaseStatusUtil extends Thread {
 
         try {
             //TODO: Multi-threading
-            useSQLFileInitDB();
+//            useSQLFileInitDB();
+            useJavaClassInitDB();
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -79,6 +81,18 @@ public class DatabaseStatusUtil extends Thread {
         }
         statement.close();
     }
+
+    private static void useJavaClassInitDB() throws SQLException {
+        Statement statement = DatabaseStatementUtil.getStatement();
+        statement.executeUpdate(InitSQL.initSQL);
+
+        String[] i = InitSQL.insertData;
+        for (String s : i)
+            statement.execute(s);
+
+
+    }
+
 
     public static void forcedInitDB() throws SQLException {
         deleteDBDir(false);
