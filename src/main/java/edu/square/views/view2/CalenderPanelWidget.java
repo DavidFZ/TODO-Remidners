@@ -82,13 +82,9 @@ public class CalenderPanelWidget extends MWidget {
         dayPanel.setBackground(new Color(198, 230, 232));
 //        dayPanel.setBackground(Color.BLACK);
         mainPanel.add(dayPanel);
-//        backLabel.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//                calenderFrame.dispose();
-//            }
-//        });
+    }
 
+    private void bindListenerOnLastLabel() {
         lastLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -97,22 +93,11 @@ public class CalenderPanelWidget extends MWidget {
                     month = 12;
                 }
                 changeCurrentMonthPanel();
-//                if (month >= 1) {
-//                    calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
-//                    day = calendar.get(Calendar.DAY_OF_WEEK);
-//                    currentMonthPanel = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
-//                    currentMonthPanel.setVisible(true);
-//                    dayPanel.add(currentMonthPanel);
-//                } else {
-//                    month = 12;
-//                    calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
-//                    day = calendar.get(Calendar.DAY_OF_WEEK);
-//                    currentMonthPanel = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
-//                    currentMonthPanel.setVisible(true);
-//                    dayPanel.add(currentMonthPanel);
-//                }
             }
         });
+    }
+
+    private void bindListenerOnNextLabel() {
         nextLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -121,28 +106,8 @@ public class CalenderPanelWidget extends MWidget {
                     month = 1;
                 }
                 changeCurrentMonthPanel();
-//                currentMonthPanel.setVisible(false);
-//                Calendar calendar = Calendar.getInstance();
-//                int day;
-//                if (month <= 12) {
-//                    calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
-//                    day = calendar.get(Calendar.DAY_OF_WEEK);
-//                    currentMonthPanel = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
-//                    currentMonthPanel.setVisible(true);
-//                    dayPanel.add(currentMonthPanel);
-//                } else {
-//                    month = 1;
-//                    calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
-//                    day = calendar.get(Calendar.DAY_OF_WEEK);
-//                    currentMonthPanel = new MonthPanelWidget(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
-//                    currentMonthPanel.setVisible(true);
-//                    dayPanel.add(currentMonthPanel);
-//                }
-
             }
         });
-
-
     }
 
     private void changeCurrentMonthPanel() {
@@ -207,9 +172,11 @@ public class CalenderPanelWidget extends MWidget {
 
     public void addListenerOnNextLabel(MouseAdapter mouseAdapter) {
         nextLabel.addMouseListener(mouseAdapter);
+        bindListenerOnNextLabel();
     }
 
     public void addListenerOnLastLabel(MouseAdapter mouseAdapter) {
         lastLabel.addMouseListener(mouseAdapter);
+        bindListenerOnLastLabel();
     }
 }
