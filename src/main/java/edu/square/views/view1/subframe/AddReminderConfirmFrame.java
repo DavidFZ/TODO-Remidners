@@ -46,9 +46,9 @@ public class AddReminderConfirmFrame {
         itemName = new JTextField();
         itemName.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.9, 0.1));
 
-        BlockPanelWidget blockPanelWidget0 = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.1));
+        BlockPanelWidget blockPanelWidget0 = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.05));
 
-        BlockPanelWidget blockPanelWidget = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.05));
+        BlockPanelWidget blockPanelWidget = new BlockPanelWidget(selfDimension, resizeDimensionHeightScale(selfDimension, 0.01));
 
         timeSelectorComponentView = new TimeSelectorComponentView(selfDimension, resizeDimensionHeightScale(selfDimension, 0.7));
         timSelectorComponentController = new TimSelectorComponentController(timeSelectorComponentView, new TimeSelectorComponentModel());
