@@ -22,7 +22,7 @@ public class MonthPanelWidget {
     public MonthPanelWidget(int i, int width, int height, int blockDay) {//i表示月份，1基
         this.width = width;
         this.height = height;
-        monthPanel.setPreferredSize(new Dimension((int) width, (int) height));
+        monthPanel.setPreferredSize(new Dimension(width, height));
         monthPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         monthNamePanel.setPreferredSize(new Dimension((int) (width), (int) (0.1 * height)));
         monthDayPanel.setBackground(new Color(198, 230, 232));
@@ -99,7 +99,7 @@ public class MonthPanelWidget {
 
 
     public JPanel getMonthDayPanel() {
-        return monthDayPanel;
+        return monthPanel;
     }
 
     public List<CalendarDayPanel> getCalendarDayPanelList() {
