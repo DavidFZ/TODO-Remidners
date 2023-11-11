@@ -11,12 +11,13 @@ import java.util.List;
 
 //每个月中每一天的panel
 public class CalendarDayPanel {
-    JTextArea dayTextArea = new JTextArea();
     private final JPanel dayPanel = new JPanel();
     private final JLabel dayLabel = new JLabel();
+    JTextArea dayTextArea = new JTextArea();
     @Getter
     @Setter
     private List<Reminder> todayReminderList;
+    private final JLabel reminderCounterLabel;
 
     CalendarDayPanel(int size, String s) {
         dayPanel.setPreferredSize(new Dimension(size, size));
@@ -26,8 +27,8 @@ public class CalendarDayPanel {
         dayPanel.setLayout(new BorderLayout());
         dayPanel.add(dayLabel, BorderLayout.NORTH);
 
-        JLabel jLabel = new JLabel();
-        jLabel.setForeground(new Color(92, 179, 204));
+        reminderCounterLabel = new JLabel();
+        reminderCounterLabel.setForeground(new Color(92, 179, 204));
 
         JPanel heightPanel = new JPanel();
         heightPanel.setPreferredSize(new Dimension(size, ((int) (0.15 * size))));
@@ -35,12 +36,12 @@ public class CalendarDayPanel {
         JPanel mainPanel = new JPanel();
         mainPanel.setPreferredSize(new Dimension(size, ((int) (0.75 * size))));
         mainPanel.setBackground(new Color(216, 227, 231));
-        jLabel.setFont(new Font("宋体", Font.BOLD, (int) (0.4 * size)));
+        reminderCounterLabel.setFont(new Font("宋体", Font.BOLD, (int) (0.4 * size)));
 
         JPanel notePanel = new JPanel();
         notePanel.setBackground(new Color(216, 227, 231));
         notePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
-        mainPanel.add(jLabel);
+        mainPanel.add(reminderCounterLabel);
         notePanel.add(heightPanel);
         notePanel.add(mainPanel);
         dayPanel.add(notePanel);
@@ -55,8 +56,8 @@ public class CalendarDayPanel {
         dayPanel.addMouseListener(mouseAdapter);
     }
 
-    public void setDayLabel(String s) {
-        dayLabel.setText(s);
+    public void setReminderCounterText(String s) {
+        reminderCounterLabel.setText(s);
     }
 
     public JPanel getDayPanel() {

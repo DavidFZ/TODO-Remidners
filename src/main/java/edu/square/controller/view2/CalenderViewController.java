@@ -84,7 +84,7 @@ public class CalenderViewController {
 
             //update view
             if (dayList != null && dayList.size() > 0)
-                list.get(i).setDayLabel(String.valueOf(dayList.size()));
+                list.get(i).setReminderCounterText(String.valueOf(dayList.size()));
 
             //add listener
             list.get(i).getDayPanel().addMouseListener(new MouseAdapter() {
@@ -92,8 +92,8 @@ public class CalenderViewController {
                 public void mouseClicked(MouseEvent e) {
                     super.mouseClicked(e);
                     //title
-                    groupedListComponentController.setGroupedTitle(year + " " + MONTHS[indexMonth] + " " + day);
-                    groupedListComponentController.setGroupedTitleFont(FontUtil.getBoldFont(10));
+                    groupedListComponentController.setGroupedTitle(MONTHS[indexMonth] + " " + day);
+//                    groupedListComponentController.setGroupedTitle(year + " " + MONTHS[indexMonth] + " " + day);
                     groupedListComponentController.updateListModelAndView(dayList);
                 }
             });
