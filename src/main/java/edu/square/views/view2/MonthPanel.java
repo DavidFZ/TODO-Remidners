@@ -18,6 +18,7 @@ public class MonthPanel {
         monthPanel.setPreferredSize(new Dimension((int)width,(int)heigh));
         monthPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
         monthNamePanel.setPreferredSize(new Dimension((int)(width),(int)(0.1*heigh)));
+        monthDayPanel.setBackground(new Color(198,230,232));
         if(i == 1){
             monthNameLabel.setText("January");
             monthNameLabel.setFont(new Font("宋体",Font.BOLD,(int)(0.05*width)));
@@ -78,6 +79,7 @@ public class MonthPanel {
             monthNameLabel.setFont(new Font("宋体",Font.BOLD,(int)(0.05*width)));
             monthNamePanel.add(monthNameLabel);
         }
+        monthNamePanel.setBackground(new Color(198,230,232));
         monthPanel.add(monthNamePanel);
 
 
@@ -89,6 +91,7 @@ public class MonthPanel {
         JLabel SundayLabel = new JLabel("Sunday");
         SundayLabel.setFont(new Font("宋体",Font.BOLD,(int)(0.02*width)));
         SundayPanel.add(SundayLabel);
+        SundayPanel.setBackground(new Color(198,230,232));
         weekOfDayPanel.add(SundayPanel);
 
         JPanel MondayPanel = new JPanel();
@@ -96,6 +99,7 @@ public class MonthPanel {
         JLabel MondayLabel = new JLabel("Monday");
         MondayLabel.setFont(new Font("宋体",Font.BOLD,(int)(0.02*width)));
         MondayPanel.add(MondayLabel);
+        MondayPanel.setBackground(new Color(198,230,232));
         weekOfDayPanel.add(MondayPanel);
 
         JPanel TuesdayPanel = new JPanel();
@@ -103,6 +107,7 @@ public class MonthPanel {
         JLabel TuesdayLabel = new JLabel("Tuesday");
         TuesdayLabel.setFont(new Font("宋体",Font.BOLD,(int)(0.02*width)));
         TuesdayPanel.add(TuesdayLabel);
+        TuesdayPanel.setBackground(new Color(198,230,232));
         weekOfDayPanel.add(TuesdayPanel);
 
         JPanel WednesdayPanel = new JPanel();
@@ -110,6 +115,7 @@ public class MonthPanel {
         JLabel WednesdayLabel = new JLabel("Wednesday");
         WednesdayLabel.setFont(new Font("宋体",Font.BOLD,(int)(0.02*width)));
         WednesdayPanel.add(WednesdayLabel);
+        WednesdayPanel.setBackground(new Color(198,230,232));
         weekOfDayPanel.add(WednesdayPanel);
 
         JPanel ThursdayPanel = new JPanel();
@@ -117,6 +123,7 @@ public class MonthPanel {
         JLabel ThursdayLabel = new JLabel("Thursday");
         ThursdayLabel.setFont(new Font("宋体",Font.BOLD,(int)(0.02*width)));
         ThursdayPanel.add(ThursdayLabel);
+        ThursdayPanel.setBackground(new Color(198,230,232));
         weekOfDayPanel.add(ThursdayPanel);
 
         JPanel FridayPanel = new JPanel();
@@ -124,6 +131,7 @@ public class MonthPanel {
         JLabel FridayLabel = new JLabel("Friday");
         FridayLabel.setFont(new Font("宋体",Font.BOLD,(int)(0.02*width)));
         FridayPanel.add(FridayLabel);
+        FridayPanel.setBackground(new Color(198,230,232));
         weekOfDayPanel.add(FridayPanel);
 
         JPanel SaturdayPanel = new JPanel();
@@ -131,9 +139,10 @@ public class MonthPanel {
         JLabel SaturdayLabel = new JLabel("Saturday");
         SaturdayLabel.setFont(new Font("宋体",Font.BOLD,(int)(0.02*width)));
         SaturdayPanel.add(SaturdayLabel);
+        SaturdayPanel.setBackground(new Color(198,230,232));
         weekOfDayPanel.add(SaturdayPanel);
 
-
+        weekOfDayPanel.setBackground(new Color(198,230,232));
         monthPanel.add(weekOfDayPanel);
 
 
@@ -170,7 +179,8 @@ public class MonthPanel {
                 monthDayPanel.add(J);
             }
         }
-
+        monthDayPanel.setBackground(new Color(198,230,232));
+        monthPanel.setBackground(new Color(198,230,232));
         monthPanel.add(monthDayPanel);
 
 

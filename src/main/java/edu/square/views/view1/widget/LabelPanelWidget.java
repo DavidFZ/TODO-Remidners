@@ -44,6 +44,6 @@ public class LabelPanelWidget extends MWidget {
 
     public void setNotSelected() {
         label.setForeground(new Color(198,230,232));
-        mainPanel.setBackground(new Color(198,230,232));
+        mainPanel.setBackground(new Color(92,179,204));
     }
 }
