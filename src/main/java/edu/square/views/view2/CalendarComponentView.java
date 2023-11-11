@@ -12,8 +12,8 @@ import static edu.square.utils.UIUtils.JPanelUtil.getCenterFlowMainPanel;
 
 public class CalendarComponentView extends MComponent {
 
-    public CalendarComponentView(Dimension selfDimension, MyView myView) {
-        super(myView, selfDimension);
+    public CalendarComponentView(Dimension rootFrameDimension, MyView myView) {
+        super(myView, rootFrameDimension);
 
     }
 
