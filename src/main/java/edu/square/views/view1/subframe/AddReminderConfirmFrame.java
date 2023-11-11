@@ -33,17 +33,15 @@ public class AddReminderConfirmFrame {
 
         mainFrame = JFrameFactory.buildJFrame(selfDimension, "Please add Reminder");
         mainFrame.setLayout(new BorderLayout());
-        mainFrame.setBackground(new Color(198,230,232));
 
         //inputPanel
         JLabel inputLabel = new JLabel("Set Reminder Content");
         inputLabel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.8, 0.1));
         inputLabel.setFont(font);
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        inputPanel.setBackground(new Color(198,230,232));
-        inputLabel.setForeground(new Color(92,179,204));
-        inputPanel.add(inputLabel);
 
+        inputPanel.setBackground(Color.green);
+        inputPanel.add(inputLabel);
 
         itemName = new JTextField();
         itemName.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.9, 0.1));
@@ -61,7 +59,7 @@ public class AddReminderConfirmFrame {
         detailMessagePanel.add(itemName);
         detailMessagePanel.add(blockPanelWidget0.getMainPanel());
         detailMessagePanel.add(timeSelectorComponentView.getMainPanel());
-        detailMessagePanel.setBackground(new Color(198,230,232));
+
         confirmButton = new JButton("Confirm");
         JPanel confirmPanel = new JPanel(new BorderLayout());
         //while input Enter will be same as click confirm button

@@ -66,7 +66,6 @@ public class ComboBoxPanelWidgetView extends MWidget {
 //        jComboBox.setFont(font);
         jComboBox.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.6, 0.8));
         mainPanel.add(jComboBox);
-        mainPanel.setBackground(new Color(198,230,232));
     }
 
     /**

@@ -83,25 +83,19 @@ public class TimeSelectorComponentView extends MComponent {
 
         JPanel detailMessagePanel = JPanelUtil.getFlowJpanel(FlowLayout.CENTER, selfDimension);
         detailMessagePanel.add(tipsLabel);
-        detailMessagePanel.setBackground(new Color(198,230,232));
         JPanel a = JPanelUtil.getFlowJpanel(FlowLayout.CENTER);
         a.add(yearsComboBoxPanelWidgetView.getMainPanel());
         a.add(monthsComboBoxPanelWidgetView.getMainPanel());
-        a.setBackground(new Color(198,230,232));
         JPanel b = JPanelUtil.getFlowJpanel(FlowLayout.CENTER);
         b.add(datesComboBoxPanelWidgetView.getMainPanel());
         b.add(hoursComboBoxPanelWidgetView.getMainPanel());
-        b.setBackground(new Color(198,230,232));
         detailMessagePanel.add(a);
         detailMessagePanel.add(b);
         BlockPanelWidget blockPanelWidget = new BlockPanelWidget(parentDimension, resizeDimensionHeightScale(parentDimension, 0.05));
-        JPanel jPanel= blockPanelWidget.getMainPanel();
-        jPanel.setBackground(new Color(198,230,232));
-        detailMessagePanel.add(jPanel);
+        detailMessagePanel.add(blockPanelWidget.getMainPanel());
         detailMessagePanel.add(flaggedRadio);
 
         mainPanel.add(detailMessagePanel);
-        mainPanel.setBackground(new Color(198,230,232));
     }
 
     @Override
