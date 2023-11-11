@@ -75,12 +75,12 @@ public class MonthPanelWidget {
         } else {
             days = 30;
         }
-
+        calendarDayPanelList = new ArrayList<CalendarDayPanel>();
         //add days into monthDayPanel
         for (int j = 1; j <= days; j++) {
             String s = String.valueOf(j);
             CalendarDayPanel calendarDayPanel = new CalendarDayPanel((int) (width / 7.5), s);
-            calendarDayPanelList = new ArrayList<CalendarDayPanel>();
+
             calendarDayPanelList.add(calendarDayPanel);
             monthDayPanel.add(calendarDayPanel.getDayPanel());
         }
