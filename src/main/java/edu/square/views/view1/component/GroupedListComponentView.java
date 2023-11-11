@@ -68,6 +68,7 @@ public class GroupedListComponentView extends MComponent {
         //GROUP LABEL
         reminderListWidgetView = new ReminderListWidgetView(parentDimension, resizeDimensionHeightScale(selfDimension, 0.9));
         mainPanel.add(reminderListWidgetView.getScrollPane());
+        mainPanel.setBackground(new Color(198,230,232));
     }
 
     @Override

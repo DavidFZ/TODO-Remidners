@@ -72,9 +72,9 @@ public class DetailInformationComponentView extends MComponent {
     protected void initializeJComponents() {
         //reminderStatusControllerPanel
         JPanel reminderStatusControllerPanel = reminderStatusControllerPanel();
-        reminderStatusControllerPanel.setBackground(Color.red);
+        reminderStatusControllerPanel.setBackground(new Color(195,215,223));
         mainPanel.add(reminderStatusControllerPanel);
-
+        mainPanel.setBackground(new Color(198,230,232));
 
         //TextPanel
         JPanel textPanelDetail = getFlowJpanel(FlowLayout.CENTER, resizeDimensionHeightScale(selfDimension, 0.1));
