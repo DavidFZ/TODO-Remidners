@@ -15,8 +15,8 @@ public class CalendarComponentView extends MComponent {
     @Getter
     private CalenderPanelWidget calenderPanelWidget;
 
-    public CalendarComponentView(Dimension selfDimension, MyView myView) {
-        super(myView, selfDimension);
+    public CalendarComponentView(Dimension rootFrameDimension, MyView myView) {
+        super(myView, rootFrameDimension);
 
     }
 
