@@ -6,8 +6,8 @@ import java.awt.event.MouseAdapter;
 
 //每个月中每一天的panel
 public class CalendarDayPanel {
-    JPanel dayPanel = new JPanel();
-    JLabel dayLabel = new JLabel();
+    private JPanel dayPanel = new JPanel();
+    private JLabel dayLabel = new JLabel();
     JTextArea dayTextArea = new JTextArea();
 
     CalendarDayPanel(int size, String s) {
@@ -49,5 +49,9 @@ public class CalendarDayPanel {
 
     public void setDayLabel(String s) {
         dayLabel.setText(s);
+    }
+
+    public JPanel getDayPanel() {
+        return dayPanel;
     }
 }

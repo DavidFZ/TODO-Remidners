@@ -71,7 +71,7 @@ public class CalenderPanelWidget extends MWidget {
         int dayOfWeek = this.GetThisMonthFirstDay() - 1;
         month = this.getMonth();
         Dimension dimension = resizeDimensionWidthAndHeight(selfDimension, 0.99, 0.77);
-        eachDayPanel = new MonthPanel(month, dimension.width, dimension.height, dayOfWeek).monthPanel;
+        eachDayPanel = new MonthPanel(month, dimension.width, dimension.height, dayOfWeek).getMonthDayPanel();
         eachDayPanel.setBackground(new Color(198,230,232));
         dayPanel.add(eachDayPanel);
         dayPanel.setBackground(new Color(198,230,232));
@@ -94,14 +94,14 @@ public class CalenderPanelWidget extends MWidget {
                 if (month >= 1) {
                     calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
                     day = calendar.get(Calendar.DAY_OF_WEEK);
-                    eachDayPanel = new MonthPanel(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).monthPanel;
+                    eachDayPanel = new MonthPanel(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
                     eachDayPanel.setVisible(true);
                     dayPanel.add(eachDayPanel);
                 } else {
                     month = 12;
                     calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
                     day = calendar.get(Calendar.DAY_OF_WEEK);
-                    eachDayPanel = new MonthPanel(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).monthPanel;
+                    eachDayPanel = new MonthPanel(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
                     eachDayPanel.setVisible(true);
                     dayPanel.add(eachDayPanel);
                 }
@@ -117,14 +117,14 @@ public class CalenderPanelWidget extends MWidget {
                 if (month <= 12) {
                     calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
                     day = calendar.get(Calendar.DAY_OF_WEEK);
-                    eachDayPanel = new MonthPanel(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).monthPanel;
+                    eachDayPanel = new MonthPanel(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
                     eachDayPanel.setVisible(true);
                     dayPanel.add(eachDayPanel);
                 } else {
                     month = 1;
                     calendar.set(calendar.get(Calendar.YEAR), month - 1, 1);
                     day = calendar.get(Calendar.DAY_OF_WEEK);
-                    eachDayPanel = new MonthPanel(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).monthPanel;
+                    eachDayPanel = new MonthPanel(month, (int) (0.98 * mainPanel.getWidth()), (int) (0.8 * mainPanel.getHeight()), day - 1).getMonthDayPanel();
                     eachDayPanel.setVisible(true);
                     dayPanel.add(eachDayPanel);
                 }
