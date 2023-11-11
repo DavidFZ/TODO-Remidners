@@ -9,6 +9,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static edu.square.utils.ColorChangeUtil.getColorListener;
 import static edu.square.utils.UIUtils.ComponentResizeUtil.*;
 
 public class GroupLabelWidget extends MWidget {
@@ -37,6 +38,7 @@ public class GroupLabelWidget extends MWidget {
 
     public void addMouseListener(MouseListener mouseListener) {
         mainPanel.addMouseListener(mouseListener);
+        mainPanel.addMouseListener(getColorListener(mainPanel,mainPanel.getBackground(), new Color(81,196,211)));
     }
 
     public void repaint() {
