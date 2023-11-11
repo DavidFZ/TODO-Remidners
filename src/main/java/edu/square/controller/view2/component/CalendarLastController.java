@@ -1,4 +1,4 @@
-package edu.square.controller.view2.controller;
+package edu.square.controller.view2.component;
 
 import edu.square.views.view2.CalenderPanelWidget;
 import edu.square.views.view2.MonthPanel;
