@@ -1,6 +1,5 @@
 package edu.square.views.view2;
 
-import edu.square.utils.ColorUtil;
 import edu.square.utils.UIUtils.FontUtil;
 import edu.square.views.widget.MWidget;
 
@@ -70,7 +69,7 @@ public class CalenderPanelWidget extends MWidget {
         dayPanel.setPreferredSize(resizeDimensionWidthAndHeight(selfDimension, 0.99, 0.77));
 //      dayPanel.setBackground(Color.BLUE);
         int dayOfWeek = this.GetThisMonthFirstDay() - 1;
-        month = this.GetMonth();
+        month = this.getMonth();
         Dimension dimension = resizeDimensionWidthAndHeight(selfDimension, 0.99, 0.77);
         eachDayPanel = new MonthPanel(month, dimension.width, dimension.height, dayOfWeek).monthPanel;
         eachDayPanel.setBackground(new Color(198,230,232));
@@ -142,7 +141,7 @@ public class CalenderPanelWidget extends MWidget {
         return dayOfWeek;
     }
 
-    public int GetMonth() {
+    public int getMonth() {
         Calendar calendar = Calendar.getInstance();
         return calendar.get(Calendar.MONTH) + 1;
     }

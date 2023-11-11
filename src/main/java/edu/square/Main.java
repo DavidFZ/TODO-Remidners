@@ -2,6 +2,7 @@ package edu.square;
 
 import edu.square.controller.ViewsBarComponentController;
 import edu.square.controller.view1.ListController;
+import edu.square.controller.view2.CalenderViewController;
 import edu.square.utils.UIUtils.JFrameFactory;
 import edu.square.views.ViewsBarComponentView;
 import edu.square.views.view.CalenderView;
@@ -10,6 +11,8 @@ import edu.square.views.view1.view.ListView;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 
 import static edu.square.utils.DBUtils.jdbc.DatabaseStatusUtil.forcedInitDB;
@@ -36,6 +39,7 @@ public class Main {
 
         //calender view
         CalenderView calenderView = new CalenderView(mainFrame, resizeDimensionWidthScale(mainFrame, 0.9));
+        CalenderViewController calenderViewController = new CalenderViewController(calenderView);
         JPanel calenderPanel = calenderView.getMainPanel();
         calenderPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
@@ -50,6 +54,13 @@ public class Main {
         ViewsBarComponentView viewsBarComponentView = viewsBarComponentController.viewsBarComponentView;
         viewsBarComponentView.getMainPanel().setLayout(new FlowLayout(FlowLayout.CENTER, 0, 0));
 
+
+        //add listener on bar view
+        viewsBarComponentView.getLabelPanelWidgets().get(1).getMainPanel().addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent evt) {
+                calenderViewController.updateThisYearListModelAndView();
+            }
+        });
 
         mainFrame.add(viewsBarComponentView.getMainPanel());
         mainFrame.add(viewsBarComponentController.getCardPanel());
