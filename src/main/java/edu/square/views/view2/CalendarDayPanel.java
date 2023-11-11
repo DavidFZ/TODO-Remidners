@@ -1,22 +1,14 @@
 package edu.square.views.view2;
 
-import edu.square.entity.Reminder;
-import lombok.Getter;
-import lombok.Setter;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
-import java.util.List;
 
 //每个月中每一天的panel
 public class CalendarDayPanel {
+    private JPanel dayPanel = new JPanel();
+    private JLabel dayLabel = new JLabel();
     JTextArea dayTextArea = new JTextArea();
-    private final JPanel dayPanel = new JPanel();
-    private final JLabel dayLabel = new JLabel();
-    @Getter
-    @Setter
-    private List<Reminder> todayReminderList;
 
     CalendarDayPanel(int size, String s) {
         dayPanel.setPreferredSize(new Dimension(size, size));

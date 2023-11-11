@@ -58,7 +58,6 @@ public class Main {
         //add listener on bar view
         viewsBarComponentView.getLabelPanelWidgets().get(1).getMainPanel().addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent evt) {
-                calenderViewController.updateCalenderModelAndView();
                 calenderViewController.updateThisYearListModelAndView();
             }
         });
