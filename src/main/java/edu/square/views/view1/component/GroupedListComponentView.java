@@ -63,11 +63,15 @@ public class GroupedListComponentView extends MComponent {
     protected void initializeJComponents() {
         //GROUP TITLE
         groupedTitleWidgetView = new GroupedTitleWidgetView(parentDimension, resizeDimensionHeightScale(selfDimension, 0.1));
+        JPanel groupedTitleWidgetPanel = new JPanel();
+        groupedTitleWidgetPanel.setBackground(new Color(198,230,232));
         mainPanel.add(groupedTitleWidgetView.getMainPanel());
 
         //GROUP LABEL
         reminderListWidgetView = new ReminderListWidgetView(parentDimension, resizeDimensionHeightScale(selfDimension, 0.9));
-        mainPanel.add(reminderListWidgetView.getScrollPane());
+        JPanel reminderListPanel = reminderListWidgetView.getMainPanel();
+        reminderListPanel.setBackground(new Color(198,230,232));
+        mainPanel.add(reminderListPanel);
     }
 
     @Override

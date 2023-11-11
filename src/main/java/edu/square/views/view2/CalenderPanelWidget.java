@@ -74,6 +74,7 @@ public class CalenderPanelWidget extends MWidget {
         eachDayPanel = new MonthPanel(month, dimension.width, dimension.height, dayOfWeek).monthPanel;
         eachDayPanel.setBackground(new Color(198,230,232));
         dayPanel.add(eachDayPanel);
+        dayPanel.setBackground(new Color(198,230,232));
 //        dayPanel.setBackground(Color.BLACK);
         mainPanel.add(dayPanel);
 //        backLabel.addMouseListener(new MouseAdapter() {

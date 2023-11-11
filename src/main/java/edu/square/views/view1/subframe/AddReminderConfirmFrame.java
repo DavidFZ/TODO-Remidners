@@ -40,7 +40,8 @@ public class AddReminderConfirmFrame {
         inputLabel.setFont(font);
         JPanel inputPanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-        inputPanel.setBackground(Color.green);
+        inputLabel.setForeground(new Color(92,179,204));
+        inputPanel.setBackground(new Color(195,215,223));
         inputPanel.add(inputLabel);
 
         itemName = new JTextField();
