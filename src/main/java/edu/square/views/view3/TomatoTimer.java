@@ -102,8 +102,8 @@ public class TomatoTimer extends MComponent {
                 }
 
                 // 绘制时钟指针
-                drawClockHand(g2d, centerX, centerY, radius - 50, (hours % 12) * 30 - 90, new Color(185,227,251), 6);//时钟
-                drawClockHand(g2d, centerX, centerY, radius - 30, minutes * 6 - 90, new Color(116,227,245), 4);//分针
+                drawClockHand(g2d, centerX, centerY, radius - 50, (hours % 12) * 30 - 90,new Color(116,227,245), 6);//时钟
+                drawClockHand(g2d, centerX, centerY, radius - 30, minutes * 6 - 90, new Color(185,227,251), 4);//分针
                 drawClockHand(g2d, centerX, centerY, radius - 10, seconds * 6 - 90, new Color(119,195,227), 2);//秒针
             }
         };
