@@ -10,6 +10,7 @@ import edu.square.views.view1.component.GroupedListComponentView;
 import edu.square.views.widget.ReminderListWidgetView;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
@@ -112,6 +113,10 @@ public class GroupedListComponentController extends MController {
 
     public void setGroupedTitle(String title) {
         ((GroupedListComponentView) mComponentView).setGroupedTitle(title);
+    }
+
+    public void setGroupedTitleFont(Font font) {
+        ((GroupedListComponentView) mComponentView).getTitleLabel().setFont(font);
     }
 
     /**

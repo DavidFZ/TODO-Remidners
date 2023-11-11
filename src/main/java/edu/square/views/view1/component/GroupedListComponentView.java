@@ -84,6 +84,10 @@ public class GroupedListComponentView extends MComponent {
         groupedTitleWidgetView.setTitleLabel(title);
     }
 
+    public JLabel getTitleLabel() {
+        return groupedTitleWidgetView.getTitleLabel();
+    }
+
     public void cleanSubFrameTextFiled() {
         addReminderConfirmFrame.cleanTextField();
     }
