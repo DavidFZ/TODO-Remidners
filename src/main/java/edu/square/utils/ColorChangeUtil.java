@@ -19,14 +19,15 @@ public class ColorChangeUtil {
             frame.add(panel);
 
             JButton button = new JButton("Change Color");
-            button.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
+//            button.addActionListener(new ActionListener() {
+//                @Override
+//                public void actionPerformed(ActionEvent e) {
                     Color initialColor = panel.getBackground();
                     Color targetColor = Color.BLUE; // 目标背景颜色
-                    animateBackgroundColor(panel, initialColor, targetColor, 1000, 1000);
-                }
-            });
+//                    animateBackgroundColor(panel, initialColor, targetColor, 1000, 1000);
+//                }
+//            });
+            button.addActionListener(getColorListener(panel,initialColor,targetColor));
 
             frame.add(button, BorderLayout.SOUTH);
             frame.setVisible(true);
@@ -85,5 +86,14 @@ public class ColorChangeUtil {
             }
         });
         fadeOutTimer.start();
+    }
+
+    public static ActionListener getColorListener(JPanel targetPanel, Color initialColor, Color targetColor) {
+        return new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                animateBackgroundColor(targetPanel, initialColor, targetColor, 1000, 1000);
+            }
+        };
     }
 }
